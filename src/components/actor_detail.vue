@@ -143,7 +143,7 @@
 </script>
 
 <style scoped>
-@import '../assets/css/reset.css'; /* index.html에 넣은 reset.css 적용 안됨 */
+/* @import '../assets/css/reset.css'; index.html에 넣은 reset.css 적용 안됨 */
 
 /* reset */
 * {
