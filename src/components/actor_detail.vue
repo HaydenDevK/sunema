@@ -46,18 +46,18 @@
       <section id="filmography" class="padding-t-24 padding-l-24">
         <div class="font-h5-bold font-white padding-b-8">참여 작품</div>
         <div class="wrapper-movie-slide">
-          <img src="" alt="">
-          <img src="assets/images/actor_detail/img-filmo-1.png" alt="">
-          <img src="assets/images/actor_detail/img-filmo-1.png" alt="">
+          <img src="../assets/actor_detail/img-filmo-1.png" alt="">
+          <img src="../assets/actor_detail/img-filmo-1.png" alt="">
+          <img src="../assets/actor_detail/img-filmo-1.png" alt="">
         </div>
       </section>
 
       <section id="photography" class="padding-t-24 padding-l-24">
         <div class="font-h5-bold font-white padding-b-8">이미지?</div>
         <div class="wrapper-movie-slide">
-          <img src="assets/images/actor_detail/img-photography-1.png" alt="">
-          <img src="assets/images/actor_detail/img-photography-1.png" alt="">
-          <img src="assets/images/actor_detail/img-photography-1.png" alt="">
+          <img src="../assets/actor_detail/img-photography-1.png" alt="">
+          <img src="../assets/actor_detail/img-photography-1.png" alt="">
+          <img src="../assets/actor_detail/img-photography-1.png" alt="">
         </div>
       </section>
 
