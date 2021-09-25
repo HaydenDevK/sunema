@@ -2,7 +2,7 @@
   <div id="keyword-search" class="bg-navy-100 min-height-100vh">
     <header id="header">
       <router-link to="" class="btn-back">
-        <img src="../assets/keyword_search/icon-back.png" alt="">
+        <img src="../assets/keyword_search/icon-back.png" alt="" />
       </router-link>
     </header>
 
@@ -14,58 +14,64 @@
     </section>
 
     <!-- 영화 리스트 -->
-    <main id="wrapper-movies" class="wrapper-grid grid-colunms-3 grid-row-gap-16 grid-column-gap-16">
+    <main
+      id="wrapper-movies"
+      class="wrapper-grid grid-colunms-3 grid-row-gap-16 grid-column-gap-16"
+    >
       <router-link to="">
-        <img src="../assets/keyword_search/movie-thumb-1.png" alt="">
+        <img src="../assets/keyword_search/movie-thumb-1.png" alt="" />
       </router-link>
       <router-link to="">
-        <img src="../assets/keyword_search/movie-thumb-1.png" alt="">
+        <img src="../assets/keyword_search/movie-thumb-1.png" alt="" />
       </router-link>
       <router-link to="">
-        <img src="../assets/keyword_search/movie-thumb-1.png" alt="">
-      </router-link>
-
-      <router-link to="">
-        <img src="../assets/keyword_search/movie-thumb-1.png" alt="">
-      </router-link>
-      <router-link to="">
-        <img src="../assets/keyword_search/movie-thumb-1.png" alt="">
-      </router-link>
-      <router-link to="">
-        <img src="../assets/keyword_search/movie-thumb-1.png" alt="">
+        <img src="../assets/keyword_search/movie-thumb-1.png" alt="" />
       </router-link>
 
       <router-link to="">
-        <img src="../assets/keyword_search/movie-thumb-1.png" alt="">
+        <img src="../assets/keyword_search/movie-thumb-1.png" alt="" />
       </router-link>
       <router-link to="">
-        <img src="../assets/keyword_search/movie-thumb-1.png" alt="">
+        <img src="../assets/keyword_search/movie-thumb-1.png" alt="" />
       </router-link>
       <router-link to="">
-        <img src="../assets/keyword_search/movie-thumb-1.png" alt="">
+        <img src="../assets/keyword_search/movie-thumb-1.png" alt="" />
+      </router-link>
+
+      <router-link to="">
+        <img src="../assets/keyword_search/movie-thumb-1.png" alt="" />
+      </router-link>
+      <router-link to="">
+        <img src="../assets/keyword_search/movie-thumb-1.png" alt="" />
+      </router-link>
+      <router-link to="">
+        <img src="../assets/keyword_search/movie-thumb-1.png" alt="" />
       </router-link>
     </main>
-    
+
     <!-- 독 바 -->
-    <footer id="footer" class="bg-dark wrapper-grid grid-colunms-5 justify-items-center">
+    <footer
+      id="footer"
+      class="bg-dark wrapper-grid grid-colunms-5 justify-items-center"
+    >
       <router-link to="" class="wrapper-grid justify-items-center width-100">
-        <img src="../assets/keyword_search/icon-home.png" alt="">
+        <img src="../assets/keyword_search/icon-home.png" alt="" />
         <p class="font-body-12 font-white">홈</p>
       </router-link>
       <router-link to="" class="wrapper-grid justify-items-center width-100">
-        <img src="../assets/keyword_search/icon-nowplaying.png" alt="">
+        <img src="../assets/keyword_search/icon-nowplaying.png" alt="" />
         <p class="font-body-12 font-white">상영중</p>
       </router-link>
       <router-link to="" class="wrapper-grid justify-items-center width-100">
-        <img src="../assets/keyword_search/icon-upcoming.png" alt="">
+        <img src="../assets/keyword_search/icon-upcoming.png" alt="" />
         <p class="font-body-12 font-white">개봉예정</p>
       </router-link>
       <router-link to="" class="wrapper-grid justify-items-center width-100">
-        <img src="../assets/keyword_search/icon-search.png" alt="">
+        <img src="../assets/keyword_search/icon-search.png" alt="" />
         <p class="font-body-12 font-white">검색</p>
       </router-link>
       <router-link to="" class="wrapper-grid justify-items-center width-100">
-        <img src="../assets/keyword_search/icon-popular.png" alt="">
+        <img src="../assets/keyword_search/icon-popular.png" alt="" />
         <p class="font-body-12 font-white">인기콘텐츠</p>
       </router-link>
     </footer>
@@ -74,8 +80,8 @@
 
 <script>
 export default {
-  name: 'KeywordSearch'
-}
+  name: 'KeywordSearch',
+};
 </script>
 
 <style scoped>
@@ -96,11 +102,11 @@ button {
 }
 
 .font-dark {
-  color: #13131B;
+  color: #13131b;
 }
 
 .bg-dark {
-  background-color: #13131B;
+  background-color: #13131b;
 }
 
 .bg-navy-100 {
@@ -177,21 +183,21 @@ button {
 .btn-badge {
   text-align: center;
   padding: 8px 16px;
-  border: 0.75px solid #8E8E8E;
+  border: 0.75px solid #8e8e8e;
   box-sizing: border-box;
   border-radius: 21px;
   background-color: #212634;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .btn-badge:focus {
   text-align: center;
   padding: 8px 16px;
-  border: 0.75px solid #8E8E8E;
+  border: 0.75px solid #8e8e8e;
   box-sizing: border-box;
   border-radius: 21px;
   background-color: white;
-  color: #13131B;
+  color: #13131b;
 }
 
 .movie-card {
@@ -202,12 +208,11 @@ button {
 
 /* keyword-search */
 
-
 /* HEADER */
 #header {
   height: 80px;
   display: flex;
-  align-items: flex-end; /* end value has mixed support, consider using flex-end instead */
+  align-items: flex-end;
 }
 
 #wrapper-keyword {

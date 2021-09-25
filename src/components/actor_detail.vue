@@ -7,13 +7,17 @@
     <div class="contents">
       <header id="header">
         <router-link to="" class="btn-back">
-          <img src="../assets/keyword_search/icon-back.png" alt="">
+          <img src="../assets/keyword_search/icon-back.png" alt="" />
         </router-link>
       </header>
 
       <section id="wrapper-profile">
-        <img class="center-img margin-0-auto border-radius-5" src="../assets/actor_detail/img-actor-1.png" alt="">
-        
+        <img
+          class="center-img margin-0-auto border-radius-5"
+          src="../assets/actor_detail/img-actor-1.png"
+          alt=""
+        />
+
         <div class="padding-24 font-white">
           <div class="text-align-middle padding-b-24">
             <span class="font-h5-bold padding-r-8">Margot Robbie</span>
@@ -21,7 +25,9 @@
           </div>
 
           <div class="font-body-16">
-            Margot Elise Robbie (born 2 July 1990) is an Australian actress and producer. She has received nominations for two Academy Awards and five 
+            Margot Elise Robbie (born 2 July 1990) is an Australian actress and
+            producer. She has received nominations for two Academy Awards and
+            five
           </div>
 
           <div class="wrapper-more padding-y-16">
@@ -41,23 +47,23 @@
         </div>
       </section>
 
-      <div class="seperator-black-2"/>
+      <div class="seperator-black-2" />
 
       <section id="filmography" class="padding-t-24 padding-l-24">
         <div class="font-h5-bold font-white padding-b-8">참여 작품</div>
         <div class="wrapper-movie-slide">
-          <img src="../assets/actor_detail/img-filmo-1.png" alt="">
-          <img src="../assets/actor_detail/img-filmo-1.png" alt="">
-          <img src="../assets/actor_detail/img-filmo-1.png" alt="">
+          <img src="../assets/actor_detail/img-filmo-1.png" alt="" />
+          <img src="../assets/actor_detail/img-filmo-1.png" alt="" />
+          <img src="../assets/actor_detail/img-filmo-1.png" alt="" />
         </div>
       </section>
 
       <section id="photography" class="padding-t-24 padding-l-24">
         <div class="font-h5-bold font-white padding-b-8">이미지?</div>
         <div class="wrapper-movie-slide">
-          <img src="../assets/actor_detail/img-photography-1.png" alt="">
-          <img src="../assets/actor_detail/img-photography-1.png" alt="">
-          <img src="../assets/actor_detail/img-photography-1.png" alt="">
+          <img src="@/assets/actor_detail/img-photography-1.png" alt="" />
+          <img src="@/assets/actor_detail/img-photography-1.png" alt="" />
+          <img src="@/assets/actor_detail/img-photography-1.png" alt="" />
         </div>
       </section>
 
@@ -85,7 +91,10 @@
           <span>Joker: Put on a Happy Face Self 역</span>
 
           <span class="font-white-70">2020</span>
-          <span>버즈 오브 프레이: 할리 퀸의 황홀한 해방 Harleen Quinzel / Harley Quinn 역</span>
+          <span
+            >버즈 오브 프레이: 할리 퀸의 황홀한 해방 Harleen Quinzel / Harley
+            Quinn 역</span
+          >
 
           <span class="font-white-70">2019</span>
           <span>밤쉘: 세상을 바꾼 폭탄선언 Kayla Posp..</span>
@@ -137,9 +146,9 @@
 </template>
 
 <script>
-  export default {
-    name: 'ActorDetail'
-  }
+export default {
+  name: 'ActorDetail',
+};
 </script>
 
 <style scoped>
@@ -162,7 +171,7 @@ button {
 }
 
 .font-dark {
-  color: #13131B;
+  color: #13131b;
 }
 
 .font-white-70 {
@@ -170,7 +179,7 @@ button {
 }
 
 .font-primary {
-  color: #43FF8E;
+  color: #43ff8e;
 }
 
 .font-body-12 {
@@ -244,7 +253,7 @@ button {
 
 .padding-y-24 {
   padding-top: 24px;
-  padding-bottom: 24px; 
+  padding-bottom: 24px;
 }
 
 .padding-t-24 {
@@ -300,7 +309,7 @@ button {
 }
 
 .bg-blured {
-  background: url("../assets/actor_detail/img-actor-1.png") no-repeat center;
+  background: url('../assets/actor_detail/img-actor-1.png') no-repeat center;
   background-size: cover;
   height: 452px;
   filter: blur(40px);
@@ -321,6 +330,6 @@ button {
 #header {
   height: 80px;
   display: flex;
-  align-items: end;
+  align-items: flex-end;
 }
 </style>
