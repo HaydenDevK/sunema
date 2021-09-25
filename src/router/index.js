@@ -1,36 +1,81 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
+import Main from '../views/main.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home,
+    name: 'Main',
+    component: Main,
   },
   {
-    path: '/keywordsearch',
+    path: '/detail/:idx',
+    name: 'Detail',
+    component: () =>
+      import(/* webpackChunkName: "detail" */ '../views/detail.vue'),
+  },
+  {
+    path: '/round/:idx', // 전체 회차
+    name: 'Round',
+    component: () =>
+      import(/* webpackChunkName: "round" */ '../views/round.vue'),
+  },
+  {
+    path: '/commingsoon', // 개봉 예정
+    name: 'CommingSoon',
+    component: () =>
+      import(/* webpackChunkName: "commingsoon" */ '../views/commingSoon.vue'),
+  },
+  {
+    path: '/nowmovie', // 현재 상영중
+    name: 'Now',
+    component: () => import(/* webpackChunkName: "now" */ '../views/now.vue'),
+  },
+  {
+    path: '/popular', // 인기 영화
+    name: 'Popular',
+    component: () =>
+      import(/* webpackChunkName: "popular" */ '../views/popular.vue'),
+  },
+  {
+    path: '/keywordsearch', // 키워드 검색
     name: 'KeywordSearch',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(
-        /* webpackChunkName: "keywrodsearch" */ '../components/keyword_search.vue'
+        /* webpackChunkName: "keywrodsearch" */ '../views/keyword_search.vue'
       ),
   },
   {
-    path: '/actordetail',
+    path: '/actor', // 인기배우
+    name: 'Actor',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "actordetail" */ '../views/actor.vue'),
+  },
+  {
+    path: '/actordetail', // 인기배우  상세
     name: 'ActorDetail',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(
-        /* webpackChunkName: "actordetail" */ '../components/actor_detail.vue'
-      ),
+      import(/* webpackChunkName: "actordetail" */ '../views/actor_detail.vue'),
+  },
+  {
+    path: '/search', // 인기배우  상세
+    name: 'Search',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "search" */ '../views/search.vue'),
   },
 ];
 
