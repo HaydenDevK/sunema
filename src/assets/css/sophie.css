@@ -1,0 +1,181 @@
+* {
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+  letter-spacing: 0.25px;
+}
+
+button {
+  background-color: unset;
+  border: none;
+}
+
+.font-white {
+  color: white;
+}
+
+.font-dark {
+  color: #13131b;
+}
+
+.font-white-70 {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.font-primary {
+  color: #43ff8e;
+}
+
+.bg-dark {
+  background-color: #13131b;
+}
+
+.bg-navy-100 {
+  background-color: #181727;
+}
+
+.bg-navy-80 {
+  background: #212634;
+}
+
+.min-height-100vh {
+  min-height: 100vh;
+}
+
+.border-radius-5 {
+  border-radius: 5px;
+}
+
+.justify-items-center {
+  justify-items: center;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.wrapper-flex-center {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.header {
+  height: 80px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.header .btn-back {
+  padding: 16px 24px;
+}
+
+.header .btn-back img {
+  width: 10px;
+}
+
+.header .btn-badge {
+  text-align: center;
+  padding: 8px 16px;
+  border: 0.75px solid #8e8e8e;
+  box-sizing: border-box;
+  border-radius: 21px;
+  background-color: #212634;
+  color: #ffffff;
+}
+
+.header .btn-badge:focus {
+  background-color: white;
+  color: #13131b;
+}
+
+.wrapper-poster {
+  padding: 24px;
+  display: grid;
+  grid-column-gap: 16px;
+  grid-row-gap: 16px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.wrapper-poster a {
+  font-size: 0;
+}
+
+.wrapper-poster a img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.wrapper-more {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.wrapper-more button {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* doc-bar 나중에 컴포넌트화 */
+.doc-bar {
+  position: fixed;
+  bottom: 0;
+  height: 54px;
+  width: 100%;
+  background-color: #13131b;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  justify-items: center;
+}
+
+.doc-bar a {
+  padding: 8px 0;
+}
+
+.doc-bar a img {
+  width: 24px;
+}
+
+.doc-bar p {
+  font-weight: bold;
+  color: white;
+  font-size: 11px;
+  line-height: 14px;
+  letter-spacing: -0.02em;
+}
+
+.doc-bar-item {
+  display: grid;
+  justify-items: center;
+  width: 100%;
+}
+
+/* tab */
+@media screen and (min-width: 1024px) {
+  .header {
+    height: 88px;
+  }
+
+  .header .btn-back {
+    padding: 20px 48px;
+  }
+
+  .header .btn-back img {
+    width: 14px;
+  }
+
+  .wrapper-poster {
+    padding: 24px 48px;
+    grid-template-columns: repeat(5, 1fr);
+    grid-column-gap: 24px;
+    grid-row-gap: 24px;
+  }
+
+  .doc-bar {
+    padding: 0 220px;
+    height: 60px;
+  }
+}
