@@ -14,7 +14,7 @@
         <ul class="visual">
           <li>
             <router-link to="">
-              <img src="../assets/main/img_main_poster.png" alt="" />
+              <img src="../assets/images/main/img_main_poster.png" alt="" />
               <div class="banner-text">
                 <strong>바르트코비아크</strong>
                 <p>Bartkowiak</p>
@@ -24,7 +24,7 @@
           </li>
           <!-- <li>
             <router-link to="">
-              <img src="../assets/main/img_main_poster.png" alt="" />
+              <img src="../assets/images/main/img_main_poster.png" alt="" />
               <div class="banner-text">
                 <strong>바르트코비아크</strong>
                 <p>Bartkowiak</p>
@@ -46,37 +46,37 @@
             <ul>
               <li>
                 <router-link to="">
-                  <img src="../assets/main/img_popular01.png" alt="" />
+                  <img src="../assets/images/main/img_popular01.png" alt="" />
                   <p class="number">1</p>
                 </router-link>
               </li>
               <li>
                 <router-link to="">
-                  <img src="../assets/main/img_popular02.png" alt="" />
+                  <img src="../assets/images/main/img_popular02.png" alt="" />
                   <p class="number">2</p>
                 </router-link>
               </li>
               <!-- <li>
                 <router-link to="">
-                  <img src="../assets/main/img_popular03.png" alt="" />
+                  <img src="../assets/images/main/img_popular03.png" alt="" />
                   <p class="number">3</p>
                 </router-link>
               </li>
               <li>
                 <router-link to="">
-                  <img src="../assets/main/img_popular04.png" alt="" />
+                  <img src="../assets/images/main/img_popular04.png" alt="" />
                   <p class="number">4</p>
                 </router-link>
               </li>
               <li>
                 <router-link to="">
-                  <img src="../assets/main/img_popular05.png" alt="" />
+                  <img src="../assets/images/main/img_popular05.png" alt="" />
                   <p class="number">5</p>
                 </router-link>
               </li>
               <li>
                 <router-link to="">
-                  <img src="../assets/main/img_popular06.png" alt="" />
+                  <img src="../assets/images/main/img_popular06.png" alt="" />
                   <p class="number">6</p>
                 </router-link>
               </li> -->
@@ -88,32 +88,32 @@
             <ul>
               <li>
                 <router-link to="">
-                  <img src="../assets/main/img_nowPlaying01.png" alt="" />
+                  <img src="../assets/images/main/img_nowPlaying01.png" alt="" />
                 </router-link>
               </li>
               <li>
                 <router-link to="">
-                  <img src="../assets/main/img_nowPlaying02.png" alt="" />
+                  <img src="../assets/images/main/img_nowPlaying02.png" alt="" />
                 </router-link>
               </li>
               <!-- <li>
                 <router-link to="">
-                  <img src="../assets/main/img_nowPlaying03.png" alt="" />
+                  <img src="../assets/images/main/img_nowPlaying03.png" alt="" />
                 </router-link>
                 </li>
               <li>
                 <router-link to="">
-                  <img src="../assets/main/img_nowPlaying04.png" alt="" />
+                  <img src="../assets/images/main/img_nowPlaying04.png" alt="" />
                 </router-link>
                 </li>
               <li>
                 <router-link to="">
-                  <img src="../assets/main/img_nowPlaying05.png" alt="" />
+                  <img src="../assets/images/main/img_nowPlaying05.png" alt="" />
                 </router-link>
                 </li>
               <li>
                 <router-link to="">
-                  <img src="../assets/main/img_nowPlaying06.png" alt="" />
+                  <img src="../assets/images/main/img_nowPlaying06.png" alt="" />
                 </router-link>
                 </li> -->
             </ul>
@@ -153,7 +153,7 @@
                   <router-link to="">
                     <figure>
                       <img
-                        src="../assets/main/img_free_tv01.png"
+                        src="../assets/images/main/img_free_tv01.png"
                         alt=""
                       />
                       <figcaption>
@@ -167,7 +167,7 @@
                   <router-link to="">
                     <figure>
                       <img
-                        src="../assets/main/img_free_tv02.png"
+                        src="../assets/images/main/img_free_tv02.png"
                         alt=""
                       />
                       <figcaption>
@@ -185,7 +185,7 @@
                   <router-link to="">
                     <figure>
                       <img
-                        src="../assets/main/img_free_tv01.png"
+                        src="../assets/images/main/img_free_tv01.png"
                         alt=""
                       />
                       <figcaption>
@@ -199,7 +199,7 @@
                   <router-link to="">
                     <figure>
                       <img
-                        src="../assets/main/img_free_tv02.png"
+                        src="../assets/images/main/img_free_tv02.png"
                         alt=""
                       />
                       <figcaption>
@@ -228,7 +228,7 @@
                 <li>
                   <router-link to="">
                     <img
-                      src="../assets/main/img_nowPlaying01.png"
+                      src="../assets/images/main/img_nowPlaying01.png"
                       alt=""
                     />
                   </router-link>
@@ -236,7 +236,7 @@
                 <!-- <li>
                   <router-link to="">
                     <img
-                      src="../assets/main/img_nowPlaying02.png"
+                      src="../assets/images/main/img_nowPlaying02.png"
                       alt=""
                     />
                   </router-link>
@@ -248,7 +248,7 @@
                 <li>
                   <router-link to="">
                     <img
-                      src="../assets/main/img_nowPlaying03.png"
+                      src="../assets/images/main/img_nowPlaying03.png"
                       alt=""
                     />
                   </router-link>
@@ -256,7 +256,7 @@
                 <li>
                   <router-link to="">
                     <img
-                      src="../assets/main/img_nowPlaying04.png"
+                      src="../assets/images/main/img_nowPlaying04.png"
                       alt=""
                     />
                   </router-link>
@@ -271,25 +271,25 @@
             <ul>
               <li>
                 <router-link to="">
-                  <img src="../assets/main/img_popular01.png" alt="" />
+                  <img src="../assets/images/main/img_popular01.png" alt="" />
                 </router-link>
               </li>
               <li>
                 <router-link to="">
-                  <img src="../assets/main/img_popular02.png" alt="" />
+                  <img src="../assets/images/main/img_popular02.png" alt="" />
                 </router-link>
               </li>
               <!-- <li>
-                <img src="../assets/main/img_popular03.png" alt="" />
+                <img src="../assets/images/main/img_popular03.png" alt="" />
               </li>
               <li>
-                <img src="../assets/main/img_popular04.png" alt="" />
+                <img src="../assets/images/main/img_popular04.png" alt="" />
               </li>
               <li>
-                <img src="../assets/main/img_popular05.png" alt="" />
+                <img src="../assets/images/main/img_popular05.png" alt="" />
               </li>
               <li>
-                <img src="../assets/main/img_popular06.png" alt="" />
+                <img src="../assets/images/main/img_popular06.png" alt="" />
               </li> -->
             </ul>
             <router-link to="">전체보기</router-link>
@@ -300,7 +300,7 @@
               <li>
                 <figure>
                   <img
-                    src="../assets/main/img_actor01.png"
+                    src="../assets/images/main/img_actor01.png"
                     alt=""
                   />
                   <figcaption>
@@ -312,7 +312,7 @@
               <li>
                 <figure>
                   <img
-                    src="../assets/main/img_actor02.png"
+                    src="../assets/images/main/img_actor02.png"
                     alt=""
                   />
                   <figcaption>
@@ -324,7 +324,7 @@
               <li>
                 <figure>
                   <img
-                    src="../assets/main/img_actor03.png"
+                    src="../assets/images/main/img_actor03.png"
                     alt=""
                   />
                   <figcaption>
@@ -336,7 +336,7 @@
               <!-- <li>
                 <figure>
                   <img
-                    src="../assets/main/img_actor01.png"
+                    src="../assets/images/main/img_actor01.png"
                     alt=""
                   />
                   <figcaption>
@@ -348,7 +348,7 @@
               <li>
                 <figure>
                   <img
-                    src="../assets/main/img_actor02.png"
+                    src="../assets/images/main/img_actor02.png"
                     alt=""
                   />
                   <figcaption>
@@ -360,7 +360,7 @@
               <li>
                 <figure>
                   <img
-                    src="../assets/main/img_actor03.png"
+                    src="../assets/images/main/img_actor03.png"
                     alt=""
                   />
                   <figcaption>
@@ -519,7 +519,7 @@ header .logo {
   float:left;
   width:3.38vw;
   height:5.56vw;
-  background:url("../assets/main/icon_plus.png") no-repeat center center;
+  background:url("../assets/images/main/icon_plus.png") no-repeat center center;
   background-size:3.38vw;
   margin-right:2.42vw;
 }
