@@ -81,6 +81,7 @@ export default {
       this.$store.dispatch('keywordSearch/getKeywordMovie', keyword_id);
     },
     getImage(poster_path) {
+      // console.log(poster_path)
       return `https://image.tmdb.org/t/p/w300${poster_path}`;
     }
   }
