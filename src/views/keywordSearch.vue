@@ -62,18 +62,22 @@ export default {
       keywordList: [
         {
           keyword_id: 18035,
-          keyword_name: 'family'
+          keyword_name: 'family',
         },
         {
           keyword_id: 3667,
-          keyword_name: 'time'
-        }
+          keyword_name: 'time',
+        },
       ],
-      keywordMovie: []
+      keywordMovie: [],
     };
   },
   mounted() {
     this.getInitMovie(18035);
+
+    //  스크롤 하단 이동 체크하기
+    //  하단 이동하면 콜백 함수 실행
+    this.$isScrollBottomCheck(this.scrollCallback);
   },
   methods: {
     getInitMovie(keyword_id) {
@@ -83,8 +87,11 @@ export default {
     getImage(poster_path) {
       // console.log(poster_path)
       return `https://image.tmdb.org/t/p/w300${poster_path}`;
-    }
-  }
+    },
+    scrollCallback() {
+      console.log('callback');
+    },
+  },
 };
 </script>
 
