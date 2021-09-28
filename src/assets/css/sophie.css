@@ -92,7 +92,6 @@ button {
 }
 
 .wrapper-poster {
-  padding: 24px;
   display: grid;
   grid-column-gap: 16px;
   grid-row-gap: 16px;
@@ -101,11 +100,14 @@ button {
 
 .wrapper-poster a {
   font-size: 0;
+  height: 164px;
+  border-radius: 5px;
+  overflow: hidden;
 }
 
 .wrapper-poster a img {
+  height: 100%;
   width: 100%;
-  border-radius: 5px;
 }
 
 .wrapper-more {
@@ -168,7 +170,6 @@ button {
   }
 
   .wrapper-poster {
-    padding: 24px 48px;
     grid-template-columns: repeat(5, 1fr);
     grid-column-gap: 24px;
     grid-row-gap: 24px;

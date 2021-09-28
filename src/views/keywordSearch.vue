@@ -8,93 +8,23 @@
 
     <!-- 키워드 버튼 -->
     <section id="wrapper-keyword">
-      <button>
-        #stockholm syndrome
-      </button>
-      <button>
-        #stockholm syndrome
-      </button>
-      <button>
-        #stockholm syndrome
-      </button>
-      <button>
-        #stockholm syndrome
-      </button>
-      <button>
-        #stockholm syndrome
+      <button
+        v-for="item in keywordList"
+        :key="item.keyword_id"
+        @click="getInitMovie(item.keyword_id)"
+      >
+        {{ item.keyword_name }}
       </button>
     </section>
 
     <!-- 영화 리스트 -->
     <main class="wrapper-poster">
-      <router-link to="">
-        <img src="../assets/images/keyword_search/movie-thumb-1.png" alt="" />
-      </router-link>
-      <router-link to="">
-        <img src="../assets/images/keyword_search/movie-thumb-1.png" alt="" />
-      </router-link>
-      <router-link to="">
-        <img src="../assets/images/keyword_search/movie-thumb-1.png" alt="" />
-      </router-link>
-
-      <router-link to="">
-        <img src="../assets/images/keyword_search/movie-thumb-1.png" alt="" />
-      </router-link>
-      <router-link to="">
-        <img src="../assets/images/keyword_search/movie-thumb-1.png" alt="" />
-      </router-link>
-      <router-link to="">
-        <img src="../assets/images/keyword_search/movie-thumb-1.png" alt="" />
-      </router-link>
-
-      <router-link to="">
-        <img src="../assets/images/keyword_search/movie-thumb-1.png" alt="" />
-      </router-link>
-      <router-link to="">
-        <img src="../assets/images/keyword_search/movie-thumb-1.png" alt="" />
-      </router-link>
-      <router-link to="">
-        <img src="../assets/images/keyword_search/movie-thumb-1.png" alt="" />
-      </router-link>
-
-      <router-link to="">
-        <img src="../assets/images/keyword_search/movie-thumb-1.png" alt="" />
-      </router-link>
-      <router-link to="">
-        <img src="../assets/images/keyword_search/movie-thumb-1.png" alt="" />
-      </router-link>
-      <router-link to="">
-        <img src="../assets/images/keyword_search/movie-thumb-1.png" alt="" />
-      </router-link>
-
-      <router-link to="">
-        <img src="../assets/images/keyword_search/movie-thumb-1.png" alt="" />
-      </router-link>
-      <router-link to="">
-        <img src="../assets/images/keyword_search/movie-thumb-1.png" alt="" />
-      </router-link>
-      <router-link to="">
-        <img src="../assets/images/keyword_search/movie-thumb-1.png" alt="" />
-      </router-link>
-
-      <router-link to="">
-        <img src="../assets/images/keyword_search/movie-thumb-1.png" alt="" />
-      </router-link>
-      <router-link to="">
-        <img src="../assets/images/keyword_search/movie-thumb-1.png" alt="" />
-      </router-link>
-      <router-link to="">
-        <img src="../assets/images/keyword_search/movie-thumb-1.png" alt="" />
-      </router-link>
-
-      <router-link to="">
-        <img src="../assets/images/keyword_search/movie-thumb-1.png" alt="" />
-      </router-link>
-      <router-link to="">
-        <img src="../assets/images/keyword_search/movie-thumb-1.png" alt="" />
-      </router-link>
-      <router-link to="">
-        <img src="../assets/images/keyword_search/movie-thumb-1.png" alt="" />
+      <router-link
+        v-for="item in $store.state.keywordSearch.keywordMovie"
+        :key="item.id"
+        to=""
+      >
+        <img :src="getImage(item.poster_path)" alt="" />
       </router-link>
     </main>
 
@@ -126,12 +56,44 @@
 
 <script>
 export default {
-  name: 'KeywordSearch'
+  name: 'KeywordSearch',
+  data() {
+    return {
+      keywordList: [
+        {
+          keyword_id: 18035,
+          keyword_name: 'family'
+        },
+        {
+          keyword_id: 3667,
+          keyword_name: 'time'
+        }
+      ],
+      keywordMovie: []
+    };
+  },
+  mounted() {
+    this.getInitMovie(18035);
+  },
+  methods: {
+    getInitMovie(keyword_id) {
+      console.log(keyword_id);
+      this.$store.dispatch('keywordSearch/getKeywordMovie', keyword_id);
+    },
+    getImage(poster_path) {
+      // console.log(poster_path)
+      return `https://image.tmdb.org/t/p/w300${poster_path}`;
+    }
+  }
 };
 </script>
 
 <style scoped>
 @import '../assets/css/sophie.css';
+
+main {
+  padding: 24px 24px 70px 24px;
+}
 
 /* mobile */
 #wrapper-keyword {
@@ -168,6 +130,10 @@ export default {
 
 /* tablet */
 @media (min-width: 1024px) {
+  main {
+    padding: 24px 48px 82px 48px;
+  }
+
   #wrapper-keyword {
     padding-left: 48px;
   }
