@@ -16,6 +16,7 @@
             <div class="ep-list-text">
               <div>시즌3 10화</div>
               <p>2021</p>
+              <button @click="printlog">클릭</button>
             </div></router-link
           >
         </li>
@@ -133,7 +134,21 @@
 
 <script>
 export default {
-  name: 'Round'
+  name: 'Round',
+  mounted() {
+    this.getInitMovie();
+    console.log(this.$route.params.idx);
+    
+  },
+  methods: {
+    getInitMovie() {
+      //api사용하는 코드
+      this.$store.dispatch('round/getMovieList', this.$route.params.idx);
+    },
+    printlog() {
+      console.log(this.$store.state.round.movieRound);
+    }
+  }
 };
 </script>
 
