@@ -1,5 +1,6 @@
 <template>
   <div id="detail-container" class="detail-container">
+    <!-- <button @click="printState">클릭</button> -->
       <!-- s: top-area -->
       <section class="top-area">
         <!-- video -->
@@ -351,6 +352,20 @@
 <script>
 export default {
   name: 'Detail',
+  components:{},
+  mounted(){
+    console.log('컨포넌트 준비됨');
+    this.initMovieDetail();
+  },
+  methods: {
+    initMovieDetail(){
+      console.log('init movie가 잘 호출됨');
+      this.$store.dispatch('detail/getMovieDetail');
+    },
+    // printState(){
+    //   console.log(this.$store.state.detail.detailMovie);
+    // }
+  }
 };
 </script>
 
