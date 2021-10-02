@@ -10,94 +10,14 @@
 
     <section id="episode">
       <ul class="ep-list">
-        <li>
+        <li v-for="item in $store.state.round.movieRound" :key="item.id">
           <router-link to="">
-            <img src="../assets/images/round/list_image00.png" alt="" />
+            <img :src="getImage(item.still_path)" alt="" />
             <div class="ep-list-text">
-              <div>시즌3 10화</div>
-              <p>2021</p>
-              <button @click="printlog">클릭</button>
-            </div></router-link
-          >
-        </li>
-        <li>
-          <router-link to="">
-            <img src="../assets/images/round/list_image00.png" alt="" />
-            <div class="ep-list-text">
-              <div>시즌3 9화</div>
-              <p>2021</p>
-            </div></router-link
-          >
-        </li>
-        <li>
-          <router-link to="">
-            <img src="../assets/images/round/list_image00.png" alt="" />
-            <div class="ep-list-text">
-              <div>시즌3 8화</div>
-              <p>2021</p>
-            </div></router-link
-          >
-        </li>
-        <li>
-          <router-link to="">
-            <img src="../assets/images/round/list_image00.png" alt="" />
-            <div class="ep-list-text">
-              <div>시즌3 7화</div>
-              <p>2021</p>
-            </div></router-link
-          >
-        </li>
-        <li>
-          <router-link to="">
-            <img src="../assets/images/round/list_image00.png" alt="" />
-            <div class="ep-list-text">
-              <div>시즌3 6화</div>
-              <p>2021</p>
-            </div></router-link
-          >
-        </li>
-        <li>
-          <router-link to="">
-            <img src="../assets/images/round/list_image00.png" alt="" />
-            <div class="ep-list-text">
-              <div>시즌3 5화</div>
-              <p>2021</p>
-            </div></router-link
-          >
-        </li>
-        <li>
-          <router-link to="">
-            <img src="../assets/images/round/list_image00.png" alt="" />
-            <div class="ep-list-text">
-              <div>시즌3 4화</div>
-              <p>2021</p>
-            </div></router-link
-          >
-        </li>
-        <li>
-          <router-link to="">
-            <img src="../assets/images/round/list_image00.png" alt="" />
-            <div class="ep-list-text">
-              <div>시즌3 3화</div>
-              <p>2021</p>
-            </div></router-link
-          >
-        </li>
-        <li>
-          <router-link to="">
-            <img src="../assets/images/round/list_image00.png" alt="" />
-            <div class="ep-list-text">
-              <div>시즌3 2화</div>
-              <p>2021</p>
-            </div></router-link
-          >
-        </li>
-        <li>
-          <router-link to="">
-            <img src="../assets/images/round/list_image00.png" alt="" />
-            <div class="ep-list-text">
-              <div>시즌3 1화</div>
-              <p>2021</p>
+              <div>
+                시즌{{ item.season_number }} {{ item.episode_number }}화
+              </div>
+              <p>{{ item.air_date }}</p>
             </div></router-link
           >
         </li>
@@ -137,16 +57,16 @@ export default {
   name: 'Round',
   mounted() {
     this.getInitMovie();
-    console.log(this.$route.params.idx);
-    
+    // console.log(this.$route.params.idx);
   },
   methods: {
     getInitMovie() {
       //api사용하는 코드
       this.$store.dispatch('round/getMovieList', this.$route.params.idx);
     },
-    printlog() {
-      console.log(this.$store.state.round.movieRound);
+    getImage(still_path) {
+      // console.log(still_path)
+      return `https://image.tmdb.org/t/p/w300${still_path}`;
     }
   }
 };
