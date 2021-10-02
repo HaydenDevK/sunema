@@ -5,6 +5,7 @@ import keywordSearch from './keywordSearch';
 import actorDetail from './actorDetail';
 import round from './round';
 import detail from './detail';
+import keyword from './keyword';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -13,6 +14,7 @@ export default new Vuex.Store({
     keywordSearch,
     actorDetail,
     round,
-    detail
+    detail,
+    keyword,
   },
 });
