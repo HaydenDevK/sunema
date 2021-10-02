@@ -1,12 +1,4 @@
-import axios from 'axios';
-
-const request = axios.create({
-  baseURL: 'https://api.themoviedb.org/3',
-  params: {
-    api_key: '3d6c850fedd64a507e51cfb2335f305c',
-    language: 'ko-KR',
-  },
-});
+import { request } from './axios';
 
 export default {
   namespaced: true,

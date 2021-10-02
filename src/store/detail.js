@@ -1,39 +1,43 @@
-import axios from 'axios';
-
-const request = axios.create({
-  baseURL: 'https://api.themoviedb.org/3',
-  params: {
-    api_key: '4ae7e3c1afba212f2a37c1e33792869c',
-    language: 'ko-KR',
-  },
-});
+import { request } from './axios';
 
 export default {
   namespaced: true,
   state: {
-    detailMovie: []
+    movieType: 'movie', // movie or tv
+    movieKeywords: [
+      // 키워드
+      {
+        keyword_id: 18035,
+        keyword_name: 'family',
+      },
+      {
+        keyword_id: 3667,
+        keyword_name: 'time',
+      },
+    ],
+    detailMovie: [],
   },
   mutations: {
-    SET_DETAIL_MOVIE(state, data){
+    SET_DETAIL_MOVIE(state, data) {
       state.detailMovie = data;
-    }
+    },
   },
   actions: {
-    async getMovieDetail({ commit }){
-      const result = await axios.get(
-        'https://api.themoviedb.org/3/movie/566525?api_key=4ae7e3c1afba212f2a37c1e33792869c&language=ko-kr'
-      );
+    async getMovieDetail({ commit }) {
+      // const result = await request.get(
+      //   'https://api.themoviedb.org/3/movie/566525?api_key=4ae7e3c1afba212f2a37c1e33792869c&language=ko-kr'
+      // );
+      const result = await request.get('/movie/566525');
 
-      if(result.status === 200){
+      if (result.status === 200) {
         // console.log(result.data.title);
-        commit("SET_DETAIL_MOVIE", result.data.title);
+        commit('SET_DETAIL_MOVIE', result.data.title);
       }
 
       console.log(result);
-      
     },
     testCall() {
       console.log(request);
     },
-  }
+  },
 };

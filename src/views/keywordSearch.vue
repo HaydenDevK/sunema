@@ -10,6 +10,7 @@
     <section id="wrapper-keyword">
       <button
         v-for="item in keywordList"
+        :class="{ active: item.isActive }"
         :key="item.keyword_id"
         @click="getInitMovie(item.keyword_id)"
       >
@@ -59,29 +60,40 @@ export default {
   name: 'KeywordSearch',
   data() {
     return {
-      keywordList: [
+      keywordMovie: [],
+    };
+  },
+  computed: {
+    movieType() {
+      // return this.$store.state.detail.movieType;
+      return 'movie';
+    },
+    keywordList() {
+      // return this.$store.state.detail.movieKeywords;
+      return [
         {
           keyword_id: 18035,
           keyword_name: 'family',
+          isActive: false,
         },
         {
           keyword_id: 3667,
           keyword_name: 'time',
+          isActive: true,
         },
-      ],
-      keywordMovie: [],
-    };
+      ];
+    },
   },
   mounted() {
-    this.getInitMovie(18035);
+    const keywrodId = Number(this.$route.params.keywordId);
+    this.getInitMovie(keywrodId);
 
     //  스크롤 하단 이동 체크하기
     //  하단 이동하면 콜백 함수 실행
     this.$isScrollBottomCheck(this.scrollCallback);
   },
   methods: {
-    getInitMovie(keyword_id) {
-      console.log(keyword_id);
+    async getInitMovie(keyword_id) {
       this.$store.dispatch('keywordSearch/getKeywordMovie', keyword_id);
     },
     getImage(poster_path) {
@@ -130,7 +142,7 @@ main {
   margin-right: 0;
 }
 
-#wrapper-keyword button:focus {
+#wrapper-keyword button.active {
   background-color: white;
   color: #13131b;
 }
