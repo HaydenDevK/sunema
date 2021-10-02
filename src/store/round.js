@@ -11,11 +11,6 @@ export default {
     }
   },
   actions: {
-    testCall() {
-      //  this.$store.dispatch("round/testCall")
-      // console.log(request);
-      console.log('testcall');
-    },
     //영화 리스트 정보
     async getMovieList({ commit }) {
       const result = await request(`/tv/93405/season/1`);

@@ -58,6 +58,9 @@ export default {
   mounted() {
     this.getInitMovie();
     // console.log(this.$route.params.idx);
+    //  스크롤 하단 이동 체크하기
+    //  하단 이동하면 콜백 함수 실행
+    this.$isScrollBottomCheck(this.scrollCallback);
   },
   methods: {
     getInitMovie() {
@@ -67,6 +70,9 @@ export default {
     getImage(still_path) {
       // console.log(still_path)
       return `https://image.tmdb.org/t/p/w300${still_path}`;
+    },
+    scrollCallback() {
+      console.log('callback');
     }
   }
 };
@@ -125,6 +131,9 @@ export default {
 }
 #episode ul li + li {
   margin-top: 16px;
+}
+#episode ul li:nth-last-child(1) {
+  margin-bottom: 53px;
 }
 #episode ul li a {
   display: flex;
