@@ -24,9 +24,6 @@ export default {
   },
   actions: {
     async getMovieDetail({ commit }) {
-      // const result = await request.get(
-      //   'https://api.themoviedb.org/3/movie/566525?api_key=4ae7e3c1afba212f2a37c1e33792869c&language=ko-kr'
-      // );
       const result = await request.get('/movie/566525');
 
       if (result.status === 200) {
@@ -35,9 +32,6 @@ export default {
       }
 
       console.log(result);
-    },
-    testCall() {
-      console.log(request);
-    },
+    }
   },
 };
