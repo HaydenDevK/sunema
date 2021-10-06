@@ -6,6 +6,7 @@ import actorDetail from './actorDetail';
 import round from './round';
 import detail from './detail';
 import keyword from './keyword';
+import actor from './actor';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -16,5 +17,6 @@ export default new Vuex.Store({
     round,
     detail,
     keyword,
+    actor
   },
 });
