@@ -60,7 +60,8 @@ export default {
   name: 'KeywordSearch',
   data() {
     return {
-      keywordMovie: [],
+      keywordId: 0,
+      keywordMovie: []
     };
   },
   computed: {
@@ -74,36 +75,58 @@ export default {
         {
           keyword_id: 18035,
           keyword_name: 'family',
-          isActive: false,
+          isActive: false
         },
         {
           keyword_id: 3667,
           keyword_name: 'time',
-          isActive: true,
-        },
+          isActive: false
+        }
+        // todo mounted 시점에 첫번째 keyword_id의 isActive가 자동으로 true가 되는 이유 이해하기
+        // 받아오는 keywordList 배열 안 객체에는 isActive 프로퍼티가 없을텐데, 어떻게 넣을지?
       ];
-    },
+    }
   },
   mounted() {
-    const keywrodId = Number(this.$route.params.keywordId);
-    this.getInitMovie(keywrodId);
+    this.keywordId = Number(this.$route.params.keywordId);
+    this.getInitMovie();
 
     //  스크롤 하단 이동 체크하기
     //  하단 이동하면 콜백 함수 실행
     this.$isScrollBottomCheck(this.scrollCallback);
   },
   methods: {
-    async getInitMovie(keyword_id) {
-      this.$store.dispatch('keywordSearch/getKeywordMovie', keyword_id);
+    getInitMovie(keywordId) {
+      this.setkeywordId(keywordId); // 함수 호출 시에 넘겨받은 keywordId가 있으면 그 값을 로컬에 저장하고 state에도 올리고
+      this.handleActive(); // 변경된 keywordId 가지고 일치하는 keywordId 찾아서 클래스 연동하고
+      this.$store.dispatch('keywordSearch/getKeywordMovie'); // 영화 불러다가 스토어에 붙임 // todo 스토어 정보가 바뀌면 템플릿에 바인딩도 다시 되는 이유 이해
+    },
+    setkeywordId(keywordId) {
+      if (keywordId) {
+        this.keywordId = Number(keywordId);
+      }
+      this.$store.commit('keywordSearch/SET_KEYWORD_ID', this.keywordId);
+    },
+    handleActive() {
+      this.keywordList.map((obj) => {
+        if (obj.keyword_id === this.keywordId) {
+          obj.isActive = true;
+        } else {
+          obj.isActive = false;
+        }
+      });
     },
     getImage(poster_path) {
-      // console.log(poster_path)
-      return `https://image.tmdb.org/t/p/w300${poster_path}`;
+      if (poster_path) {
+        return `https://image.tmdb.org/t/p/w300${poster_path}`;
+      } else {
+        return 'test'; // 성주님께 디폴트 이미지 제작 요청 후 붙이기 룰루리랄라
+      }
     },
     scrollCallback() {
-      console.log('callback');
-    },
-  },
+      this.$store.dispatch('keywordSearch/getKeywordMovieMore');
+    }
+  }
 };
 </script>
 
