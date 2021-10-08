@@ -83,7 +83,7 @@ export default {
           isActive: false
         }
         // todo mounted 시점에 첫번째 keyword_id의 isActive가 자동으로 true가 되는 이유 이해하기
-        // 받아오는 keywordList 배열 안 객체에는 isActive 프로퍼티가 없을텐데, 어떻게 넣을지?
+        // todo 받아오는 keywordList 배열 안 객체에는 isActive가 없을텐데, 어떻게 넣을지
       ];
     }
   },
@@ -97,11 +97,11 @@ export default {
   },
   methods: {
     getInitMovie(keywordId) {
-      this.setkeywordId(keywordId); // 함수 호출 시에 넘겨받은 keywordId가 있으면 그 값을 로컬에 저장하고 state에도 올리고
-      this.handleActive(); // 변경된 keywordId 가지고 일치하는 keywordId 찾아서 클래스 연동하고
-      this.$store.dispatch('keywordSearch/getKeywordMovie'); // 영화 불러다가 스토어에 붙임 // todo 스토어 정보가 바뀌면 템플릿에 바인딩도 다시 되는 이유 이해
+      this.setKeywordId(keywordId);
+      this.handleActive();
+      this.$store.dispatch('keywordSearch/getKeywordMovie'); // todo 스토어 정보가 바뀌면 템플릿에 바인딩도 다시 되는 이유 이해
     },
-    setkeywordId(keywordId) {
+    setKeywordId(keywordId) {
       if (keywordId) {
         this.keywordId = Number(keywordId);
       }
@@ -120,7 +120,7 @@ export default {
       if (poster_path) {
         return `https://image.tmdb.org/t/p/w300${poster_path}`;
       } else {
-        return 'test'; // 성주님께 디폴트 이미지 제작 요청 후 붙이기 룰루리랄라
+        return 'test'; // todo 성주님께 디폴트 이미지 제작 요청 후 붙이기 룰루리랄라
       }
     },
     scrollCallback() {
@@ -178,10 +178,6 @@ main {
 
   #wrapper-keyword {
     padding-left: 48px;
-  }
-
-  #wrapper-movies {
-    padding: 24px 48px;
   }
 
   #wrapper-keyword button {

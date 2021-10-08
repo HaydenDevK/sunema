@@ -19,7 +19,7 @@ export default {
       state.keywordMovie = result.results;
       state.pageTotal = result.total_pages;
     },
-    SET_PAGENUM_NEXT(state) {
+    SET_PAGE_NEXT(state) {
       if (state.pageTotal >= state.pageNow) {
         state.pageNow++;
       }
@@ -46,7 +46,7 @@ export default {
       }
     },
     async getKeywordMovieMore({ state, commit }) {
-      commit('SET_PAGENUM_NEXT');
+      commit('SET_PAGE_NEXT');
       const result = await request(`/keyword/${state.keywordId}/movies`, {
         params: {
           page: state.pageNow

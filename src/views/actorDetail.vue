@@ -1,7 +1,7 @@
 <template>
   <div class="bg-navy-100">
     <!-- 배경 블러 이미지 -->
-    <div class="bg-blured"></div>
+    <div class='bg-blurred'></div>
 
     <!-- 컨텐츠 -->
     <div id="contents">
@@ -34,7 +34,7 @@
           </div>
           <!-- todo
             가져올 내용 제한하는 방법 적용하고
-            더보기 버튼으로 추가로 더 불러오게끔
+            더보기 버튼으로 추가로 더 불러오게
           -->
 
           <div class="wrapper-list">
@@ -108,13 +108,17 @@
           }}</span>
           <span>{{ item.title }}</span>
         </div>
-        <!-- todo
-          공백
-        -->
 
         <div class="wrapper-more">
           <button>더보기</button>
         </div>
+        <!-- todo
+          가져올 내용 제한하는 방법 적용하고
+          더보기 버튼으로 추가로 더 불러오게
+        -->
+        <!-- todo
+          공백
+        -->
 
         <div class="works-category font-primary works-category-space">제작</div>
         <div
@@ -131,6 +135,13 @@
         <div class="wrapper-more">
           <button>더보기</button>
         </div>
+        <!-- todo
+          가져올 내용 제한하는 방법 적용하고
+          더보기 버튼으로 추가로 더 불러오게
+        -->
+        <!-- todo
+          공백
+        -->
       </section>
     </div>
   </div>
@@ -171,7 +182,7 @@ export default {
       if (this.actorDetail.profile_path) {
         return `https://image.tmdb.org/t/p/w300${this.actorDetail.profile_path}`;
       } else {
-        return 'test'; // 성주님께 디폴트 이미지 제작 요청 후 붙이기 룰루리랄라
+        return 'test'; // todo 성주님께 디폴트 이미지 제작 요청 후 붙이기 룰루리랄라
       }
     }
   },
@@ -209,8 +220,8 @@ export default {
       }
     },
     getYear(release_date) {
-      const splited = release_date.split('-');
-      const year = splited[0];
+      const splitArr = release_date.split('-');
+      const year = splitArr[0];
       return year;
     }
   }
@@ -227,7 +238,6 @@ export default {
 
 #wrapper-profile img {
   display: block;
-  margin: 0px auto;
   width: 226px;
   margin: 0 auto;
   border-radius: 5px;
@@ -323,9 +333,8 @@ export default {
   height: 222px;
 }
 
-.bg-blured {
-  background: url('../assets/images/actor_detail/img-actor-1.png') no-repeat
-    center;
+.bg-blurred {
+  background: url('../assets/images/actor_detail/img-actor-1.png') no-repeat center;
   background-size: cover;
   height: 452px;
   filter: blur(40px);
@@ -333,7 +342,7 @@ export default {
 
 /* 1024px */
 @media screen and (min-width: 1024px) {
-  .bg-blured {
+  .bg-blurred {
     height: 664px;
   }
 
@@ -346,10 +355,6 @@ export default {
 
   #wrapper-profile img {
     width: 381px;
-  }
-
-  #wrapper-profile-text {
-    padding: 48px;
   }
 
   #profile-title #profile-name {
@@ -390,11 +395,6 @@ export default {
     line-height: 38px;
   }
 
-  .font-md-h3 {
-    font-size: 30px;
-    line-height: 38px;
-  }
-
   .wrapper-more {
     display: none;
   }
@@ -404,8 +404,6 @@ export default {
     font-size: 24px;
     line-height: 35px;
     letter-spacing: 0.25px;
-    font-size: 24px;
-    line-height: 35px;
   }
 
   .wrapper-movie-slide {
