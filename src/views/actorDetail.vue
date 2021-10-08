@@ -164,7 +164,6 @@ export default {
           age--;
         }
       }
-      // console.log(age);
       return age;
     },
     profile() {
@@ -184,28 +183,22 @@ export default {
   },
   methods: {
     setPersonId() {
-      // console.log(this.personID);
-      // console.log(this.$route.params.personId);
       this.personID = Number(this.$route.params.personId); // todo 왜 형변환 해야하는지 다시 이해
-      // console.log(this.personID);
       this.$store.commit('actorDetail/SET_PERSON_ID', this.personID);
     },
     getInitDetail() {
       this.$store.dispatch('actorDetail/getActorDetail').then(() => {
         this.actorDetail = this.$store.state.actorDetail.actorDetail;
-        // console.log(this.actorDetail);
       });
     },
     getInitCredits() {
       this.$store.dispatch('actorDetail/getActorCredits').then(() => {
         this.actorCredits = this.$store.state.actorDetail.actorCredits;
-        // console.log(this.actorCredits);
       });
     },
     getInitImages() {
       this.$store.dispatch('actorDetail/getActorImages').then(() => {
         this.actorImages = this.$store.state.actorDetail.actorImages;
-        // console.log(this.actorImages);
       });
     },
     getImage(poster_path) {

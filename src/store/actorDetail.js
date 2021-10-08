@@ -39,7 +39,6 @@ export default {
       })(`/person/${state.personId}`);
       // api 호출 성공 시
       if (result.status === 200) {
-        // console.log(result.data);
         commit('SET_ACTOR_DETAIL', result.data);
       }
     },
@@ -50,7 +49,6 @@ export default {
 
       // api 호출 성공 시
       if (result.status === 200) {
-        // console.log(result.data);
         commit('SET_ACTOR_CREDITS', result.data);
       }
     },
@@ -59,7 +57,6 @@ export default {
 
       // api 호출 성공 시
       if (result.status === 200) {
-        // console.log(result.data);
         commit('SET_ACTOR_IMAGES', result.data.profiles);
       }
     }
