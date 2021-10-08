@@ -39,7 +39,7 @@
           <h2>현재 상영중</h2>
           <ul>
             <li>
-              <router-link to="">>
+              <router-link to="">
                 <img src="../assets/images/main/img_nowPlaying01.png" alt="" />
               </router-link>
             </li>
