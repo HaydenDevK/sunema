@@ -120,7 +120,8 @@ export default {
       if (poster_path) {
         return `https://image.tmdb.org/t/p/w300${poster_path}`;
       } else {
-        return 'test'; // todo 성주님께 디폴트 이미지 제작 요청 후 붙이기 룰루리랄라
+        return require('../assets/images/keyword_search/movie-thumb-default.png');
+        // todo 성주님께 디폴트 이미지 제작 요청 후 붙이기 룰루리랄라
       }
     },
     scrollCallback() {
