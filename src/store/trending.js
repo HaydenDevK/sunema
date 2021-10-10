@@ -44,7 +44,7 @@ export default {
           commit('SET_TOP_RATED', result.data);
         }
       } else {
-        const result = await request(`/tv/airing_today`, {
+        const result = await request(`/trending/{media_type}/{time_window}`, {
           params: {
             page: state.pageNow
           }

@@ -8,12 +8,18 @@
     </header>
 
     <!-- 버튼 -->
-    <button class="btn-type" @click="getInitContents('movie')">
-      영화
-    </button>
-    <button class="btn-type" @click="getInitContents('tv')">
-      티비 프로그램
-    </button>
+    <section class="wrapper-btn-type">
+      <button class="btn-type" @click="getInitMedia('movie')">
+        <p :class="{ active: $store.state.topRated.mediaType === 'movie' }">
+          영화
+        </p>
+      </button>
+      <button class="btn-type" @click="getInitMedia('tv')">
+        <p :class="{ active: $store.state.topRated.mediaType === 'tv' }">
+          티비 프로그램
+        </p>
+      </button>
+    </section>
 
     <!-- 컨텐츠 리스트 -->
     <main class="wrapper-poster">
@@ -61,14 +67,17 @@ export default {
   computed: {},
   mounted() {
     // todo async await 필요한 거 맞는지
-    this.getInitContents(this.$store.state.topRated.contentsType);
+    this.getInitMedia();
     //  스크롤 하단 이동 체크하기
     //  하단 이동하면 콜백 함수 실행
     this.$isScrollBottomCheck(this.scrollCallback);
   },
   methods: {
-    getInitContents(contentsType) {
-      this.$store.dispatch('topRated/getTopRated', contentsType);
+    async getInitMedia(mediaType) {
+      if (mediaType) {
+        await this.$store.commit('topRated/SET_MEDIA_TYPE', mediaType);
+      }
+      this.$store.dispatch('topRated/getTopRated');
       // todo 스토어 정보가 바뀌면 템플릿에 바인딩도 다시 되는 이유 이해
     },
     getImage(poster_path) {

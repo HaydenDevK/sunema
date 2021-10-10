@@ -88,6 +88,12 @@ const routes = [
     name: 'TopRated',
     component: () =>
       import(/* webpackChunkName: "toprated" */ '../views/topRated.vue')
+  },
+  {
+    path: '/trending', // 지금 뜨는 중 (선혜)
+    name: 'Trending',
+    component: () =>
+      import(/* webpackChunkName: "toprated" */ '../views/trending.vue')
   }
 ];
 

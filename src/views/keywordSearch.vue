@@ -9,10 +9,10 @@
     <!-- 키워드 버튼 -->
     <section id="wrapper-keyword">
       <button
-        v-for="item in $store.state.keywordSearch.contentsKeywords"
+        v-for="item in $store.state.keywordSearch.mediaKeywords"
         :class="{ active: item.id === keywordId }"
         :key="item.id"
-        @click="getInitContents(item.id)"
+        @click="getInitMedia(item.id)"
       >
         {{ item.name }}
       </button>
@@ -21,7 +21,7 @@
     <!-- 컨텐츠 리스트 -->
     <main class="wrapper-poster">
       <router-link
-        v-for="item in $store.state.keywordSearch.keywordContents"
+        v-for="item in $store.state.keywordSearch.keywordMedia"
         :key="item.id"
         to=""
       >
@@ -72,8 +72,8 @@ export default {
   },
   async mounted() {
     // todo async await 필요한 거 맞는지
-    await this.$store.dispatch('keywordSearch/getContentsKeywords').then(() => {
-      this.getInitContents();
+    await this.$store.dispatch('keywordSearch/getMediaKeywords').then(() => {
+      this.getInitMedia();
     });
 
     //  스크롤 하단 이동 체크하기
@@ -81,9 +81,9 @@ export default {
     this.$isScrollBottomCheck(this.scrollCallback);
   },
   methods: {
-    getInitContents(keywordId) {
+    getInitMedia(keywordId) {
       this.setKeywordId(keywordId);
-      this.$store.dispatch('keywordSearch/getKeywordContents');
+      this.$store.dispatch('keywordSearch/getKeywordMedia');
       // todo 스토어 정보가 바뀌면 템플릿에 바인딩도 다시 되는 이유 이해
     },
     setKeywordId(keywordId) {
@@ -104,7 +104,7 @@ export default {
       }
     },
     scrollCallback() {
-      this.$store.dispatch('keywordSearch/getKeywordContentsMore');
+      this.$store.dispatch('keywordSearch/getKeywordMediaMore');
     }
   }
 };

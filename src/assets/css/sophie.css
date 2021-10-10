@@ -89,15 +89,26 @@ button {
   color: #ffffff;
 }
 
-.btn-type {
+.wrapper-btn-type {
+  padding: 1.2rem 0 2.4rem 2.4rem;
+}
+
+.wrapper-btn-type .btn-type {
+  padding: 0 2.4rem;
+}
+
+.wrapper-btn-type .btn-type:first-child {
+  margin-right: 0.8rem;
+}
+
+.wrapper-btn-type .btn-type p {
   font-size: 1.8rem;
   line-height: 2.3rem;
-  text-align: center;
   letter-spacing: -0.02em;
   color: #ffffff;
 }
 
-.btn-type.active {
+.wrapper-btn-type .btn-type p.active {
   border-bottom: 2px solid #ffffff;
   /* todo 애니메이션, 클릭 이벤트 연결 */
 }

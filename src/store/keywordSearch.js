@@ -4,12 +4,12 @@ export default {
   namespaced: true,
   state: {
     keywordId: 0,
-    keywordContents: [],
+    keywordMedia: [],
     pageNow: 1,
     pageTotal: 1,
-    contentsType: 'movie', // sample setting
-    contentsId: 436969,
-    contentsKeywords: []
+    mediaType: 'movie', // sample setting
+    mediaId: 436969,
+    mediaKeywords: []
   },
   mutations: {
     INIT_PAGE_NOW(state) {
@@ -18,8 +18,8 @@ export default {
     SET_KEYWORD_ID(state, keywordId) {
       state.keywordId = keywordId;
     },
-    SET_KEYWORD_CONTENTS(state, result) {
-      state.keywordContents = result.results;
+    SET_KEYWORD_MEDIA(state, result) {
+      state.keywordMedia = result.results;
       state.pageTotal = result.total_pages;
     },
     SET_PAGE_NEXT(state) {
@@ -27,20 +27,20 @@ export default {
         state.pageNow++;
       }
     },
-    SET_KEYWORD_CONTENTS_NEXT(state, result) {
-      const newkeywordContents = state.keywordContents.concat(result.results);
-      state.keywordContents = newkeywordContents;
+    SET_KEYWORD_MEDIA_NEXT(state, result) {
+      const newkeywordMedia = state.keywordMedia.concat(result.results);
+      state.keywordMedia = newkeywordMedia;
     },
-    SET_CONTENTS_KEYWORDS(state, data) {
-      state.contentsKeywords = data;
+    SET_MEDIA_KEYWORDS(state, data) {
+      state.mediaKeywords = data;
     }
   },
   actions: {
-    async getKeywordContents({ state, commit }) {
+    async getKeywordMedia({ state, commit }) {
       await commit('SET_KEYWORD_ID', state.keywordId);
       await commit('INIT_PAGE_NOW'); // todo await 해야하는지 이해
 
-      const result = await request(`/discover/${state.contentsType}`, {
+      const result = await request(`/discover/${state.mediaType}`, {
         params: {
           page: state.pageNow,
           with_keywords: state.keywordId
@@ -49,12 +49,12 @@ export default {
 
       // api 호출 성공 시
       if (result.status === 200) {
-        commit('SET_KEYWORD_CONTENTS', result.data);
+        commit('SET_KEYWORD_MEDIA', result.data);
       }
     },
-    async getKeywordContentsMore({ state, commit }) {
+    async getKeywordMediaMore({ state, commit }) {
       await commit('SET_PAGE_NEXT');
-      const result = await request(`/discover/${state.contentsType}`, {
+      const result = await request(`/discover/${state.mediaType}`, {
         params: {
           page: state.pageNow,
           with_keywords: state.keywordId
@@ -63,23 +63,23 @@ export default {
 
       // api 호출 성공 시
       if (result.status === 200) {
-        commit('SET_KEYWORD_CONTENTS_NEXT', result.data);
+        commit('SET_KEYWORD_MEDIA_NEXT', result.data);
       }
     },
-    async getContentsKeywords({ state, commit }) {
-      if (state.contentsType === 'movie') {
-        const result = await request(`/movie/${state.contentsId}/keywords`);
+    async getMediaKeywords({ state, commit }) {
+      if (state.mediaType === 'movie') {
+        const result = await request(`/movie/${state.mediaId}/keywords`);
 
         // api 호출 성공 시
         if (result.status === 200) {
-          commit('SET_CONTENTS_KEYWORDS', result.data.keywords);
+          commit('SET_MEDIA_KEYWORDS', result.data.keywords);
         }
       } else {
-        const result = await request(`/tv/${state.contentsId}/keywords`);
+        const result = await request(`/tv/${state.mediaId}/keywords`);
 
         // api 호출 성공 시
         if (result.status === 200) {
-          commit('SET_CONTENTS_KEYWORDS', result.data.keywords);
+          commit('SET_MEDIA_KEYWORDS', result.data.keywords);
         }
       }
     }

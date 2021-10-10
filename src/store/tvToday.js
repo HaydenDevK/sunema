@@ -42,7 +42,8 @@ export default {
     },
     async getTvTodayMore({ state, commit }) {
       await commit('SET_PAGE_NEXT');
-      const result = await request(`/discover/${state.contentsType}`, {
+
+      const result = await request(`/tv/airing_today`, {
         params: {
           page: state.pageNow
         }

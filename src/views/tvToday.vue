@@ -53,13 +53,13 @@ export default {
   computed: {},
   mounted() {
     // todo async await 필요한 거 맞는지
-    this.getInitContents();
+    this.getInitMedia();
     //  스크롤 하단 이동 체크하기
     //  하단 이동하면 콜백 함수 실행
     this.$isScrollBottomCheck(this.scrollCallback);
   },
   methods: {
-    getInitContents() {
+    getInitMedia() {
       this.$store.dispatch('tvToday/getTvToday');
       // todo 스토어 정보가 바뀌면 템플릿에 바인딩도 다시 되는 이유 이해
     },
