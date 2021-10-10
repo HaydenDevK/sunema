@@ -4,39 +4,35 @@
       <!-- s: top-area -->
       <section class="top-area">
         <!-- video -->
-        <div class="preview-box">
-          <!-- ifram으로 교체예정 -->
+        <div class="preview-box" v-if="movieDetail.videos && movieDetail.videos.results.length > 0">
           <img src="@/assets/images/detail/thum_video_top.png" alt="">
-          <!-- // ifram으로 교체예정 -->
         </div>
         <!-- // video -->
 
         <!-- poster -->
-        <!-- <div class="poster-box">
+        <div class="poster-box">
           <div class="bg-box">
-            <img src="@/assets/detail/thum_poster.png" alt="배경 이미지">
+            <img :src="getBackDrop(movieDetail.backdrop_path)" alt="배경 이미지">
           </div>
           <div class="img-box">
-            <img src="@/assets/detail/thum_poster.png" alt="포스터 이미지">
+            <img :src="getImage(movieDetail.poster_path)" alt="포스터 이미지">
           </div>
-        </div> -->
+        </div>
         <!-- // poster -->
       </section>
       <!-- e: top-area -->
 
       <!-- s: info-area -->
       <section class="info-area inner-box">
-        <h2 class="movie-tit">종이의 집(2017)</h2>
+        <h2 class="movie-tit">{{movieDetail.title}}</h2>
         <div class="info-tablet-ui clear">
           <div class="info_basic">
           <span class="grade"><b>19</b>+</span>
           <span class="genre">범죄</span>
-          <span class="genre">드라마</span>
-          <span class="genre">장르</span>
           <span class="time"><b class="hour">1</b>h<b class="minute">10</b>m</span>
           </div>
           <div class="info_other">
-          <span class="date">2017.05.02</span>
+          <span class="date">{{movieDetail.release_date}}</span>
           <!-- star -->
           <div class="star-box">
             <!-- class="star-on"의 width값에 따라 별점 노출 -->
@@ -47,10 +43,8 @@
           <!-- // star -->
           </div>
         </div>
-        <h2 class="movie-tit-lang">The perfect robbery.</h2>
-        <p class="info-txt">
-          1명의 천재, 8명의 공범, 철저히 준비한 세기의 강도. 스페인 조폐국에서 인질극까지 벌인 이들은 과연 포위 경찰을 따돌리고 거액의 돈과 함께 달아날 수 있을까?
-        </p>
+        <h2 class="movie-tit-lang">{{movieDetail.tagline}}</h2>
+        <p class="info-txt">{{movieDetail.overview}}</p>
         <div class="info-series">
           <div class="now-series">
             <div class="img-box">
@@ -352,10 +346,23 @@
 <script>
 export default {
   name: 'Detail',
+  props:{
+  },
   components:{},
+  data(){
+    return{
+      movieDetail: [],
+    };
+  },
   mounted(){
     console.log('컨포넌트 준비됨');
     this.initMovieDetail();
+
+    this.$store
+      .dispatch('detail/getMovieDetail', this.$route.params.movie_id)
+      .then(() => {
+        this.movieDetail = this.$store.state.detail.movieDetail;
+      });
   },
   methods: {
     initMovieDetail(){
@@ -363,8 +370,19 @@ export default {
       this.$store.dispatch('detail/getMovieDetail');
     },
     // printState(){
-    //   console.log(this.$store.state.detail.detailMovie);
+    //   console.log(this.$store.state.detail.movieDetail);
     // }
+
+    getImage(poster_path) {
+      return `https://image.tmdb.org/t/p/w300${poster_path}`;
+    },
+    getBackDrop(backdrop_path) {
+      return `https://image.tmdb.org/t/p/w300${backdrop_path}`;
+    },
+    // getYoutube(key) {
+    //   console.log('https://www.youtube.com/embed/' + key);
+    //   return 'https://www.youtube.com/embed/' + key;
+    // },
   }
 };
 </script>

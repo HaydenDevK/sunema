@@ -15,11 +15,11 @@ export default {
         keyword_name: 'time',
       },
     ],
-    detailMovie: [],
+    movieDetail: [],
   },
   mutations: {
-    SET_DETAIL_MOVIE(state, data) {
-      state.detailMovie = data;
+    SET_DETAIL_MOVIE(state, data) { 
+      state.movieDetail = data;
     },
   },
   actions: {
@@ -28,7 +28,7 @@ export default {
 
       if (result.status === 200) {
         // console.log(result.data.title);
-        commit('SET_DETAIL_MOVIE', result.data.title);
+        commit('SET_DETAIL_MOVIE', result.data);
       }
 
       console.log(result);
