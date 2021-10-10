@@ -53,7 +53,7 @@
         </div>
       </section>
 
-      <div class="seperator-black-2" />
+      <div class="separator-black-2" />
 
       <!-- 참여 작품 -->
       <section id="filmography">
@@ -179,8 +179,8 @@ export default {
       if (this.actorDetail.profile_path) {
         return `https://image.tmdb.org/t/p/w300${this.actorDetail.profile_path}`;
       } else {
-        return require('../assets/images/actor_detail/actor-profile-default.png');
-        // todo 성주님께 디폴트 이미지 제작 요청 후 붙이기 룰루리랄라
+        return require('../assets/images/actor_detail/img-default.png');
+        // todo 메인 프로필, 참여 작품, 프로필 사진 등에서 활용할 img-default.png로 수정
       }
     }
   },
@@ -215,7 +215,7 @@ export default {
         return `https://image.tmdb.org/t/p/w300${poster_path}`;
       } else {
         return require('../assets/images/actor_detail/img-default.png');
-        // todo 참여 작품, 프로필 사진에서 쓰이기 때문에 "이미지가 없다"는 이미지여야 할 듯
+        // todo 메인 프로필, 참여 작품, 프로필 사진 등에서 활용할 img-default.png로 수정
       }
     },
     getYear(release_date) {
@@ -270,18 +270,13 @@ export default {
   line-height: 2.3rem;
 }
 
-#filmography,
-#photography {
-  padding-top: 2.4rem;
-}
-
 #filmography .profile-subtitle,
 #photography .profile-subtitle {
-  padding: 0 0 1.6rem 2.4rem;
+  padding: 4rem 0 1.6rem 2.4rem;
 }
 
 #works {
-  padding: 2.4rem;
+  padding: 4.8rem 2.4rem;
 }
 
 .profile-subtitle {
@@ -304,7 +299,7 @@ export default {
   margin-top: 3rem;
 }
 
-.seperator-black-2 {
+.separator-black-2 {
   background: #000000;
   height: 0.2rem;
   width: 100%;
@@ -388,13 +383,13 @@ export default {
     margin-bottom: 1.6rem;
   }
 
-  #filmography,
-  #photography {
-    padding: 3rem 0 0 4.8rem;
+  #filmography .profile-subtitle,
+  #photography .profile-subtitle {
+    padding: 5.4rem 0 1.8rem 4.8rem;
   }
 
   #works {
-    padding: 3rem 0 4.8rem 4.8rem;
+    padding: 5.4rem 0 4.8rem 4.8rem;
   }
 
   .profile-subtitle {

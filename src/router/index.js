@@ -70,6 +70,24 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "search" */ '../views/search.vue')
+  },
+  {
+    path: '/tvtoday', // 오늘 방영할 티비 프로그램 (선혜)
+    name: 'TvToday',
+    component: () =>
+      import(/* webpackChunkName: "tvtoday" */ '../views/tvToday.vue')
+  },
+  {
+    path: '/tvNow', // 티비 방영중 (선혜)
+    name: 'TvNow',
+    component: () =>
+      import(/* webpackChunkName: "tvnow" */ '../views/tvNow.vue')
+  },
+  {
+    path: '/topRated', // 높은 평점 (선혜)
+    name: 'TopRated',
+    component: () =>
+      import(/* webpackChunkName: "toprated" */ '../views/topRated.vue')
   }
 ];
 

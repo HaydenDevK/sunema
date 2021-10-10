@@ -7,10 +7,18 @@
       <p class="font-page-title">TV 방영중</p>
     </header>
 
+    <!-- 버튼 -->
+    <button class="btn-type" @click="getInitContents('movie')">
+      영화
+    </button>
+    <button class="btn-type" @click="getInitContents('tv')">
+      티비 프로그램
+    </button>
+
     <!-- 컨텐츠 리스트 -->
     <main class="wrapper-poster">
       <router-link
-        v-for="item in $store.state.tvNow.tvNow"
+        v-for="item in $store.state.topRated.topRated"
         :key="item.id"
         to=""
       >
@@ -46,21 +54,21 @@
 
 <script>
 export default {
-  name: 'TvNow',
+  name: 'TopRated',
   data() {
     return {};
   },
   computed: {},
   mounted() {
     // todo async await 필요한 거 맞는지
-    this.getInitContents();
+    this.getInitContents(this.$store.state.topRated.contentsType);
     //  스크롤 하단 이동 체크하기
     //  하단 이동하면 콜백 함수 실행
     this.$isScrollBottomCheck(this.scrollCallback);
   },
   methods: {
-    getInitContents() {
-      this.$store.dispatch('tvNow/getTvNow');
+    getInitContents(contentsType) {
+      this.$store.dispatch('topRated/getTopRated', contentsType);
       // todo 스토어 정보가 바뀌면 템플릿에 바인딩도 다시 되는 이유 이해
     },
     getImage(poster_path) {
@@ -72,7 +80,7 @@ export default {
       }
     },
     scrollCallback() {
-      this.$store.dispatch('tvNow/getTvNowMore');
+      this.$store.dispatch('topRated/getTopRatedMore');
     }
   }
 };

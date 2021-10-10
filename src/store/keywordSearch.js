@@ -53,7 +53,7 @@ export default {
       }
     },
     async getKeywordContentsMore({ state, commit }) {
-      commit('SET_PAGE_NEXT');
+      await commit('SET_PAGE_NEXT');
       const result = await request(`/discover/${state.contentsType}`, {
         params: {
           page: state.pageNow,
