@@ -1,7 +1,10 @@
 <template>
   <div class="bg-navy-100">
     <!-- 배경 블러 이미지 -->
-    <div class='bg-blurred'></div>
+    <div
+      class="bg-blurred"
+      :style="{ backgroundImage: `url(${profile})` }"
+    ></div>
 
     <!-- 컨텐츠 -->
     <div id="contents">
@@ -30,7 +33,7 @@
           </div>
 
           <div class="wrapper-more">
-            <button class="font-white font-white-70 font-md-h5">더보기</button>
+            <button>더보기</button>
           </div>
           <!-- todo
             가져올 내용 제한하는 방법 적용하고
@@ -116,9 +119,6 @@
           가져올 내용 제한하는 방법 적용하고
           더보기 버튼으로 추가로 더 불러오게
         -->
-        <!-- todo
-          공백
-        -->
 
         <div class="works-category font-primary works-category-space">제작</div>
         <div
@@ -138,9 +138,6 @@
         <!-- todo
           가져올 내용 제한하는 방법 적용하고
           더보기 버튼으로 추가로 더 불러오게
-        -->
-        <!-- todo
-          공백
         -->
       </section>
     </div>
@@ -182,7 +179,8 @@ export default {
       if (this.actorDetail.profile_path) {
         return `https://image.tmdb.org/t/p/w300${this.actorDetail.profile_path}`;
       } else {
-        return 'test'; // todo 성주님께 디폴트 이미지 제작 요청 후 붙이기 룰루리랄라
+        return require('../assets/images/actor_detail/actor-profile-default.png');
+        // todo 성주님께 디폴트 이미지 제작 요청 후 붙이기 룰루리랄라
       }
     }
   },
@@ -194,7 +192,7 @@ export default {
   },
   methods: {
     setPersonId() {
-      this.personID = Number(this.$route.params.personId); // todo 왜 형변환 해야하는지 다시 이해
+      this.personID = Number(this.$route.params.personId);
       this.$store.commit('actorDetail/SET_PERSON_ID', this.personID);
     },
     getInitDetail() {
@@ -216,7 +214,8 @@ export default {
       if (poster_path) {
         return `https://image.tmdb.org/t/p/w300${poster_path}`;
       } else {
-        return 'test';
+        return require('../assets/images/actor_detail/img-default.png');
+        // todo 참여 작품, 프로필 사진에서 쓰이기 때문에 "이미지가 없다"는 이미지여야 할 듯
       }
     },
     getYear(release_date) {
@@ -233,166 +232,180 @@ export default {
 
 #contents {
   position: relative;
-  margin-top: -452px;
+  margin-top: -45.2rem;
 }
 
 #wrapper-profile img {
   display: block;
-  width: 226px;
+  width: 22.6rem;
   margin: 0 auto;
-  border-radius: 5px;
+  border-radius: 0.5rem;
 }
 
 #wrapper-profile-top {
-  padding: 24px;
+  padding: 2.4rem;
   color: white;
 }
 
 #profile-title {
   display: flex;
   align-items: center;
-  padding-bottom: 24px;
+  padding-bottom: 2.4rem;
 }
 
 #profile-title #profile-name {
-  font-size: 21px;
-  line-height: 26px;
+  font-size: 2.1rem;
+  line-height: 2.6rem;
   font-weight: bold;
-  padding-right: 8px;
+  padding-right: 0.8rem;
 }
 
 #profile-title #profile-job {
-  font-size: 12px;
-  line-height: 15px;
+  font-size: 1.2rem;
+  line-height: 1.5rem;
 }
 
 #profile-further {
-  font-size: 16px;
-  line-height: 23px;
+  font-size: 1.6rem;
+  line-height: 2.3rem;
 }
 
 #filmography,
 #photography {
-  padding: 24px 0 0 24px;
+  padding-top: 2.4rem;
+}
+
+#filmography .profile-subtitle,
+#photography .profile-subtitle {
+  padding: 0 0 1.6rem 2.4rem;
 }
 
 #works {
-  padding: 24px;
+  padding: 2.4rem;
 }
 
 .profile-subtitle {
-  font-size: 21px;
-  line-height: 26px;
-  letter-spacing: 0.25px;
+  font-size: 2.1rem;
+  line-height: 2.6rem;
+  letter-spacing: 0.025rem;
   color: white;
   font-weight: bold;
-  padding-bottom: 16px;
+  padding-bottom: 1.6rem;
 }
 
 .works-category {
-  padding-bottom: 8px;
-  font-size: 18px;
-  line-height: 23px;
+  padding-bottom: 0.8rem;
+  font-size: 1.8rem;
+  line-height: 2.3rem;
   letter-spacing: -0.02em;
 }
 
 .works-category-space {
-  margin-top: 30px;
+  margin-top: 3rem;
 }
 
 .seperator-black-2 {
   background: #000000;
-  height: 2px;
+  height: 0.2rem;
   width: 100%;
 }
 
 .wrapper-list {
   display: grid;
-  grid-template-columns: 56px 1fr;
-  font-size: 16px;
-  line-height: 23px;
+  grid-template-columns: 5.6rem 1fr;
+  font-size: 1.6rem;
+  line-height: 2.3rem;
   color: white;
 }
 
 .wrapper-movie-slide {
   display: grid;
-  grid-template-columns: repeat(6, 148px);
-  /* grid-template-columns: repeat(auto-fill, 148px); */
-  grid-column-gap: 16px;
+  grid-auto-columns: max-content;
+  grid-column-gap: 1.6rem;
   grid-auto-flow: column;
   overflow-x: auto;
   white-space: nowrap;
 }
+
 .wrapper-movie-slide a {
   font-size: 0;
   overflow: hidden;
-  border-radius: 5px;
+  border-radius: 0.5rem;
+}
+
+.wrapper-movie-slide a:first-child {
+  margin-left: 2.4rem;
+}
+
+.wrapper-movie-slide a:last-child {
+  margin-right: 2.4rem;
 }
 
 .wrapper-movie-slide img {
-  height: 222px;
+  height: 22.2rem;
 }
 
 .bg-blurred {
-  background: url('../assets/images/actor_detail/img-actor-1.png') no-repeat center;
+  background-repeat: no-repeat;
+  background-position: center;
   background-size: cover;
-  height: 452px;
-  filter: blur(40px);
+  height: 45.2rem;
+  filter: blur(4rem);
 }
 
 /* 1024px */
 @media screen and (min-width: 1024px) {
   .bg-blurred {
-    height: 664px;
+    height: 66.4rem;
   }
 
   #contents {
-    margin-top: -664px;
+    margin-top: -66.4rem;
   }
   #wrapper-profile-top {
-    padding: 48px;
+    padding: 4.8rem;
   }
 
   #wrapper-profile img {
-    width: 381px;
+    width: 38.1rem;
   }
 
   #profile-title #profile-name {
-    font-size: 40px;
-    line-height: 120%;
-    letter-spacing: 0.25px;
+    font-size: 4rem;
+    line-height: 4.8rem;
+    letter-spacing: 0.025rem;
   }
 
   #profile-title #profile-job {
-    font-size: 21px;
-    line-height: 26px;
+    font-size: 2.1rem;
+    line-height: 2.6rem;
   }
 
   #profile-further {
-    font-size: 24px;
-    line-height: 35px;
-    letter-spacing: 0.25px;
-    margin-bottom: 16px;
+    font-size: 2.4rem;
+    line-height: 3.5rem;
+    letter-spacing: 0.025rem;
+    margin-bottom: 1.6rem;
   }
 
   #filmography,
   #photography {
-    padding: 30px 0 0 48px;
+    padding: 3rem 0 0 4.8rem;
   }
 
   #works {
-    padding: 30px 0 48px 48px;
+    padding: 3rem 0 4.8rem 4.8rem;
   }
 
   .profile-subtitle {
-    font-size: 30px;
-    line-height: 38px;
-    padding-bottom: 18px;
+    font-size: 3rem;
+    line-height: 3.8rem;
+    padding-bottom: 1.8rem;
   }
 
   .works-category {
-    font-size: 30px;
-    line-height: 38px;
+    font-size: 3rem;
+    line-height: 3.8rem;
   }
 
   .wrapper-more {
@@ -400,21 +413,26 @@ export default {
   }
 
   .wrapper-list {
-    grid-template-columns: 94px 1fr;
-    font-size: 24px;
-    line-height: 35px;
-    letter-spacing: 0.25px;
+    grid-template-columns: 9.4rem 1fr;
+    font-size: 2.4rem;
+    line-height: 3.5rem;
+    letter-spacing: 0.025rem;
   }
 
   .wrapper-movie-slide {
-    /* grid-template-columns: repeat(auto-fill, 166px); */
-    /* grid-template-columns: repeat(auto-fill, minmax(166px, auto)); */
-    grid-template-columns: repeat(10, 166px);
-    grid-column-gap: 24px;
+    grid-column-gap: 2.4rem;
   }
 
   .wrapper-movie-slide img {
-    height: 256px;
+    height: 25.6rem;
+  }
+
+  .wrapper-movie-slide a:first-child {
+    margin-left: 4.8rem;
+  }
+
+  .wrapper-movie-slide a:last-child {
+    margin-right: 4.8rem;
   }
 }
 </style>

@@ -50,6 +50,28 @@ export default {
 
       // api 호출 성공 시
       if (result.status === 200) {
+        result.data.crew.sort(function(a, b) {
+          if (a.release_date < b.release_date) {
+            return 1;
+          }
+          if (a.release_date > b.release_date) {
+            return -1;
+          }
+          // a must be equal to b
+          return 0;
+        });
+
+        result.data.cast.sort(function(a, b) {
+          if (a.release_date < b.release_date) {
+            return 1;
+          }
+          if (a.release_date > b.release_date) {
+            return -1;
+          }
+          // a must be equal to b
+          return 0;
+        });
+
         commit('SET_ACTOR_CREDITS', result.data);
       }
     },
