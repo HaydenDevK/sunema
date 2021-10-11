@@ -18,7 +18,7 @@
       </button>
     </section>
 
-    <!-- 컨텐츠 리스트 -->
+    <!-- 작품 리스트 -->
     <main class="wrapper-poster">
       <router-link
         v-for="item in $store.state.keywordSearch.keywordMedia"

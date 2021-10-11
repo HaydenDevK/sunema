@@ -4,7 +4,7 @@
       <router-link to="" class="btn-back">
         <img src="../assets/images/keyword_search/icon-back.png" alt="" />
       </router-link>
-      <p class="font-page-title">TV 방영중</p>
+      <p class="font-page-title">지금 뜨는 콘텐츠</p>
     </header>
 
     <!-- 버튼 -->
@@ -21,7 +21,7 @@
       </button>
     </section>
 
-    <!-- 컨텐츠 리스트 -->
+    <!-- 작품 리스트 -->
     <main class="wrapper-poster">
       <router-link
         v-for="item in $store.state.topRated.topRated"
@@ -105,7 +105,7 @@ main {
 /* tablet */
 @media (min-width: 1024px) {
   main {
-    padding: 2.4rem 4.8rem 8.2rem 4.8rem;
+    padding: 0 4.8rem 8.2rem 4.8rem;
   }
 }
 </style>

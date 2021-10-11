@@ -7,7 +7,7 @@
       <p class="font-page-title">TV 방영중</p>
     </header>
 
-    <!-- 컨텐츠 리스트 -->
+    <!-- 작품 리스트 -->
     <main class="wrapper-poster">
       <router-link
         v-for="item in $store.state.tvNow.tvNow"
