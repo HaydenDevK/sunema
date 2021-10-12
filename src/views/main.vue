@@ -34,55 +34,7 @@
           </li> -->
       </ul>
       <div class="contents">
-        <section class="popular">
-          <div class="title-box">
-            <h2>인기 콘텐츠</h2>
-            <div class="streaming">
-              <p>스트리밍 ON</p>
-              <input type="checkbox" id="str" checked />
-              <label for="str"><p>선택</p></label>
-            </div>
-          </div>
-          <ul>
-            <li>
-              <router-link to="">
-                <img src="../assets/images/main/img_popular01.png" alt="" />
-                <p class="number">1</p>
-              </router-link>
-            </li>
-            <li>
-              <router-link to="">
-                <img src="../assets/images/main/img_popular02.png" alt="" />
-                <p class="number">2</p>
-              </router-link>
-            </li>
-            <!-- <li>
-                <router-link to="">
-                  <img src="../assets/images/main/img_popular03.png" alt="" />
-                  <p class="number">3</p>
-                </router-link>
-              </li>
-              <li>
-                <router-link to="">
-                  <img src="../assets/images/main/img_popular04.png" alt="" />
-                  <p class="number">4</p>
-                </router-link>
-              </li>
-              <li>
-                <router-link to="">
-                  <img src="../assets/images/main/img_popular05.png" alt="" />
-                  <p class="number">5</p>
-                </router-link>
-              </li>
-              <li>
-                <router-link to="">
-                  <img src="../assets/images/main/img_popular06.png" alt="" />
-                  <p class="number">6</p>
-                </router-link>
-              </li> -->
-          </ul>
-          <router-link to="">전체보기</router-link>
-        </section>
+        <MainMovieSlide title="인기 콘텐츠" flag="T" :movie="$store.state.main.popularMovie" />
         <section class="now-playing">
           <h2>현재 상영중</h2>
           <ul>
@@ -124,7 +76,7 @@
           <ul>
             <li>
               <router-link to="">
-                <iframe
+                <!-- <iframe
                   width="560"
                   height="315"
                   src="https://www.youtube.com/embed/gQJ0RQ9e01s"
@@ -132,7 +84,7 @@
                   frameborder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen
-                ></iframe>
+                ></iframe> -->
               </router-link>
             </li>
           </ul>
@@ -363,10 +315,23 @@
 </template>
 
 <script>
+import MainMovieSlide from '@/components/MainMovieSlide.vue';
 export default {
-  mounted() {
-    this.$store.dispatch('main/testCall');
+  name: 'Main',
+  components: {
+    MainMovieSlide,
+    
   },
+  mounted() {
+    // this.$store.dispatch('main/testCall');
+    this.getMovieInfo();
+  },
+  methods: {
+    getMovieInfo() {
+      console.log('getMovieInfo 호출');
+      this.$store.dispatch('main/getPopularMovie');
+    }
+  }
 };
 </script>
 
