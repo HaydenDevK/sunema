@@ -1,0 +1,95 @@
+<template>
+  <div>
+    <!-- 하단 메뉴 -->
+    <section class="menu">
+      <div>
+        <button>
+          <img src="../assets/images/search/home.png" alt="" />
+          <p>홈2</p>
+        </button>
+      </div>
+      <div>
+        <button>
+          <img src="../assets/images/search/released.png" alt="" />
+          <p>상영중</p>
+        </button>
+      </div>
+      <div>
+        <button>
+          <img src="../assets/images/search/upcoming.png" alt="" />
+          <p>개봉예정</p>
+        </button>
+      </div>
+      <div>
+        <button>
+          <img src="../assets/images/search/mint_mag.png" alt="" />
+          <p class="font-mint">검색</p>
+        </button>
+      </div>
+      <div>
+        <button>
+          <img src="../assets/images/search/popular.png" alt="" />
+          <p>인기콘텐츠</p>
+        </button>
+      </div>
+    </section>
+  </div>
+</template>
+
+<script>
+export default {};
+</script>
+
+<style scoped>
+.menu {
+  display: flex;
+  background-color: #13131b;
+  padding: 0px;
+  position: fixed;
+  bottom: 0;
+  height: 54px;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  z-index: 1;
+  bottom: 0;
+}
+.menu div {
+  width: 25%;
+  list-style: none;
+}
+.menu div p {
+  text-align: center;
+}
+.menu button {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 11px;
+  color: #ffffff;
+}
+.menu p {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+button,
+input,
+button:focus {
+  border: none;
+  cursor: pointer;
+  outline: none;
+  background-color: unset;
+  color: #ffffff;
+}
+.menu button img {
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: -5px;
+  width: 16px;
+  height: 18px;
+}
+</style>

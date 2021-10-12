@@ -28,30 +28,6 @@
         <img :src="getImage(item.poster_path)" alt="" />
       </router-link>
     </main>
-
-    <!-- 독 바 -->
-    <footer class="doc-bar">
-      <router-link to="" class="doc-bar-item">
-        <img src="../assets/images/keyword_search/icon-home.png" alt="" />
-        <p>홈</p>
-      </router-link>
-      <router-link to="" class="doc-bar-item">
-        <img src="../assets/images/keyword_search/icon-nowplaying.png" alt="" />
-        <p>상영중</p>
-      </router-link>
-      <router-link to="" class="doc-bar-item">
-        <img src="../assets/images/keyword_search/icon-upcoming.png" alt="" />
-        <p>개봉예정</p>
-      </router-link>
-      <router-link to="" class="doc-bar-item">
-        <img src="../assets/images/keyword_search/icon-search.png" alt="" />
-        <p>검색</p>
-      </router-link>
-      <router-link to="" class="doc-bar-item">
-        <img src="../assets/images/keyword_search/icon-popular.png" alt="" />
-        <p>인기콘텐츠</p>
-      </router-link>
-    </footer>
   </div>
 </template>
 
@@ -60,7 +36,7 @@ export default {
   name: 'KeywordSearch',
   data() {
     return {
-      keywordId: 0
+      keywordId: 0,
     };
   },
   computed: {
@@ -68,7 +44,7 @@ export default {
       // return this.$store.state.detail.movieKeywords;
       return this.$store.state.keywordSearch.movieKeywords;
       // todo data에서 가져올지 computed에서 가져올지 판단
-    }
+    },
   },
   async mounted() {
     // todo async await 필요한 거 맞는지
@@ -105,8 +81,8 @@ export default {
     },
     scrollCallback() {
       this.$store.dispatch('keywordSearch/getKeywordMediaMore');
-    }
-  }
+    },
+  },
 };
 </script>
 
