@@ -4,24 +4,27 @@
       <router-link to="" class="btn-back">
         <img src="../assets/images/keyword_search/icon-back.png" alt="" />
       </router-link>
+      <p class="font-page-title">TV 방영중</p>
     </header>
 
-    <!-- 키워드 버튼 -->
-    <section id="wrapper-keyword">
-      <button
-        v-for="item in $store.state.keywordSearch.mediaKeywords"
-        :class="{ active: item.id === keywordId }"
-        :key="item.id"
-        @click="getInitMedia(item.id)"
-      >
-        {{ item.name }}
+    <!-- 버튼 -->
+    <section class="wrapper-btn-type">
+      <button class="btn-type" @click="getInitMedia('movie')">
+        <p :class="{ active: $store.state.topRated.mediaType === 'movie' }">
+          영화
+        </p>
+      </button>
+      <button class="btn-type" @click="getInitMedia('tv')">
+        <p :class="{ active: $store.state.topRated.mediaType === 'tv' }">
+          티비 프로그램
+        </p>
       </button>
     </section>
 
     <!-- 작품 리스트 -->
     <main class="wrapper-poster">
       <router-link
-        v-for="item in $store.state.keywordSearch.keywordMedia"
+        v-for="item in $store.state.topRated.topRated"
         :key="item.id"
         to=""
       >
@@ -57,43 +60,25 @@
 
 <script>
 export default {
-  name: 'KeywordSearch',
+  name: 'Trending',
   data() {
-    return {
-      keywordId: 0
-    };
+    return {};
   },
-  computed: {
-    keywords() {
-      // return this.$store.state.detail.movieKeywords;
-      return this.$store.state.keywordSearch.movieKeywords;
-      // todo data에서 가져올지 computed에서 가져올지 판단
-    }
-  },
-  async mounted() {
+  computed: {},
+  mounted() {
     // todo async await 필요한 거 맞는지
-    await this.$store.dispatch('keywordSearch/getMediaKeywords').then(() => {
-      this.getInitMedia();
-    });
-
+    this.getInitMedia();
     //  스크롤 하단 이동 체크하기
     //  하단 이동하면 콜백 함수 실행
     this.$isScrollBottomCheck(this.scrollCallback);
   },
   methods: {
-    getInitMedia(keywordId) {
-      this.setKeywordId(keywordId);
-      this.$store.dispatch('keywordSearch/getKeywordMedia');
-      // todo 스토어 정보가 바뀌면 템플릿에 바인딩도 다시 되는 이유 이해
-    },
-    setKeywordId(keywordId) {
-      if (keywordId) {
-        this.keywordId = Number(keywordId);
-      } else {
-        this.keywordId = Number(this.$route.params.keywordId);
+    async getInitMedia(mediaType) {
+      if (mediaType) {
+        await this.$store.commit('topRated/SET_MEDIA_TYPE', mediaType);
       }
-
-      this.$store.commit('keywordSearch/SET_KEYWORD_ID', this.keywordId);
+      this.$store.dispatch('topRated/getTopRated');
+      // todo 스토어 정보가 바뀌면 템플릿에 바인딩도 다시 되는 이유 이해
     },
     getImage(poster_path) {
       if (poster_path) {
@@ -104,7 +89,7 @@ export default {
       }
     },
     scrollCallback() {
-      this.$store.dispatch('keywordSearch/getKeywordMediaMore');
+      this.$store.dispatch('topRated/getTopRatedMore');
     }
   }
 };
@@ -114,59 +99,13 @@ export default {
 @import '../assets/css/sophie.css';
 
 main {
-  padding: 2.4rem 2.4rem 7rem 2.4rem;
-}
-
-/* mobile */
-#wrapper-keyword {
-  padding-left: 2.4rem;
-  overflow: hidden;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  overflow-x: auto;
-}
-
-#wrapper-keyword button {
-  min-width: fit-content;
-  margin-right: 0.8rem;
-  text-align: center;
-  padding: 0.8rem 1.6rem;
-  border: 0.075rem solid #8e8e8e;
-  box-sizing: border-box;
-  border-radius: 2.1rem;
-  background-color: #212634;
-  color: #ffffff;
-  font-size: 1.1rem;
-  line-height: 1.4rem;
-  letter-spacing: -0.02em;
-}
-
-#wrapper-keyword button:last-of-type {
-  margin-right: 2.4rem;
-}
-
-#wrapper-keyword button.active {
-  background-color: white;
-  color: #13131b;
+  padding: 0 2.4rem 7rem 2.4rem;
 }
 
 /* tablet */
 @media (min-width: 1024px) {
   main {
     padding: 2.4rem 4.8rem 8.2rem 4.8rem;
-  }
-
-  #wrapper-keyword {
-    padding-left: 4.8rem;
-  }
-
-  #wrapper-keyword button {
-    font-size: 2.1rem;
-    line-height: 2.6rem;
-    letter-spacing: 0.025rem;
-    padding: 1.6rem 3.2rem;
-    border-radius: 3rem;
   }
 }
 </style>

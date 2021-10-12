@@ -4,13 +4,27 @@
       <router-link to="" class="btn-back">
         <img src="../assets/images/keyword_search/icon-back.png" alt="" />
       </router-link>
-      <p class="font-page-title">오늘 방영할 TV 프로그램</p>
+      <p class="font-page-title">지금 뜨는 콘텐츠</p>
     </header>
+
+    <!-- 버튼 -->
+    <section class="wrapper-btn-type">
+      <button class="btn-type" @click="getInitMedia('movie')">
+        <p :class="{ active: $store.state.topRated.mediaType === 'movie' }">
+          영화
+        </p>
+      </button>
+      <button class="btn-type" @click="getInitMedia('tv')">
+        <p :class="{ active: $store.state.topRated.mediaType === 'tv' }">
+          티비 프로그램
+        </p>
+      </button>
+    </section>
 
     <!-- 작품 리스트 -->
     <main class="wrapper-poster">
       <router-link
-        v-for="item in $store.state.tvToday.tvToday"
+        v-for="item in $store.state.topRated.topRated"
         :key="item.id"
         to=""
       >
@@ -46,7 +60,7 @@
 
 <script>
 export default {
-  name: 'TvToday',
+  name: 'TopRated',
   data() {
     return {};
   },
@@ -59,8 +73,11 @@ export default {
     this.$isScrollBottomCheck(this.scrollCallback);
   },
   methods: {
-    getInitMedia() {
-      this.$store.dispatch('tvToday/getTvToday');
+    async getInitMedia(mediaType) {
+      if (mediaType) {
+        await this.$store.commit('topRated/SET_MEDIA_TYPE', mediaType);
+      }
+      this.$store.dispatch('topRated/getTopRated');
       // todo 스토어 정보가 바뀌면 템플릿에 바인딩도 다시 되는 이유 이해
     },
     getImage(poster_path) {
@@ -72,7 +89,7 @@ export default {
       }
     },
     scrollCallback() {
-      this.$store.dispatch('tvToday/getTvTodayMore');
+      this.$store.dispatch('topRated/getTopRatedMore');
     }
   }
 };
@@ -88,7 +105,7 @@ main {
 /* tablet */
 @media (min-width: 1024px) {
   main {
-    padding: 2.4rem 4.8rem 8.2rem 4.8rem;
+    padding: 0 4.8rem 8.2rem 4.8rem;
   }
 }
 </style>

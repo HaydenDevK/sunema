@@ -1,6 +1,10 @@
 * {
   font-family: 'Spoqa Han Sans Neo', 'sans-serif';
-  letter-spacing: 0.25px;
+  letter-spacing: 0.025rem;
+}
+
+html {
+  font-size: 10px;
 }
 
 button {
@@ -41,7 +45,7 @@ button {
 }
 
 .border-radius-5 {
-  border-radius: 5px;
+  border-radius: 0.5rem;
 }
 
 .justify-items-center {
@@ -63,69 +67,90 @@ button {
 }
 
 .header {
-  height: 80px;
+  height: 8rem;
   display: flex;
   align-items: flex-end;
 }
 
 .header .btn-back {
-  padding: 16px 24px;
+  padding: 1.6rem 2.4rem;
+  font-size: 0;
 }
 
 .header .btn-back img {
-  width: 10px;
+  width: 1rem;
 }
 
-.header .btn-badge {
-  text-align: center;
-  padding: 8px 16px;
-  border: 0.75px solid #8e8e8e;
-  box-sizing: border-box;
-  border-radius: 21px;
-  background-color: #212634;
+.header .font-page-title {
+  font-size: 1.8rem;
+  line-height: 4.9rem;
+  letter-spacing: -0.02em;
+  font-weight: bold;
   color: #ffffff;
 }
 
-.header .btn-badge:focus {
-  background-color: white;
-  color: #13131b;
+.wrapper-btn-type {
+  padding: 1.2rem 0 2.4rem 2.4rem;
+}
+
+.wrapper-btn-type .btn-type {
+  padding: 0 2.4rem;
+}
+
+.wrapper-btn-type .btn-type:first-child {
+  margin-right: 0.8rem;
+}
+
+.wrapper-btn-type .btn-type p {
+  font-size: 1.8rem;
+  line-height: 2.3rem;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.wrapper-btn-type .btn-type p.active {
+  border-bottom: 2px solid #ffffff;
+  /* todo 애니메이션, 클릭 이벤트 연결 */
 }
 
 .wrapper-poster {
   display: grid;
-  grid-column-gap: 16px;
-  grid-row-gap: 16px;
-  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 1.6rem;
+  grid-row-gap: 1.6rem;
+  grid-template-columns: repeat(auto-fill, minmax(10.1rem, auto));
 }
 
 .wrapper-poster a {
   font-size: 0;
-  height: 164px;
-  border-radius: 5px;
+  border-radius: 0.5rem;
   overflow: hidden;
+  height: 100%;
 }
 
 .wrapper-poster a img {
-  height: 100%;
   width: 100%;
+  height: inherit;
 }
 
 .wrapper-more {
   display: flex;
   justify-content: flex-end;
-  padding-top: 16px;
-  padding-bottom: 16px;
+  padding-top: 1.6rem;
+  padding-bottom: 1.6rem;
 }
 
 .wrapper-more button {
   color: rgba(255, 255, 255, 0.7);
+  font-size: 1.2rem;
+  line-height: 1.5rem;
+  letter-spacing: 0.025rem;
 }
 
 /* doc-bar 나중에 컴포넌트화 */
 .doc-bar {
   position: fixed;
   bottom: 0;
-  height: 54px;
+  height: 5.4rem;
   width: 100%;
   background-color: #13131b;
   display: grid;
@@ -134,18 +159,18 @@ button {
 }
 
 .doc-bar a {
-  padding: 8px 0;
+  padding: 0.8rem 0;
 }
 
 .doc-bar a img {
-  width: 24px;
+  width: 2.4rem;
 }
 
 .doc-bar p {
   font-weight: bold;
   color: white;
-  font-size: 11px;
-  line-height: 14px;
+  font-size: 1.1rem;
+  line-height: 1.4rem;
   letter-spacing: -0.02em;
 }
 
@@ -158,25 +183,39 @@ button {
 /* tab */
 @media screen and (min-width: 1024px) {
   .header {
-    height: 88px;
+    height: 8.8rem;
   }
 
   .header .btn-back {
-    padding: 20px 48px;
+    padding: 2rem 4.8rem;
   }
 
   .header .btn-back img {
-    width: 14px;
+    width: 1.4rem;
+  }
+
+  .header .font-page-title {
+    font-size: 2.1rem;
+    line-height: 6.38rem;
+  }
+
+  .wrapper-btn-type {
+    padding: 2.4rem 0 3.4rem 4.8rem;
+  }
+
+  .wrapper-btn-type .btn-type p {
+    font-size: 2.1rem;
+    line-height: 2.6rem;
   }
 
   .wrapper-poster {
     grid-template-columns: repeat(5, 1fr);
-    grid-column-gap: 24px;
-    grid-row-gap: 24px;
+    grid-column-gap: 2.4rem;
+    grid-row-gap: 2.4rem;
   }
 
   .doc-bar {
-    padding: 0 220px;
-    height: 60px;
+    padding: 0 22rem;
+    height: 6rem;
   }
 }

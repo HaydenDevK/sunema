@@ -1,7 +1,10 @@
 <template>
   <div class="bg-navy-100">
     <!-- 배경 블러 이미지 -->
-    <div class="bg-blured"></div>
+    <div
+      class="bg-blurred"
+      :style="{ backgroundImage: `url(${profile})` }"
+    ></div>
 
     <!-- 컨텐츠 -->
     <div id="contents">
@@ -11,145 +14,131 @@
         </router-link>
       </header>
 
+      <!-- 기본 정보 -->
       <section id="wrapper-profile">
-        <img src="../assets/images/actor_detail/img-actor-1.png" alt="" />
+        <img :src="profile" alt="" />
 
         <div id="wrapper-profile-top">
           <div id="profile-title">
             <span id="profile-name">
-              Margot Robbie
+              {{ actorDetail.name }}
             </span>
-            <span id="profile-job">배우</span>
+            <span id="profile-job">{{
+              `${actorDetail.known_for_department === 'Acting' ? '배우' : ''}`
+            }}</span>
           </div>
 
           <div id="profile-further">
-            Margot Elise Robbie (born 2 July 1990) is an Australian actress and
-            producer. She has received nominations for two Academy Awards and
-            five
+            {{ actorDetail.biography }}
           </div>
 
           <div class="wrapper-more">
-            <button class="font-white font-white-70 font-md-h5">더보기</button>
+            <button>더보기</button>
           </div>
+          <!-- todo
+            가져올 내용 제한하는 방법 적용하고
+            더보기 버튼으로 추가로 더 불러오게
+          -->
 
           <div class="wrapper-list">
             <span class="font-white-70">성별</span>
-            <span>여성</span>
+            <span>{{ `${actorDetail.gender === 1 ? '여성' : '남성'}` }}</span>
 
             <span class="font-white-70">생일</span>
-            <span>1990-07-02 (31 years old)</span>
+            <span>{{ actorDetail.birthday }} ({{ age }} years old)</span>
 
             <span class="font-white-70">출생지</span>
-            <span>Dalby, Queensland, Australia</span>
+            <span>{{ actorDetail.place_of_birth }}</span>
           </div>
         </div>
       </section>
 
-      <div class="seperator-black-2" />
+      <div class="separator-black-2" />
 
+      <!-- 참여 작품 -->
       <section id="filmography">
         <div class="profile-subtitle">
           참여 작품
         </div>
+
         <div class="wrapper-movie-slide">
-          <img src="../assets/images/actor_detail/img-filmo-1.png" alt="" />
-          <img src="../assets/images/actor_detail/img-filmo-1.png" alt="" />
-          <img src="../assets/images/actor_detail/img-filmo-1.png" alt="" />
-          <img src="../assets/images/actor_detail/img-filmo-1.png" alt="" />
-          <img src="../assets/images/actor_detail/img-filmo-1.png" alt="" />
-          <img src="../assets/images/actor_detail/img-filmo-1.png" alt="" />
+          <router-link
+            v-for="item in $store.state.actorDetail.actorCredits.cast"
+            :key="item.id"
+            to=""
+          >
+            <img :src="getImage(item.poster_path)" alt="" />
+          </router-link>
+          <!-- todo
+            공백
+          -->
         </div>
       </section>
 
+      <!-- 프로필 사진 -->
       <section id="photography">
         <div class="profile-subtitle">
           프로필 사진
         </div>
         <div class="wrapper-movie-slide">
-          <img src="@/assets/images/actor_detail/img-photo-1.png" alt="" />
-          <img src="@/assets/images/actor_detail/img-photo-1.png" alt="" />
-          <img src="@/assets/images/actor_detail/img-photo-1.png" alt="" />
-          <img src="@/assets/images/actor_detail/img-photo-1.png" alt="" />
-          <img src="@/assets/images/actor_detail/img-photo-1.png" alt="" />
-          <img src="@/assets/images/actor_detail/img-photo-1.png" alt="" />
+          <router-link
+            v-for="item in $store.state.actorDetail.actorImages"
+            :key="item.id"
+            to=""
+          >
+            <img :src="getImage(item.file_path)" alt="" />
+          </router-link>
+          <!-- todo
+            공백
+          -->
         </div>
       </section>
 
+      <!-- 전체 작품 활동 -->
       <section id="works">
         <div class="profile-subtitle">
           전체 작품 활동
         </div>
 
         <div class="works-category font-primary">연기</div>
-        <div class="wrapper-list">
-          <span class="font-white-70">—</span>
-          <span>Untitled Wes Anderson Film</span>
-
-          <span class="font-white-70">—</span>
-          <span>Untitled Pirates of the Caribbean Re</span>
-
-          <span class="font-white-70">—</span>
-          <span>바비 Barbie 역</span>
-
-          <span class="font-white-70">2022</span>
-          <span>바빌론</span>
-
-          <span class="font-white-70">2021</span>
-          <span>더 수어사이드 스쿼드 Harleen Quinzel / Harley Quinn 역</span>
-
-          <span class="font-white-70">2020</span>
-          <span>Joker: Put on a Happy Face Self 역</span>
-
-          <span class="font-white-70">2020</span>
-          <span
-            >버즈 오브 프레이: 할리 퀸의 황홀한 해방 Harleen Quinzel / Harley
-            Quinn 역</span
-          >
-
-          <span class="font-white-70">2019</span>
-          <span>밤쉘: 세상을 바꾼 폭탄선언 Kayla Posp..</span>
+        <div
+          v-for="item in $store.state.actorDetail.actorCredits.cast"
+          :key="item.id"
+          class="wrapper-list"
+        >
+          <span class="font-white-70">{{
+            item.release_date ? getYear(item.release_date) : ''
+          }}</span>
+          <span>{{ item.title }}</span>
         </div>
 
         <div class="wrapper-more">
           <button>더보기</button>
         </div>
+        <!-- todo
+          가져올 내용 제한하는 방법 적용하고
+          더보기 버튼으로 추가로 더 불러오게
+        -->
 
         <div class="works-category font-primary works-category-space">제작</div>
-        <div class="wrapper-list">
-          <span class="font-white-70">—</span>
-          <span>Til Death … 제작자</span>
-
-          <span class="font-white-70">—</span>
-          <span>The Paper Bag Princess … 제작자</span>
-
-          <span class="font-white-70">—</span>
-          <span>Dangerous Odds … 제작자</span>
-
-          <span class="font-white-70">—</span>
-          <span>My Year of Rest and Relaxation … 제작..</span>
-
-          <span class="font-white-70">—</span>
-          <span>Fool's Day … 책임 프로듀서</span>
-
-          <span class="font-white-70">—</span>
-          <span>Beautiful Things … 제작자</span>
-
-          <span class="font-white-70">—</span>
-          <span>Barbed Wire Heart … 제작자</span>
-
-          <span class="font-white-70">—</span>
-          <span>Bad Monkeys … 제작자</span>
-
-          <span class="font-white-70">—</span>
-          <span>Big Gay Jamboree … 제작자</span>
-
-          <span class="font-white-70">—</span>
-          <span>바비 … 제작자</span>
+        <div
+          v-for="item in $store.state.actorDetail.actorCredits.crew"
+          :key="item.credit_id"
+          class="wrapper-list"
+        >
+          <span class="font-white-70">{{
+            item.release_date ? getYear(item.release_date) : ''
+          }}</span>
+          <span>{{ item.title }}…{{ item.job }}</span>
         </div>
 
         <div class="wrapper-more">
           <button>더보기</button>
         </div>
+        <!-- todo
+          가져올 내용 제한하는 방법 적용하고
+          더보기 버튼으로 추가로 더 불러오게
+        -->
       </section>
     </div>
   </div>
@@ -157,7 +146,84 @@
 
 <script>
 export default {
-  name: 'ActorDetail'
+  name: 'ActorDetail',
+  data() {
+    return {
+      personID: 0,
+      actorDetail: {},
+      actorCredits: {
+        cast: [],
+        crew: []
+      },
+      actorImages: {}
+    };
+  },
+  computed: {
+    age() {
+      let age = 0;
+      if (this.actorDetail.birthday) {
+        const birthday = this.actorDetail.birthday.split('-');
+        const today = new Date();
+        const birthDate = new Date(birthday[0], birthday[1], birthday[2]);
+
+        age = today.getFullYear() - birthDate.getFullYear();
+        const m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+          age--;
+        }
+      }
+      return age;
+    },
+    profile() {
+      // 메인 프로필 사진
+      if (this.actorDetail.profile_path) {
+        return `https://image.tmdb.org/t/p/w300${this.actorDetail.profile_path}`;
+      } else {
+        return require('../assets/images/actor_detail/img-default.png');
+        // todo 메인 프로필, 참여 작품, 프로필 사진 등에서 활용할 img-default.png로 수정
+      }
+    }
+  },
+  mounted() {
+    this.setPersonId();
+    this.getInitDetail();
+    this.getInitCredits();
+    this.getInitImages();
+  },
+  methods: {
+    setPersonId() {
+      this.personID = Number(this.$route.params.personId);
+      this.$store.commit('actorDetail/SET_PERSON_ID', this.personID);
+    },
+    getInitDetail() {
+      this.$store.dispatch('actorDetail/getActorDetail').then(() => {
+        this.actorDetail = this.$store.state.actorDetail.actorDetail;
+      });
+    },
+    getInitCredits() {
+      this.$store.dispatch('actorDetail/getActorCredits').then(() => {
+        this.actorCredits = this.$store.state.actorDetail.actorCredits;
+      });
+    },
+    getInitImages() {
+      this.$store.dispatch('actorDetail/getActorImages').then(() => {
+        this.actorImages = this.$store.state.actorDetail.actorImages;
+      });
+    },
+    getImage(poster_path) {
+      if (poster_path) {
+        return `https://image.tmdb.org/t/p/w300${poster_path}`;
+      } else {
+        return require('../assets/images/actor_detail/img-default.png');
+        // todo 메인 프로필, 참여 작품, 프로필 사진 등에서 활용할 img-default.png로 수정
+      }
+    },
+    getYear(release_date) {
+      const splitArr = release_date.split('-');
+      const year = splitArr[0];
+      return year;
+    }
+  }
 };
 </script>
 
@@ -166,171 +232,175 @@ export default {
 
 #contents {
   position: relative;
-  margin-top: -452px;
+  margin-top: -45.2rem;
 }
 
 #wrapper-profile img {
   display: block;
-  margin: 0px auto;
-  width: 226px;
+  width: 22.6rem;
   margin: 0 auto;
-  border-radius: 5px;
+  border-radius: 0.5rem;
 }
 
 #wrapper-profile-top {
-  padding: 24px;
+  padding: 2.4rem;
   color: white;
 }
 
 #profile-title {
   display: flex;
   align-items: center;
-  padding-bottom: 24px;
+  padding-bottom: 2.4rem;
 }
 
 #profile-title #profile-name {
-  font-size: 21px;
-  line-height: 26px;
+  font-size: 2.1rem;
+  line-height: 2.6rem;
   font-weight: bold;
-  padding-right: 8px;
+  padding-right: 0.8rem;
 }
 
 #profile-title #profile-job {
-  font-size: 12px;
-  line-height: 15px;
+  font-size: 1.2rem;
+  line-height: 1.5rem;
 }
 
 #profile-further {
-  font-size: 16px;
-  line-height: 23px;
+  font-size: 1.6rem;
+  line-height: 2.3rem;
 }
 
-#filmography,
-#photography {
-  padding: 24px 0 0 24px;
+#filmography .profile-subtitle,
+#photography .profile-subtitle {
+  padding: 4rem 0 1.6rem 2.4rem;
 }
 
 #works {
-  padding: 24px;
+  padding: 4.8rem 2.4rem;
 }
 
 .profile-subtitle {
-  font-size: 21px;
-  line-height: 26px;
-  letter-spacing: 0.25px;
+  font-size: 2.1rem;
+  line-height: 2.6rem;
+  letter-spacing: 0.025rem;
   color: white;
   font-weight: bold;
-  padding-bottom: 16px;
+  padding-bottom: 1.6rem;
 }
 
 .works-category {
-  padding-bottom: 8px;
-  font-size: 18px;
-  line-height: 23px;
+  padding-bottom: 0.8rem;
+  font-size: 1.8rem;
+  line-height: 2.3rem;
   letter-spacing: -0.02em;
 }
 
 .works-category-space {
-  margin-top: 30px;
+  margin-top: 3rem;
 }
 
-.seperator-black-2 {
+.separator-black-2 {
   background: #000000;
-  height: 2px;
+  height: 0.2rem;
   width: 100%;
 }
 
 .wrapper-list {
   display: grid;
-  grid-template-columns: 56px 1fr;
-  font-size: 16px;
-  line-height: 23px;
+  grid-template-columns: 5.6rem 1fr;
+  font-size: 1.6rem;
+  line-height: 2.3rem;
   color: white;
 }
 
 .wrapper-movie-slide {
   display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  grid-column-gap: 16px;
+  grid-auto-columns: max-content;
+  grid-column-gap: 1.6rem;
   grid-auto-flow: column;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.wrapper-movie-slide a {
+  font-size: 0;
   overflow: hidden;
+  border-radius: 0.5rem;
+}
+
+.wrapper-movie-slide a:first-child {
+  margin-left: 2.4rem;
+}
+
+.wrapper-movie-slide a:last-child {
+  margin-right: 2.4rem;
 }
 
 .wrapper-movie-slide img {
-  width: 148px;
-  border-radius: 5px;
+  height: 22.2rem;
 }
 
-.bg-blured {
-  background: url('../assets/images/actor_detail/img-actor-1.png') no-repeat
-    center;
+.bg-blurred {
+  background-repeat: no-repeat;
+  background-position: center;
   background-size: cover;
-  height: 452px;
-  filter: blur(40px);
+  height: 45.2rem;
+  filter: blur(4rem);
 }
 
 /* 1024px */
 @media screen and (min-width: 1024px) {
-  .bg-blured {
-    height: 664px;
+  .bg-blurred {
+    height: 66.4rem;
   }
 
   #contents {
-    margin-top: -664px;
+    margin-top: -66.4rem;
   }
   #wrapper-profile-top {
-    padding: 48px;
+    padding: 4.8rem;
   }
 
   #wrapper-profile img {
-    width: 381px;
-  }
-
-  #wrapper-profile-text {
-    padding: 48px;
+    width: 38.1rem;
   }
 
   #profile-title #profile-name {
-    font-size: 40px;
-    line-height: 120%;
-    letter-spacing: 0.25px;
+    font-size: 4rem;
+    line-height: 4.8rem;
+    letter-spacing: 0.025rem;
   }
 
   #profile-title #profile-job {
-    font-size: 21px;
-    line-height: 26px;
+    font-size: 2.1rem;
+    line-height: 2.6rem;
   }
 
   #profile-further {
-    font-size: 24px;
-    line-height: 35px;
-    letter-spacing: 0.25px;
-    margin-bottom: 16px;
+    font-size: 2.4rem;
+    line-height: 3.5rem;
+    letter-spacing: 0.025rem;
+    margin-bottom: 1.6rem;
   }
 
-  #filmography,
-  #photography {
-    padding: 30px 0 0 48px;
+  #filmography .profile-subtitle,
+  #photography .profile-subtitle {
+    padding: 5.4rem 0 1.8rem 4.8rem;
   }
 
   #works {
-    padding: 30px 0 48px 48px;
+    padding: 5.4rem 0 4.8rem 4.8rem;
   }
 
   .profile-subtitle {
-    font-size: 30px;
-    line-height: 38px;
-    padding-bottom: 18px;
+    font-size: 3rem;
+    line-height: 3.8rem;
+    padding-bottom: 1.8rem;
   }
 
   .works-category {
-    font-size: 30px;
-    line-height: 38px;
-  }
-
-  .font-md-h3 {
-    font-size: 30px;
-    line-height: 38px;
+    font-size: 3rem;
+    line-height: 3.8rem;
   }
 
   .wrapper-more {
@@ -338,20 +408,26 @@ export default {
   }
 
   .wrapper-list {
-    grid-template-columns: 94px 1fr;
-    font-size: 24px;
-    line-height: 35px;
-    letter-spacing: 0.25px;
-    font-size: 24px;
-    line-height: 35px;
+    grid-template-columns: 9.4rem 1fr;
+    font-size: 2.4rem;
+    line-height: 3.5rem;
+    letter-spacing: 0.025rem;
   }
 
   .wrapper-movie-slide {
-    grid-column-gap: 24px;
+    grid-column-gap: 2.4rem;
   }
 
   .wrapper-movie-slide img {
-    width: 195.16px;
+    height: 25.6rem;
+  }
+
+  .wrapper-movie-slide a:first-child {
+    margin-left: 4.8rem;
+  }
+
+  .wrapper-movie-slide a:last-child {
+    margin-right: 4.8rem;
   }
 }
 </style>
