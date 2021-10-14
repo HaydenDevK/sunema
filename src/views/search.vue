@@ -5,6 +5,9 @@
 			<div class="window">
 				<img src="../assets/images/search/magnifier.png" alt="" />
 				<input
+					id="name"
+					@keyup.enter="find(inputText)"
+					v-model="inputText"
 					type="text"
 					placeholder="영화, TV프로그램, 배우 검색"
 					onfocus="this.placeholder=''"
@@ -128,7 +131,22 @@
 
 <script>
 export default {
-	name: 'Search'
+	name: 'Search',
+	data() {
+		return { inputText: '' };
+	},
+	methods: {
+		find(txt) {
+			this.$store.dispatch('keyword/find', txt);
+		},
+		sort(a, b) {
+			// 검색어 순위 정렬
+			if (a.counter >= b.counter) {
+				return 1;
+			}
+			return -1;
+		}
+	}
 };
 </script>
 
