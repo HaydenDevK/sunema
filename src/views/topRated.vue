@@ -84,7 +84,7 @@ export default {
       if (poster_path) {
         return `https://image.tmdb.org/t/p/w300${poster_path}`;
       } else {
-        return require('../assets/images/keyword_search/movie-thumb-default.png');
+        return require('../assets/images/global/no-image.png');
         // todo 메인 프로필, 참여 작품, 프로필 사진 등에서 활용할 img-default.png로 수정
       }
     },
