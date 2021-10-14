@@ -12,7 +12,7 @@ export default {
     },
     actorImages: {}
   },
-  mutations: {
+  mutations: { 
     SET_PERSON_ID(state, personId) {
       state.personId = personId;
     },

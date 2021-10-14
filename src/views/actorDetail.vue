@@ -187,7 +187,7 @@ export default {
   mounted() {
     this.setPersonId();
     this.getInitDetail();
-    this.getInitCredits();
+    this.getInitCredits(); 
     this.getInitImages();
   },
   methods: {
