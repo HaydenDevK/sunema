@@ -22,27 +22,17 @@
             </div>
           </router-link>
         </li>
-        <!-- <li>
-            <router-link to="">
-              <img src="../assets/images/main/img_main_poster.png" alt="" />
-              <div class="banner-text">
-                <strong>바르트코비아크</strong>
-                <p>Bartkowiak</p>
-                <router-link to="" class="btn-more">자세히 보기</router-link>
-              </div>
-          </a>
-          </li> -->
       </ul>
       <div class="contents">
         <MainMovieSlide class="popular" title="인기 콘텐츠" type="pop" streaming="T" img="T" video="F" rank="T" :movie="$store.state.main.popularMovie" />
         <MainMovieSlide class="now-playing" title="현재 상영중" type="now" streaming="F" img="T" video="F" rank="F" :movie="$store.state.main.nowPlayingMovie" />
         <MainMovieSlide class="upcoming" title="개봉 예정" type="upcoming" streaming="F" img="F" video="T" rank="F" :movie="$store.state.main.upcomingMovie" />
-        <section class="upcoming">
+        <!-- <section class="upcoming">
           <h2>개봉 예정</h2>
           <ul>
             <li>
               <router-link to="">
-                <!-- <iframe
+                <iframe
                   width="560"
                   height="315"
                   src="https://www.youtube.com/embed/gQJ0RQ9e01s"
@@ -50,12 +40,12 @@
                   frameborder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen
-                ></iframe> -->
+                ></iframe>
               </router-link>
             </li>
           </ul>
           <router-link to="">전체보기</router-link>
-        </section>
+        </section> -->
         <section class="free-contents">
           <div class="title-box">
             <h2>무료 콘텐츠</h2>
