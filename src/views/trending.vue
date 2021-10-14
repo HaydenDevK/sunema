@@ -2,7 +2,7 @@
   <div class="bg-navy-100 min-height-100vh">
     <header class="header">
       <router-link to="" class="btn-back">
-        <img src="../assets/images/keyword_search/icon-back.png" alt="" />
+        <img src="../assets/images/global/icon-back.png" alt="" />
       </router-link>
       <p class="font-page-title">오늘 뜨는 컨텐츠</p>
     </header>
@@ -31,30 +31,6 @@
         <img :src="getImage(item.poster_path)" alt="" />
       </router-link>
     </main>
-
-    <!-- 독 바 -->
-    <footer class="doc-bar">
-      <router-link to="" class="doc-bar-item">
-        <img src="../assets/images/keyword_search/icon-home.png" alt="" />
-        <p>홈</p>
-      </router-link>
-      <router-link to="" class="doc-bar-item">
-        <img src="../assets/images/keyword_search/icon-nowplaying.png" alt="" />
-        <p>상영중</p>
-      </router-link>
-      <router-link to="" class="doc-bar-item">
-        <img src="../assets/images/keyword_search/icon-upcoming.png" alt="" />
-        <p>개봉예정</p>
-      </router-link>
-      <router-link to="" class="doc-bar-item">
-        <img src="../assets/images/keyword_search/icon-search.png" alt="" />
-        <p>검색</p>
-      </router-link>
-      <router-link to="" class="doc-bar-item">
-        <img src="../assets/images/keyword_search/icon-popular.png" alt="" />
-        <p>인기콘텐츠</p>
-      </router-link>
-    </footer>
   </div>
 </template>
 

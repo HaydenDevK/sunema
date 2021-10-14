@@ -181,7 +181,7 @@ button {
   width: 100%;
 }
 
-/* tab */
+/* tablet */
 @media screen and (min-width: 1024px) {
   .header {
     height: 8.8rem;
