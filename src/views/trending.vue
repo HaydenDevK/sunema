@@ -4,18 +4,18 @@
       <router-link to="" class="btn-back">
         <img src="../assets/images/keyword_search/icon-back.png" alt="" />
       </router-link>
-      <p class="font-page-title">TV 방영중</p>
+      <p class="font-page-title">오늘 뜨는 컨텐츠</p>
     </header>
 
     <!-- 버튼 -->
     <section class="wrapper-btn-type">
       <button class="btn-type" @click="getInitMedia('movie')">
-        <p :class="{ active: $store.state.topRated.mediaType === 'movie' }">
+        <p :class="{ active: $store.state.trending.mediaType === 'movie' }">
           영화
         </p>
       </button>
       <button class="btn-type" @click="getInitMedia('tv')">
-        <p :class="{ active: $store.state.topRated.mediaType === 'tv' }">
+        <p :class="{ active: $store.state.trending.mediaType === 'tv' }">
           티비 프로그램
         </p>
       </button>
@@ -24,7 +24,7 @@
     <!-- 작품 리스트 -->
     <main class="wrapper-poster">
       <router-link
-        v-for="item in $store.state.topRated.topRated"
+        v-for="item in $store.state.trending.trending"
         :key="item.id"
         to=""
       >
@@ -75,9 +75,9 @@ export default {
   methods: {
     async getInitMedia(mediaType) {
       if (mediaType) {
-        await this.$store.commit('topRated/SET_MEDIA_TYPE', mediaType);
+        await this.$store.commit('trending/SET_MEDIA_TYPE', mediaType);
       }
-      this.$store.dispatch('topRated/getTopRated');
+      this.$store.dispatch('trending/getTrending');
       // todo 스토어 정보가 바뀌면 템플릿에 바인딩도 다시 되는 이유 이해
     },
     getImage(poster_path) {
@@ -89,7 +89,7 @@ export default {
       }
     },
     scrollCallback() {
-      this.$store.dispatch('topRated/getTopRatedMore');
+      this.$store.dispatch('trending/getTrendingMore');
     }
   }
 };
@@ -105,7 +105,7 @@ main {
 /* tablet */
 @media (min-width: 1024px) {
   main {
-    padding: 2.4rem 4.8rem 8.2rem 4.8rem;
+    padding: 0 4.8rem 8.2rem 4.8rem;
   }
 }
 </style>

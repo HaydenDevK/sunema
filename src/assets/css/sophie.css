@@ -105,6 +105,7 @@ button {
   font-size: 1.8rem;
   line-height: 2.3rem;
   letter-spacing: -0.02em;
+  font-weight: bold;
   color: #ffffff;
 }
 
@@ -146,7 +147,7 @@ button {
   letter-spacing: 0.025rem;
 }
 
-/* doc-bar 나중에 컴포넌트화 */
+/* doc-bar */
 .doc-bar {
   position: fixed;
   bottom: 0;
