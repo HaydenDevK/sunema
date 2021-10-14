@@ -2,7 +2,7 @@
   <div class="bg-navy-100 min-height-100vh">
     <header class="header">
       <router-link to="" class="btn-back">
-        <img src="../assets/images/keyword_search/icon-back.png" alt="" />
+        <img src="../assets/images/global/icon-back.png" alt="" />
       </router-link>
     </header>
 
@@ -76,7 +76,6 @@ export default {
         return `https://image.tmdb.org/t/p/w300${poster_path}`;
       } else {
         return require('../assets/images/global/no-image.png');
-        // todo 메인 프로필, 참여 작품, 프로필 사진 등에서 활용할 img-default.png로 수정
       }
     },
     scrollCallback() {
