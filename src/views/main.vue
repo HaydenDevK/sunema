@@ -24,9 +24,9 @@
         </li>
       </ul>
       <div class="contents">
-        <MainMovieSlide class="popular" title="인기 콘텐츠" type="pop" streaming="T" img="T" video="F" rank="T" :movie="$store.state.main.popularMovie" />
-        <MainMovieSlide class="now-playing" title="현재 상영중" type="now" streaming="F" img="T" video="F" rank="F" :movie="$store.state.main.nowPlayingMovie" />
-        <MainMovieSlide class="upcoming" title="개봉 예정" type="upcoming" streaming="F" img="F" video="T" rank="F" :movie="$store.state.main.upcomingMovie" />
+        <MainMovieSlide class="popular" title="인기 콘텐츠" type="pop" streaming="T" rank="T" :movie="$store.state.main.popularMovie" />
+        <MainMovieSlide class="now-playing" title="현재 상영중" type="now" streaming="F" rank="F" :movie="$store.state.main.nowPlayingMovie" />
+        <MainVideoSlide class="upcoming" title="개봉 예정" type="upcoming" :movie="$store.state.main.upcomingMovie" />
         <!-- <section class="upcoming">
           <h2>개봉 예정</h2>
           <ul>
@@ -46,6 +46,7 @@
           </ul>
           <router-link to="">전체보기</router-link>
         </section> -->
+        <!-- <MainFigureSlide class="free-contents" title="무료 콘텐츠" :movie="$store.state.main.???? 무료콘텐츠 어디서 찾나요" /> -->
         <section class="free-contents">
           <div class="title-box">
             <h2>무료 콘텐츠</h2>
@@ -272,10 +273,13 @@
 
 <script>
 import MainMovieSlide from '@/components/MainMovieSlide.vue';
+import MainVideoSlide from '@/components/MainVideoSlide.vue';
+
 export default {
   name: 'Main',
   components: {
-    MainMovieSlide
+    MainMovieSlide,
+    MainVideoSlide
   },
   mounted() {
     // this.$store.dispatch('main/testCall');

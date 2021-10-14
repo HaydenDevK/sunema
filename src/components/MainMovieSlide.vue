@@ -11,14 +11,7 @@
         <swiper class="swiper" :options="swiperOption">
             <swiper-slide v-for="(item, index) in movie" :key="item.id">
                 <router-link :to="`/detail/${item.id}`">
-                    <img v-if="img === 'T'" :src="getImage(item.poster_path)" />
-                    <iframe
-                      v-if="video === 'T'"
-                      :src="getYoutube(item)"
-                      width="560"
-                      height="315"
-                      frameborder="0"
-                    ></iframe>
+                    <img :src="getImage(item.poster_path)" />
                     <p class="number" v-if="rank === 'T'">{{ index + 1 }}</p>
                 </router-link>
             </swiper-slide>
@@ -37,9 +30,7 @@
           movie: Array,
           streaming: String,
           rank: String,
-          img: String,
-          video: String,
-          type:String
+          type: String
       },
       components: {
           Swiper,
@@ -51,13 +42,12 @@
                 slidesPerView: 2.33, 
                 spaceBetween: 16, 
                 freeMode: true,
-            },
-            videoList:[]
+            }
           };
       },
       mounted() {
          //console.log(this.movie);
-     /*     this.$store
+          /* this.$store
           .dispatch('main/getVideoList', this.movie.id)
           .then(() => {
             this.videoList = this.$store.state.main.videoList;
@@ -66,18 +56,6 @@
       methods: {
         getImage(poster_path) {
           return `https://image.tmdb.org/t/p/w300${poster_path}`;
-        },
-        getYoutube(key) {
-          console.log(key.id); 
-          this.$store
-          .dispatch('main/getVideoList', key.id)
-          .then(() => {
-            this.videoList = this.$store.state.main.videoList;
-            console.log(this.videoList);
-
-            return 'https://www.youtube.com/embed/' + this.videoList.videos.results[0].key;
-          });
-
         }
       }
     };
@@ -213,7 +191,7 @@
   font-weight: 700;
   color: rgba(255, 255, 255, 0.8);
 }
-#container .contents .upcoming ul li {
+/* #container .contents .upcoming ul li {
   width: 69.67%;
 }
 #container .contents .upcoming ul li a {
@@ -230,7 +208,7 @@
   width: 100%;
   height: 100%;
   border-radius: 5px;
-}
+} */
 #container .contents section .tab-btn::after {
   content: '';
   display: block;
