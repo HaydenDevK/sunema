@@ -1,8 +1,8 @@
 <template>
-    <section class="popular">
+    <section>
         <div class="title-box">
             <h2>{{ title }}</h2>
-            <div class="streaming" v-if="flag === 'T'">
+            <div class="streaming" v-if="streaming === 'T'">
               <p>스트리밍 ON</p>
               <input type="checkbox" id="str" checked />
               <label for="str"><p>선택</p></label>
@@ -10,28 +10,19 @@
         </div>
         <swiper class="swiper" :options="swiperOption">
             <swiper-slide v-for="(item, index) in movie" :key="item.id">
-                <router-link to="">
-                    <img :src="getImage(item.poster_path)" />
-                    <p class="number">{{ index + 1 }}</p>
+                <router-link :to="`/detail/${item.id}`">
+                    <img v-if="img === 'T'" :src="getImage(item.poster_path)" />
+                    <iframe
+                      v-if="video === 'T'"
+                      :src="getYoutube(item)"
+                      width="560"
+                      height="315"
+                      frameborder="0"
+                    ></iframe>
+                    <p class="number" v-if="rank === 'T'">{{ index + 1 }}</p>
                 </router-link>
             </swiper-slide>
         </swiper>
-        <!-- <ul>
-            <li v-for="item in movie" :key="item.id">
-                <router-link to="">
-                    <img :src="getImage(item.poster_path)" />
-                    <p class="number">1</p>
-                </router-link>
-            </li>
-            <li>
-                <router-link to="">
-                    <img src="../assets/images/main/img_popular02.png" alt="" />
-                    <p class="number">2</p>
-                </router-link>
-            </li>
-        </ul> -->
-        
-
         <router-link to="">전체보기</router-link>
     </section>
 </template>
@@ -41,32 +32,54 @@
     import 'swiper/css/swiper.css';
 
     export default {
-        props: {
-            title: String,
-            movie: Array,
-            flag: String
+      props: {
+          title: String,
+          movie: Array,
+          streaming: String,
+          rank: String,
+          img: String,
+          video: String,
+          type:String
+      },
+      components: {
+          Swiper,
+          SwiperSlide,
+      },
+      data() { 
+          return { 
+            swiperOption: { 
+                slidesPerView: 2.33, 
+                spaceBetween: 16, 
+                freeMode: true,
+            },
+            videoList:[]
+          };
+      },
+      mounted() {
+         //console.log(this.movie);
+     /*     this.$store
+          .dispatch('main/getVideoList', this.movie.id)
+          .then(() => {
+            this.videoList = this.$store.state.main.videoList;
+          }); */
+      },
+      methods: {
+        getImage(poster_path) {
+          return `https://image.tmdb.org/t/p/w300${poster_path}`;
         },
-        components: {
-            Swiper,
-            SwiperSlide,
-        },
-        data() { 
-            return { 
-                swiperOption: { 
-                    slidesPerView: 2.33, 
-                    spaceBetween: 16, 
-                    freeMode: true,
-                } 
-            } 
-        },
-        mounted() {
-            console.log(this.movie);
-        },
-        methods: {
-            getImage(poster_path) {
-                return `https://image.tmdb.org/t/p/w300${poster_path}`;
-            }
+        getYoutube(key) {
+          console.log(key.id); 
+          this.$store
+          .dispatch('main/getVideoList', key.id)
+          .then(() => {
+            this.videoList = this.$store.state.main.videoList;
+            console.log(this.videoList);
+
+            return 'https://www.youtube.com/embed/' + this.videoList.videos.results[0].key;
+          });
+
         }
+      }
     };
 </script>
 
@@ -161,6 +174,7 @@
 #container .contents section .swiper-container {
   margin-top: 16.5px;
   margin-right: -24px;
+  padding-right: 24px;
   /* display: flex;
   justify-content: left; */
 }

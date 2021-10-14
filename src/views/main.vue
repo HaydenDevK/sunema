@@ -34,43 +34,9 @@
           </li> -->
       </ul>
       <div class="contents">
-        <MainMovieSlide title="인기 콘텐츠" flag="T" :movie="$store.state.main.popularMovie" />
-        <section class="now-playing">
-          <h2>현재 상영중</h2>
-          <ul>
-            <li>
-              <router-link to="">
-                <img src="../assets/images/main/img_nowPlaying01.png" alt="" />
-              </router-link>
-            </li>
-            <li>
-              <router-link to="">
-                <img src="../assets/images/main/img_nowPlaying02.png" alt="" />
-              </router-link>
-            </li>
-            <!-- <li>
-                <router-link to="">
-                  <img src="../assets/images/main/img_nowPlaying03.png" alt="" />
-                </router-link>
-                </li>
-              <li>
-                <router-link to="">
-                  <img src="../assets/images/main/img_nowPlaying04.png" alt="" />
-                </router-link>
-                </li>
-              <li>
-                <router-link to="">
-                  <img src="../assets/images/main/img_nowPlaying05.png" alt="" />
-                </router-link>
-                </li>
-              <li>
-                <router-link to="">
-                  <img src="../assets/images/main/img_nowPlaying06.png" alt="" />
-                </router-link>
-                </li> -->
-          </ul>
-          <router-link to="">전체보기</router-link>
-        </section>
+        <MainMovieSlide class="popular" title="인기 콘텐츠" type="pop" streaming="T" img="T" video="F" rank="T" :movie="$store.state.main.popularMovie" />
+        <MainMovieSlide class="now-playing" title="현재 상영중" type="now" streaming="F" img="T" video="F" rank="F" :movie="$store.state.main.nowPlayingMovie" />
+        <MainMovieSlide class="upcoming" title="개봉 예정" type="upcoming" streaming="F" img="F" video="T" rank="F" :movie="$store.state.main.upcomingMovie" />
         <section class="upcoming">
           <h2>개봉 예정</h2>
           <ul>
@@ -319,8 +285,7 @@ import MainMovieSlide from '@/components/MainMovieSlide.vue';
 export default {
   name: 'Main',
   components: {
-    MainMovieSlide,
-    
+    MainMovieSlide
   },
   mounted() {
     // this.$store.dispatch('main/testCall');
@@ -330,6 +295,10 @@ export default {
     getMovieInfo() {
       console.log('getMovieInfo 호출');
       this.$store.dispatch('main/getPopularMovie');
+      this.$store.dispatch('main/getNowPlayingMovie');
+      this.$store.dispatch('main/getUpcomingMovie');
+      //this.$store.dispatch('main/getTodayTv');
+      //this.$store.dispatch('main/getVideoList');
     }
   }
 };
