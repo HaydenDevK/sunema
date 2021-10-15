@@ -59,10 +59,11 @@ const routes = [
       import(/* webpackChunkName: "actordetail" */ '../views/actor.vue')
   },
   {
-    path: '/actordetail/:personId', // 인기배우 상세
+    path: '/actordetail/:personId', // 인기배우 상세 (선혜)
     name: 'ActorDetail',
     component: () =>
-      import(/* webpackChunkName: "actordetail" */ '../views/actorDetail.vue')
+      import(/* webpackChunkName: "actordetail" */ '../views/actorDetail.vue'),
+    meta: { layout: 'NoTopBottomLayout' }
   },
   {
     path: '/search', // 인기배우  상세
