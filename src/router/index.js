@@ -8,7 +8,9 @@ const routes = [
   {
     path: '/',
     name: 'Main',
-    component: Main
+    component: Main,
+    // NoTopBottomLayout 적용
+    meta: { layout: 'NoTopBottomLayout' }
   },
   {
     path: '/detail/:idx',
@@ -40,7 +42,7 @@ const routes = [
       import(/* webpackChunkName: "popular" */ '../views/popular.vue')
   },
   {
-    path: '/keywordsearch', // 키워드 검색
+    path: '/keywordsearch/:keywordId', // 키워드 검색 (선혜)
     name: 'KeywordSearch',
     component: () =>
       import(
@@ -57,7 +59,7 @@ const routes = [
       import(/* webpackChunkName: "actordetail" */ '../views/actor.vue')
   },
   {
-    path: '/actordetail', // 인기배우  상세
+    path: '/actordetail/:personId', // 인기배우 상세
     name: 'ActorDetail',
     component: () =>
       import(/* webpackChunkName: "actordetail" */ '../views/actorDetail.vue')
@@ -70,6 +72,30 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "search" */ '../views/search.vue')
+  },
+  {
+    path: '/tvtoday', // 오늘 방영할 티비 프로그램 (선혜)
+    name: 'TvToday',
+    component: () =>
+      import(/* webpackChunkName: "tvtoday" */ '../views/tvToday.vue')
+  },
+  {
+    path: '/tvNow', // 티비 방영중 (선혜)
+    name: 'TvNow',
+    component: () =>
+      import(/* webpackChunkName: "tvnow" */ '../views/tvNow.vue')
+  },
+  {
+    path: '/topRated', // 높은 평점 (선혜)
+    name: 'TopRated',
+    component: () =>
+      import(/* webpackChunkName: "toprated" */ '../views/topRated.vue')
+  },
+  {
+    path: '/trending', // 지금 뜨는 중 (선혜)
+    name: 'Trending',
+    component: () =>
+      import(/* webpackChunkName: "toprated" */ '../views/trending.vue')
   }
 ];
 

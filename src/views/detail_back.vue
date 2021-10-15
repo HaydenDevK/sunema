@@ -28,11 +28,11 @@
         <div class="info-tablet-ui clear">
           <div class="info_basic">
           <span class="grade" v-if="movieDetail.adult === true"><b>19</b>+</span>
-          <span class="genre">{{getGenres}}</span>
+          <span class="genre">범죄</span>
           <span class="time"><b class="hour">1</b>h<b class="minute">10</b>m</span>
           </div>
           <div class="info_other">
-          <span class="date">{{movieDetail.release_date | formatDateV2}}</span>
+          <span class="date">{{movieDetail.release_date}}</span>
           <!-- star -->
           <div class="star-box">
             <!-- class="star-on"의 width값에 따라 별점 노출 -->
@@ -293,7 +293,7 @@
           </dt>
           <dd>
             <ul class="clear">
-              <li v-for="item in $store.state.detail.movieDetailRecommendation" :key="item.id">
+              <li v-for="item in $store.state.detail.movieDetailRecommendation.poster_path" :key="item.id">
                 <router-link to="">
                   <div class="img-box">
                     <img :src="getImage(item.poster_path)" alt="추천영화 이미지">
@@ -312,7 +312,7 @@
 export default {
   name: 'Detail',
   props:{
-    
+    genres: Array
   },
   components:{},
   data(){
@@ -320,33 +320,26 @@ export default {
       movieDetail: [],
     };
   },
-  computed:{
-    getGenres(){
-      let genre = '';
-      if(this.movieDetail.genres?.length){        
-        for(let i=0; i<this.movieDetail.genres.length; i++){
-          if(genre != '') genre += '/';
-          genre += this.movieDetail.genres[i].name;
-        }
-      }
-      return genre;
-    }
-  },
   mounted(){
+    console.log('컨포넌트 준비됨');
     this.initMovieDetail();
 
     this.$store
       .dispatch('detail/getMovieDetail', this.$route.params.movie_id)
+      .dispatch('detail/getRecommendation', this.$route.params.poster_path)
       .then(() => {
         this.movieDetail = this.$store.state.detail.movieDetail;
-      });    
+        this.movieDetailRecommendation = this.$store.state.detail.movieDetailRecommendation;
+      });
   },
   methods: {
     initMovieDetail(){
       console.log('init movie가 잘 호출됨');
       this.$store.dispatch('detail/getMovieDetail');
-      this.$store.dispatch('detail/getMovieRecommendation');
     },
+    // printState(){
+    //   console.log(this.$store.state.detail.movieDetail);
+    // }
 
     getImage(poster_path) {
       return `https://image.tmdb.org/t/p/w300${poster_path}`;
@@ -354,15 +347,12 @@ export default {
     getBackDrop(backdrop_path) {
       return `https://image.tmdb.org/t/p/w300${backdrop_path}`;
     },
-    
     // getYoutube(key) {
     //   console.log('https://www.youtube.com/embed/' + key);
     //   return 'https://www.youtube.com/embed/' + key;
     // },
-    // getRecommendation(poster_path) {
-    //   return `https://image.tmdb.org/t/p/w300${poster_path}/recommendations`;
-    // },
-    getRecommendation() {   
+    getRecommendation(poster_path) {
+      return `https://image.tmdb.org/t/p/w300${poster_path}/recommendations`;
     },
   }
 };

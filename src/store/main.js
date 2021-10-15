@@ -1,22 +1,29 @@
-import axios from 'axios';
-
-const request = axios.create({
-  baseURL: 'https://api.themoviedb.org/3',
-  params: {
-    api_key: '3d6c850fedd64a507e51cfb2335f305c',
-    language: 'ko-KR',
-  },
-});
+import { request } from './axios';
 
 export default {
   namespaced: true,
-  state: {},
-  mutations: {},
+  state: {
+    popularMovie:[]
+  },
+  mutations: {
+    SET_POPULAR_MOVIE(state, data){
+      state.popularMovie = data;
+    }
+  },
   actions: {
-    testCall() {
-      //  this.$store.dispatch("main/testCall")
-      console.log(request);
-      console.log('testcall');
-    },
+    // testCall() {
+      // this.$store.dispatch("main/testCall");
+      // console.log(request);
+      // console.log('testcall');
+    // },
+    async getPopularMovie({ commit }) {
+      const result = await request('movie/popular');
+      console.log(result);
+
+      if(result.status === 200) {
+        console.log(result.data.results);
+        commit('SET_POPULAR_MOVIE', result.data.results);
+      }
+    }
   },
 };

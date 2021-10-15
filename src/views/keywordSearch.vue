@@ -2,55 +2,32 @@
   <div class="bg-navy-100 min-height-100vh">
     <header class="header">
       <router-link to="" class="btn-back">
-        <img src="../assets/images/keyword_search/icon-back.png" alt="" />
+        <img src="../assets/images/global/icon-back.png" alt="" />
       </router-link>
     </header>
 
     <!-- 키워드 버튼 -->
     <section id="wrapper-keyword">
       <button
-        v-for="item in keywordList"
-        :key="item.keyword_id"
-        @click="getInitMovie(item.keyword_id)"
+        v-for="item in $store.state.keywordSearch.mediaKeywords"
+        :class="{ active: item.id === keywordId }"
+        :key="item.id"
+        @click="getInitMedia(item.id)"
       >
-        {{ item.keyword_name }}
+        {{ item.name }}
       </button>
     </section>
 
-    <!-- 영화 리스트 -->
+    <!-- 작품 리스트 -->
     <main class="wrapper-poster">
       <router-link
-        v-for="item in $store.state.keywordSearch.keywordMovie"
+        v-for="item in $store.state.keywordSearch.keywordMedia"
         :key="item.id"
         to=""
       >
         <img :src="getImage(item.poster_path)" alt="" />
       </router-link>
     </main>
-
-    <!-- 독 바 -->
-    <footer class="doc-bar">
-      <router-link to="" class="doc-bar-item">
-        <img src="../assets/images/keyword_search/icon-home.png" alt="" />
-        <p>홈</p>
-      </router-link>
-      <router-link to="" class="doc-bar-item">
-        <img src="../assets/images/keyword_search/icon-nowplaying.png" alt="" />
-        <p>상영중</p>
-      </router-link>
-      <router-link to="" class="doc-bar-item">
-        <img src="../assets/images/keyword_search/icon-upcoming.png" alt="" />
-        <p>개봉예정</p>
-      </router-link>
-      <router-link to="" class="doc-bar-item">
-        <img src="../assets/images/keyword_search/icon-search.png" alt="" />
-        <p>검색</p>
-      </router-link>
-      <router-link to="" class="doc-bar-item">
-        <img src="../assets/images/keyword_search/icon-popular.png" alt="" />
-        <p>인기콘텐츠</p>
-      </router-link>
-    </footer>
   </div>
 </template>
 
@@ -59,39 +36,52 @@ export default {
   name: 'KeywordSearch',
   data() {
     return {
-      keywordList: [
-        {
-          keyword_id: 18035,
-          keyword_name: 'family',
-        },
-        {
-          keyword_id: 3667,
-          keyword_name: 'time',
-        },
-      ],
-      keywordMovie: [],
+      keywordId: 0
     };
   },
-  mounted() {
-    this.getInitMovie(18035);
+  computed: {
+    keywords() {
+      // return this.$store.state.detail.movieKeywords;
+      return this.$store.state.keywordSearch.movieKeywords;
+      // todo data에서 가져올지 computed에서 가져올지 판단
+    }
+  },
+  async mounted() {
+    // todo async await 필요한 거 맞는지
+    await this.$store.dispatch('keywordSearch/getMediaKeywords').then(() => {
+      this.getInitMedia();
+    });
 
     //  스크롤 하단 이동 체크하기
     //  하단 이동하면 콜백 함수 실행
     this.$isScrollBottomCheck(this.scrollCallback);
   },
   methods: {
-    getInitMovie(keyword_id) {
-      console.log(keyword_id);
-      this.$store.dispatch('keywordSearch/getKeywordMovie', keyword_id);
+    getInitMedia(keywordId) {
+      this.setKeywordId(keywordId);
+      this.$store.dispatch('keywordSearch/getKeywordMedia');
+      // todo 스토어 정보가 바뀌면 템플릿에 바인딩도 다시 되는 이유 이해
+    },
+    setKeywordId(keywordId) {
+      if (keywordId) {
+        this.keywordId = Number(keywordId);
+      } else {
+        this.keywordId = Number(this.$route.params.keywordId);
+      }
+
+      this.$store.commit('keywordSearch/SET_KEYWORD_ID', this.keywordId);
     },
     getImage(poster_path) {
-      // console.log(poster_path)
-      return `https://image.tmdb.org/t/p/w300${poster_path}`;
+      if (poster_path) {
+        return `https://image.tmdb.org/t/p/w300${poster_path}`;
+      } else {
+        return require('../assets/images/global/no-image.png');
+      }
     },
     scrollCallback() {
-      console.log('callback');
-    },
-  },
+      this.$store.dispatch('keywordSearch/getKeywordMediaMore');
+    }
+  }
 };
 </script>
 
@@ -99,38 +89,39 @@ export default {
 @import '../assets/css/sophie.css';
 
 main {
-  padding: 24px 24px 70px 24px;
+  padding: 2.4rem 2.4rem 7rem 2.4rem;
 }
 
 /* mobile */
 #wrapper-keyword {
-  padding-left: 24px;
+  padding-left: 2.4rem;
   overflow: hidden;
   display: flex;
   flex-direction: row;
   align-items: center;
+  overflow-x: auto;
 }
 
 #wrapper-keyword button {
   min-width: fit-content;
-  margin-right: 8px;
+  margin-right: 0.8rem;
   text-align: center;
-  padding: 8px 16px;
-  border: 0.75px solid #8e8e8e;
+  padding: 0.8rem 1.6rem;
+  border: 0.075rem solid #8e8e8e;
   box-sizing: border-box;
-  border-radius: 21px;
+  border-radius: 2.1rem;
   background-color: #212634;
   color: #ffffff;
-  font-size: 11px;
-  line-height: 14px;
+  font-size: 1.1rem;
+  line-height: 1.4rem;
   letter-spacing: -0.02em;
 }
 
 #wrapper-keyword button:last-of-type {
-  margin-right: 0;
+  margin-right: 2.4rem;
 }
 
-#wrapper-keyword button:focus {
+#wrapper-keyword button.active {
   background-color: white;
   color: #13131b;
 }
@@ -138,23 +129,19 @@ main {
 /* tablet */
 @media (min-width: 1024px) {
   main {
-    padding: 24px 48px 82px 48px;
+    padding: 0 4.8rem 8.2rem 4.8rem;
   }
 
   #wrapper-keyword {
-    padding-left: 48px;
-  }
-
-  #wrapper-movies {
-    padding: 24px 48px;
+    padding-left: 4.8rem;
   }
 
   #wrapper-keyword button {
-    font-size: 21px;
-    line-height: 26px;
-    letter-spacing: 0.25px;
-    padding: 16px 32px;
-    border-radius: 30px;
+    font-size: 2.1rem;
+    line-height: 2.6rem;
+    letter-spacing: 0.025rem;
+    padding: 1.6rem 3.2rem;
+    border-radius: 3rem;
   }
 }
 </style>
