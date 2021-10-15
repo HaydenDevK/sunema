@@ -10,7 +10,7 @@
     <div id="contents">
       <header class="header">
         <router-link to="" class="btn-back">
-          <img src="../assets/images/keyword_search/icon-back.png" alt="" />
+          <img src="../assets/images/global/icon-back.png" alt="" />
         </router-link>
       </header>
 
@@ -179,8 +179,7 @@ export default {
       if (this.actorDetail.profile_path) {
         return `https://image.tmdb.org/t/p/w300${this.actorDetail.profile_path}`;
       } else {
-        return require('../assets/images/actor_detail/img-default.png');
-        // todo 메인 프로필, 참여 작품, 프로필 사진 등에서 활용할 img-default.png로 수정
+        return require('../assets/images/global/no-image.png');
       }
     }
   },
@@ -214,8 +213,7 @@ export default {
       if (poster_path) {
         return `https://image.tmdb.org/t/p/w300${poster_path}`;
       } else {
-        return require('../assets/images/actor_detail/img-default.png');
-        // todo 메인 프로필, 참여 작품, 프로필 사진 등에서 활용할 img-default.png로 수정
+        return require('../assets/images/global/no-image.png');
       }
     },
     getYear(release_date) {
@@ -348,7 +346,7 @@ export default {
   filter: blur(4rem);
 }
 
-/* 1024px */
+/* tablet */
 @media screen and (min-width: 1024px) {
   .bg-blurred {
     height: 66.4rem;

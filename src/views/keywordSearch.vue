@@ -2,7 +2,7 @@
   <div class="bg-navy-100 min-height-100vh">
     <header class="header">
       <router-link to="" class="btn-back">
-        <img src="../assets/images/keyword_search/icon-back.png" alt="" />
+        <img src="../assets/images/global/icon-back.png" alt="" />
       </router-link>
     </header>
 
@@ -36,7 +36,7 @@ export default {
   name: 'KeywordSearch',
   data() {
     return {
-      keywordId: 0,
+      keywordId: 0
     };
   },
   computed: {
@@ -44,7 +44,7 @@ export default {
       // return this.$store.state.detail.movieKeywords;
       return this.$store.state.keywordSearch.movieKeywords;
       // todo data에서 가져올지 computed에서 가져올지 판단
-    },
+    }
   },
   async mounted() {
     // todo async await 필요한 거 맞는지
@@ -75,14 +75,13 @@ export default {
       if (poster_path) {
         return `https://image.tmdb.org/t/p/w300${poster_path}`;
       } else {
-        return require('../assets/images/keyword_search/movie-thumb-default.png');
-        // todo 메인 프로필, 참여 작품, 프로필 사진 등에서 활용할 img-default.png로 수정
+        return require('../assets/images/global/no-image.png');
       }
     },
     scrollCallback() {
       this.$store.dispatch('keywordSearch/getKeywordMediaMore');
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -130,7 +129,7 @@ main {
 /* tablet */
 @media (min-width: 1024px) {
   main {
-    padding: 2.4rem 4.8rem 8.2rem 4.8rem;
+    padding: 0 4.8rem 8.2rem 4.8rem;
   }
 
   #wrapper-keyword {

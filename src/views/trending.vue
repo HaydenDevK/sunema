@@ -2,20 +2,20 @@
   <div class="bg-navy-100 min-height-100vh">
     <header class="header">
       <router-link to="" class="btn-back">
-        <img src="../assets/images/keyword_search/icon-back.png" alt="" />
+        <img src="../assets/images/global/icon-back.png" alt="" />
       </router-link>
-      <p class="font-page-title">TV 방영중</p>
+      <p class="font-page-title">오늘 뜨는 컨텐츠</p>
     </header>
 
     <!-- 버튼 -->
     <section class="wrapper-btn-type">
       <button class="btn-type" @click="getInitMedia('movie')">
-        <p :class="{ active: $store.state.topRated.mediaType === 'movie' }">
+        <p :class="{ active: $store.state.trending.mediaType === 'movie' }">
           영화
         </p>
       </button>
       <button class="btn-type" @click="getInitMedia('tv')">
-        <p :class="{ active: $store.state.topRated.mediaType === 'tv' }">
+        <p :class="{ active: $store.state.trending.mediaType === 'tv' }">
           티비 프로그램
         </p>
       </button>
@@ -24,37 +24,13 @@
     <!-- 작품 리스트 -->
     <main class="wrapper-poster">
       <router-link
-        v-for="item in $store.state.topRated.topRated"
+        v-for="item in $store.state.trending.trending"
         :key="item.id"
         to=""
       >
         <img :src="getImage(item.poster_path)" alt="" />
       </router-link>
     </main>
-
-    <!-- 독 바 -->
-    <footer class="doc-bar">
-      <router-link to="" class="doc-bar-item">
-        <img src="../assets/images/keyword_search/icon-home.png" alt="" />
-        <p>홈</p>
-      </router-link>
-      <router-link to="" class="doc-bar-item">
-        <img src="../assets/images/keyword_search/icon-nowplaying.png" alt="" />
-        <p>상영중</p>
-      </router-link>
-      <router-link to="" class="doc-bar-item">
-        <img src="../assets/images/keyword_search/icon-upcoming.png" alt="" />
-        <p>개봉예정</p>
-      </router-link>
-      <router-link to="" class="doc-bar-item">
-        <img src="../assets/images/keyword_search/icon-search.png" alt="" />
-        <p>검색</p>
-      </router-link>
-      <router-link to="" class="doc-bar-item">
-        <img src="../assets/images/keyword_search/icon-popular.png" alt="" />
-        <p>인기콘텐츠</p>
-      </router-link>
-    </footer>
   </div>
 </template>
 
@@ -75,21 +51,20 @@ export default {
   methods: {
     async getInitMedia(mediaType) {
       if (mediaType) {
-        await this.$store.commit('topRated/SET_MEDIA_TYPE', mediaType);
+        await this.$store.commit('trending/SET_MEDIA_TYPE', mediaType);
       }
-      this.$store.dispatch('topRated/getTopRated');
+      this.$store.dispatch('trending/getTrending');
       // todo 스토어 정보가 바뀌면 템플릿에 바인딩도 다시 되는 이유 이해
     },
     getImage(poster_path) {
       if (poster_path) {
         return `https://image.tmdb.org/t/p/w300${poster_path}`;
       } else {
-        return require('../assets/images/keyword_search/movie-thumb-default.png');
-        // todo 메인 프로필, 참여 작품, 프로필 사진 등에서 활용할 img-default.png로 수정
+        return require('../assets/images/global/no-image.png');
       }
     },
     scrollCallback() {
-      this.$store.dispatch('topRated/getTopRatedMore');
+      this.$store.dispatch('trending/getTrendingMore');
     }
   }
 };
@@ -105,7 +80,7 @@ main {
 /* tablet */
 @media (min-width: 1024px) {
   main {
-    padding: 2.4rem 4.8rem 8.2rem 4.8rem;
+    padding: 0 4.8rem 8.2rem 4.8rem;
   }
 }
 </style>
