@@ -24,9 +24,28 @@
         </li>
       </ul>
       <div class="contents">
-        <MainMovieSlide class="popular" title="인기 콘텐츠" type="pop" streaming="T" rank="T" :movie="$store.state.main.popularMovie" />
-        <MainMovieSlide class="now-playing" title="현재 상영중" type="now" streaming="F" rank="F" :movie="$store.state.main.nowPlayingMovie" />
-        <MainVideoSlide class="upcoming" title="개봉 예정" type="upcoming" :movie="$store.state.main.upcomingMovie" />
+        <MainMovieSlide
+          class="popular"
+          title="인기 콘텐츠"
+          type="pop"
+          streaming="T"
+          rank="T"
+          :movie="$store.state.main.popularMovie"
+        />
+        <MainMovieSlide
+          class="now-playing"
+          title="현재 상영중"
+          type="now"
+          streaming="F"
+          rank="F"
+          :movie="$store.state.main.nowPlayingMovie"
+        />
+        <MainVideoSlide
+          class="upcoming"
+          title="개봉 예정"
+          type="upcoming"
+          :movie="$store.state.main.upcomingMovie"
+        />
         <!-- <section class="upcoming">
           <h2>개봉 예정</h2>
           <ul>
@@ -279,7 +298,7 @@ export default {
   name: 'Main',
   components: {
     MainMovieSlide,
-    MainVideoSlide
+    MainVideoSlide,
   },
   mounted() {
     // this.$store.dispatch('main/testCall');
@@ -293,8 +312,8 @@ export default {
       this.$store.dispatch('main/getUpcomingMovie');
       //this.$store.dispatch('main/getTodayTv');
       //this.$store.dispatch('main/getVideoList');
-    }
-  }
+    },
+  },
 };
 </script>
 
