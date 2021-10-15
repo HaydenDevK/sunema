@@ -14,6 +14,24 @@ export default {
       },
     ],
   },
-  mutations: {},
-  actions: {},
+  mutations: {
+    PUSH_KEYWORD(state, txt) {
+      state.searchKeyword.push({ text: txt, counter: 1 });
+    },
+    PLUS_COUNTER(state, result) {
+      state.searchKeyword[result]
+    }
+  },
+  actions: {
+    find({ state, commit }, txt) {
+      // 검색 키워드가 이미 state에 있는지?
+      const result = state.searchKeyword.indexOf(txt)
+      console.log(result);
+      if (result === -1) {
+        commit('PUSH_KEYWORD', txt)
+      } else {
+        commit('PLUS_COUNTER', result)
+      }
+    }
+  }
 };

@@ -1,31 +1,34 @@
 <template>
-  <div id="search" class="bg-navy">
-    <!-- Header -->
-    <header>
-      <div class="window">
-        <img src="../assets/images/search/magnifier.png" alt="" />
-        <input
-          type="text"
-          placeholder="영화, TV프로그램, 배우 검색"
-          onfocus="this.placeholder=''"
-          onblur="this.placeholder='영화, TV프로그램, 배우 검색'"
-          style="width: 186px;"
-        />
-      </div>
-      <div class="cancel">
-        <button>취소</button>
-      </div>
-    </header>
-    <!-- 검색 순위 -->
-    <section class="ranking">
-      <p>최다 검색</p>
-      <div class="rank-padding">
-        <div class="rank">
-          <router-link to="">
-            <span class="num-mint">1</span>
-            Mortal Kombat Legends: Battle of the..
-          </router-link>
-        </div>
+	<div id="search" class="bg-navy">
+		<!-- Header -->
+		<header>
+			<div class="window">
+				<img src="../assets/images/search/magnifier.png" alt="" />
+				<input
+					id="name"
+					@keyup.enter="find(inputText)"
+					v-model="inputText"
+					type="text"
+					placeholder="영화, TV프로그램, 배우 검색"
+					onfocus="this.placeholder=''"
+					onblur="this.placeholder='영화, TV프로그램, 배우 검색'"
+					style="width: 186px;"
+				/>
+			</div>
+			<div class="cancel">
+				<button>취소</button>
+			</div>
+		</header>
+		<!-- 검색 순위 -->
+		<section class="ranking">
+			<p>최다 검색</p>
+			<div class="rank-padding">
+				<div class="rank">
+					<router-link to="">
+						<span class="num-mint">1</span>
+						Mortal Kombat Legends: Battle of the..
+					</router-link>
+				</div>
 
         <div class="rank">
           <router-link to="">
@@ -95,7 +98,22 @@
 
 <script>
 export default {
-  name: 'Search',
+	name: 'Search',
+	data() {
+		return { inputText: '' };
+	},
+	methods: {
+		find(txt) {
+			this.$store.dispatch('keyword/find', txt);
+		},
+		sort(a, b) {
+			// 검색어 순위 정렬
+			if (a.counter >= b.counter) {
+				return 1;
+			}
+			return -1;
+		}
+	}
 };
 </script>
 
