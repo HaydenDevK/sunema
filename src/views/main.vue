@@ -22,61 +22,17 @@
             </div>
           </router-link>
         </li>
-        <!-- <li>
-            <router-link to="">
-              <img src="../assets/images/main/img_main_poster.png" alt="" />
-              <div class="banner-text">
-                <strong>바르트코비아크</strong>
-                <p>Bartkowiak</p>
-                <router-link to="" class="btn-more">자세히 보기</router-link>
-              </div>
-          </a>
-          </li> -->
       </ul>
       <div class="contents">
-        <MainMovieSlide title="인기 콘텐츠" flag="T" :movie="$store.state.main.popularMovie" />
-        <section class="now-playing">
-          <h2>현재 상영중</h2>
-          <ul>
-            <li>
-              <router-link to="">
-                <img src="../assets/images/main/img_nowPlaying01.png" alt="" />
-              </router-link>
-            </li>
-            <li>
-              <router-link to="">
-                <img src="../assets/images/main/img_nowPlaying02.png" alt="" />
-              </router-link>
-            </li>
-            <!-- <li>
-                <router-link to="">
-                  <img src="../assets/images/main/img_nowPlaying03.png" alt="" />
-                </router-link>
-                </li>
-              <li>
-                <router-link to="">
-                  <img src="../assets/images/main/img_nowPlaying04.png" alt="" />
-                </router-link>
-                </li>
-              <li>
-                <router-link to="">
-                  <img src="../assets/images/main/img_nowPlaying05.png" alt="" />
-                </router-link>
-                </li>
-              <li>
-                <router-link to="">
-                  <img src="../assets/images/main/img_nowPlaying06.png" alt="" />
-                </router-link>
-                </li> -->
-          </ul>
-          <router-link to="">전체보기</router-link>
-        </section>
-        <section class="upcoming">
+        <MainMovieSlide class="popular" title="인기 콘텐츠" type="pop" streaming="T" rank="T" :movie="$store.state.main.popularMovie" />
+        <MainMovieSlide class="now-playing" title="현재 상영중" type="now" streaming="F" rank="F" :movie="$store.state.main.nowPlayingMovie" />
+        <MainVideoSlide class="upcoming" title="개봉 예정" type="upcoming" :movie="$store.state.main.upcomingMovie" />
+        <!-- <section class="upcoming">
           <h2>개봉 예정</h2>
           <ul>
             <li>
               <router-link to="">
-                <!-- <iframe
+                <iframe
                   width="560"
                   height="315"
                   src="https://www.youtube.com/embed/gQJ0RQ9e01s"
@@ -84,12 +40,13 @@
                   frameborder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen
-                ></iframe> -->
+                ></iframe>
               </router-link>
             </li>
           </ul>
           <router-link to="">전체보기</router-link>
-        </section>
+        </section> -->
+        <!-- <MainFigureSlide class="free-contents" title="무료 콘텐츠" :movie="$store.state.main.???? 무료콘텐츠 어디서 찾나요" /> -->
         <section class="free-contents">
           <div class="title-box">
             <h2>무료 콘텐츠</h2>
@@ -316,11 +273,13 @@
 
 <script>
 import MainMovieSlide from '@/components/MainMovieSlide.vue';
+import MainVideoSlide from '@/components/MainVideoSlide.vue';
+
 export default {
   name: 'Main',
   components: {
     MainMovieSlide,
-    
+    MainVideoSlide
   },
   mounted() {
     // this.$store.dispatch('main/testCall');
@@ -330,6 +289,10 @@ export default {
     getMovieInfo() {
       console.log('getMovieInfo 호출');
       this.$store.dispatch('main/getPopularMovie');
+      this.$store.dispatch('main/getNowPlayingMovie');
+      this.$store.dispatch('main/getUpcomingMovie');
+      //this.$store.dispatch('main/getTodayTv');
+      //this.$store.dispatch('main/getVideoList');
     }
   }
 };
