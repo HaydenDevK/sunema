@@ -55,6 +55,9 @@
 
       <div class="separator-black-2" />
 
+      <!-- 스와이퍼 -->
+      <Slide :Array="$store.state.actorDetail.actorCredits.crew" />
+
       <!-- 참여 작품 -->
       <section id="filmography">
         <div class="profile-subtitle">
@@ -69,9 +72,6 @@
           >
             <img :src="getImage(item.poster_path)" alt="" />
           </router-link>
-          <!-- todo
-            공백
-          -->
         </div>
       </section>
 
@@ -145,8 +145,12 @@
 </template>
 
 <script>
+import Slide from '@/components/ListSlide.vue';
 export default {
   name: 'ActorDetail',
+  components: {
+    Slide
+  },
   data() {
     return {
       personID: 0,
