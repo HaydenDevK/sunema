@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- router view -->
     <slot></slot>
     <BottomMenu />
   </div>
