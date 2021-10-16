@@ -3,7 +3,7 @@ import { request } from './axios';
 export default {
   namespaced: true,
   state: {
-    topRated: [],
+    popular: [],
     mediaType: 'movie',
     pageNow: 1,
     pageTotal: 1
@@ -15,8 +15,8 @@ export default {
     SET_MEDIA_TYPE(state, mediaType) {
       state.mediaType = mediaType;
     },
-    SET_TOP_RATED(state, result) {
-      state.topRated = result.results;
+    SET_POPULAR(state, result) {
+      state.popular = result.results;
       state.pageTotal = result.total_pages;
     },
     SET_PAGE_NEXT(state) {
@@ -24,36 +24,38 @@ export default {
         state.pageNow++;
       }
     },
-    SET_TOP_RATED_MORE(state, result) {
-      const newTopRated = state.topRated.concat(result.results);
-      state.topRated = newTopRated;
+    SET_POPULAR_MORE(state, result) {
+      const newPopular = state.popular.concat(result.results);
+      state.popular = newPopular;
     }
   },
   actions: {
-    async getTopRated({ state, commit }) {
+    async getPopular({ state, commit }) {
       await commit('INIT_PAGE_NOW'); // todo await 해야하는지 이해
 
-      const result = await request(`${state.mediaType}/top_rated`, {
+      const result = await request(`/${state.mediaType}/popular`, {
         params: {
           page: state.pageNow
         }
       });
 
+      // api 호출 성공 시
       if (result.status === 200) {
-        commit('SET_TOP_RATED', result.data);
+        commit('SET_POPULAR', result.data);
       }
     },
-    async getTopRatedMore({ state, commit }) {
+    async getPopularMore({ state, commit }) {
       await commit('SET_PAGE_NEXT');
 
-      const result = await request(`${state.mediaType}/top_rated`, {
+      const result = await request(`/${state.mediaType}/popular`, {
         params: {
           page: state.pageNow
         }
       });
 
+      // api 호출 성공 시
       if (result.status === 200) {
-        commit('SET_TOP_RATED_MORE', result.data);
+        commit('SET_POPULAR_MORE', result.data);
       }
     }
   }

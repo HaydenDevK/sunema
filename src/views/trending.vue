@@ -4,7 +4,7 @@
       <router-link to="" class="btn-back">
         <img src="../assets/images/global/icon-back.png" alt="" />
       </router-link>
-      <p class="font-page-title">오늘 뜨는 컨텐츠</p>
+      <p class="font-page-title">지금 뜨는 컨텐츠</p>
     </header>
 
     <!-- 버튼 -->

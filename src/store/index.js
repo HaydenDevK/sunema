@@ -11,6 +11,7 @@ import tvToday from './tvToday';
 import tvNow from './tvNow';
 import topRated from './topRated';
 import trending from './trending';
+import popular from './popular';
 
 Vue.use(Vuex);
 
@@ -26,6 +27,7 @@ export default new Vuex.Store({
     tvToday,
     tvNow,
     topRated,
-    trending
+    trending,
+    popular
   }
 });
