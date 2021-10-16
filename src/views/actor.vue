@@ -17,7 +17,18 @@
               <div>
                 {{ item.name }}
               </div>
-              <p>{{ item.known_for[0].title }} {{ item.known_for[0].name }}</p>
+              <p v-if="item.known_for[0].name !== undefined">
+                {{ item.known_for[0].name + ',' }}
+              </p>
+              <p v-if="item.known_for[0].title !== undefined">
+                {{ item.known_for[0].title + ',' }}
+              </p>
+              <p v-if="item.known_for[1].name !== undefined">
+                {{ item.known_for[1].name + ',' }}
+              </p>
+              <p v-if="item.known_for[1].title !== undefined">
+                {{ item.known_for[1].title }}
+              </p>
             </div></router-link
           >
         </li>
@@ -25,30 +36,6 @@
     </section>
 
     <!-- episode-list -->
-
-    <div id="bottom-bar">
-      <router-link to=""
-        ><img src="../assets/images/round/icon-home.png" alt="" />
-        <p>홈</p>
-      </router-link>
-      <router-link to=""
-        ><img src="../assets/images/round/icon-nowplaying.png" alt="" />
-        <p>상영중</p>
-      </router-link>
-      <router-link to=""
-        ><img src="../assets/images/round/icon-upcoming.png" alt="" />
-        <p>개봉예정</p>
-      </router-link>
-      <router-link to=""
-        ><img src="../assets/images/round/icon-search.png" alt="" />
-        <p>검색</p>
-      </router-link>
-      <router-link to=""
-        ><img src="../assets/images/round/icon-popular.png" alt="" />
-        <p>인기콘텐츠</p>
-      </router-link>
-    </div>
-    <!-- bottom-bar -->
   </div>
 </template>
 
@@ -73,6 +60,7 @@ export default {
       // console.log(profile_path)
       return `https://image.tmdb.org/t/p/w300${profile_path}`;
     },
+
     scrollCallback() {
       console.log('callback');
     }
@@ -85,6 +73,7 @@ export default {
 
 * {
   font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+  background: #181727;
 }
 
 #wrap {
@@ -157,37 +146,14 @@ export default {
   color: #fff;
   font-size: 18px;
   font-weight: 700;
+  background: #212634;
 }
 #episode ul li div.ep-list-text p {
+  float: left;
+  padding-right: 8px;
   color: #fff;
   font-size: 12px;
   margin-top: 8px;
-}
-
-/* bottom-bar  */
-
-#bottom-bar {
-  display: grid;
-  width: 100%;
-  height: 54px;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  background: #13131b;
-  position: fixed;
-  bottom: 0;
-  justify-items: center;
-}
-#bottom-bar a {
-  padding: 8px 0;
-  justify-items: center;
-  text-align: center;
-  width: 100%;
-}
-#bottom-bar p {
-  font-size: 11px;
-  color: #fff;
-  line-height: 15px;
-}
-#bottom-bar img {
-  width: 24px;
+  background: #212634;
 }
 </style>

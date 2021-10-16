@@ -4,7 +4,7 @@
       <router-link to="">
         <img src="../assets/images/round/icon_back.png" alt="" />
       </router-link>
-      <p>종이의 집(2017)</p>
+      <p>오징어게임(2021)</p>
     </header>
     <!-- header -->
 
@@ -23,32 +23,7 @@
         </li>
       </ul>
     </section>
-
     <!-- episode-list -->
-
-    <div id="bottom-bar">
-      <router-link to=""
-        ><img src="../assets/images/round/icon-home.png" alt="" />
-        <p>홈</p>
-      </router-link>
-      <router-link to=""
-        ><img src="../assets/images/round/icon-nowplaying.png" alt="" />
-        <p>상영중</p>
-      </router-link>
-      <router-link to=""
-        ><img src="../assets/images/round/icon-upcoming.png" alt="" />
-        <p>개봉예정</p>
-      </router-link>
-      <router-link to=""
-        ><img src="../assets/images/round/icon-search.png" alt="" />
-        <p>검색</p>
-      </router-link>
-      <router-link to=""
-        ><img src="../assets/images/round/icon-popular.png" alt="" />
-        <p>인기콘텐츠</p>
-      </router-link>
-    </div>
-    <!-- bottom-bar -->
   </div>
 </template>
 
@@ -83,12 +58,12 @@ export default {
 
 * {
   font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+  background: #181727;
 }
 
 #wrap {
   width: 100%;
   min-height: 100vh;
-  background: #181727;
 }
 
 /* header */
@@ -155,37 +130,13 @@ export default {
   color: #fff;
   font-size: 18px;
   font-weight: 700;
+  background: #212634;
+
 }
 #episode ul li div.ep-list-text p {
   color: #fff;
   font-size: 12px;
   margin-top: 8px;
-}
-
-/* bottom-bar  */
-
-#bottom-bar {
-  display: grid;
-  width: 100%;
-  height: 54px;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  background: #13131b;
-  position: fixed;
-  bottom: 0;
-  justify-items: center;
-}
-#bottom-bar a {
-  padding: 8px 0;
-  justify-items: center;
-  text-align: center;
-  width: 100%;
-}
-#bottom-bar p {
-  font-size: 11px;
-  color: #fff;
-  line-height: 15px;
-}
-#bottom-bar img {
-  width: 24px;
+  background: #212634;
 }
 </style>

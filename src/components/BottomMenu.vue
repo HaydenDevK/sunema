@@ -3,41 +3,73 @@
     <!-- 하단 메뉴 -->
     <section class="menu">
       <div>
-        <button>
-          <img src="../assets/images/search/home.png" alt="" />
-          <p>홈2</p>
-        </button>
+        <router-link to="/">
+          <button>
+            <img src="../assets/images/search/home.png" alt="" />
+            <p>홈</p>
+          </button>
+        </router-link>
       </div>
       <div>
-        <button>
-          <img src="../assets/images/search/released.png" alt="" />
-          <p>상영중</p>
-        </button>
+        <router-link to="/nowmovie" @click.native="changeRouter('nowmovie')">
+          <button>
+            <img src="../assets/images/search/released.png" alt="" />
+            <p>상영중</p>
+          </button>
+        </router-link>
       </div>
       <div>
-        <button>
-          <img src="../assets/images/search/upcoming.png" alt="" />
-          <p>개봉예정</p>
-        </button>
+        <router-link
+          to="/commingsoon"
+          @click.native="changeRouter('commingsoon')"
+        >
+          <button>
+            <img src="../assets/images/search/upcoming.png" alt="" />
+            <p>개봉예정</p>
+          </button>
+        </router-link>
       </div>
       <div>
-        <button>
-          <img src="../assets/images/search/mint_mag.png" alt="" />
-          <p class="font-mint">검색</p>
-        </button>
+        <router-link to="/search" @click.native="changeRouter('search')">
+          <button>
+            <!-- tab 변수가 search 면 mint_...파일 불러오기 -->
+            <img
+              v-if="tab === 'search'"
+              src="../assets/images/round/icon-search-on.png"
+              alt=""
+            />
+            <!-- tab 변수가 다른거면 흰색 이미지 불러오기 -->
+            <img v-else src="../assets/images/round/icon-search.png" alt="" />
+            <p class="font-mint">검색</p>
+          </button>
+        </router-link>
       </div>
       <div>
-        <button>
-          <img src="../assets/images/search/popular.png" alt="" />
-          <p>인기콘텐츠</p>
-        </button>
+        <router-link to="/popular" @click.native="changeRouter('popular')">
+          <button>
+            <img src="../assets/images/search/popular.png" alt="" />
+            <p>인기콘텐츠</p>
+          </button>
+        </router-link>
       </div>
     </section>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      tab: '',
+    };
+  },
+  methods: {
+    changeRouter(type) {
+      this.tab = type;
+      console.log(this.tab);
+    },
+  },
+};
 </script>
 
 <style scoped>

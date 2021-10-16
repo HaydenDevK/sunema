@@ -1,6 +1,7 @@
 <template>
   <!-- 컴포넌트 동적 바인딩 -->
   <component :is="layout">
+    <!-- router view -->
     <slot />
   </component>
 </template>

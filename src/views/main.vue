@@ -137,8 +137,18 @@
           <div class="title-box">
             <h2>지금 뜨는 콘텐츠</h2>
             <ul class="tab-btn">
-              <li class="active">오늘</li>
-              <li>이번주</li>
+              <li
+                @click="changeTodayContentType('movie')"
+                :class="{ active: todayContentType === 'movie' }"
+              >
+                영화
+              </li>
+              <li
+                @click="changeTodayContentType('tv')"
+                :class="{ active: todayContentType === 'tv' }"
+              >
+                Tv
+              </li>
             </ul>
           </div>
           <div class="tab-contents">
@@ -300,6 +310,11 @@ export default {
     MainMovieSlide,
     MainVideoSlide,
   },
+  data() {
+    return {
+      todayContentType: 'movie',
+    };
+  },
   mounted() {
     // this.$store.dispatch('main/testCall');
     this.getMovieInfo();
@@ -312,6 +327,9 @@ export default {
       this.$store.dispatch('main/getUpcomingMovie');
       //this.$store.dispatch('main/getTodayTv');
       //this.$store.dispatch('main/getVideoList');
+    },
+    changeTodayContentType(type) {
+      this.todayContentType = type;
     },
   },
 };
