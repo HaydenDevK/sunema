@@ -12,7 +12,7 @@ export default {
     },
     actorImages: {}
   },
-  mutations: { 
+  mutations: {
     SET_PERSON_ID(state, personId) {
       state.personId = personId;
     },
@@ -21,16 +21,16 @@ export default {
     },
     SET_ACTOR_CREDITS(state, data) {
       state.actorCredits = data;
-      // todo actorCredits.cast, actorCredits.crew 날짜별로 정렬
-      // todo 날짜=>연월일배열로나누기
     },
     SET_ACTOR_IMAGES(state, data) {
       state.actorImages = data;
+      // console.log(state.actorImages);
+      // console.log(typeof state.actorImages);
+      // todo Array인데 왜 Object인지 찾기
     }
   },
   actions: {
     async getActorDetail({ state, commit }) {
-      // const result = await request(`/person/${state.personId}`);
       const result = await axios.create({
         baseURL: 'https://api.themoviedb.org/3',
         params: {

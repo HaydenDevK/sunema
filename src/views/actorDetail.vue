@@ -55,24 +55,16 @@
 
       <div class="separator-black-2" />
 
-      <!-- 스와이퍼 -->
-      <Slide :Array="$store.state.actorDetail.actorCredits.crew" />
-
       <!-- 참여 작품 -->
       <section id="filmography">
         <div class="profile-subtitle">
           참여 작품
         </div>
 
-        <div class="wrapper-movie-slide">
-          <router-link
-            v-for="item in $store.state.actorDetail.actorCredits.cast"
-            :key="item.id"
-            to=""
-          >
-            <img :src="getImage(item.poster_path)" alt="" />
-          </router-link>
-        </div>
+        <ListSlide
+          :Media="$store.state.actorDetail.actorCredits.cast"
+          Path="poster_path"
+        />
       </section>
 
       <!-- 프로필 사진 -->
@@ -80,18 +72,11 @@
         <div class="profile-subtitle">
           프로필 사진
         </div>
-        <div class="wrapper-movie-slide">
-          <router-link
-            v-for="item in $store.state.actorDetail.actorImages"
-            :key="item.id"
-            to=""
-          >
-            <img :src="getImage(item.file_path)" alt="" />
-          </router-link>
-          <!-- todo
-            공백
-          -->
-        </div>
+
+        <ListSlide
+          :Media="$store.state.actorDetail.actorImages"
+          Path="file_path"
+        />
       </section>
 
       <!-- 전체 작품 활동 -->
@@ -102,7 +87,7 @@
 
         <div class="works-category font-primary">연기</div>
         <div
-          v-for="item in $store.state.actorDetail.actorCredits.cast"
+          v-for="item in actorCredits.cast"
           :key="item.id"
           class="wrapper-list"
         >
@@ -113,43 +98,36 @@
         </div>
 
         <div class="wrapper-more">
-          <button>더보기</button>
+          <button @click="getCreditsMore('cast')">더보기</button>
         </div>
-        <!-- todo
-          가져올 내용 제한하는 방법 적용하고
-          더보기 버튼으로 추가로 더 불러오게
-        -->
 
         <div class="works-category font-primary works-category-space">제작</div>
         <div
-          v-for="item in $store.state.actorDetail.actorCredits.crew"
+          v-for="item in actorCredits.crew"
           :key="item.credit_id"
           class="wrapper-list"
         >
-          <span class="font-white-70">{{
-            item.release_date ? getYear(item.release_date) : ''
-          }}</span>
+          <span class="font-white-70">
+            {{ item.release_date ? getYear(item.release_date) : '' }}
+          </span>
           <span>{{ item.title }}…{{ item.job }}</span>
         </div>
 
         <div class="wrapper-more">
-          <button>더보기</button>
+          <button @click="getCreditsMore('crew')">더보기</button>
         </div>
-        <!-- todo
-          가져올 내용 제한하는 방법 적용하고
-          더보기 버튼으로 추가로 더 불러오게
-        -->
       </section>
     </div>
   </div>
 </template>
 
 <script>
-import Slide from '@/components/ListSlide.vue';
+import ListSlide from '../components/ListSlide.vue';
+
 export default {
   name: 'ActorDetail',
   components: {
-    Slide
+    ListSlide
   },
   data() {
     return {
@@ -159,7 +137,8 @@ export default {
         cast: [],
         crew: []
       },
-      actorImages: {}
+      castCounter: 1,
+      crewCounter: 1
     };
   },
   computed: {
@@ -180,17 +159,15 @@ export default {
     },
     profile() {
       // 메인 프로필 사진
-      if (this.actorDetail.profile_path) {
-        return `https://image.tmdb.org/t/p/w300${this.actorDetail.profile_path}`;
-      } else {
-        return require('../assets/images/global/no-image.png');
-      }
+      return this.actorDetail.profile_path
+        ? `https://image.tmdb.org/t/p/w300${this.actorDetail.profile_path}`
+        : require('../assets/images/global/no-image.png');
     }
   },
   mounted() {
     this.setPersonId();
     this.getInitDetail();
-    this.getInitCredits(); 
+    this.getInitCredits();
     this.getInitImages();
   },
   methods: {
@@ -205,13 +182,46 @@ export default {
     },
     getInitCredits() {
       this.$store.dispatch('actorDetail/getActorCredits').then(() => {
-        this.actorCredits = this.$store.state.actorDetail.actorCredits;
+        this.$store.state.actorDetail.actorCredits.cast.length >= 10
+          ? (this.actorCredits.cast = this.$store.state.actorDetail.actorCredits.cast.slice(
+              0,
+              10
+            ))
+          : (this.actorCredits.cast = this.$store.state.actorDetail.actorCredits.cast);
+
+        this.$store.state.actorDetail.actorCredits.crew.length >= 10
+          ? (this.actorCredits.crew = this.$store.state.actorDetail.actorCredits.crew.slice(
+              0,
+              10
+            ))
+          : (this.actorCredits.crew = this.$store.state.actorDetail.actorCredits.crew);
       });
     },
     getInitImages() {
-      this.$store.dispatch('actorDetail/getActorImages').then(() => {
-        this.actorImages = this.$store.state.actorDetail.actorImages;
-      });
+      this.$store.dispatch('actorDetail/getActorImages');
+      // .then(() => {
+      //   this.actorImages = this.$store.state.actorDetail.actorImages;
+      // });
+    },
+    setCreditsCounter(type) {
+      type === 'cast' ? this.castCounter++ : this.crewCounter++;
+    },
+    getCreditsMore(type) {
+      this.setCreditsCounter(type);
+
+      this.$store.state.actorDetail.actorCredits[`${type}`].length >=
+      this[`${type}Counter`] * 10
+        ? (this.actorCredits[
+            `${type}`
+          ] = this.$store.state.actorDetail.actorCredits[`${type}`].slice(
+            0,
+            this[`${type}Counter`] * 10
+            // todo 얕은 복사 문제없을지 점검
+          ))
+        : (this.actorCredits[
+            `${type}`
+          ] = this.$store.state.actorDetail.actorCredits[`${type}`]);
+      // todo 더보기 버튼 없애기
     },
     getImage(poster_path) {
       if (poster_path) {
@@ -420,16 +430,16 @@ export default {
     grid-column-gap: 2.4rem;
   }
 
-  .wrapper-movie-slide img {
-    height: 25.6rem;
-  }
-
   .wrapper-movie-slide a:first-child {
     margin-left: 4.8rem;
   }
 
   .wrapper-movie-slide a:last-child {
     margin-right: 4.8rem;
+  }
+
+  .wrapper-movie-slide img {
+    height: 25.6rem;
   }
 }
 </style>

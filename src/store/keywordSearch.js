@@ -7,8 +7,8 @@ export default {
     keywordMedia: [],
     pageNow: 1,
     pageTotal: 1,
-    mediaType: 'movie', // sample setting
-    mediaId: 436969,
+    mediaType: 'movie', // sample
+    mediaId: 436969, // sample
     mediaKeywords: []
   },
   mutations: {
@@ -38,7 +38,7 @@ export default {
   actions: {
     async getKeywordMedia({ state, commit }) {
       await commit('SET_KEYWORD_ID', state.keywordId);
-      await commit('INIT_PAGE_NOW'); // todo await 해야하는지 이해
+      await commit('INIT_PAGE_NOW');
 
       const result = await request(`/discover/${state.mediaType}`, {
         params: {

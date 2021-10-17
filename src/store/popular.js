@@ -31,7 +31,7 @@ export default {
   },
   actions: {
     async getPopular({ state, commit }) {
-      await commit('INIT_PAGE_NOW'); // todo await 해야하는지 이해
+      await commit('INIT_PAGE_NOW');
 
       const result = await request(`/${state.mediaType}/popular`, {
         params: {

@@ -11,7 +11,7 @@
         </router-link>
       </div>
       <div>
-        <router-link to="/nowmovie" @click.native="changeRouter('nowmovie')">
+        <router-link to="/movienow" @click.native="changeRouter('movienow')">
           <button>
             <img src="../assets/images/search/released.png" alt="" />
             <p>상영중</p>
@@ -19,10 +19,7 @@
         </router-link>
       </div>
       <div>
-        <router-link
-          to="/commingsoon"
-          @click.native="changeRouter('commingsoon')"
-        >
+        <router-link to="/upcoming" @click.native="changeRouter('upcoming')">
           <button>
             <img src="../assets/images/search/upcoming.png" alt="" />
             <p>개봉예정</p>
@@ -60,15 +57,15 @@
 export default {
   data() {
     return {
-      tab: '',
+      tab: ''
     };
   },
   methods: {
     changeRouter(type) {
       this.tab = type;
       console.log(this.tab);
-    },
-  },
+    }
+  }
 };
 </script>
 

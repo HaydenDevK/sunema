@@ -3,34 +3,29 @@
 export default {
   namespaced: true,
   state: {
-    searchKeyword: [
-      {
-        text: '종이의집',
-        counter: 1,
-      },
-      {
-        text: '환승연애',
-        counter: 1,
-      },
-    ],
+    searchKeyword: []
   },
   mutations: {
     PUSH_KEYWORD(state, txt) {
-      state.searchKeyword.push({ text: txt, counter: 1 });
+      state.searchKeyword.push({ text: `${txt}`, counter: 1 });
     },
-    PLUS_COUNTER(state, result) {
-      state.searchKeyword[result]
+    PLUS_COUNTER(state, index) {
+      state.searchKeyword[index].counter++;
     }
   },
   actions: {
     find({ state, commit }, txt) {
-      // 검색 키워드가 이미 state에 있는지?
-      const result = state.searchKeyword.indexOf(txt)
-      console.log(result);
-      if (result === -1) {
-        commit('PUSH_KEYWORD', txt)
-      } else {
-        commit('PLUS_COUNTER', result)
+      let check = 0;
+      for (let index in state.searchKeyword) {
+        if (state.searchKeyword[index].text === txt) {
+          check++;
+          commit('PLUS_COUNTER', index);
+          break;
+        }
+      }
+      if (check === 0) {
+        console.log('없어');
+        commit('PUSH_KEYWORD', txt);
       }
     }
   }

@@ -1,8 +1,8 @@
 <template>
   <swiper class="swiper" :options="swiperOption">
-    <swiper-slide v-for="item in Array" :key="item.id">
+    <swiper-slide v-for="item in Media" :key="item.credit_id">
       <router-link to="">
-        <img :src="getImage(item.poster_path)" />
+        <img :src="getImage(item[`${Path}`])" />
       </router-link>
     </swiper-slide>
   </swiper>
@@ -14,7 +14,8 @@ import 'swiper/css/swiper.css';
 
 export default {
   props: {
-    Array: Array
+    Media: [Object, Array],
+    Path: String
   },
   components: {
     Swiper,
@@ -23,42 +24,54 @@ export default {
   data() {
     return {
       swiperOption: {
-        slidesPerView: 2.33,
         spaceBetween: 16,
-        freeMode: true
+        slidesPerView: 2.2,
+        freeMode: true,
+        breakpoints: {
+          414: {
+            slidesPerView: 2.6219
+          },
+          1024: {
+            slidesPerView: 5.381,
+            spaceBetween: 24
+          }
+        }
       }
     };
   },
-  mounted() {
-    console.log(this.Array);
-  },
   methods: {
-    getImage(poster_path) {
-      return `https://image.tmdb.org/t/p/w300${poster_path}`;
+    getImage(path) {
+      return path
+        ? `https://image.tmdb.org/t/p/w300${path}`
+        : require('../assets/images/global/no-image.png');
     }
   }
 };
 </script>
 
 <style scoped>
-/* .swiper-slide {
-  font-size: 0;
-}
-
-.swiper-slide > a {
-  display: block;
-  font-size: 0;
-}
-
-.swiper-slide a:first-child {
+.swiper {
   margin-left: 2.4rem;
 }
 
-.swiper-slide a:last-child {
+.swiper-slide:last-child {
   margin-right: 2.4rem;
 }
 
+.swiper-slide a {
+  font-size: 0;
+  display: block;
+}
+
 .swiper-slide img {
-  height: 25.6rem;
-} */
+  border-radius: 0.5rem;
+  width: 100%;
+}
+
+/* tablet */
+@media screen and (min-width: 1024px) {
+  .swiper {
+    margin-left: 4.8rem;
+  }
+}
 </style>
