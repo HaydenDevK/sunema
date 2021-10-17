@@ -10,7 +10,9 @@ export default {
       cast: [],
       crew: []
     },
-    actorImages: {}
+    actorImages: {},
+    actorBiography: '',
+    actorBiographyCounter: 1
   },
   mutations: {
     SET_PERSON_ID(state, personId) {
@@ -28,6 +30,17 @@ export default {
       // console.log(typeof state.actorImages);
       // todo Array인데 왜 Object인지 찾기
     }
+    // SET_ACTOR_BIOGRAPHY_COUNTER(state) {
+    //   state.actorBiographyCounter++;
+    // },
+    // SET_ACTOR_BIOGRAPHY(state) {
+    //   state.actorDetail.biography.length >= state.actorBiographyCounter * 50
+    //     ? (state.actorBiography = state.actorDetail.biography.substring(
+    //         0,
+    //         state.actorBiographyCounter * 50
+    //       ))
+    //     : (state.actorBiography = state.actorDetail.biography);
+    // }
   },
   actions: {
     async getActorDetail({ state, commit }) {
@@ -50,25 +63,23 @@ export default {
 
       // api 호출 성공 시
       if (result.status === 200) {
-        result.data.crew.sort(function(a, b) {
+        result.data.crew.sort((a, b) => {
           if (a.release_date < b.release_date) {
             return 1;
           }
           if (a.release_date > b.release_date) {
             return -1;
           }
-          // a must be equal to b
           return 0;
         });
 
-        result.data.cast.sort(function(a, b) {
+        result.data.cast.sort((a, b) => {
           if (a.release_date < b.release_date) {
             return 1;
           }
           if (a.release_date > b.release_date) {
             return -1;
           }
-          // a must be equal to b
           return 0;
         });
 
@@ -83,5 +94,9 @@ export default {
         commit('SET_ACTOR_IMAGES', result.data.profiles);
       }
     }
+    // async setActorBiography({ commit }) {
+    //   await commit('SET_ACTOR_BIOGRAPHY_COUNTER');
+    //   commit('SET_ACTOR_BIOGRAPHY');
+    // }
   }
 };

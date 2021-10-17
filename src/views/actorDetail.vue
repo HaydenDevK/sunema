@@ -21,34 +21,51 @@
         <div id="wrapper-profile-top">
           <div id="profile-title">
             <span id="profile-name">
-              {{ actorDetail.name }}
+              {{ $store.state.actorDetail.actorDetail.name }}
             </span>
             <span id="profile-job">{{
-              `${actorDetail.known_for_department === 'Acting' ? '배우' : ''}`
+              `${
+                $store.state.actorDetail.actorDetail.known_for_department ===
+                'Acting'
+                  ? '배우'
+                  : ''
+              }`
             }}</span>
           </div>
 
           <div id="profile-further">
-            {{ actorDetail.biography }}
+            {{ $store.state.actorDetail.actorDetail.biography }}
           </div>
 
           <div class="wrapper-more">
-            <button>더보기</button>
+            <button @click="getInitBiography()">더보기</button>
           </div>
           <!-- todo
-            가져올 내용 제한하는 방법 적용하고
-            더보기 버튼으로 추가로 더 불러오게
+            문자열 자르기가 아니라 CSS로 해야할듯?
           -->
 
           <div class="wrapper-list">
             <span class="font-white-70">성별</span>
-            <span>{{ `${actorDetail.gender === 1 ? '여성' : '남성'}` }}</span>
+            <span>{{
+              `${
+                $store.state.actorDetail.actorDetail.gender === 1
+                  ? '여성'
+                  : '남성'
+              }`
+            }}</span>
 
             <span class="font-white-70">생일</span>
-            <span>{{ actorDetail.birthday }} ({{ age }} years old)</span>
+            <span
+              >{{ $store.state.actorDetail.actorDetail.birthday }} ({{
+                age
+              }}
+              years old)</span
+            >
 
             <span class="font-white-70">출생지</span>
-            <span>{{ actorDetail.place_of_birth }}</span>
+            <span>{{
+              $store.state.actorDetail.actorDetail.place_of_birth
+            }}</span>
           </div>
         </div>
       </section>
@@ -132,7 +149,6 @@ export default {
   data() {
     return {
       personID: 0,
-      actorDetail: {},
       actorCredits: {
         cast: [],
         crew: []
@@ -144,8 +160,10 @@ export default {
   computed: {
     age() {
       let age = 0;
-      if (this.actorDetail.birthday) {
-        const birthday = this.actorDetail.birthday.split('-');
+      if (this.$store.state.actorDetail.actorDetail.birthday) {
+        const birthday = this.$store.state.actorDetail.actorDetail.birthday.split(
+          '-'
+        );
         const today = new Date();
         const birthDate = new Date(birthday[0], birthday[1], birthday[2]);
 
@@ -159,14 +177,15 @@ export default {
     },
     profile() {
       // 메인 프로필 사진
-      return this.actorDetail.profile_path
-        ? `https://image.tmdb.org/t/p/w300${this.actorDetail.profile_path}`
+      return this.$store.state.actorDetail.actorDetail.profile_path
+        ? `https://image.tmdb.org/t/p/w300${this.$store.state.actorDetail.actorDetail.profile_path}`
         : require('../assets/images/global/no-image.png');
     }
   },
   mounted() {
     this.setPersonId();
     this.getInitDetail();
+    this.getInitBiography();
     this.getInitCredits();
     this.getInitImages();
   },
@@ -176,9 +195,7 @@ export default {
       this.$store.commit('actorDetail/SET_PERSON_ID', this.personID);
     },
     getInitDetail() {
-      this.$store.dispatch('actorDetail/getActorDetail').then(() => {
-        this.actorDetail = this.$store.state.actorDetail.actorDetail;
-      });
+      this.$store.dispatch('actorDetail/getActorDetail');
     },
     getInitCredits() {
       this.$store.dispatch('actorDetail/getActorCredits').then(() => {
@@ -196,12 +213,13 @@ export default {
             ))
           : (this.actorCredits.crew = this.$store.state.actorDetail.actorCredits.crew);
       });
+      // todo 모든 데이터와 함수를 스테이트로 옮길지 판단해서 수정
     },
     getInitImages() {
       this.$store.dispatch('actorDetail/getActorImages');
-      // .then(() => {
-      //   this.actorImages = this.$store.state.actorDetail.actorImages;
-      // });
+    },
+    getInitBiography() {
+      this.$store.dispatch('actorDetail/setActorBiography');
     },
     setCreditsCounter(type) {
       type === 'cast' ? this.castCounter++ : this.crewCounter++;
@@ -223,6 +241,7 @@ export default {
           ] = this.$store.state.actorDetail.actorCredits[`${type}`]);
       // todo 더보기 버튼 없애기
     },
+
     getImage(poster_path) {
       if (poster_path) {
         return `https://image.tmdb.org/t/p/w300${poster_path}`;
