@@ -37,7 +37,8 @@ export default {
           1024: {
             spaceBetween: 24
           }
-        }
+        },
+        slideToClickedSlide: true
       }
     };
   },
