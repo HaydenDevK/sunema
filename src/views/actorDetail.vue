@@ -33,16 +33,15 @@
             }}</span>
           </div>
 
-          <div id="profile-further">
+          <div id="profile-further" :class="{ ellipsis: ellipsis === true }">
             {{ $store.state.actorDetail.actorDetail.biography }}
           </div>
 
           <div class="wrapper-more">
-            <button @click="getInitBiography()">더보기</button>
+            <button @click="ellipsis = !ellipsis">
+              {{ ellipsis === true ? '펼치기' : '닫기' }}
+            </button>
           </div>
-          <!-- todo
-            문자열 자르기가 아니라 CSS로 해야할듯?
-          -->
 
           <div class="wrapper-list">
             <span class="font-white-70">성별</span>
@@ -154,7 +153,8 @@ export default {
         crew: []
       },
       castCounter: 1,
-      crewCounter: 1
+      crewCounter: 1,
+      ellipsis: true
     };
   },
   computed: {
@@ -185,7 +185,6 @@ export default {
   mounted() {
     this.setPersonId();
     this.getInitDetail();
-    this.getInitBiography();
     this.getInitCredits();
     this.getInitImages();
   },
@@ -217,9 +216,6 @@ export default {
     },
     getInitImages() {
       this.$store.dispatch('actorDetail/getActorImages');
-    },
-    getInitBiography() {
-      this.$store.dispatch('actorDetail/setActorBiography');
     },
     setCreditsCounter(type) {
       type === 'cast' ? this.castCounter++ : this.crewCounter++;
@@ -299,6 +295,16 @@ export default {
 #profile-further {
   font-size: 1.6rem;
   line-height: 2.3rem;
+}
+
+#profile-further.ellipsis {
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+  -webkit-line-clamp: 3;
+  height: 6.9rem;
+  overflow: hidden;
 }
 
 #filmography .profile-subtitle,
@@ -432,10 +438,6 @@ export default {
   .works-category {
     font-size: 3rem;
     line-height: 3.8rem;
-  }
-
-  .wrapper-more {
-    display: none;
   }
 
   .wrapper-list {

@@ -111,7 +111,6 @@ button {
 
 .wrapper-btn-type .btn-type p.active {
   border-bottom: 2px solid #ffffff;
-  /* todo 애니메이션, 클릭 이벤트 연결 */
 }
 
 .wrapper-poster {
@@ -119,8 +118,8 @@ button {
   display: grid;
   grid-column-gap: 1.6rem;
   grid-row-gap: 1.6rem;
-  grid-template-columns: repeat(auto-fill, minmax(9.4rem, auto));
-  /* repeat(auto-fill, minmax(10.1rem, auto)) */
+  grid-template-columns: repeat(auto-fill, minmax(9.8rem, auto));
+  /* 375까지 3개 */
 }
 
 .wrapper-poster a {
@@ -147,6 +146,14 @@ button {
   font-size: 1.2rem;
   line-height: 1.5rem;
   letter-spacing: 0.025rem;
+  padding: 0.8rem 1.2rem;
+  transform: translateX(1.2rem);
+  border-radius: 0.5rem;
+}
+
+.wrapper-more button:focus,
+.wrapper-more button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 /* tablet */

@@ -33,12 +33,12 @@ export default {
         spaceBetween: 8,
         slidesPerView: 'auto',
         freeMode: true,
+        slideToClickedSlide: true, // todo 가끔 안먹는 버그 해결
         breakpoints: {
           1024: {
             spaceBetween: 24
           }
-        },
-        slideToClickedSlide: true
+        }
       }
     };
   },
