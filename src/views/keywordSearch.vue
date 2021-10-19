@@ -7,7 +7,7 @@
     </header>
 
     <!-- 키워드 리스트 -->
-    <ListKeyword />
+    <ListKeyword type="keywordSearch" />
 
     <!-- 작품 리스트 -->
     <ListScroll :Media="$store.state.keywordSearch.keywordMedia" />

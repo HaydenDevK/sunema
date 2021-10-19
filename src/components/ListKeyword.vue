@@ -6,7 +6,7 @@
     >
       <button
         :class="{ active: item.id === keywordId }"
-        @click="getNewMedia(item.id)"
+        @click="handleFunc(item.id)"
       >
         #{{ item.name }}
       </button>
@@ -20,7 +20,7 @@ import 'swiper/css/swiper.css';
 
 export default {
   props: {
-    // mediaKeywords: Array // todo 재사용성 개선
+    type: String
   },
   components: {
     Swiper,
@@ -28,6 +28,7 @@ export default {
   },
   data() {
     return {
+      movieId: 0,
       keywordId: 0,
       swiperOption: {
         spaceBetween: 8,
@@ -43,29 +44,38 @@ export default {
     };
   },
   async mounted() {
-    await this.$store
-      .dispatch('keywordSearch/getMediaKeywords')
-      .then(() => {
-        this.setKeywordId();
-      })
-      .then(() => {
-        this.getInitMedia();
-      });
+    this.movieId = Number(this.$route.params.idx);
+
+    await this.$store.commit('keywordSearch/SET_MEDIA_ID', this.movieId);
+    await this.$store.dispatch('keywordSearch/getMediaKeywords');
+
+    if (this.type === 'keywordSearch') {
+      this.setKeywordId();
+      this.getInitMedia();
+    }
   },
   methods: {
-    setKeywordId(newKeywordId) {
-      newKeywordId
-        ? (this.keywordId = Number(newKeywordId))
-        : (this.keywordId = Number(this.$route.params.keywordId));
-      this.$store.commit('keywordSearch/SET_KEYWORD_ID', this.keywordId);
+    setKeywordId(keywordId) {
+      keywordId
+        ? (this.keywordId = Number(keywordId))
+        : (this.keywordId = this.$store.state.keywordSearch.mediaKeywords[0].id); // 디테일에서 넘어오지 않고, 접근했을 때
+
+      this.keywordId !== 0
+        ? this.$store.commit('keywordSearch/SET_KEYWORD_ID', this.keywordId)
+        : '';
     },
     getInitMedia() {
       this.$store.dispatch('keywordSearch/getKeywordMedia');
       // todo 스토어 정보가 바뀌면 템플릿에 바인딩도 다시 되는 이유 이해
     },
-    getNewMedia(newKeywordId) {
-      this.setKeywordId(newKeywordId);
-      this.getInitMedia();
+    handleFunc(keywordId) {
+      if (this.type === 'keywordSearch') {
+        this.setKeywordId(keywordId);
+        this.getInitMedia();
+      } else if (this.type === 'detail') {
+        this.setKeywordId(keywordId);
+        this.$router.push({ path: `/keywordsearch/${this.movieId}` });
+      }
     }
   }
 };

@@ -33,6 +33,9 @@ export default {
     },
     SET_MEDIA_KEYWORDS(state, data) {
       state.mediaKeywords = data;
+    },
+    SET_MEDIA_ID(state, id) {
+      state.mediaId = id;
     }
   },
   actions: {
