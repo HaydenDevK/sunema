@@ -4,7 +4,7 @@
         <ul class="actor-list">
             <li v-for="item in actor" :key="item.id">
             <figure>
-                <router-link to="">
+                <router-link :to="`/actordetail/${item.id}`">
                     <img :src="getImage(item.profile_path)" alt="" />
                     <figcaption>
                     <strong>{{ item.name }}</strong>
