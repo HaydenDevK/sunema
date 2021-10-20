@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper-poster">
-    <router-link v-for="item in Media" :key="item.id" to="">
+    <router-link v-for="item in Media" :key="item.id" :to="`/detail/${item.id}`">
       <img :src="getImage(item.poster_path)" alt="" />
     </router-link>
   </div>

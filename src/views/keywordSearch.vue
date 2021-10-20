@@ -7,7 +7,17 @@
     </header>
 
     <!-- 키워드 리스트 -->
-    <ListKeyword type="keywordSearch" />
+    <ListKeyword View="keywordSearch" />
+
+    <!-- 키워드 없을 경우 -->
+    <div
+      v-if="$store.state.keywordSearch.mediaKeywords.length === 0"
+      class="font-white-70"
+      style="font-size: 1.8rem; padding: 2.4rem;"
+    >
+      해당하는 영화가 없거나,<br/>
+      키워드가 없는 영화입니다.
+    </div>
 
     <!-- 작품 리스트 -->
     <ListScroll :Media="$store.state.keywordSearch.keywordMedia" />

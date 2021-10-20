@@ -20,7 +20,7 @@ import 'swiper/css/swiper.css';
 
 export default {
   props: {
-    type: String
+    View: String
   },
   components: {
     Swiper,
@@ -28,7 +28,7 @@ export default {
   },
   data() {
     return {
-      movieId: 0,
+      mediaId: 0,
       keywordId: 0,
       swiperOption: {
         spaceBetween: 8,
@@ -44,37 +44,35 @@ export default {
     };
   },
   async mounted() {
-    this.movieId = Number(this.$route.params.idx);
-
-    await this.$store.commit('keywordSearch/SET_MEDIA_ID', this.movieId);
+    this.mediaId = Number(this.$route.params.idx);
+    await this.$store.commit('keywordSearch/SET_MEDIA_ID', this.mediaId);
     await this.$store.dispatch('keywordSearch/getMediaKeywords');
 
-    if (this.type === 'keywordSearch') {
-      this.setKeywordId();
+    // todo 중첩문 함수형으로 축약
+    if (this.View === 'keywordSearch') {
+      if (this.$route.params.keyword) {
+        this.setKeywordId(this.$route.params.keyword)
+      } else if (this.$store.state.keywordSearch.mediaKeywords.length !== 0) {
+        this.setKeywordId(this.$store.state.keywordSearch.mediaKeywords[0].id)
+      }
       this.getInitMedia();
     }
   },
   methods: {
     setKeywordId(keywordId) {
-      keywordId
-        ? (this.keywordId = Number(keywordId))
-        : (this.keywordId = this.$store.state.keywordSearch.mediaKeywords[0].id); // 디테일에서 넘어오지 않고, 접근했을 때
-
-      this.keywordId !== 0
-        ? this.$store.commit('keywordSearch/SET_KEYWORD_ID', this.keywordId)
-        : '';
+      this.keywordId = Number(keywordId)
+      this.$store.commit('keywordSearch/SET_KEYWORD_ID', this.keywordId)
     },
     getInitMedia() {
       this.$store.dispatch('keywordSearch/getKeywordMedia');
       // todo 스토어 정보가 바뀌면 템플릿에 바인딩도 다시 되는 이유 이해
     },
     handleFunc(keywordId) {
-      if (this.type === 'keywordSearch') {
+      if (this.View === 'keywordSearch') {
         this.setKeywordId(keywordId);
         this.getInitMedia();
-      } else if (this.type === 'detail') {
-        this.setKeywordId(keywordId);
-        this.$router.push({ path: `/keywordsearch/${this.movieId}` });
+      } else {
+        this.$router.push({ name: 'KeywordSearch', params: { idx: this.mediaId, keyword: keywordId } })
       }
     }
   }
@@ -107,6 +105,7 @@ export default {
   font-size: 1.1rem;
   line-height: 1.4rem;
   letter-spacing: -0.02em;
+  opacity: 0.5;
 }
 
 .swiper-slide:last-of-type {
@@ -116,6 +115,7 @@ export default {
 .swiper-slide button.active {
   background-color: white;
   color: #13131b;
+  opacity: 1;
 }
 
 /* tablet */

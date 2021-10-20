@@ -2,6 +2,7 @@
   <div class="bg-navy-100">
     <!-- 배경 블러 이미지 -->
     <div
+
       class="bg-blurred"
       :style="{ backgroundImage: `url(${profile})` }"
     ></div>
@@ -80,6 +81,7 @@
         <ListSlide
           :Media="$store.state.actorDetail.actorCredits.cast"
           Path="poster_path"
+          Type="filmography"
         />
       </section>
 
@@ -92,6 +94,7 @@
         <ListSlide
           :Media="$store.state.actorDetail.actorImages"
           Path="file_path"
+          Type="photography"
         />
       </section>
 
@@ -113,7 +116,7 @@
           <span>{{ item.title }}</span>
         </div>
 
-        <div class="wrapper-more">
+        <div v-if="castMore" class="wrapper-more">
           <button @click="getCreditsMore('cast')">더보기</button>
         </div>
 
@@ -129,7 +132,7 @@
           <span>{{ item.title }}…{{ item.job }}</span>
         </div>
 
-        <div class="wrapper-more">
+        <div v-if="crewMore" class="wrapper-more">
           <button @click="getCreditsMore('crew')">더보기</button>
         </div>
       </section>
@@ -152,9 +155,11 @@ export default {
         cast: [],
         crew: []
       },
+      ellipsis: true,
       castCounter: 1,
       crewCounter: 1,
-      ellipsis: true
+      castMore: true,
+      crewMore: true
     };
   },
   computed: {
@@ -197,21 +202,19 @@ export default {
       this.$store.dispatch('actorDetail/getActorDetail');
     },
     getInitCredits() {
-      this.$store.dispatch('actorDetail/getActorCredits').then(() => {
-        this.$store.state.actorDetail.actorCredits.cast.length >= 10
-          ? (this.actorCredits.cast = this.$store.state.actorDetail.actorCredits.cast.slice(
-              0,
-              10
-            ))
-          : (this.actorCredits.cast = this.$store.state.actorDetail.actorCredits.cast);
+      this.$store
+        .dispatch('actorDetail/getActorCredits')
+        .then(() => {
+          this.$store.state.actorDetail.actorCredits.cast.length >= 10
+            ? (this.actorCredits.cast = this.$store.state.actorDetail.actorCredits.cast
+              .slice(0, 10))
+            : (this.actorCredits.cast = this.$store.state.actorDetail.actorCredits.cast);
 
-        this.$store.state.actorDetail.actorCredits.crew.length >= 10
-          ? (this.actorCredits.crew = this.$store.state.actorDetail.actorCredits.crew.slice(
-              0,
-              10
-            ))
-          : (this.actorCredits.crew = this.$store.state.actorDetail.actorCredits.crew);
-      });
+          this.$store.state.actorDetail.actorCredits.crew.length >= 10
+            ? (this.actorCredits.crew = this.$store.state.actorDetail.actorCredits.crew
+              .slice(0, 10))
+            : (this.actorCredits.crew = this.$store.state.actorDetail.actorCredits.crew);
+        });
       // todo 모든 데이터와 함수를 스테이트로 옮길지 판단해서 수정
     },
     getInitImages() {
@@ -223,26 +226,12 @@ export default {
     getCreditsMore(type) {
       this.setCreditsCounter(type);
 
-      this.$store.state.actorDetail.actorCredits[`${type}`].length >=
-      this[`${type}Counter`] * 10
-        ? (this.actorCredits[
-            `${type}`
-          ] = this.$store.state.actorDetail.actorCredits[`${type}`].slice(
-            0,
-            this[`${type}Counter`] * 10
-            // todo 얕은 복사 문제없을지 점검
-          ))
-        : (this.actorCredits[
-            `${type}`
-          ] = this.$store.state.actorDetail.actorCredits[`${type}`]);
-      // todo 더보기 버튼 없애기
-    },
-
-    getImage(poster_path) {
-      if (poster_path) {
-        return `https://image.tmdb.org/t/p/w300${poster_path}`;
+      if (this.$store.state.actorDetail.actorCredits[`${type}`].length >= this[`${type}Counter`] * 15) {
+        this.actorCredits[`${type}`] = this.$store.state.actorDetail.actorCredits[`${type}`]
+          .slice(0, this[`${type}Counter`] * 15)
       } else {
-        return require('../assets/images/global/no-image.png');
+        this.actorCredits[`${type}`] = this.$store.state.actorDetail.actorCredits[`${type}`];
+        this[`${type}More`] = false;
       }
     },
     getYear(release_date) {
@@ -313,7 +302,7 @@ export default {
 }
 
 #works {
-  padding: 4.8rem 2.4rem;
+  padding: 4.8rem 2.4rem 7.2rem 2.4rem;
 }
 
 .profile-subtitle {
@@ -426,7 +415,7 @@ export default {
   }
 
   #works {
-    padding: 5.4rem 0 4.8rem 4.8rem;
+    padding: 5.4rem 4.8rem 7.2rem 4.8rem;
   }
 
   .profile-subtitle {

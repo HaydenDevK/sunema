@@ -25,8 +25,7 @@ export default {
       }
     },
     SET_POPULAR_MORE(state, result) {
-      const newPopular = state.popular.concat(result.results);
-      state.popular = newPopular;
+      state.popular = state.popular.concat(result.results);
     }
   },
   actions: {

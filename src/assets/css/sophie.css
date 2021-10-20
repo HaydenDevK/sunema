@@ -190,4 +190,17 @@ button {
     grid-column-gap: 2.4rem;
     grid-row-gap: 2.4rem;
   }
+
+  .wrapper-more {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .wrapper-more button {
+    font-size: 1.8rem;
+    line-height: 2.3rem;
+    letter-spacing: -0.02em;
+    padding: 1.2rem 2rem;
+    transform: translateX(2rem);
+  }
 }

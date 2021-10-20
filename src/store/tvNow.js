@@ -21,8 +21,7 @@ export default {
       }
     },
     SET_TV_NOW_MORE(state, result) {
-      const newTvNow = state.tvNow.concat(result.results);
-      state.tvNow = newTvNow;
+      state.tvNow = state.tvNow.concat(result.results);
     }
   },
   actions: {

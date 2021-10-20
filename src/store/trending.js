@@ -25,8 +25,7 @@ export default {
       }
     },
     SET_TRENDING_MORE(state, result) {
-      const newTrending = state.trending.concat(result.results);
-      state.trending = newTrending;
+      state.trending = state.trending.concat(result.results);
     }
   },
   actions: {

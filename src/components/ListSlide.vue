@@ -1,9 +1,9 @@
 <template>
   <swiper class="swiper" :options="swiperOption">
     <swiper-slide v-for="item in Media" :key="item.credit_id">
-      <router-link to="">
-        <img :src="getImage(item[`${Path}`])" />
-      </router-link>
+      <a @click="handleFunc(item.id)">
+        <img :src="getImage(item[`${Path}`])" alt=""/>
+      </a>
     </swiper-slide>
   </swiper>
 </template>
@@ -15,7 +15,8 @@ import 'swiper/css/swiper.css';
 export default {
   props: {
     Media: [Object, Array],
-    Path: String
+    Path: String,
+    Type: String
   },
   components: {
     Swiper,
@@ -44,6 +45,11 @@ export default {
       return path
         ? `https://image.tmdb.org/t/p/w300${path}`
         : require('../assets/images/global/no-image.png');
+    },
+    handleFunc(id) {
+      (this.Type === 'filmography')
+        ? this.$router.push({ path: `/detail/${id}` })
+        : ''; // todo 크게 보기?
     }
   }
 };

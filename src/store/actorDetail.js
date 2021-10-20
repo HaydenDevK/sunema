@@ -26,11 +26,12 @@ export default {
       state.actorImages = data;
       // console.log(state.actorImages);
       // console.log(typeof state.actorImages);
-      // todo Array인데 왜 Object인지 찾기
+      // // todo Array인데 왜 Object인지 찾기
     }
   },
   actions: {
     async getActorDetail({ state, commit }) {
+      // 영어 정보라도 가져오기 위함
       const result = await axios.create({
         baseURL: 'https://api.themoviedb.org/3',
         params: {
