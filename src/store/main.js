@@ -6,10 +6,9 @@ export default {
     popularMovie: [],
     nowPlayingMovie: [],
     upcomingMovie: [],
-    // freeContents:[],
-    // trendingContents:[],
-    todayTv: [],
-    videoList: [],
+    trendingContents: [],
+    mediaType: 'movie',
+    todayTv: []
   },
   mutations: {
     SET_POPULAR_MOVIE(state, data) {
@@ -21,18 +20,16 @@ export default {
     SET_UPCOMING_MOVIE(state, data) {
       state.upcomingMovie = data;
     },
-    // SET_FREE_CONTENTS(state, data){
-    //   state.freeContents = data;
-    // },
-    // SET_TRENDING_CONTENTS(state, data){
-    //   state.trendingContents = data;
-    // },
+    SET_TRENDING_CONTENTS(state, data) {
+      state.trendingContents = data;
+    },
+    SET_MEDIA_TYPE(state, type) {
+      state.mediaType = type;
+      console.log(state);
+    },
     SET_TODAY_TV(state, data) {
       state.todayTv = data;
-    },
-    SET_VIDEO_LIST(state, data) {
-      state.videoList = data;
-    },
+    }
   },
   actions: {
     async getPopularMovie({ commit }) {
@@ -80,21 +77,17 @@ export default {
         commit('SET_UPCOMING_MOVIE', moviesWithOut);
       }
     },
+    async getTrendingContents({ state, commit }) {
+      const result = await request(`/trending/${state.mediaType}/day`);
+      if (result.status === 200) {
+        commit('SET_TRENDING_CONTENTS', result.data.results);
+      }
+    },
     async getTodayTv({ commit }) {
       const result = await request('/tv/airing_today');
       if (result.status === 200) {
         commit('SET_TODAY_TV', result.data.results);
       }
-    },
-    async getVideoList({ commit }, movieId) {
-      const result = await request('/movie/' + movieId, {
-        params: {
-          append_to_response: 'videos',
-        },
-      });
-      if (result.status === 200) {
-        commit('SET_VIDEO_LIST', result.data);
-      }
-    },
-  },
+    }
+  }
 };
