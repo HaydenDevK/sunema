@@ -25,7 +25,7 @@
 			<div class="rank-padding">
 				<div
 					class="rank"
-					v-for="(item, index) in $store.state.keyword.searchKeyword"
+					v-for="(item, index) in searchKeyword"
 					:key="item.text"
 				>
 					<router-link to="">
@@ -43,6 +43,11 @@ export default {
 	data() {
 		return { inputText: '' };
 	},
+  computed: {
+    searchKeyword() {
+      return this.$store.state.keyword.searchKeyword.slice(0, 10);
+    }
+  },
 	methods: {
 		find(txt) {
 			this.$store.dispatch('keyword/find', txt);

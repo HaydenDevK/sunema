@@ -64,9 +64,6 @@ export default {
         }
         return 0;
       });
-      if (state.searchKeyword.length > 10) {
-        state.searchKeyword.splice(10);
-      }
     }
   },
   actions: {
