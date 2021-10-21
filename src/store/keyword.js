@@ -6,7 +6,7 @@ export default {
     searchKeyword: [
       {
         text: '종이의집',
-        counter: 1
+        counter: 1,
       },
       {
         text: '환승연애',
@@ -69,13 +69,18 @@ export default {
   actions: {
     find({ state, commit }, txt) {
       // 검색 키워드가 이미 state에 있는지?
-      const result = state.searchKeyword.indexOf(txt);
-      console.log(result);
-      if (result === -1) {
-        commit('PUSH_KEYWORD', txt);
+      let result = 0
+      let idx = 0
+      for (let i = 0; i < state.searchKeyword.length; i++) {
+        if (txt === state.searchKeyword[i].text) {
+          result = 1
+          idx = i
+        }
+      }
+      if (result == 0) {
+        commit('PUSH_KEYWORD', txt)
       } else {
-        commit('PLUS_COUNTER', result);
-
+        commit('PLUS_COUNTER', idx)
       }
       console.log(state.searchKeyword)
       commit('SORT_KEYWORD');
