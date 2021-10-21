@@ -11,289 +11,65 @@
       </nav>
     </header>
     <div id="container">
-      <ul class="visual">
-        <li>
-          <router-link to="">
-            <img src="../assets/images/main/img_main_poster.png" alt="" />
-            <div class="banner-text">
-              <strong>바르트코비아크</strong>
-              <p>Bartkowiak</p>
-              <router-link to="" class="btn-more">자세히 보기</router-link>
-            </div>
-          </router-link>
-        </li>
-      </ul>
+      <swiper class="visual" :options="swiperOption">
+        <swiper-slide v-for="item in $store.state.main.trendingContents" :key="item.id">
+          <img :src="getImage(item.poster_path)" alt="" />
+          <div class="banner-text">
+            <strong>{{ item.title }}</strong>
+            <p>{{ item.original_title }}</p>
+            <router-link :to="`/detail/${item.id}`" class="btn-more">자세히 보기</router-link>
+          </div>
+        </swiper-slide>
+      </swiper>
       <div class="contents">
-        <MainMovieSlide
+        <SlidePoster
           class="popular"
           title="인기 콘텐츠"
           type="pop"
           streaming="T"
           rank="T"
+          rink="popular"
           :movie="$store.state.main.popularMovie"
         />
-        <MainMovieSlide
+        <SlidePoster
           class="now-playing"
           title="현재 상영중"
           type="now"
           streaming="F"
           rank="F"
+          rink="nowmovie"
           :movie="$store.state.main.nowPlayingMovie"
         />
-        <MainVideoSlide
+        <SlideVideo
           class="upcoming"
           title="개봉 예정"
           type="upcoming"
           :movie="$store.state.main.upcomingMovie"
         />
-        <!-- <section class="upcoming">
-          <h2>개봉 예정</h2>
-          <ul>
-            <li>
-              <router-link to="">
-                <iframe
-                  width="560"
-                  height="315"
-                  src="https://www.youtube.com/embed/gQJ0RQ9e01s"
-                  title="YouTube video player"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
-                ></iframe>
-              </router-link>
-            </li>
-          </ul>
-          <router-link to="">전체보기</router-link>
-        </section> -->
-        <!-- <MainFigureSlide class="free-contents" title="무료 콘텐츠" :movie="$store.state.main.???? 무료콘텐츠 어디서 찾나요" /> -->
-        <section class="free-contents">
-          <div class="title-box">
-            <h2>무료 콘텐츠</h2>
-            <ul class="tab-btn">
-              <li class="active">영화</li>
-              <li>TV</li>
-            </ul>
-          </div>
-          <div class="tab-contents">
-            <!-- 영화 -->
-            <ul class="active">
-              <li>
-                <router-link to="">
-                  <figure>
-                    <img src="../assets/images/main/img_free_tv01.png" alt="" />
-                    <figcaption>
-                      <p>스니치 : 마약과의 전쟁(2012)</p>
-                      <router-link to="">자세히보기</router-link>
-                    </figcaption>
-                  </figure>
-                </router-link>
-              </li>
-              <!-- <li>
-                  <router-link to="">
-                    <figure>
-                      <img
-                        src="../assets/images/main/img_free_tv02.png"
-                        alt=""
-                      />
-                      <figcaption>
-                        <p>스니치 : 마약과의 전쟁(2012)</p>
-                        <router-link to="">자세히보기</router-link>
-                      </figcaption>
-                    </figure>
-                  </router-link>
-                </li> -->
-            </ul>
-            <!-- // 영화 -->
-            <!-- TV -->
-            <ul>
-              <li>
-                <router-link to="">
-                  <figure>
-                    <img src="../assets/images/main/img_free_tv01.png" alt="" />
-                    <figcaption>
-                      <p>스니치 : 마약과의 전쟁(2012)</p>
-                      <router-link to="">자세히보기</router-link>
-                    </figcaption>
-                  </figure>
-                </router-link>
-              </li>
-              <li>
-                <router-link to="">
-                  <figure>
-                    <img src="../assets/images/main/img_free_tv02.png" alt="" />
-                    <figcaption>
-                      <p>스니치 : 마약과의 전쟁(2012)</p>
-                      <router-link to="">자세히보기</router-link>
-                    </figcaption>
-                  </figure>
-                </router-link>
-              </li>
-            </ul>
-            <!-- // TV -->
-          </div>
-          <router-link to="">전체보기</router-link>
-        </section>
-        <section class="trending">
-          <div class="title-box">
-            <h2>지금 뜨는 콘텐츠</h2>
-            <ul class="tab-btn">
-              <li
-                @click="changeTodayContentType('movie')"
-                :class="{ active: todayContentType === 'movie' }"
-              >
-                영화
-              </li>
-              <li
-                @click="changeTodayContentType('tv')"
-                :class="{ active: todayContentType === 'tv' }"
-              >
-                Tv
-              </li>
-            </ul>
-          </div>
-          <div class="tab-contents">
-            <!-- 오늘 -->
-            <ul class="active">
-              <li>
-                <router-link to="">
-                  <img
-                    src="../assets/images/main/img_nowPlaying01.png"
-                    alt=""
-                  />
-                </router-link>
-              </li>
-              <!-- <li>
-                  <router-link to="">
-                    <img
-                      src="../assets/images/main/img_nowPlaying02.png"
-                      alt=""
-                    />
-                  </router-link>
-                </li> -->
-            </ul>
-            <!-- // 오늘 -->
-            <!-- 이번주 -->
-            <ul>
-              <li>
-                <router-link to="">
-                  <img
-                    src="../assets/images/main/img_nowPlaying03.png"
-                    alt=""
-                  />
-                </router-link>
-              </li>
-              <li>
-                <router-link to="">
-                  <img
-                    src="../assets/images/main/img_nowPlaying04.png"
-                    alt=""
-                  />
-                </router-link>
-              </li>
-            </ul>
-            <!-- // 이번주 -->
-          </div>
-          <router-link to="">전체보기</router-link>
-        </section>
-        <section class="today-tv">
-          <h2>오늘 방영할 TV프로그램</h2>
-          <ul>
-            <li>
-              <router-link to="">
-                <img src="../assets/images/main/img_popular01.png" alt="" />
-              </router-link>
-            </li>
-            <li>
-              <router-link to="">
-                <img src="../assets/images/main/img_popular02.png" alt="" />
-              </router-link>
-            </li>
-            <!-- <li>
-                <img src="../assets/images/main/img_popular03.png" alt="" />
-              </li>
-              <li>
-                <img src="../assets/images/main/img_popular04.png" alt="" />
-              </li>
-              <li>
-                <img src="../assets/images/main/img_popular05.png" alt="" />
-              </li>
-              <li>
-                <img src="../assets/images/main/img_popular06.png" alt="" />
-              </li> -->
-          </ul>
-          <router-link to="">전체보기</router-link>
-        </section>
-        <section class="popular-actor">
-          <h2>인기 배우</h2>
-          <ul class="actor-list">
-            <li>
-              <figure>
-                <img src="../assets/images/main/img_actor01.png" alt="" />
-                <figcaption>
-                  <strong>Margot Robbie</strong>
-                  <p>
-                    더 울프 오브 월 스트리트, 수어사이드스쿼드, 어찌구저찌구
-                  </p>
-                </figcaption>
-              </figure>
-            </li>
-            <li>
-              <figure>
-                <img src="../assets/images/main/img_actor02.png" alt="" />
-                <figcaption>
-                  <strong>Katherine LaNasa</strong>
-                  <p>그레이 아나토미, 하우스, 발렌타인 데이, 어찌구저찌구</p>
-                </figcaption>
-              </figure>
-            </li>
-            <li>
-              <figure>
-                <img src="../assets/images/main/img_actor03.png" alt="" />
-                <figcaption>
-                  <strong>Hande Erçel</strong>
-                  <p>Sen Çal Kapımı, Güneşin Kızlarırtsasf, 어찌구저찌구</p>
-                </figcaption>
-              </figure>
-            </li>
-            <!-- <li>
-                <figure>
-                  <img
-                    src="../assets/images/main/img_actor01.png"
-                    alt=""
-                  />
-                  <figcaption>
-                    <strong>Margot Robbie</strong>
-                    <p>더 울프 오브 월 스트리트, 수어사이드스쿼드, 어찌구저찌구</p>
-                  </figcaption>
-                </figure>
-              </li>
-              <li>
-                <figure>
-                  <img
-                    src="../assets/images/main/img_actor02.png"
-                    alt=""
-                  />
-                  <figcaption>
-                    <strong>Katherine LaNasa</strong>
-                    <p>그레이 아나토미, 하우스, 발렌타인 데이, 어찌구저찌구</p>
-                  </figcaption>
-                </figure>
-              </li>
-              <li>
-                <figure>
-                  <img
-                    src="../assets/images/main/img_actor03.png"
-                    alt=""
-                  />
-                  <figcaption>
-                    <strong>Hande Erçel</strong>
-                    <p>Sen Çal Kapımı, Güneşin Kızlarırtsasf, 어찌구저찌구</p>
-                  </figcaption>
-                </figure>
-              </li> -->
-          </ul>
-          <router-link to="">전체보기</router-link>
-        </section>
+        <SlideBigPoster
+          class="trending"
+          title="지금 뜨는 콘텐츠"
+          type="trending"
+          tab1="영화"
+          tab2="TV"
+          rink="trending"
+          :movie="$store.state.main.trendingContents"
+        />
+        <SlidePoster
+        class="today-tv"
+        title="오늘 방영할 TV프로그램"
+        type="today"
+        streaming="F"
+        rank="F"
+        rink="tvtoday"
+        :movie="$store.state.main.todayTv"
+        />
+        <PopularActor
+        class="popular-actor"
+        title="인기 배우"
+        type="actor"
+        :actor="$store.state.actor.popularActor"
+        />
       </div>
     </div>
     <footer></footer>
@@ -301,18 +77,33 @@
 </template>
 
 <script>
-import MainMovieSlide from '@/components/MainMovieSlide.vue';
-import MainVideoSlide from '@/components/MainVideoSlide.vue';
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
+import 'swiper/css/swiper.css';
+
+import SlidePoster from '@/components/SlidePoster.vue';
+import SlideVideo from '@/components/SlideVideo.vue';
+import SlideBigPoster from '@/components/SlideBigPoster.vue';
+import PopularActor from'@/components/PopularActor.vue';
 
 export default {
   name: 'Main',
   components: {
-    MainMovieSlide,
-    MainVideoSlide,
+    SlidePoster,
+    SlideVideo,
+    SlideBigPoster,
+    PopularActor,
+    Swiper,
+    SwiperSlide
   },
   data() {
     return {
-      todayContentType: 'movie',
+      swiperOption: { 
+        slidesPerView: 1,
+        autoplay: {
+          "delay": 5000,
+          "disableOnInteraction": false
+        }
+      }
     };
   },
   mounted() {
@@ -325,12 +116,12 @@ export default {
       this.$store.dispatch('main/getPopularMovie');
       this.$store.dispatch('main/getNowPlayingMovie');
       this.$store.dispatch('main/getUpcomingMovie');
-      //this.$store.dispatch('main/getTodayTv');
-      //this.$store.dispatch('main/getVideoList');
+      this.$store.dispatch('main/getTrendingContents');
+      this.$store.dispatch('main/getTodayTv');
     },
-    changeTodayContentType(type) {
-      this.todayContentType = type;
-    },
+    getImage(poster_path) {
+      return `https://image.tmdb.org/t/p/w300${poster_path}`;
+    }
   },
 };
 </script>
@@ -401,16 +192,18 @@ header .logo {
   position: absolute;
   left: 0;
   top: 0;
+  z-index:10;
   width: 100%;
   height: 127px;
   background: linear-gradient(180deg, #181727 0%, rgba(25, 25, 64, 0) 100%);
 }
-#container .visual::after {
+#container .visual .swiper-slide::after {
   content: '';
   display: block;
   position: absolute;
   left: 0;
-  bottom: 0;
+  bottom: -1px;
+  z-index:10;
   width: 100%;
   height: 301.5px;
   background: linear-gradient(
@@ -419,27 +212,28 @@ header .logo {
     rgba(25, 25, 64, 0) 99.82%
   );
 }
-#container .visual li {
+#container .visual .swiper-slide {
   width: 100%;
   height: 100%;
   font-size: 0;
 }
-#container .visual li a {
+#container .visual .swiper-slide a {
   display: block;
   height: 100%;
 }
-#container .visual li img {
+#container .visual .swiper-slide img {
   width: 100%;
 }
-#container .visual li .banner-text {
-  width: 65.3%;
+#container .visual .swiper-slide .banner-text {
+  width: 75%;
   position: absolute;
   left: 50%;
   bottom: 56.5px;
-  z-index: 10;
+  z-index: 20;
   transform: translateX(-50%);
+  word-break:keep-all;
 }
-#container .visual li .banner-text strong {
+#container .visual .swiper-slide .banner-text strong {
   display: block;
   color: #fff;
   font-size: 9.66vw;
@@ -447,14 +241,14 @@ header .logo {
   letter-spacing: 0.25px;
   text-align: center;
 }
-#container .visual li .banner-text p {
+#container .visual .swiper-slide .banner-text p {
   color: #fff;
   font-size: 2.9vw;
   line-height: 3.62vw;
   letter-spacing: 0.25px;
   text-align: center;
 }
-#container .visual li .banner-text .btn-more {
+#container .visual .swiper-slide .banner-text .btn-more {
   display: block;
   width: 36.23vw;
   margin: 18px auto 0;
@@ -466,7 +260,7 @@ header .logo {
   color: #fff;
   letter-spacing: -0.02em;
 }
-#container .visual li .banner-text .btn-more::before {
+#container .visual .swiper-slide .banner-text .btn-more::before {
   content: '';
   display: block;
   float: left;
@@ -476,7 +270,7 @@ header .logo {
   background-size: 3.38vw;
   margin-right: 2.42vw;
 }
-#container .visual li .banner-text .btn-more::after {
+#container .visual .swiper-slide .banner-text .btn-more::after {
   content: '';
   display: block;
   clear: both;
@@ -678,43 +472,6 @@ header .logo {
 #container .contents section .tab-contents ul li {
   width: 80.8%;
 }
-#container .contents .free-contents figure {
-  width: 100%;
-  display: flex;
-  justify-content: left;
-}
-#container .contents .free-contents figure img {
-  width: 50%;
-  border-radius: 5px 0 0 5px / 5px 0 0 5px;
-}
-#container .contents .free-contents figure figcaption {
-  position: relative;
-  width: 50%;
-  background: #212634;
-  border-radius: 0 5px 5px 0 / 0 5px 5px 0;
-  padding: 7.97vw 5.31vw;
-  color: #fff;
-}
-#container .contents .free-contents figure figcaption p {
-  font-size: 3.38vw;
-  font-weight: 700;
-  line-height: 4.35vw;
-  letter-spacing: -0.02em;
-}
-#container .contents .free-contents figure figcaption a {
-  display: block;
-  position: absolute;
-  left: 50%;
-  bottom: 33px;
-  transform: translateX(-50%);
-  width: 21.74vw;
-  line-height: 6.28vw;
-  border: 1px solid #43ff8e;
-  border-radius: 2.42vw;
-  font-size: 3.38vw;
-  color: #43ff8e;
-  text-align: center;
-}
 #container .contents .trending .tab-contents ul li {
   width: 56.5%;
 }
@@ -904,20 +661,7 @@ header .logo {
   #container .contents section .tab-contents ul li {
     width: 35.35vw;
   }
-  #container .contents .free-contents figure figcaption {
-    padding: 4.2vw 2.09vw 4.39vw;
-  }
-  #container .contents .free-contents figure figcaption p {
-    font-size: 2.05vw;
-    line-height: 2.54vw;
-  }
-  #container .contents .free-contents figure figcaption a {
-    width: 11.79vw;
-    line-height: 3.22vw;
-    border-radius: 1.95vw;
-    font-size: 1.76vw;
-    bottom: 4.39vw;
-  }
+  
   #container .contents .trending .tab-contents ul li {
     width: 19.06vw;
   }

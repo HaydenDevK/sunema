@@ -1,22 +1,22 @@
 <template>
     <section>
         <div class="title-box">
-            <h2>{{ title }}</h2>
-            <div class="streaming" v-if="streaming === 'T'">
-              <p>스트리밍 ON</p>
-              <input type="checkbox" id="str" checked />
-              <label for="str"><p>선택</p></label>
-            </div>
+          <h2>{{ title }}</h2>
+          <div class="streaming" v-if="streaming === 'T'">
+            <p>스트리밍 ON</p>
+            <input type="checkbox" id="str" checked />
+            <label for="str"><p>선택</p></label>
+          </div>
         </div>
         <swiper class="swiper" :options="swiperOption">
-            <swiper-slide v-for="(item, index) in movie" :key="item.id">
-                <router-link :to="`/detail/${item.id}`">
-                    <img :src="getImage(item.poster_path)" />
-                    <p class="number" v-if="rank === 'T'">{{ index + 1 }}</p>
-                </router-link>
-            </swiper-slide>
+          <swiper-slide v-for="(item, index) in movie" :key="item.id">
+            <router-link :to="`/detail/${item.id}`">
+              <img :src="getImage(item.poster_path)" />
+              <p class="number" v-if="rank === 'T'">{{ index + 1 }}</p>
+            </router-link>
+          </swiper-slide>
         </swiper>
-        <router-link to="">전체보기</router-link>
+        <router-link :to="rink">전체보기</router-link>
     </section>
 </template>
 
@@ -30,7 +30,8 @@
           movie: Array,
           streaming: String,
           rank: String,
-          type: String
+          type: String,
+          rink: String
       },
       components: {
           Swiper,
@@ -46,7 +47,7 @@
           };
       },
       mounted() {
-         //console.log(this.movie);
+         console.log(this.movie);
           /* this.$store
           .dispatch('main/getVideoList', this.movie.id)
           .then(() => {
@@ -269,7 +270,7 @@
 
 
 @media (min-width: 1024px) {
-    #container .contents section {
+  #container .contents section {
     margin-top: 29px;
   }
   #container .contents section:first-child {
