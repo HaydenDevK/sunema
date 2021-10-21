@@ -115,10 +115,12 @@ button {
 }
 
 .wrapper-poster {
+  padding: 0 2.4rem 7rem 2.4rem;
   display: grid;
   grid-column-gap: 1.6rem;
   grid-row-gap: 1.6rem;
-  grid-template-columns: repeat(auto-fill, minmax(10.1rem, auto));
+  grid-template-columns: repeat(auto-fill, minmax(9.4rem, auto));
+  /* repeat(auto-fill, minmax(10.1rem, auto)) */
 }
 
 .wrapper-poster a {
@@ -145,40 +147,6 @@ button {
   font-size: 1.2rem;
   line-height: 1.5rem;
   letter-spacing: 0.025rem;
-}
-
-/* doc-bar */
-.doc-bar {
-  position: fixed;
-  bottom: 0;
-  height: 5.4rem;
-  width: 100%;
-  background-color: #13131b;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  justify-items: center;
-}
-
-.doc-bar a {
-  padding: 0.8rem 0;
-}
-
-.doc-bar a img {
-  width: 2.4rem;
-}
-
-.doc-bar p {
-  font-weight: bold;
-  color: white;
-  font-size: 1.1rem;
-  line-height: 1.4rem;
-  letter-spacing: -0.02em;
-}
-
-.doc-bar-item {
-  display: grid;
-  justify-items: center;
-  width: 100%;
 }
 
 /* tablet */
@@ -210,13 +178,9 @@ button {
   }
 
   .wrapper-poster {
+    padding: 0 4.8rem 8.2rem 4.8rem;
     grid-template-columns: repeat(5, 1fr);
     grid-column-gap: 2.4rem;
     grid-row-gap: 2.4rem;
-  }
-
-  .doc-bar {
-    padding: 0 22rem;
-    height: 6rem;
   }
 }

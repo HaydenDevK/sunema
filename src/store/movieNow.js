@@ -3,7 +3,7 @@ import { request } from './axios';
 export default {
   namespaced: true,
   state: {
-    tvNow: [],
+    movieNow: [],
     pageNow: 1,
     pageTotal: 1
   },
@@ -11,8 +11,8 @@ export default {
     INIT_PAGE_NOW(state) {
       state.pageNow = 1;
     },
-    SET_TV_NOW(state, result) {
-      state.tvNow = result.results;
+    SET_MOVIE_NOW(state, result) {
+      state.movieNow = result.results;
       state.pageTotal = result.total_pages;
     },
     SET_PAGE_NEXT(state) {
@@ -20,16 +20,16 @@ export default {
         state.pageNow++;
       }
     },
-    SET_TV_NOW_MORE(state, result) {
-      const newTvNow = state.tvNow.concat(result.results);
-      state.tvNow = newTvNow;
+    SET_MOVIE_NOW_MORE(state, result) {
+      const newMovieNow = state.movieNow.concat(result.results);
+      state.movieNow = newMovieNow;
     }
   },
   actions: {
-    async getTvNow({ state, commit }) {
+    async getMovieNow({ state, commit }) {
       await commit('INIT_PAGE_NOW');
 
-      const result = await request(`/tv/on_the_air`, {
+      const result = await request(`/movie/now_playing`, {
         params: {
           page: state.pageNow
         }
@@ -37,13 +37,13 @@ export default {
 
       // api 호출 성공 시
       if (result.status === 200) {
-        commit('SET_TV_NOW', result.data);
+        commit('SET_MOVIE_NOW', result.data);
       }
     },
-    async getTvNowMore({ state, commit }) {
+    async getMovieNowMore({ state, commit }) {
       await commit('SET_PAGE_NEXT');
 
-      const result = await request(`/tv/on_the_air`, {
+      const result = await request(`/movie/now_playing`, {
         params: {
           page: state.pageNow
         }
@@ -51,7 +51,7 @@ export default {
 
       // api 호출 성공 시
       if (result.status === 200) {
-        commit('SET_TV_NOW_MORE', result.data);
+        commit('SET_MOVIE_NOW_MORE', result.data);
       }
     }
   }

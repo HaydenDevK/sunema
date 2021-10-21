@@ -25,15 +25,16 @@ const routes = [
       import(/* webpackChunkName: "round" */ '../views/round.vue'),
   },
   {
-    path: '/commingsoon', // 개봉 예정
-    name: 'CommingSoon',
+    path: '/upcoming', // 개봉 예정 (선혜)
+    name: 'Upcoming',
     component: () =>
-      import(/* webpackChunkName: "commingsoon" */ '../views/commingSoon.vue'),
+      import(/* webpackChunkName: "upcoming" */ '../views/upcoming.vue')
   },
   {
-    path: '/nowmovie', // 현재 상영중
-    name: 'Now',
-    component: () => import(/* webpackChunkName: "now" */ '../views/now.vue'),
+    path: '/movienow', // 현재 상영중 (선혜)
+    name: 'MovieNow',
+    component: () =>
+      import(/* webpackChunkName: "movienow" */ '../views/movieNow.vue')
   },
   {
     path: '/popular', // 인기 콘텐츠
@@ -92,7 +93,7 @@ const routes = [
       import(/* webpackChunkName: "toprated" */ '../views/topRated.vue'),
   },
   {
-    path: '/trending', // 지금 뜨는 중 (선혜)
+    path: '/trending', // 지금 뜨는 컨텐츠 (선혜)
     name: 'Trending',
     component: () =>
       import(/* webpackChunkName: "toprated" */ '../views/trending.vue'),

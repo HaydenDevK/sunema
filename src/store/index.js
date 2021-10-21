@@ -9,8 +9,11 @@ import keyword from './keyword';
 import actor from './actor';
 import tvToday from './tvToday';
 import tvNow from './tvNow';
+import movieNow from './movieNow';
 import topRated from './topRated';
 import trending from './trending';
+import popular from './popular';
+import upcoming from './upcoming';
 
 Vue.use(Vuex);
 
@@ -25,7 +28,10 @@ export default new Vuex.Store({
     actor,
     tvToday,
     tvNow,
+    movieNow,
     topRated,
-    trending
+    trending,
+    popular,
+    upcoming
   }
 });

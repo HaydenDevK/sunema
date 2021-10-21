@@ -31,53 +31,29 @@ export default {
   },
   actions: {
     async getTopRated({ state, commit }) {
-      await commit('INIT_PAGE_NOW'); // todo await 해야하는지 이해
+      await commit('INIT_PAGE_NOW');
 
-      if (state.mediaType === 'movie') {
-        const result = await request(`/movie/top_rated`, {
-          params: {
-            page: state.pageNow
-          }
-        });
-        // api 호출 성공 시
-        if (result.status === 200) {
-          commit('SET_TOP_RATED', result.data);
+      const result = await request(`${state.mediaType}/top_rated`, {
+        params: {
+          page: state.pageNow
         }
-      } else {
-        const result = await request(`/tv/airing_today`, {
-          params: {
-            page: state.pageNow
-          }
-        });
-        // api 호출 성공 시
-        if (result.status === 200) {
-          commit('SET_TOP_RATED', result.data);
-        }
+      });
+
+      if (result.status === 200) {
+        commit('SET_TOP_RATED', result.data);
       }
     },
     async getTopRatedMore({ state, commit }) {
       await commit('SET_PAGE_NEXT');
 
-      if (state.mediaType === 'movie') {
-        const result = await request(`/movie/top_rated`, {
-          params: {
-            page: state.pageNow
-          }
-        });
-        // api 호출 성공 시
-        if (result.status === 200) {
-          commit('SET_TOP_RATED_MORE', result.data);
+      const result = await request(`${state.mediaType}/top_rated`, {
+        params: {
+          page: state.pageNow
         }
-      } else {
-        const result = await request(`/tv/airing_today`, {
-          params: {
-            page: state.pageNow
-          }
-        });
-        // api 호출 성공 시
-        if (result.status === 200) {
-          commit('SET_TOP_RATED_MORE', result.data);
-        }
+      });
+
+      if (result.status === 200) {
+        commit('SET_TOP_RATED_MORE', result.data);
       }
     }
   }

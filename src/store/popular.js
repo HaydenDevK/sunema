@@ -3,7 +3,8 @@ import { request } from './axios';
 export default {
   namespaced: true,
   state: {
-    tvNow: [],
+    popular: [],
+    mediaType: 'movie',
     pageNow: 1,
     pageTotal: 1
   },
@@ -11,8 +12,11 @@ export default {
     INIT_PAGE_NOW(state) {
       state.pageNow = 1;
     },
-    SET_TV_NOW(state, result) {
-      state.tvNow = result.results;
+    SET_MEDIA_TYPE(state, mediaType) {
+      state.mediaType = mediaType;
+    },
+    SET_POPULAR(state, result) {
+      state.popular = result.results;
       state.pageTotal = result.total_pages;
     },
     SET_PAGE_NEXT(state) {
@@ -20,16 +24,16 @@ export default {
         state.pageNow++;
       }
     },
-    SET_TV_NOW_MORE(state, result) {
-      const newTvNow = state.tvNow.concat(result.results);
-      state.tvNow = newTvNow;
+    SET_POPULAR_MORE(state, result) {
+      const newPopular = state.popular.concat(result.results);
+      state.popular = newPopular;
     }
   },
   actions: {
-    async getTvNow({ state, commit }) {
+    async getPopular({ state, commit }) {
       await commit('INIT_PAGE_NOW');
 
-      const result = await request(`/tv/on_the_air`, {
+      const result = await request(`/${state.mediaType}/popular`, {
         params: {
           page: state.pageNow
         }
@@ -37,13 +41,13 @@ export default {
 
       // api 호출 성공 시
       if (result.status === 200) {
-        commit('SET_TV_NOW', result.data);
+        commit('SET_POPULAR', result.data);
       }
     },
-    async getTvNowMore({ state, commit }) {
+    async getPopularMore({ state, commit }) {
       await commit('SET_PAGE_NEXT');
 
-      const result = await request(`/tv/on_the_air`, {
+      const result = await request(`/${state.mediaType}/popular`, {
         params: {
           page: state.pageNow
         }
@@ -51,7 +55,7 @@ export default {
 
       // api 호출 성공 시
       if (result.status === 200) {
-        commit('SET_TV_NOW_MORE', result.data);
+        commit('SET_POPULAR_MORE', result.data);
       }
     }
   }
