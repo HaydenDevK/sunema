@@ -1,9 +1,5 @@
 <template>
   <div id="detail-container" class="detail-container">
-
-    <!-- 키워드 리스트 -->
-    <ListKeyword View="detail" />
-
     <!-- <button @click="printState">클릭</button> -->
       <!-- s: top-area -->
       <section class="top-area">
@@ -313,14 +309,12 @@
 </template>
 
 <script>
-import ListKeyword from '../components/ListKeyword.vue';
-
 export default {
   name: 'Detail',
   props:{
 
   },
-  components:{ListKeyword},
+  components:{},
   data(){
     return{
       movieDetail: [],
