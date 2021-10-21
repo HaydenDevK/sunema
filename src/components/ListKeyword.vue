@@ -1,5 +1,9 @@
 <template>
-  <swiper class="swiper" :options="swiperOption">
+  <swiper
+    v-if="$store.state.keywordSearch.mediaKeywords.length > 0"
+    class="swiper"
+    :options="swiperOption"
+  >
     <swiper-slide
       v-for="item in $store.state.keywordSearch.mediaKeywords"
       :key="item.id"
@@ -87,12 +91,10 @@ export default {
 /* mobile */
 .swiper {
   padding-left: 2.4rem;
-  /* padding-bottom: 1.2rem; */
 }
 
 .swiper-slide {
   width: auto;
-  padding-bottom: 1.2rem;
 }
 
 .swiper-slide button {
@@ -125,10 +127,6 @@ export default {
 @media (min-width: 1024px) {
   .swiper {
     padding-left: 4.8rem;
-  }
-
-  .swiper-slide {
-    padding-bottom: 1.8rem;
   }
 
   .swiper-slide button {

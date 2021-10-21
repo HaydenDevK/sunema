@@ -18,8 +18,11 @@ export default {
     SET_MEDIA_ID(state, id) {
       state.mediaId = id;
     },
+    SET_MEDIA_TYPE(state, mediaType) {
+      state.mediaType = mediaType;
+    },
     SET_MEDIA_KEYWORDS(state, data) {
-      data ? state.mediaKeywords = data : state.mediaKeywords = []
+      data ? state.mediaKeywords = data : state.mediaKeywords = [];
     },
     SET_KEYWORD_ID(state, keywordId) {
       state.keywordId = keywordId;
@@ -70,7 +73,9 @@ export default {
     },
     async getMediaKeywords({ state, commit }) {
       try {
-        const result = await request(`/${state.mediaType}/${state.mediaId}/keywords`);
+        const result = await request(
+          `/${state.mediaType}/${state.mediaId}/keywords`
+        );
 
         // api 호출 성공 시
         if (result.status === 200) {
@@ -78,8 +83,12 @@ export default {
         }
       } catch (e) {
         // request failed with status code 404 예외처리
-        commit('SET_MEDIA_KEYWORDS')
+        commit('SET_MEDIA_KEYWORDS');
       }
+    },
+    async getKeywordMediaElse({ commit, dispatch }, mediaType) {
+      await commit('SET_MEDIA_TYPE', mediaType);
+      await dispatch('getKeywordMedia');
     }
   }
 };

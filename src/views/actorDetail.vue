@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-navy-100">
+  <div class="bg-navy-100 min-height-100vh">
     <!-- 배경 블러 이미지 -->
     <div
       class="bg-blurred"
@@ -122,8 +122,10 @@
           전체 작품 활동
         </div>
 
-        <div v-if="actorCredits.cast.length > 0">
-          <div class="works-category font-primary">연기</div>
+        <div v-if="actorCredits.cast.length > 0" class="works-category-space">
+          <div class="works-category font-primary">
+            연기
+          </div>
           <div
             v-for="item in actorCredits.cast"
             :key="item.id"
@@ -141,7 +143,7 @@
         </div>
 
         <div v-if="actorCredits.crew.length > 0">
-          <div class="works-category font-primary works-category-space">
+          <div class="works-category font-primary">
             제작
           </div>
           <div
@@ -361,7 +363,7 @@ export default {
 }
 
 .works-category-space {
-  margin-top: 3rem;
+  margin-bottom: 2.4rem;
 }
 
 .separator-black-2 {
@@ -466,6 +468,10 @@ export default {
   .works-category {
     font-size: 3rem;
     line-height: 3.8rem;
+  }
+
+  .works-category-space {
+    margin-bottom: 3rem;
   }
 
   .wrapper-list {
