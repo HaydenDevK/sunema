@@ -1,7 +1,7 @@
 <template>
   <div class="bg-navy-100 min-height-100vh">
     <header class="header">
-      <router-link to="" class="btn-back">
+      <router-link to="/" class="btn-back">
         <img src="../assets/images/global/icon-back.png" alt="" />
       </router-link>
       <p class="font-page-title">높은 평점</p>

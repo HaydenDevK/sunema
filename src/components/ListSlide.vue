@@ -2,7 +2,7 @@
   <swiper class="swiper" :options="swiperOption">
     <swiper-slide v-for="item in Media" :key="item.credit_id">
       <a @click="handleFunc(item.id)">
-        <img :src="getImage(item[`${Path}`])" alt=""/>
+        <img :src="getImage(item[`${Path}`])" alt="" />
       </a>
     </swiper-slide>
   </swiper>
@@ -47,7 +47,7 @@ export default {
         : require('../assets/images/global/no-image.png');
     },
     handleFunc(id) {
-      (this.Type === 'filmography')
+      this.Type === 'filmography'
         ? this.$router.push({ path: `/detail/${id}` })
         : ''; // todo 크게 보기?
     }
@@ -67,6 +67,7 @@ export default {
 .swiper-slide a {
   font-size: 0;
   display: block;
+  cursor: pointer;
 }
 
 .swiper-slide img {

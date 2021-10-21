@@ -1,9 +1,9 @@
 <template>
   <div class="bg-navy-100 min-height-100vh">
     <header class="header">
-      <router-link to="" class="btn-back">
+      <a class="btn-back" @click="$router.go(-1)">
         <img src="../assets/images/global/icon-back.png" alt="" />
-      </router-link>
+      </a>
     </header>
 
     <!-- 키워드 리스트 -->
@@ -15,7 +15,7 @@
       class="font-white-70"
       style="font-size: 1.8rem; padding: 2.4rem;"
     >
-      해당하는 영화가 없거나,<br/>
+      해당하는 영화가 없거나,<br />
       키워드가 없는 영화입니다.
     </div>
 

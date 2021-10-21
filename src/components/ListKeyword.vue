@@ -51,17 +51,17 @@ export default {
     // todo 중첩문 함수형으로 축약
     if (this.View === 'keywordSearch') {
       if (this.$route.params.keyword) {
-        this.setKeywordId(this.$route.params.keyword)
+        this.setKeywordId(this.$route.params.keyword); // Number로 형변환 안해도되네
       } else if (this.$store.state.keywordSearch.mediaKeywords.length !== 0) {
-        this.setKeywordId(this.$store.state.keywordSearch.mediaKeywords[0].id)
+        this.setKeywordId(this.$store.state.keywordSearch.mediaKeywords[0].id);
       }
       this.getInitMedia();
     }
   },
   methods: {
     setKeywordId(keywordId) {
-      this.keywordId = Number(keywordId)
-      this.$store.commit('keywordSearch/SET_KEYWORD_ID', this.keywordId)
+      this.keywordId = Number(keywordId);
+      this.$store.commit('keywordSearch/SET_KEYWORD_ID', this.keywordId);
     },
     getInitMedia() {
       this.$store.dispatch('keywordSearch/getKeywordMedia');
@@ -71,9 +71,11 @@ export default {
       if (this.View === 'keywordSearch') {
         this.setKeywordId(keywordId);
         this.getInitMedia();
-      } else {
-        this.$router.push({ name: 'KeywordSearch', params: { idx: this.mediaId, keyword: keywordId } })
-      }
+      } else
+        this.$router.push({
+          name: 'KeywordSearch',
+          params: { idx: this.mediaId, keyword: keywordId }
+        });
     }
   }
 };
@@ -106,6 +108,7 @@ export default {
   line-height: 1.4rem;
   letter-spacing: -0.02em;
   opacity: 0.5;
+  cursor: pointer;
 }
 
 .swiper-slide:last-of-type {
