@@ -100,7 +100,7 @@ export default {
       swiperOption: { 
         slidesPerView: 1,
         autoplay: {
-          "delay": 7000,
+          "delay": 5000,
           "disableOnInteraction": false
         }
       }
