@@ -70,6 +70,12 @@
                     slidesPerView: 1.69, 
                     spaceBetween: 16, 
                     freeMode: true,
+                    breakpoints: {
+                      1024: {
+                        slidesPerView:4.55,
+                        spaceBetween: 24
+                      }
+                    }
                 },
                 todayContentType: 'movie',
             };
