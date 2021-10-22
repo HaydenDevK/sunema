@@ -19,7 +19,7 @@ const routes = [
       import(/* webpackChunkName: "detail" */ '../views/detail.vue')
   },
   {
-    path: '/round/:idx', // 전체 회차
+    path: '/round/:tv_id', // 전체 회차
     name: 'Round',
     component: () =>
       import(/* webpackChunkName: "round" */ '../views/round.vue')

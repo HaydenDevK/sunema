@@ -1,33 +1,23 @@
 <template>
   <div id="wrap">
     <header id="header">
-      <router-link to="">
+      <router-link to="/">
         <img src="../assets/images/round/icon_back.png" alt="" />
       </router-link>
       <p>인기배우</p>
     </header>
     <!-- header -->
-
-    <section id="episode">
-      <ul class="ep-list">
+    <section id="actor">
+      <ul class="actor-list">
         <li v-for="item in $store.state.actor.popularActor" :key="item.id">
-          <router-link to="">
+          <router-link :to="`/actordetail/${item.id}`">
             <img :src="getImage(item.profile_path)" alt="" />
-            <div class="ep-list-text">
+            <div class="actor-list-text">
               <div>
                 {{ item.name }}
               </div>
-              <p v-if="item.known_for[0].name !== undefined">
-                {{ item.known_for[0].name + ',' }}
-              </p>
-              <p v-if="item.known_for[0].title !== undefined">
-                {{ item.known_for[0].title + ',' }}
-              </p>
-              <p v-if="item.known_for[1].name !== undefined">
-                {{ item.known_for[1].name + ',' }}
-              </p>
-              <p v-if="item.known_for[1].title !== undefined">
-                {{ item.known_for[1].title }}
+              <p v-for="item1 in item.known_for" :key="item1.id">
+                {{ item1.name ? item1.name : item1.title }}
               </p>
             </div></router-link
           >
@@ -42,14 +32,16 @@
 <script>
 export default {
   name: 'Round',
-  data() {},
+  data() {
+    return {};
+  },
   mounted() {
     this.getInitActor();
     // console.log(this.$route.params.idx);
     //  스크롤 하단 이동 체크하기
     //  하단 이동하면 콜백 함수 실행
     this.$isScrollBottomCheck(this.scrollCallback);
-    console.log(this.item);
+    // console.log(this.item);
   },
   methods: {
     getInitActor() {
@@ -57,8 +49,11 @@ export default {
       this.$store.dispatch('actor/getPopularActor', this.$route.params.idx);
     },
     getImage(profile_path) {
-      // console.log(profile_path)
-      return `https://image.tmdb.org/t/p/w300${profile_path}`;
+      if (profile_path) {
+        return `https://image.tmdb.org/t/p/w300${profile_path}`;
+      } else {
+        return require('../assets/images/global/no-image.png');
+      }
     },
 
     scrollCallback() {
@@ -110,31 +105,31 @@ export default {
 
 /* episode-list */
 
-#episode {
+#actor {
   width: 100%;
 }
-#episode ul {
+#actor ul {
   margin-left: 24px;
   margin-right: 24px;
 }
-#episode ul li:nth-child(1) {
+#actor ul li:nth-child(1) {
   margin-top: 80px;
 }
-#episode ul li + li {
+#actor ul li + li {
   margin-top: 16px;
 }
-#episode ul li:nth-last-child(1) {
+#actor ul li:nth-last-child(1) {
   margin-bottom: 53px;
 }
-#episode ul li a {
+#actor ul li a {
   display: flex;
 }
-#episode ul li a img {
+#actor ul li a img {
   width: 20%;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
 }
-#episode ul li div.ep-list-text {
+#actor ul li div.actor-list-text {
   flex: 2;
   background: #212634;
   border-top-right-radius: 5px;
@@ -142,18 +137,24 @@ export default {
   padding: 14px 0 18px 22px;
   align-items: center;
 }
-#episode ul li div.ep-list-text div {
+#actor ul li div.actor-list-text div {
   color: #fff;
   font-size: 18px;
   font-weight: 700;
   background: #212634;
 }
-#episode ul li div.ep-list-text p {
+
+#actor ul li div.actor-list-text p {
   float: left;
   padding-right: 8px;
   color: #fff;
   font-size: 12px;
   margin-top: 8px;
   background: #212634;
+}
+#actor ul li div.actor-list-text span {
+  color: #fff;
+  font-size: 12px;
+  margin-top: 8px;
 }
 </style>
