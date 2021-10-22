@@ -21,8 +21,7 @@ export default {
       }
     },
     SET_MOVIE_NOW_MORE(state, result) {
-      const newMovieNow = state.movieNow.concat(result.results);
-      state.movieNow = newMovieNow;
+      state.movieNow = state.movieNow.concat(result.results);
     }
   },
   actions: {

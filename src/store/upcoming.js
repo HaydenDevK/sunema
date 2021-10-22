@@ -21,8 +21,7 @@ export default {
       }
     },
     SET_UPCOMING_MORE(state, result) {
-      const newUpcoming = state.upcoming.concat(result.results);
-      state.upcoming = newUpcoming;
+      state.upcoming = state.upcoming.concat(result.results);
     }
   },
   actions: {

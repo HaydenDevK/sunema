@@ -94,8 +94,6 @@
           </div>
           <!-- <ListKeyword View="detail"/> -->
         </div>
-        
-          
       </section>
       <!-- e: info-area -->
 
@@ -276,14 +274,19 @@
 
 export default {
   name: 'Detail',
-  // components:{
-  //   Swiper,
-  //   SwiperSlide
-  // },
+  props:{
+
+  },
+  components:{},
+  data(){
+    return{
+      movieDetail: [],
+    };
+  },
   computed:{
     getGenres(){
       let genre = '';
-      if(this.movieDetail.genres?.length){        
+      if(this.movieDetail.genres?.length){
         for(let i=0; i<this.movieDetail.genres.length; i++){
           if(genre != '') genre += '/';
           genre += this.movieDetail.genres[i].name;
@@ -318,6 +321,7 @@ export default {
       });
 
     this.initMovieDetail();
+
   },
   methods: {
     initMovieDetail(){
@@ -457,7 +461,7 @@ export default {
 
   .detail-container .info-area .info-series .view-series{margin-top: 0.75rem;width: 100%;background: #212634;display: flex;justify-content: space-between;padding: 10px 15px;border-radius: 5px;}
   .detail-container .info-area .info-series .view-series{font-size: 1rem;}
-  .detail-container .info-area .info-series .view-series .before span{color: rgba(255, 255, 255, .7);} 
+  .detail-container .info-area .info-series .view-series .before span{color: rgba(255, 255, 255, .7);}
   .detail-container .info-area .info-series .view-series .before a{display: inline-block;padding-left: 20px;}
   .detail-container .info-area .info-series .view-series .sel a{display: inline-block;padding-right: 18px;background: url('../assets/images/detail/icon_arw_gray.png') top 50% right 0 no-repeat;background-size: 7.85px 9.75px;}
 
@@ -550,7 +554,7 @@ export default {
     /* detail-container */
     .detail-container{padding: 80px 0  79px;background: #181727;min-height: 100vh;color: #fff;}
     section.inner-box{padding: 0 24px;}
-    
+
     .detail-container .top-area .preview-box{padding-bottom: 40px;}
 
     .detail-container .top-area .poster-box{margin-top: -85px;height: 701px;padding-bottom: 31px;}
@@ -563,7 +567,7 @@ export default {
 
     .detail-container .info-area .info-tablet-ui{}
     .detail-container .info-area .info-tablet-ui .info_basic{float: left;}
-    .detail-container .info-area .info-tablet-ui .info_other{float: left;} 
+    .detail-container .info-area .info-tablet-ui .info_other{float: left;}
 
     .detail-container .info-area .info_basic span{line-height: 2.063rem;font-size: 1.125rem;}
     .detail-container .info-area .info_basic span.grade{padding: 0 0.5rem;height: 2.063rem;border: 1px solid rgba(255, 255, 255, .5);border-radius: 4px;line-height: 1.438rem;}
@@ -593,7 +597,7 @@ export default {
 
     .detail-container .info-area .info-series .view-series{margin-top: 1.5rem;padding: 16px 20px 18px;border-radius: 10px;}
     .detail-container .info-area .info-series .view-series{font-size: 1.313rem;}
-    .detail-container .info-area .info-series .view-series .before span{color: rgba(255, 255, 255, .7);} 
+    .detail-container .info-area .info-series .view-series .before span{color: rgba(255, 255, 255, .7);}
     .detail-container .info-area .info-series .view-series .before a{display: inline-block;padding-left: 20px;}
     .detail-container .info-area .info-series .view-series .sel{font-size: 1rem;}
     .detail-container .info-area .info-series .view-series .sel a{display: inline-block;padding-right: 18px;}
@@ -667,7 +671,7 @@ export default {
     .detail-container .recomandation-area ul li{font-size: 0;margin-bottom: 1rem;}
     .detail-container .recomandation-area ul li .img-box{border-radius: 5px;overflow: hidden;}
 
-    
+
 
     .detail-container .info-area .info-series .streaming-box.tablet-ui{display: block;}
     .detail-container .info-area .info-series .streaming-box.mo-ui{display: none;}

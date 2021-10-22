@@ -15,6 +15,15 @@ export default {
     INIT_PAGE_NOW(state) {
       state.pageNow = 1;
     },
+    SET_MEDIA_ID(state, id) {
+      state.mediaId = id;
+    },
+    SET_MEDIA_TYPE(state, mediaType) {
+      state.mediaType = mediaType;
+    },
+    SET_MEDIA_KEYWORDS(state, data) {
+      data ? state.mediaKeywords = data : state.mediaKeywords = [];
+    },
     SET_KEYWORD_ID(state, keywordId) {
       state.keywordId = keywordId;
     },
@@ -28,11 +37,7 @@ export default {
       }
     },
     SET_KEYWORD_MEDIA_NEXT(state, result) {
-      const newkeywordMedia = state.keywordMedia.concat(result.results);
-      state.keywordMedia = newkeywordMedia;
-    },
-    SET_MEDIA_KEYWORDS(state, data) {
-      state.mediaKeywords = data;
+      state.keywordMedia = state.keywordMedia.concat(result.results);
     }
   },
   actions: {
@@ -67,21 +72,23 @@ export default {
       }
     },
     async getMediaKeywords({ state, commit }) {
-      if (state.mediaType === 'movie') {
-        const result = await request(`/movie/${state.mediaId}/keywords`);
+      try {
+        const result = await request(
+          `/${state.mediaType}/${state.mediaId}/keywords`
+        );
 
         // api 호출 성공 시
         if (result.status === 200) {
           commit('SET_MEDIA_KEYWORDS', result.data.keywords);
         }
-      } else {
-        const result = await request(`/tv/${state.mediaId}/keywords`);
-
-        // api 호출 성공 시
-        if (result.status === 200) {
-          commit('SET_MEDIA_KEYWORDS', result.data.keywords);
-        }
+      } catch (e) {
+        // request failed with status code 404 예외처리
+        commit('SET_MEDIA_KEYWORDS');
       }
+    },
+    async getKeywordMediaElse({ commit, dispatch }, mediaType) {
+      await commit('SET_MEDIA_TYPE', mediaType);
+      await dispatch('getKeywordMedia');
     }
   }
 };

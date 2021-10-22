@@ -21,8 +21,7 @@ export default {
       }
     },
     SET_TV_TODAY_MORE(state, result) {
-      const newTvToday = state.tvToday.concat(result.results);
-      state.tvToday = newTvToday;
+      state.tvToday = state.tvToday.concat(result.results);
     }
   },
   actions: {

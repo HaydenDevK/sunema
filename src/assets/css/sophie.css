@@ -75,6 +75,7 @@ button {
 .header .btn-back {
   padding: 1.6rem 2.4rem;
   font-size: 0;
+  cursor: pointer;
 }
 
 .header .btn-back img {
@@ -83,35 +84,46 @@ button {
 
 .header .font-page-title {
   font-size: 1.8rem;
-  line-height: 4.9rem;
+  line-height: 4.7rem;
   letter-spacing: -0.02em;
   font-weight: bold;
   color: #ffffff;
 }
 
 .wrapper-btn-type {
-  padding: 1.2rem 0 2.4rem 2.4rem;
+  width: 100%;
+  max-width: 64rem;
+  display: inline-flex;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  padding: 0 2.4rem 1.8rem 2.4rem;
 }
 
 .wrapper-btn-type .btn-type {
-  padding: 0 2.4rem;
-}
-
-.wrapper-btn-type .btn-type:first-child {
-  margin-right: 0.8rem;
+  cursor: pointer;
+  width: calc(100% / 3);
 }
 
 .wrapper-btn-type .btn-type p {
+  display: inline-block;
   font-size: 1.8rem;
   line-height: 2.3rem;
   letter-spacing: -0.02em;
   font-weight: bold;
   color: #ffffff;
+  opacity: 0.5;
+}
+
+.wrapper-btn-type .btn-type:first-child {
+  /* text-align: left; */
 }
 
 .wrapper-btn-type .btn-type p.active {
   border-bottom: 2px solid #ffffff;
-  /* todo 애니메이션, 클릭 이벤트 연결 */
+  /* border-bottom: 1.6px solid #ffffff; */
+  /* text-decoration: underline;
+  text-underline-position: under; */
+  opacity: 1;
 }
 
 .wrapper-poster {
@@ -119,8 +131,8 @@ button {
   display: grid;
   grid-column-gap: 1.6rem;
   grid-row-gap: 1.6rem;
-  grid-template-columns: repeat(auto-fill, minmax(9.4rem, auto));
-  /* repeat(auto-fill, minmax(10.1rem, auto)) */
+  grid-template-columns: repeat(auto-fill, minmax(9.8rem, auto));
+  /* 375까지 3개 */
 }
 
 .wrapper-poster a {
@@ -147,6 +159,15 @@ button {
   font-size: 1.2rem;
   line-height: 1.5rem;
   letter-spacing: 0.025rem;
+  padding: 0.8rem 1.2rem;
+  transform: translateX(1.2rem);
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.wrapper-more button:focus,
+.wrapper-more button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 /* tablet */
@@ -156,7 +177,7 @@ button {
   }
 
   .header .btn-back {
-    padding: 2rem 4.8rem;
+    padding: 2.4rem 4.8rem;
   }
 
   .header .btn-back img {
@@ -165,11 +186,11 @@ button {
 
   .header .font-page-title {
     font-size: 2.1rem;
-    line-height: 6.38rem;
+    line-height: 7.18rem;
   }
 
   .wrapper-btn-type {
-    padding: 2.4rem 0 3.4rem 4.8rem;
+    padding: 0 0 3.2rem 4.8rem;
   }
 
   .wrapper-btn-type .btn-type p {
@@ -182,5 +203,18 @@ button {
     grid-template-columns: repeat(5, 1fr);
     grid-column-gap: 2.4rem;
     grid-row-gap: 2.4rem;
+  }
+
+  .wrapper-more {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .wrapper-more button {
+    font-size: 1.8rem;
+    line-height: 2.3rem;
+    letter-spacing: -0.02em;
+    padding: 1.2rem 2rem;
+    transform: translateX(2rem);
   }
 }

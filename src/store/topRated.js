@@ -25,8 +25,7 @@ export default {
       }
     },
     SET_TOP_RATED_MORE(state, result) {
-      const newTopRated = state.topRated.concat(result.results);
-      state.topRated = newTopRated;
+      state.topRated = state.topRated.concat(result.results);
     }
   },
   actions: {
