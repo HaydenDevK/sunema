@@ -4,7 +4,7 @@
       <router-link to="">
         <img src="../assets/images/round/icon_back.png" alt="" />
       </router-link>
-      <p>오징어게임(2021)</p>
+      <p>{{ $store.state.round.tv_name.name }}</p>
     </header>
     <!-- header -->
 
@@ -32,6 +32,7 @@ export default {
   name: 'Round',
   mounted() {
     this.getInitMovie();
+    this.getName();
     // console.log(this.$route.params.idx);
     //  스크롤 하단 이동 체크하기
     //  하단 이동하면 콜백 함수 실행
@@ -40,11 +41,14 @@ export default {
   methods: {
     getInitMovie() {
       //api사용하는 코드
-      this.$store.dispatch('round/getMovieList', this.$route.params.idx);
+      this.$store.dispatch('round/getMovieList', this.$route.params.tv_id);
     },
     getImage(still_path) {
       // console.log(still_path)
       return `https://image.tmdb.org/t/p/w300${still_path}`;
+    },
+    getName() {
+      this.$store.dispatch('round/getTvName');
     },
     scrollCallback() {
       console.log('callback');
@@ -114,7 +118,7 @@ export default {
   display: flex;
 }
 #episode ul li a img {
-  width: 20%;
+  width: 35%;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
 }
@@ -131,7 +135,6 @@ export default {
   font-size: 18px;
   font-weight: 700;
   background: #212634;
-
 }
 #episode ul li div.ep-list-text p {
   color: #fff;
