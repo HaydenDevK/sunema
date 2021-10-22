@@ -97,6 +97,10 @@ export default {
 @import '../assets/css/sophie.css';
 
 /* mobile */
+.list-scroll {
+  padding-top: 2rem;
+}
+
 .no-media-keywords {
   color: #ffffff;
   font-size: 1.1rem;
@@ -117,6 +121,10 @@ export default {
 
 /* tablet */
 @media screen and (min-width: 1024px) {
+  .list-scroll {
+    padding-top: 3.2rem;
+  }
+
   .no-media-keywords {
     color: #ffffff;
     font-size: 1.1rem;
