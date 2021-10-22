@@ -43,11 +43,11 @@ export default {
 	data() {
 		return { inputText: '' };
 	},
-  computed: {
-    searchKeyword() {
-      return this.$store.state.keyword.searchKeyword.slice(0, 10);
-    }
-  },
+	computed: {
+		searchKeyword() {
+			return this.$store.state.keyword.searchKeyword.slice(0, 10);
+		}
+	},
 	methods: {
 		find(txt) {
 			this.$store.dispatch('keyword/find', txt);
@@ -78,6 +78,12 @@ export default {
 	font-family: 'Spoqa Han Sans Neo', 'sans-serif';
 	letter-spacing: 0.25px;
 }
+
+.bg-navy {
+	width: 100%;
+	min-height: 100vh;
+	background-color: #181727;
+}
 button,
 input,
 button:focus {
@@ -87,17 +93,11 @@ button:focus {
 	background-color: unset;
 	color: #ffffff;
 }
-.bg-navy {
-	width: 100%;
-	min-height: 100%;
-	background-color: #181727;
-}
 header {
 	height: 80px;
 	width: 100vw;
 	padding: 23px 16px 17px;
 	display: flex;
-	color: #ffffff;
 	justify-content: space-between;
 	align-items: center;
 }
