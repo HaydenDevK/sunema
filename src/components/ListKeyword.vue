@@ -1,12 +1,16 @@
 <template>
-  <swiper class="swiper" :options="swiperOption">
+  <swiper
+    v-if="$store.state.keywordSearch.mediaKeywords.length > 0"
+    class="swiper"
+    :options="swiperOption"
+  >
     <swiper-slide
       v-for="item in $store.state.keywordSearch.mediaKeywords"
       :key="item.id"
     >
       <button
         :class="{ active: item.id === keywordId }"
-        @click="getNewMedia(item.id)"
+        @click="handleFunc(item.id)"
       >
         #{{ item.name }}
       </button>
@@ -20,7 +24,7 @@ import 'swiper/css/swiper.css';
 
 export default {
   props: {
-    // mediaKeywords: Array // todo 재사용성 개선
+    View: String
   },
   components: {
     Swiper,
@@ -28,44 +32,54 @@ export default {
   },
   data() {
     return {
+      mediaId: 0,
       keywordId: 0,
       swiperOption: {
         spaceBetween: 8,
         slidesPerView: 'auto',
         freeMode: true,
+        slideToClickedSlide: true, // todo 가끔 안먹는 버그 해결
         breakpoints: {
           1024: {
             spaceBetween: 24
           }
-        },
-        slideToClickedSlide: true
+        }
       }
     };
   },
   async mounted() {
-    await this.$store
-      .dispatch('keywordSearch/getMediaKeywords')
-      .then(() => {
-        this.setKeywordId();
-      })
-      .then(() => {
-        this.getInitMedia();
-      });
+    this.mediaId = Number(this.$route.params.idx);
+    await this.$store.commit('keywordSearch/SET_MEDIA_ID', this.mediaId);
+    await this.$store.dispatch('keywordSearch/getMediaKeywords');
+
+    // todo 중첩문 함수형으로 축약
+    if (this.View === 'keywordSearch') {
+      if (this.$route.params.keyword) {
+        this.setKeywordId(this.$route.params.keyword); // Number로 형변환 안해도되네
+      } else if (this.$store.state.keywordSearch.mediaKeywords.length !== 0) {
+        this.setKeywordId(this.$store.state.keywordSearch.mediaKeywords[0].id);
+      }
+      this.getInitMedia();
+    }
   },
   methods: {
-    setKeywordId(newKeywordId) {
-      newKeywordId
-        ? (this.keywordId = Number(newKeywordId))
-        : (this.keywordId = Number(this.$route.params.keywordId));
+    setKeywordId(keywordId) {
+      this.keywordId = Number(keywordId);
       this.$store.commit('keywordSearch/SET_KEYWORD_ID', this.keywordId);
     },
     getInitMedia() {
       this.$store.dispatch('keywordSearch/getKeywordMedia');
       // todo 스토어 정보가 바뀌면 템플릿에 바인딩도 다시 되는 이유 이해
     },
-    getNewMedia(newKeywordId) {
-      this.setKeywordId(newKeywordId);
-      this.getInitMedia();
+    handleFunc(keywordId) {
+      if (this.View === 'keywordSearch') {
+        this.setKeywordId(keywordId);
+        this.getInitMedia();
+      } else
+        this.$router.push({
+          name: 'KeywordSearch',
+          params: { idx: this.mediaId, keyword: keywordId }
+        });
     }
   }
 };
@@ -77,12 +91,10 @@ export default {
 /* mobile */
 .swiper {
   padding-left: 2.4rem;
-  /* padding-bottom: 1.2rem; */
 }
 
 .swiper-slide {
   width: auto;
-  padding-bottom: 1.2rem;
 }
 
 .swiper-slide button {
@@ -97,6 +109,8 @@ export default {
   font-size: 1.1rem;
   line-height: 1.4rem;
   letter-spacing: -0.02em;
+  opacity: 0.5;
+  cursor: pointer;
 }
 
 .swiper-slide:last-of-type {
@@ -106,16 +120,13 @@ export default {
 .swiper-slide button.active {
   background-color: white;
   color: #13131b;
+  opacity: 1;
 }
 
 /* tablet */
 @media (min-width: 1024px) {
   .swiper {
     padding-left: 4.8rem;
-  }
-
-  .swiper-slide {
-    padding-bottom: 1.8rem;
   }
 
   .swiper-slide button {

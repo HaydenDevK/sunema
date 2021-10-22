@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-navy-100">
+  <div class="bg-navy-100 min-height-100vh">
     <!-- 배경 블러 이미지 -->
     <div
       class="bg-blurred"
@@ -9,9 +9,9 @@
     <!-- 컨텐츠 -->
     <div id="contents">
       <header class="header">
-        <router-link to="" class="btn-back">
+        <a class="btn-back" @click="$router.go(-1)">
           <img src="../assets/images/global/icon-back.png" alt="" />
-        </router-link>
+        </a>
       </header>
 
       <!-- 기본 정보 -->
@@ -33,39 +33,48 @@
             }}</span>
           </div>
 
-          <div id="profile-further">
+          <div
+            v-if="$store.state.actorDetail.actorDetail.biography"
+            id="profile-biography"
+            :class="{ ellipsis: ellipsis === true }"
+          >
             {{ $store.state.actorDetail.actorDetail.biography }}
           </div>
 
-          <div class="wrapper-more">
-            <button @click="getInitBiography()">더보기</button>
+          <div
+            v-if="$store.state.actorDetail.actorDetail.biography"
+            class="wrapper-more"
+          >
+            <button @click="ellipsis = !ellipsis">
+              {{ ellipsis === true ? '펼치기' : '닫기' }}
+            </button>
           </div>
-          <!-- todo
-            문자열 자르기가 아니라 CSS로 해야할듯?
-          -->
 
           <div class="wrapper-list">
             <span class="font-white-70">성별</span>
-            <span>{{
-              `${
-                $store.state.actorDetail.actorDetail.gender === 1
-                  ? '여성'
-                  : '남성'
-              }`
-            }}</span>
+            <span>
+              {{
+                `${
+                  $store.state.actorDetail.actorDetail.gender === 1
+                    ? '여성'
+                    : '남성'
+                }`
+              }}
+            </span>
 
             <span class="font-white-70">생일</span>
-            <span
-              >{{ $store.state.actorDetail.actorDetail.birthday }} ({{
-                age
-              }}
-              years old)</span
-            >
+            <span>
+              {{ $store.state.actorDetail.actorDetail.birthday || '정보 없음' }}
+              {{ age ? `(만 ${age}세)` : '' }}
+            </span>
 
             <span class="font-white-70">출생지</span>
-            <span>{{
-              $store.state.actorDetail.actorDetail.place_of_birth
-            }}</span>
+            <span>
+              {{
+                $store.state.actorDetail.actorDetail.place_of_birth ||
+                  '정보 없음'
+              }}
+            </span>
           </div>
         </div>
       </section>
@@ -73,7 +82,10 @@
       <div class="separator-black-2" />
 
       <!-- 참여 작품 -->
-      <section id="filmography">
+      <section
+        v-if="$store.state.actorDetail.actorCredits.cast > 0"
+        id="filmography"
+      >
         <div class="profile-subtitle">
           참여 작품
         </div>
@@ -81,11 +93,15 @@
         <ListSlide
           :Media="$store.state.actorDetail.actorCredits.cast"
           Path="poster_path"
+          Type="filmography"
         />
       </section>
 
       <!-- 프로필 사진 -->
-      <section id="photography">
+      <section
+        v-if="$store.state.actorDetail.actorImages.length > 0"
+        id="photography"
+      >
         <div class="profile-subtitle">
           프로필 사진
         </div>
@@ -93,45 +109,57 @@
         <ListSlide
           :Media="$store.state.actorDetail.actorImages"
           Path="file_path"
+          Type="photography"
         />
       </section>
 
       <!-- 전체 작품 활동 -->
-      <section id="works">
+      <section
+        v-if="actorCredits.cast.length > 0 || actorCredits.crew.length > 0"
+        id="works"
+      >
         <div class="profile-subtitle">
           전체 작품 활동
         </div>
 
-        <div class="works-category font-primary">연기</div>
-        <div
-          v-for="item in actorCredits.cast"
-          :key="item.id"
-          class="wrapper-list"
-        >
-          <span class="font-white-70">{{
-            item.release_date ? getYear(item.release_date) : ''
-          }}</span>
-          <span>{{ item.title }}</span>
+        <div v-if="actorCredits.cast.length > 0" class="works-category-space">
+          <div class="works-category font-primary">
+            연기
+          </div>
+          <div
+            v-for="item in actorCredits.cast"
+            :key="item.id"
+            class="wrapper-list"
+          >
+            <span class="font-white-70">{{
+              item.release_date ? getYear(item.release_date) : ''
+            }}</span>
+            <span>{{ item.title }}</span>
+          </div>
+
+          <div v-if="castMore" class="wrapper-more">
+            <button @click="getCreditsMore('cast')">더보기</button>
+          </div>
         </div>
 
-        <div class="wrapper-more">
-          <button @click="getCreditsMore('cast')">더보기</button>
-        </div>
+        <div v-if="actorCredits.crew.length > 0">
+          <div class="works-category font-primary">
+            제작
+          </div>
+          <div
+            v-for="item in actorCredits.crew"
+            :key="item.credit_id"
+            class="wrapper-list"
+          >
+            <span class="font-white-70">
+              {{ item.release_date ? getYear(item.release_date) : '' }}
+            </span>
+            <span>{{ item.title }}…{{ item.job }}</span>
+          </div>
 
-        <div class="works-category font-primary works-category-space">제작</div>
-        <div
-          v-for="item in actorCredits.crew"
-          :key="item.credit_id"
-          class="wrapper-list"
-        >
-          <span class="font-white-70">
-            {{ item.release_date ? getYear(item.release_date) : '' }}
-          </span>
-          <span>{{ item.title }}…{{ item.job }}</span>
-        </div>
-
-        <div class="wrapper-more">
-          <button @click="getCreditsMore('crew')">더보기</button>
+          <div v-if="crewMore" class="wrapper-more">
+            <button @click="getCreditsMore('crew')">더보기</button>
+          </div>
         </div>
       </section>
     </div>
@@ -153,8 +181,11 @@ export default {
         cast: [],
         crew: []
       },
+      ellipsis: true,
       castCounter: 1,
-      crewCounter: 1
+      crewCounter: 1,
+      castMore: false,
+      crewMore: false
     };
   },
   computed: {
@@ -185,7 +216,6 @@ export default {
   mounted() {
     this.setPersonId();
     this.getInitDetail();
-    this.getInitBiography();
     this.getInitCredits();
     this.getInitImages();
   },
@@ -199,27 +229,28 @@ export default {
     },
     getInitCredits() {
       this.$store.dispatch('actorDetail/getActorCredits').then(() => {
-        this.$store.state.actorDetail.actorCredits.cast.length >= 10
-          ? (this.actorCredits.cast = this.$store.state.actorDetail.actorCredits.cast.slice(
-              0,
-              10
-            ))
-          : (this.actorCredits.cast = this.$store.state.actorDetail.actorCredits.cast);
+        if (this.$store.state.actorDetail.actorCredits.cast.length >= 15) {
+          this.actorCredits.cast = this.$store.state.actorDetail.actorCredits.cast.slice(
+            0,
+            10
+          );
+          this.castMore = true;
+        } else
+          this.actorCredits.cast = this.$store.state.actorDetail.actorCredits.cast;
 
-        this.$store.state.actorDetail.actorCredits.crew.length >= 10
-          ? (this.actorCredits.crew = this.$store.state.actorDetail.actorCredits.crew.slice(
-              0,
-              10
-            ))
-          : (this.actorCredits.crew = this.$store.state.actorDetail.actorCredits.crew);
+        if (this.$store.state.actorDetail.actorCredits.crew.length >= 15) {
+          this.actorCredits.crew = this.$store.state.actorDetail.actorCredits.crew.slice(
+            0,
+            10
+          );
+          this.crewMore = true;
+        } else
+          this.actorCredits.crew = this.$store.state.actorDetail.actorCredits.crew;
       });
       // todo 모든 데이터와 함수를 스테이트로 옮길지 판단해서 수정
     },
     getInitImages() {
       this.$store.dispatch('actorDetail/getActorImages');
-    },
-    getInitBiography() {
-      this.$store.dispatch('actorDetail/setActorBiography');
     },
     setCreditsCounter(type) {
       type === 'cast' ? this.castCounter++ : this.crewCounter++;
@@ -227,26 +258,21 @@ export default {
     getCreditsMore(type) {
       this.setCreditsCounter(type);
 
-      this.$store.state.actorDetail.actorCredits[`${type}`].length >=
-      this[`${type}Counter`] * 10
-        ? (this.actorCredits[
-            `${type}`
-          ] = this.$store.state.actorDetail.actorCredits[`${type}`].slice(
-            0,
-            this[`${type}Counter`] * 10
-            // todo 얕은 복사 문제없을지 점검
-          ))
-        : (this.actorCredits[
-            `${type}`
-          ] = this.$store.state.actorDetail.actorCredits[`${type}`]);
-      // todo 더보기 버튼 없애기
-    },
-
-    getImage(poster_path) {
-      if (poster_path) {
-        return `https://image.tmdb.org/t/p/w300${poster_path}`;
+      if (
+        this.$store.state.actorDetail.actorCredits[`${type}`].length >=
+        this[`${type}Counter`] * 15
+      ) {
+        this.actorCredits[
+          `${type}`
+        ] = this.$store.state.actorDetail.actorCredits[`${type}`].slice(
+          0,
+          this[`${type}Counter`] * 15
+        );
       } else {
-        return require('../assets/images/global/no-image.png');
+        this.actorCredits[
+          `${type}`
+        ] = this.$store.state.actorDetail.actorCredits[`${type}`];
+        this[`${type}More`] = false;
       }
     },
     getYear(release_date) {
@@ -296,9 +322,19 @@ export default {
   line-height: 1.5rem;
 }
 
-#profile-further {
+#profile-biography {
   font-size: 1.6rem;
   line-height: 2.3rem;
+}
+
+#profile-biography.ellipsis {
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+  -webkit-line-clamp: 3;
+  height: 6.9rem;
+  overflow: hidden;
 }
 
 #filmography .profile-subtitle,
@@ -307,7 +343,7 @@ export default {
 }
 
 #works {
-  padding: 4.8rem 2.4rem;
+  padding: 4.8rem 2.4rem 7.2rem 2.4rem;
 }
 
 .profile-subtitle {
@@ -327,7 +363,7 @@ export default {
 }
 
 .works-category-space {
-  margin-top: 3rem;
+  margin-bottom: 2.4rem;
 }
 
 .separator-black-2 {
@@ -407,7 +443,7 @@ export default {
     line-height: 2.6rem;
   }
 
-  #profile-further {
+  #profile-biography {
     font-size: 2.4rem;
     line-height: 3.5rem;
     letter-spacing: 0.025rem;
@@ -420,7 +456,7 @@ export default {
   }
 
   #works {
-    padding: 5.4rem 0 4.8rem 4.8rem;
+    padding: 5.4rem 4.8rem 7.2rem 4.8rem;
   }
 
   .profile-subtitle {
@@ -434,8 +470,8 @@ export default {
     line-height: 3.8rem;
   }
 
-  .wrapper-more {
-    display: none;
+  .works-category-space {
+    margin-bottom: 3rem;
   }
 
   .wrapper-list {
