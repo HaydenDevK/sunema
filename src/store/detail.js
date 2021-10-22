@@ -1,4 +1,4 @@
-import { request } from './axios';
+import { request, request2 } from './axios';
 
 export default {
   namespaced: true,
@@ -19,6 +19,7 @@ export default {
     movieDetailRecommendation:[],
     movieVideo:[],
     movieImg:[],
+    moviePoster: [],
     movieKeyword:[]
   },
   mutations: {
@@ -32,11 +33,12 @@ export default {
       //6.여기서 데이터 셋팅하고
       state.movieVideo = data;
     },
-    // 사용x (포스터, 스틸컷)
     SET_DETAIL_MOVIE_IMG(state, data){
       state.movieImg = data;
     },
-    // // 사용x
+    SET_DETAIL_MOVIE_POSTER(state, data){
+      state.moviePoster = data;
+    },
     SET_DETAIL_MOVIE_KEYWORD(state, data){
       state.movieKeyword = data;
     },
@@ -54,6 +56,7 @@ export default {
       if (result.status === 200) {
         commit('SET_DETAIL_MOVIE', result.data);
       }
+      // console.log(result);
     },
     async getMovieRecommendation({ commit}, movieId) {
       const result = await request(`/movie/` + movieId + `/recommendations`);
@@ -90,20 +93,28 @@ export default {
         // console.log(result.data.results);
         commit('SET_DETAIL_MOVIE_VIDEO', result.data.results);
       }
+      // console.log(result);
+    },
+    async getMovieImg({ state , commit}, movieId) {
+      const result = await request2(`/movie/` + movieId + `/images`);
+      
+
+      if (result.status === 200) {
+        console.log(`/movie/${state.movieId}/images`);
+        commit('SET_DETAIL_MOVIE_IMG', result.data.backdrops);
+      }
+      // console.log(result);
+    },
+    async getMoviePoster({ state , commit}, movieId) {
+      const result = await request2(`/movie/` + movieId + `/images`);
+      
+
+      if (result.status === 200) {
+        console.log(`/movie/${state.movieId}/images`);
+        commit('SET_DETAIL_MOVIE_POSTER', result.data.posters);
+      }
       console.log(result);
     },
-    // 포스터, 스틸컷 배열 내에 Array(0)
-    // async getMovieImg({ state , commit}, movieId) {
-    //   const result = await request(`/movie/` + movieId + `/images`);
-
-
-    //   if (result.status === 200) {
-    //     console.log(`/movie/${state.movieId}/images`);
-    //     commit('SET_DETAIL_MOVIE_IMG', result.data);
-    //   }
-    //   // console.log(result);
-    // },
-    // // 포스터, 스틸컷 배열 내에 Array(0)
 
     async getMovieKeyword({ state , commit}, movieId) {
       const result = await request(`/movie/` + movieId + `/keywords`);
@@ -112,7 +123,7 @@ export default {
         console.log(`/movie/${state.movieId}/keywords`);
         commit('SET_DETAIL_MOVIE_KEYWORD', result.data.keywords);
       }
-      console.log(result);
+      // console.log(result);
     },
   },
 };

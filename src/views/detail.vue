@@ -11,7 +11,6 @@
         <!-- poster -->
         <div class="poster-box">
           <div class="bg-box">
-            <!-- <img :src="getBackDrop(movieDetail.backdrop_path)" alt="배경 이미지"> -->
             <img :src="getBackDrop(movieDetail.backdrop_path)" alt="배경 이미지">
           </div>
           <div class="img-box">
@@ -181,11 +180,12 @@
             <div class="section-tit">스틸컷</div>
           </dt>
           <dd class="box-x-wrap">
-            <ul class="video-list box-x">
-              <li class="box-x-item" v-for="item in $store.state.detail.movieDetail" :key="item.id">
+            <ul class="box-x">
+              <!-- <li class="box-x-item" v-for="item in $store.state.detail.movieImg" :key="item.id"> -->
+              <li class="box-x-item" v-for="item in movieImg" :key="item.id">
                 <router-link to="">
                   <div class="img-box">
-                    <img :src="getBackDrop(movieDetail.backdrop_path)" alt="스틸컷 이미지">
+                    <img :src="getImgBackDrop(item.file_path)" alt="스틸컷 이미지">
                   </div>
                 </router-link>
               </li>
@@ -203,32 +203,11 @@
             <div class="section-tit">포스터</div>
           </dt>
           <dd class="box-x-wrap">
-            <ul class="video-list box-x">
-              <li class="box-x-item">
+            <ul class="box-x">
+              <li class="box-x-item" v-for="item in moviePoster" :key="item.id">
                 <router-link to="">
                   <div class="img-box">
-                    <img src="@/assets/images/detail/thum_poster_01.png" alt="포스터 이미지">
-                  </div>
-                </router-link>
-              </li>
-              <li class="box-x-item">
-                <router-link to="">
-                  <div class="img-box">
-                    <img src="@/assets/images/detail/thum_poster_02.png" alt="포스터 이미지">
-                  </div>
-                </router-link>
-              </li>
-              <li class="box-x-item">
-                <router-link to="">
-                  <div class="img-box">
-                    <img src="@/assets/images/detail/thum_poster_02.png" alt="포스터 이미지">
-                  </div>
-                </router-link>
-              </li>
-              <li class="box-x-item">
-                <router-link to="">
-                  <div class="img-box">
-                    <img src="@/assets/images/detail/thum_poster_02.png" alt="포스터 이미지">
+                    <img :src="getPoster(item.file_path)" alt="포스터 이미지">
                   </div>
                 </router-link>
               </li>
@@ -322,6 +301,12 @@ export default {
     movieKeyword(){
       return this.$store.state.detail.movieKeyword;
     },
+    movieImg(){
+      return this.$store.state.detail.movieImg;
+    },
+    moviePoster(){
+      return this.$store.state.detail.moviePoster;
+    },
   },
   mounted(){
     console.log(this.$route.params);
@@ -339,7 +324,8 @@ export default {
       console.log('init movie가 잘 호출됨');
       this.$store.dispatch('detail/getMovieRecommendation', this.$route.params.idx);
       this.$store.dispatch('detail/getMovieVideo', this.$route.params.idx);
-      this.$store.dispatch('detail/getMovieImg', this.$route.params.idx); //getMovieImg에 값을 넣기 위해서 작성했으나, 알맹이가 없음
+      this.$store.dispatch('detail/getMovieImg', this.$route.params.idx);
+      this.$store.dispatch('detail/getMoviePoster', this.$route.params.idx);
       this.$store.dispatch('detail/getMovieKeyword', this.$route.params.idx);
     },
     getImage(poster_path) {
@@ -355,6 +341,12 @@ export default {
     getMovieVideo(key) {
       return 'https://www.youtube.com/embed/' + key;
     },
+    getImgBackDrop(file_path) {
+      return `https://image.tmdb.org/t/p/w300${file_path}`;
+    },
+    getPoster(file_path){
+      return `https://image.tmdb.org/t/p/w300${file_path}`;
+    }
   }
 };
 </script>
@@ -510,7 +502,11 @@ export default {
   /* 슬라이더로 교체시 css 수정 */
   .detail-container .poster-area{margin-top: 10px;}
   .detail-container section.poster-area .section-tit{padding: 1.125rem 24px;}
-  .detail-container .poster-area li{width: 36%;margin-left: 3.86%;border-radius: 5px;overflow: hidden;}
+  /* .detail-container .poster-area li{width: 36%;margin-left: 3.86%;border-radius: 5px;overflow: hidden;} */
+  .detail-container .poster-area li{width: auto;height: 227px;margin-left: 3.86%;border-radius: 5px;overflow: hidden;}
+  .detail-container .poster-area li a{display: inline-block;height: 100%;width: auto;font-size: 0;}
+  .detail-container .poster-area li .img-box{height: 100%;width: auto;}
+  .detail-container .poster-area li img{height: 100%;width: auto;}
   .detail-container .poster-area li:first-child{margin-left: 24px;}
   .detail-container .poster-area li:last-child{margin-right: 24px;}
   /* // 슬라이더로 교체시 css 수정 */
@@ -646,12 +642,12 @@ export default {
     .detail-container .still-cut-area li:last-child{margin-right: 24px;}
 
     /* 슬라이더로 교체시 css 수정 */
-    .detail-container .poster-area{margin-top: 10px;}
+    /* .detail-container .poster-area{margin-top: 10px;}
     .detail-container section.poster-area .section-tit{padding: 1.125rem 24px;}
     .detail-container .poster-area ul{overflow: hidden;}
     .detail-container .poster-area li{float: left;width: 36%;margin-left: 3.86%;border-radius: 5px;overflow: hidden;}
     .detail-container .poster-area li:first-child{margin-left: 24px;}
-    .detail-container .poster-area li:last-child{margin-right: 24px;}
+    .detail-container .poster-area li:last-child{margin-right: 24px;} */
     /* // 슬라이더로 교체시 css 수정 */
 
     .detail-container .sns-area{margin-top: 10px;}
