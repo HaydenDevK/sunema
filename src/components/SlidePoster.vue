@@ -43,6 +43,12 @@
                 slidesPerView: 2.33, 
                 spaceBetween: 16, 
                 freeMode: true,
+                breakpoints: {
+                  1024: {
+                    slidesPerView:4.55,
+                    spaceBetween: 24
+                  }
+                }
             }
           };
       },
@@ -154,21 +160,13 @@
   margin-top: 16.5px;
   margin-right: -24px;
   padding-right: 24px;
-  /* display: flex;
-  justify-content: left; */
 }
 #container .contents section .swiper-container .swiper-slide {
-  /* position: relative;
-  width: 40.4%; */
-  /* margin-left: 16px; */
   font-size: 0;
 }
 #container .contetns section .swiper-container .swiper-slide > a {
   display: block;
 }
-/* #container .contents section .swiper-container .swiper-slide:first-child {
-  margin-left: 0;
-} */
 #container .contents section .swiper-container .swiper-slide img {
   width: 100%;
   border-radius: 5px;
@@ -192,82 +190,6 @@
   font-weight: 700;
   color: rgba(255, 255, 255, 0.8);
 }
-/* #container .contents .upcoming ul li {
-  width: 69.67%;
-}
-#container .contents .upcoming ul li a {
-  display: block;
-  position: relative;
-  padding-top: 56%;
-  width: 100%;
-  height: 0;
-}
-#container .contents .upcoming ul li iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 5px;
-} */
-#container .contents section .tab-btn::after {
-  content: '';
-  display: block;
-  clear: both;
-}
-#container .contents section .tab-btn li {
-  position: relative;
-  float: left;
-  display: block;
-  font-size: 4.35vw;
-  font-weight: 700;
-  line-height: 6.28vw;
-  letter-spacing: -0.02em;
-  color: rgba(255, 255, 255, 0.5);
-  padding-left: 10px;
-  margin-left: 10px;
-}
-#container .contents section .tab-btn li::after {
-  content: '';
-  display: block;
-  width: 1px;
-  height: 4.83vw;
-  background: #fff;
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
-#container .contents section .tab-btn li:first-child {
-  padding-left: 0;
-  margin-left: 0;
-}
-#container .contents section .tab-btn li:first-child::after {
-  display: none;
-}
-#container .contents section .tab-btn li.active {
-  color: #fff;
-}
-#container .contents section .tab-contents {
-  margin-top: 16.5px;
-}
-#container .contents section .tab-contents ul {
-  display: none;
-}
-#container .contents section .tab-contents ul.active {
-  display: block;
-}
-#container .contents section .tab-contents ul li {
-  width: 80.8%;
-}
-#container .contents .trending .tab-contents ul li {
-  width: 56.5%;
-}
-#container .contents .trending .tab-contents ul li img {
-  width: 100%;
-  border-radius: 5px;
-}
-
 
 @media (min-width: 1024px) {
   #container .contents section {
@@ -308,14 +230,10 @@
     + label::after {
     left: 2.2vw;
   }
-  #container .contents section > ul {
+  #container .contents section > .swiper-container {
     margin-top: 18px;
   }
-  #container .contents section > ul li {
-    width: 19.06vw;
-    margin-left: 24px;
-  }
-  #container .contents section > ul li .number {
+  #container .contents section > .swiper-container .swiper-slide .number {
     left: 5.59px;
     top: -6px;
     font-size: 5.08vw;
@@ -325,23 +243,6 @@
     top: 11px;
     font-size: 2.05vw;
     line-height: 2.54vw;
-  }
-  #container .contents .upcoming ul li {
-    width: 41.6vw;
-  }
-  #container .contents section .tab-btn li {
-    font-size: 2.34vw;
-    font-weight: 500;
-    line-height: 3.42vw;
-  }
-  #container .contents section .tab-btn li::after {
-    height: 1.95vw;
-  }
-  #container .contents section .tab-contents {
-    margin-top: 18px;
-  }
-  #container .contents section .tab-contents ul li {
-    width: 35.35vw;
   }
 }
 </style>

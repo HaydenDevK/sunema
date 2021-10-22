@@ -2,19 +2,29 @@
     <section>
         <h2>{{ title }}</h2>
         <ul class="actor-list">
-            <li v-for="item in actor" :key="item.id">
+          <li v-for="item in getActor()" :key="item.id">
             <figure>
                 <router-link :to="`/actordetail/${item.id}`">
                     <img :src="getImage(item.profile_path)" alt="" />
                     <figcaption>
                     <strong>{{ item.name }}</strong>
-                    <p v-if="item.known_for[0].name !== undefined">
-                        {{ item.known_for[0].name + ',' }}
-                    </p>
+                    <div class="film-box">
+                      <template v-for="(item2, index) in item.known_for">
+                        <span v-if="item2.name !== undefined" :key="index">
+                            {{ item2.name + ',' }}
+                        </span>
+                        <span v-if="item2.title !== undefined" :key="index">
+                            {{ item2.title + ',' }}
+                        </span>
+                      </template>
+                      <!-- <span v-if="item.known_for[1].name !== undefined">
+                        {{ item.known_for[1].name + ',' }}
+                      </span> -->
+                    </div>
                     </figcaption>
                 </router-link>
             </figure>
-            </li>
+          </li>
         </ul>
         <router-link to="/actor">전체보기</router-link>
     </section>
@@ -29,6 +39,7 @@
         },
         mounted() {
             this.getInitActor();
+            console.log()
         },
         methods: {
             getInitActor() {
@@ -38,13 +49,22 @@
             getImage(profile_path) {
                 // console.log(profile_path)
                 return `https://image.tmdb.org/t/p/w300${profile_path}`;
+            },
+            getActor() {
+              let actor = this.actor;
+              if (screen.width < 1024) {
+                actor = actor.slice(0, 3);
+              } else {
+                actor = actor.slice(0, 6);
+              }
+              return actor;
             }
         }
     }
 </script>
 
 <style scoped>
-    #container .contents section {
+#container .contents section {
   position: relative;
   width: 100%;
   margin-top: 25.5px;
@@ -94,23 +114,24 @@
 }
 #container .contents .popular-actor .actor-list li figure {
   width: 100%;
-  height: 78px;
+  height: 18.84vw;
   overflow: hidden;
   border-radius: 5px;
 }
 #container .contents .popular-actor .actor-list li figure a {
     display:flex;
+    width: 100%;
+    height:26.33vw;
 }
 #container .contents .popular-actor .actor-list li figure img {
   width: 18.841vw;
-  /* border-radius: 5px 0 0 5px / 5px 0 0 5px; */
 }
 #container .contents .popular-actor .actor-list li figure figcaption {
   width: calc(100% - 18.841vw);
+  height:100%;
   background: #212634;
-  /* border-radius: 0 5px 5px 0 / 0 5px 5px 0; */
   color: #fff;
-  padding: 3.38vw 2.05vw 1.76vw;
+  padding: 3.38vw 2.05vw 4.35vw;
 }
 #container .contents .popular-actor .actor-list li figure figcaption strong {
   font-size: 4.35vw;
@@ -118,15 +139,21 @@
   line-height: 5.56vw;
   letter-spacing: -0.02em;
 }
-#container .contents .popular-actor .actor-list li figure figcaption p {
+#container .contents .popular-actor .actor-list li figure figcaption .film-box {
+  width:100%;
+  height:5.56vw;
+  overflow: hidden;
+  padding-top:8px;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+#container .contents .popular-actor .actor-list li figure figcaption .film-box span {
   font-size: 2.9vw;
   line-height: 3.62vw;
   letter-spacing: 0.25px;
-  padding: 8px 0 0 2px;
-  width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+}
+#container .contents .popular-actor .actor-list li figure figcaption .film-box span:first-child {
+  margin-left:2px;
 }
 @media (min-width: 1024px) {
     #container .contents section {
@@ -157,22 +184,36 @@
   #container .contents .popular-actor .actor-list li:nth-child(2) {
     margin-top: 0;
   }
+  #container .contents .popular-actor .actor-list li figure {
+    height:10.64vw;
+  }
+  #container .contents .popular-actor .actor-list li figure a {
+    width:100%;
+    height:14.65vw;
+  }
   #container .contents .popular-actor .actor-list li figure img {
     width: 10.65vw;
   }
   #container .contents .popular-actor .actor-list li figure figcaption {
     width: calc(100% - 10.65vw);
-    padding: 19.56px 29.42px 23.12px;
+    height:100%;
+    padding: 1.91vw 2.87vw 2.26vw;
   }
   #container .contents .popular-actor .actor-list li figure figcaption strong {
     font-size: 2.05vw;
     line-height: 2.54vw;
   }
-  #container .contents .popular-actor .actor-list li figure figcaption p {
+  #container .contents .popular-actor .actor-list li figure figcaption .film-box {
+    padding-top:17.32px;
+    height:calc(100% - 2.54vw);
+  }
+  #container .contents .popular-actor .actor-list li figure figcaption .film-box span {
     font-size: 1.76vw;
     line-height: 2.25vw;
     font-weight: 700;
-    padding: 17.32px 0 0 2px;
+  }
+  #container .contents .popular-actor .actor-list li figure figcaption .film-box span:first-child {
+    margin-left:2px;
   }
 }
 </style>

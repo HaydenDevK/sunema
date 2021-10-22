@@ -40,6 +40,12 @@ export default {
         slidesPerView: 1.41,
         spaceBetween: 16,
         freeMode: true,
+        breakpoints: {
+          1024: {
+            slidesPerView:2.22,
+            spaceBetween:24
+          }
+        }
       },
     };
   },
@@ -87,10 +93,6 @@ export default {
 #container .contetns section .swiper-container .swiper-slide > a {
   display: block;
 }
-#container .contents section .swiper-container .swiper-slide img {
-  width: 100%;
-  border-radius: 5px;
-}
 #container .contents section > a {
   display: block;
   position: absolute;
@@ -136,10 +138,6 @@ export default {
   }
   #container .contents section > .swiper-container {
     margin-top: 18px;
-  }
-  #container .contents section > .swiper-container .swiper-slide {
-    width: 19.06vw;
-    margin-left: 24px;
   }
   #container .contents section > a {
     top: 11px;
