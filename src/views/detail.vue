@@ -1,6 +1,5 @@
 <template>
   <div id="detail-container" class="detail-container">
-    <!-- <button @click="printState">클릭</button> -->
       <!-- s: top-area -->
       <section class="top-area">
         <!-- video -->
@@ -12,6 +11,7 @@
         <!-- poster -->
         <div class="poster-box">
           <div class="bg-box">
+            <!-- <img :src="getBackDrop(movieDetail.backdrop_path)" alt="배경 이미지"> -->
             <img :src="getBackDrop(movieDetail.backdrop_path)" alt="배경 이미지">
           </div>
           <div class="img-box">
@@ -71,24 +71,32 @@
             </div>
           </div>
           <div class="streaming-box tablet-ui">
-            <span class="txt-wrap">
-              스크리밍 서비스로 보기
-            </span>
+            <div class="is-flex-inner">
+              <span class="txt-wrap">
+                스크리밍 서비스로 보기
+              </span>
+              <ul class="btn-to-box clear">
+                <li class="btn-to-streaming netflix">
+                  <router-link to="">Netflix</router-link>
+                </li>
+                <li class="btn-to-streaming youtube">
+                  <router-link to="">Youtube</router-link>
+                </li>
+                <li class="btn-to-streaming watcha">
+                  <router-link to="">Watcha</router-link>
+                </li>
+              </ul>
+            </div>
           </div>
           <div class="tag-box">
             <ul>
-              <li><router-link to="">#<span>tagtagtagtagtagtag</span></router-link></li>
-              <li><router-link to="">#<span>tag</span></router-link></li>
-              <li><router-link to="">#<span>tagtagtag</span></router-link></li>
-              <li><router-link to="">#<span>tag tag</span></router-link></li>
-              <li><router-link to="">#<span>tagtagtagtagtagtag</span></router-link></li>
-              <li><router-link to="">#<span>tag</span></router-link></li>
-              <li><router-link to="">#<span>tagtagtag</span></router-link></li>
-              <li><router-link to="">#<span>tag tag</span></router-link></li>
+              <li v-for="item in $store.state.detail.movieKeyword" :key="item.id"><router-link :to="`/keywordsearch/${item.id}`">#<span>{{ item.name }}</span></router-link></li>
             </ul>
           </div>
+          <!-- <ListKeyword View="detail"/> -->
         </div>
         
+          
       </section>
       <!-- e: info-area -->
 
@@ -111,9 +119,9 @@
               <li class="box-x-item">
                 <router-link to="">
                   <div class="man-img">
-                    <img src="@/assets/images/detail/thum_man_02.png" alt="출연인물 이미지">
+                    <img src="@/assets/images/detail/thum_man_01.png" alt="출연인물 이미지">
                   </div>
-                  <p class="name">mapoLee</p>
+                  <p class="name">mapokim</p>
                 </router-link>
               </li>
               <li class="box-x-item">
@@ -121,15 +129,15 @@
                   <div class="man-img">
                     <img src="@/assets/images/detail/thum_man_01.png" alt="출연인물 이미지">
                   </div>
-                  <p class="name">mapokimmapokimmapokim</p>
+                  <p class="name">mapokim</p>
                 </router-link>
               </li>
               <li class="box-x-item">
                 <router-link to="">
                   <div class="man-img">
-                    <img src="@/assets/images/detail/thum_man_02.png" alt="출연인물 이미지">
+                    <img src="@/assets/images/detail/thum_man_01.png" alt="출연인물 이미지">
                   </div>
-                  <p class="name">mapoLeemapoLeemapoLeemapoLee</p>
+                  <p class="name">mapokim</p>
                 </router-link>
               </li>
             </ul>
@@ -146,36 +154,18 @@
           </dt>
           <dd class="box-x-wrap">
             <ul class="video-list box-x">
-              <li class="box-x-item">
+              <!-- 여기서 뿌리고 끝  --> 
+              <li class="box-x-item" v-for="item in movieVideo" :key="item.id">
                 <router-link to="">
                   <div class="video-box">
-                    <img src="@/assets/images/detail/thum_video_01.png" alt="동영상 이미지">
+                    <iframe
+                      :src="getMovieVideo(item.key)"
+                      width="100%"
+                      height="auto"
+                      frameborder="0"
+                    ></iframe>
                   </div>
-                  <div class="icon_play"></div>
-                </router-link>
-              </li>
-              <li class="box-x-item">
-                <router-link to="">
-                  <div class="video-box">
-                    <img src="@/assets/images/detail/thum_video_02.png" alt="동영상 이미지">
-                  </div>
-                  <div class="icon_play"></div>
-                </router-link>
-              </li>
-              <li class="box-x-item">
-                <router-link to="">
-                  <div class="video-box">
-                    <img src="@/assets/images/detail/thum_video_01.png" alt="동영상 이미지">
-                  </div>
-                  <div class="icon_play"></div>
-                </router-link>
-              </li>
-              <li class="box-x-item">
-                <router-link to="">
-                  <div class="video-box">
-                    <img src="@/assets/images/detail/thum_video_02.png" alt="동영상 이미지">
-                  </div>
-                  <div class="icon_play"></div>
+                  <!-- <div class="icon_play"></div> -->
                 </router-link>
               </li>
             </ul>
@@ -192,31 +182,10 @@
           </dt>
           <dd class="box-x-wrap">
             <ul class="video-list box-x">
-              <li class="box-x-item">
+              <li class="box-x-item" v-for="item in $store.state.detail.movieDetail" :key="item.id">
                 <router-link to="">
                   <div class="img-box">
-                    <img src="@/assets/images/detail/thum_still_01.png" alt="스틸컷 이미지">
-                  </div>
-                </router-link>
-              </li>
-              <li class="box-x-item">
-                <router-link to="">
-                  <div class="img-box">
-                    <img src="@/assets/images/detail/thum_still_02.png" alt="스틸컷 이미지">
-                  </div>
-                </router-link>
-              </li>
-              <li class="box-x-item">
-                <router-link to="">
-                  <div class="img-box">
-                    <img src="@/assets/images/detail/thum_still_01.png" alt="스틸컷 이미지">
-                  </div>
-                </router-link>
-              </li>
-              <li class="box-x-item">
-                <router-link to="">
-                  <div class="img-box">
-                    <img src="@/assets/images/detail/thum_still_02.png" alt="스틸컷 이미지">
+                    <img :src="getBackDrop(movieDetail.backdrop_path)" alt="스틸컷 이미지">
                   </div>
                 </router-link>
               </li>
@@ -233,16 +202,30 @@
           <dt>
             <div class="section-tit">포스터</div>
           </dt>
-          <dd>
-            <ul class="video-list clear">
-              <li>
+          <dd class="box-x-wrap">
+            <ul class="video-list box-x">
+              <li class="box-x-item">
                 <router-link to="">
                   <div class="img-box">
                     <img src="@/assets/images/detail/thum_poster_01.png" alt="포스터 이미지">
                   </div>
                 </router-link>
               </li>
-              <li>
+              <li class="box-x-item">
+                <router-link to="">
+                  <div class="img-box">
+                    <img src="@/assets/images/detail/thum_poster_02.png" alt="포스터 이미지">
+                  </div>
+                </router-link>
+              </li>
+              <li class="box-x-item">
+                <router-link to="">
+                  <div class="img-box">
+                    <img src="@/assets/images/detail/thum_poster_02.png" alt="포스터 이미지">
+                  </div>
+                </router-link>
+              </li>
+              <li class="box-x-item">
                 <router-link to="">
                   <div class="img-box">
                     <img src="@/assets/images/detail/thum_poster_02.png" alt="포스터 이미지">
@@ -309,17 +292,15 @@
 </template>
 
 <script>
+// import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
+// import 'swiper/css/swiper.css';
+
 export default {
   name: 'Detail',
-  props:{
-    
-  },
-  components:{},
-  data(){
-    return{
-      movieDetail: [],
-    };
-  },
+  // components:{
+  //   Swiper,
+  //   SwiperSlide
+  // },
   computed:{
     getGenres(){
       let genre = '';
@@ -330,39 +311,49 @@ export default {
         }
       }
       return genre;
-    }
+    },
+    movieDetail(){
+      return this.$store.state.detail.movieDetail;
+    },
+    movieVideo(){
+      //7. 여기서 가져오고 
+      return this.$store.state.detail.movieVideo;
+    },
+    movieKeyword(){
+      return this.$store.state.detail.movieKeyword;
+    },
   },
   mounted(){
-    this.initMovieDetail();
+    console.log(this.$route.params);
 
     this.$store
-      .dispatch('detail/getMovieDetail', this.$route.params.movie_id)
+      .dispatch('detail/getMovieDetail', this.$route.params.idx)
       .then(() => {
-        this.movieDetail = this.$store.state.detail.movieDetail;
-      });    
+        this.idx = this.$store.state.detail.movieDetail;
+      });
+
+    this.initMovieDetail();
   },
   methods: {
     initMovieDetail(){
       console.log('init movie가 잘 호출됨');
-      this.$store.dispatch('detail/getMovieDetail');
-      this.$store.dispatch('detail/getMovieRecommendation');
+      this.$store.dispatch('detail/getMovieRecommendation', this.$route.params.idx);
+      this.$store.dispatch('detail/getMovieVideo', this.$route.params.idx);
+      this.$store.dispatch('detail/getMovieImg', this.$route.params.idx); //getMovieImg에 값을 넣기 위해서 작성했으나, 알맹이가 없음
+      this.$store.dispatch('detail/getMovieKeyword', this.$route.params.idx);
     },
-
     getImage(poster_path) {
       return `https://image.tmdb.org/t/p/w300${poster_path}`;
     },
     getBackDrop(backdrop_path) {
       return `https://image.tmdb.org/t/p/w300${backdrop_path}`;
     },
-    
     // getYoutube(key) {
     //   console.log('https://www.youtube.com/embed/' + key);
     //   return 'https://www.youtube.com/embed/' + key;
     // },
-    // getRecommendation(poster_path) {
-    //   return `https://image.tmdb.org/t/p/w300${poster_path}/recommendations`;
-    // },
-    getRecommendation() {   
+    getMovieVideo(key) {
+      return 'https://www.youtube.com/embed/' + key;
     },
   }
 };
@@ -519,8 +510,7 @@ export default {
   /* 슬라이더로 교체시 css 수정 */
   .detail-container .poster-area{margin-top: 10px;}
   .detail-container section.poster-area .section-tit{padding: 1.125rem 24px;}
-  .detail-container .poster-area ul{overflow: hidden;}
-  .detail-container .poster-area li{float: left;width: 36%;margin-left: 3.86%;border-radius: 5px;overflow: hidden;}
+  .detail-container .poster-area li{width: 36%;margin-left: 3.86%;border-radius: 5px;overflow: hidden;}
   .detail-container .poster-area li:first-child{margin-left: 24px;}
   .detail-container .poster-area li:last-child{margin-right: 24px;}
   /* // 슬라이더로 교체시 css 수정 */
@@ -611,12 +601,16 @@ export default {
     .detail-container .info-area .info-series .view-series .before a{display: inline-block;padding-left: 20px;}
     .detail-container .info-area .info-series .view-series .sel{font-size: 1rem;}
     .detail-container .info-area .info-series .view-series .sel a{display: inline-block;padding-right: 18px;}
-    /* ///////////////////// */
 
-    .detail-container .info-area .info-series .streaming-box.tablet-ui{display: none;}
-    .detail-container .info-area .info-series .streaming-box.mo-ui{display: block;}
-    .detail-container .info-area .info-series .streaming-box.mo-ui .btn-wrap{margin-top: 0.688rem;width: 100%;padding: 12px;display: flex;justify-content: center;background: #43FF8E;border-radius: 10px;}
-    .detail-container .info-area .info-series .streaming-box.mo-ui .btn-wrap a{display: inline-block;padding-right: 20px;color: #000;font-size: 0.875rem;font-weight: 700;background: url('../assets/images/detail/icon_are_black.png') top 50% right 0 no-repeat;background-size: 10.15px 12.36px;}
+    .detail-container .info-area .info-series .streaming-box.tablet-ui{display: block;margin-top: 1.5rem;}
+    .detail-container .info-area .info-series .streaming-box.mo-ui{display: none;}
+    .detail-container .info-area .info-series .streaming-box.tablet-ui .is-flex-inner{display: flex;justify-content: space-between;align-items: center;padding: 1.5rem 5.625rem;background: #212634;border-radius: 10px;}
+    .detail-container .info-area .info-series .streaming-box.tablet-ui .is-flex-inner .txt-wrap{font-size: 1.313rem;font-weight: 700;}
+    .detail-container .info-area .info-series .streaming-box.tablet-ui .is-flex-inner ul.btn-to-box li{position: relative;width:7.375rem;padding: 7.438rem 0 0;margin-left: 1.875rem;float: left;background: url(../assets/images/detail/bg_btn_streaming.png) top 0 left 0.437rem no-repeat;background-size: 6.5rem 6.5rem;text-align: center;font-size: 1.125rem;line-height: 1.409rem;vertical-align: top;}
+    .detail-container .info-area .info-series .streaming-box.tablet-ui .is-flex-inner ul.btn-to-box li:first-child{margin-left: 0;}
+    .detail-container .info-area .info-series .streaming-box.tablet-ui .is-flex-inner ul.btn-to-box li.netflix::before{content: "";position: absolute;top: 1.495rem;left: 50%;transform: translateX(-50%);background: url(../assets/images/detail/icon_nerflix.png) no-repeat;width:5.019rem;height: 3.375rem;background-size: contain;}
+    .detail-container .info-area .info-series .streaming-box.tablet-ui .is-flex-inner ul.btn-to-box li.youtube::before{content: "";position: absolute;top: 1.143rem;left: 50%;transform: translateX(-50%);background: url(../assets/images/detail/icon_youtube.png) no-repeat;width: 4.171rem;height: 4.171rem;background-size: contain;}
+    .detail-container .info-area .info-series .streaming-box.tablet-ui .is-flex-inner ul.btn-to-box li.watcha::before{content: "";position: absolute;top: 1.123rem;left: 50%;transform: translateX(-50%);background: url(../assets/images/detail/icon_watcha.png) no-repeat;width: 3.938rem;height: 3.938rem;background-size: contain;}
 
     .detail-container .info-area .info-series .tag-box{margin: 0.813rem -24px 0;width: calc(100% + 48px);overflow-x: scroll;overflow-y: hidden;}
     .detail-container .info-area .info-series .tag-box ul{width: auto;white-space: nowrap;padding: 0 24px;}
