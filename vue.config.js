@@ -3,8 +3,8 @@ module.exports = {
   devServer: {
     disableHostCheck: true
   },
-  publicPath: '/movie-app',
-  outputDir: './docs'
+  publicPath: '/dist',
+  outputDir: './dist'
   //   outputDir: "dist",  // publicPath: './',
   // publicPath: './'
 };
