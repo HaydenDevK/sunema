@@ -4,7 +4,7 @@ module.exports = {
     disableHostCheck: true
   },
   publicPath: '/movie-app',
-  outputDir: 'dist'
+  outputDir: './docs'
   //   outputDir: "dist",  // publicPath: './',
   // publicPath: './'
 };
