@@ -25,9 +25,6 @@ export default {
         : 'DefaultLayout';
     },
   },
-  mounted() {
-    console.log('layout');
-  },
 };
 </script>
 

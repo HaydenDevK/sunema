@@ -7,25 +7,17 @@
     </header>
 
     <!-- 버튼 -->
-    <section
-      v-if="$store.state.keywordSearch.mediaKeywords.length > 0"
-      class="wrapper-btn-type"
-    >
+    <section v-if="$store.state.keywordSearch.mediaKeywords.length > 0" class="wrapper-btn-type">
       <button
         class="btn-type"
         @click="$store.dispatch('keywordSearch/getKeywordMediaElse', 'movie')"
       >
-        <p
-          :class="{ active: $store.state.keywordSearch.mediaType === 'movie' }"
-        >
+        <p :class="{active: $store.state.keywordSearch.mediaType === 'movie'}">
           영화
         </p>
       </button>
-      <button
-        class="btn-type"
-        @click="$store.dispatch('keywordSearch/getKeywordMediaElse', 'tv')"
-      >
-        <p :class="{ active: $store.state.keywordSearch.mediaType === 'tv' }">
+      <button class="btn-type" @click="$store.dispatch('keywordSearch/getKeywordMediaElse', 'tv')">
+        <p :class="{active: $store.state.keywordSearch.mediaType === 'tv'}">
           티비 프로그램
         </p>
       </button>
@@ -63,11 +55,7 @@
       class="no-keyword-media"
     >
       해당 키워드에 맞는
-      {{
-        $store.state.keywordSearch.mediaType === 'movie'
-          ? '영화'
-          : '티비 프로그램'
-      }}
+      {{ $store.state.keywordSearch.mediaType === 'movie' ? '영화' : '티비 프로그램' }}
       작품이 없습니다.
     </div>
   </div>
@@ -79,10 +67,11 @@ import ListKeyword from '../components/ListKeyword.vue';
 
 export default {
   name: 'KeywordSearch',
-  components: { ListScroll, ListKeyword },
+  components: {ListScroll, ListKeyword},
   async mounted() {
     //  스크롤 하단 이동 체크하기
     //  하단 이동하면 콜백 함수 실행
+    this.$store.commit('keywordSearch/SET_MEDIA_TYPE', 'movie');
     this.$isScrollBottomCheck(this.scrollCallback);
   },
   methods: {

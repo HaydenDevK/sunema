@@ -14,6 +14,7 @@ import topRated from './topRated';
 import trending from './trending';
 import popular from './popular';
 import upcoming from './upcoming';
+import tvmoviesearch from './tvmoviesearch';
 
 Vue.use(Vuex);
 
@@ -32,6 +33,7 @@ export default new Vuex.Store({
     topRated,
     trending,
     popular,
-    upcoming
+    upcoming,
+    tvmoviesearch
   }
 });

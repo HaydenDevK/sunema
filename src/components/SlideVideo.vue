@@ -16,12 +16,12 @@
         </router-link>
       </swiper-slide>
     </swiper>
-    <router-link to="">전체보기</router-link>
+    <router-link :to="rink">전체보기</router-link>
   </section>
 </template>
 
 <script>
-import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
+import {Swiper, SwiperSlide} from 'vue-awesome-swiper';
 import 'swiper/css/swiper.css';
 
 export default {
@@ -29,10 +29,11 @@ export default {
     title: String,
     movie: Array,
     type: String,
+    rink: String
   },
   components: {
     Swiper,
-    SwiperSlide,
+    SwiperSlide
   },
   data() {
     return {
@@ -42,18 +43,18 @@ export default {
         freeMode: true,
         breakpoints: {
           1024: {
-            slidesPerView:2.22,
-            spaceBetween:24
+            slidesPerView: 2.22,
+            spaceBetween: 24
           }
         }
-      },
+      }
     };
   },
   methods: {
     getYoutube(key) {
       return 'https://www.youtube.com/embed/' + key;
-    },
-  },
+    }
+  }
 };
 </script>
 

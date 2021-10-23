@@ -4,7 +4,7 @@
       <h1 class="logo">
         <router-link to="">SUNEMA</router-link>
       </h1>
-      <nav>
+      <nav v-if="false">
         <router-link to="">영화</router-link>
         <router-link to="">TV프로그램</router-link>
         <router-link to="">카테고리</router-link>
@@ -37,13 +37,14 @@
           type="now"
           streaming="F"
           rank="F"
-          rink="nowmovie"
+          rink="movienow"
           :movie="$store.state.main.nowPlayingMovie"
         />
         <SlideVideo
           class="upcoming"
           title="개봉 예정"
           type="upcoming"
+          rink="upcoming"
           :movie="$store.state.main.upcomingMovie"
         />
         <SlideBigPoster
@@ -56,19 +57,19 @@
           :movie="$store.state.main.trendingContents"
         />
         <SlidePoster
-        class="today-tv"
-        title="오늘 방영할 TV프로그램"
-        type="today"
-        streaming="F"
-        rank="F"
-        rink="tvtoday"
-        :movie="$store.state.main.todayTv"
+          class="today-tv"
+          title="오늘 방영할 TV프로그램"
+          type="today"
+          streaming="F"
+          rank="F"
+          rink="tvtoday"
+          :movie="$store.state.main.todayTv"
         />
         <PopularActor
-        class="popular-actor"
-        title="인기 배우"
-        type="actor"
-        :actor="$store.state.actor.popularActor"
+          class="popular-actor"
+          title="인기 배우"
+          type="actor"
+          :actor="$store.state.actor.popularActor"
         />
       </div>
     </div>
@@ -77,13 +78,13 @@
 </template>
 
 <script>
-import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
+import {Swiper, SwiperSlide} from 'vue-awesome-swiper';
 import 'swiper/css/swiper.css';
 
 import SlidePoster from '@/components/SlidePoster.vue';
 import SlideVideo from '@/components/SlideVideo.vue';
 import SlideBigPoster from '@/components/SlideBigPoster.vue';
-import PopularActor from'@/components/PopularActor.vue';
+import PopularActor from '@/components/PopularActor.vue';
 
 export default {
   name: 'Main',
@@ -97,11 +98,11 @@ export default {
   },
   data() {
     return {
-      swiperOption: { 
+      swiperOption: {
         slidesPerView: 1,
         autoplay: {
-          "delay": 5000,
-          "disableOnInteraction": false
+          delay: 5000,
+          disableOnInteraction: false
         }
       }
     };
@@ -112,7 +113,6 @@ export default {
   },
   methods: {
     getMovieInfo() {
-      console.log('getMovieInfo 호출');
       this.$store.dispatch('main/getPopularMovie');
       this.$store.dispatch('main/getNowPlayingMovie');
       this.$store.dispatch('main/getUpcomingMovie');
@@ -122,7 +122,7 @@ export default {
     getImage(poster_path) {
       return `https://image.tmdb.org/t/p/w300${poster_path}`;
     }
-  },
+  }
 };
 </script>
 
@@ -133,11 +133,11 @@ export default {
   font-family: 'Spoqa Han Sans Neo', 'sans-serif';
 }
 #wrap {
-    width: 100%;
-    min-width: 320px;
-    background: #181727;
-  }
-  
+  width: 100%;
+  min-width: 320px;
+  background: #181727;
+}
+
 /* 로고,네비 */
 header {
   width: 100%;
@@ -191,7 +191,7 @@ header .logo {
   position: absolute;
   left: 0;
   top: 0;
-  z-index:10;
+  z-index: 10;
   width: 100%;
   height: 127px;
   background: linear-gradient(180deg, #181727 0%, rgba(25, 25, 64, 0) 100%);
@@ -202,14 +202,10 @@ header .logo {
   position: absolute;
   left: 0;
   bottom: -1px;
-  z-index:10;
+  z-index: 10;
   width: 100%;
   height: 301.5px;
-  background: linear-gradient(
-    359.75deg,
-    rgba(24, 23, 39, 0.98) 42.71%,
-    rgba(25, 25, 64, 0) 99.82%
-  );
+  background: linear-gradient(359.75deg, rgba(24, 23, 39, 0.98) 42.71%, rgba(25, 25, 64, 0) 99.82%);
 }
 #container .visual .swiper-slide {
   width: 100%;
@@ -230,7 +226,7 @@ header .logo {
   bottom: 56.5px;
   z-index: 20;
   transform: translateX(-50%);
-  word-break:keep-all;
+  word-break: keep-all;
 }
 #container .visual .swiper-slide .banner-text strong {
   display: block;
@@ -317,10 +313,14 @@ header .logo {
     position: absolute;
     left: 0;
     bottom: -1px;
-    z-index:10;
+    z-index: 10;
     width: 100%;
     height: 301.5px;
-    background: linear-gradient(359.75deg, rgba(24, 23, 39, 0.7) 42.71%, rgba(25, 25, 64, 0) 99.82%);
+    background: linear-gradient(
+      359.75deg,
+      rgba(24, 23, 39, 0.7) 42.71%,
+      rgba(25, 25, 64, 0) 99.82%
+    );
   }
   #container .visual .swiper-slide .banner-text {
     width: auto;
@@ -350,7 +350,7 @@ header .logo {
     margin-right: 0.98vw;
   }
   #container .contents {
-    padding:0 32px 66px;
+    padding: 0 32px 66px;
   }
 }
 </style>

@@ -3,7 +3,7 @@
     <router-link
       v-for="item in Media"
       :key="item.id"
-      :to="`/detail/${item.id}`"
+      :to="`/detail/${item.id}?rink=${$store.state.keywordSearch.mediaType}`"
     >
       <img :src="getImage(item.poster_path)" alt="" />
     </router-link>

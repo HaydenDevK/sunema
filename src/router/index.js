@@ -10,45 +10,37 @@ const routes = [
     name: 'Main',
     component: Main,
     // NoTopBottomLayout 적용
-    meta: { layout: 'NoTopBottomLayout' }
+    meta: {layout: 'NoTopBottomLayout'}
   },
   {
     path: '/detail/:idx',
     name: 'Detail',
-    component: () =>
-      import(/* webpackChunkName: "detail" */ '../views/detail.vue')
+    component: () => import(/* webpackChunkName: "detail" */ '../views/detail.vue')
   },
   {
     path: '/round/:tv_id', // 전체 회차
     name: 'Round',
-    component: () =>
-      import(/* webpackChunkName: "round" */ '../views/round.vue')
+    component: () => import(/* webpackChunkName: "round" */ '../views/round.vue')
   },
   {
     path: '/upcoming', // 개봉 예정 (선혜)
     name: 'Upcoming',
-    component: () =>
-      import(/* webpackChunkName: "upcoming" */ '../views/upcoming.vue')
+    component: () => import(/* webpackChunkName: "upcoming" */ '../views/upcoming.vue')
   },
   {
     path: '/movienow', // 현재 상영중 (선혜)
     name: 'MovieNow',
-    component: () =>
-      import(/* webpackChunkName: "movienow" */ '../views/movieNow.vue')
+    component: () => import(/* webpackChunkName: "movienow" */ '../views/movieNow.vue')
   },
   {
     path: '/popular', // 인기 콘텐츠
     name: 'Popular',
-    component: () =>
-      import(/* webpackChunkName: "popular" */ '../views/popular.vue')
+    component: () => import(/* webpackChunkName: "popular" */ '../views/popular.vue')
   },
   {
     path: '/keywordsearch/:idx', // 키워드 검색 (선혜)
     name: 'KeywordSearch',
-    component: () =>
-      import(
-        /* webpackChunkName: "keywordsearch" */ '../views/keywordSearch.vue'
-      )
+    component: () => import(/* webpackChunkName: "keywordsearch" */ '../views/keywordSearch.vue')
   },
   {
     path: '/actor', // 인기배우
@@ -56,14 +48,12 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "actordetail" */ '../views/actor.vue')
+    component: () => import(/* webpackChunkName: "actordetail" */ '../views/actor.vue')
   },
   {
     path: '/actordetail/:personId', // 인기배우 상세
     name: 'ActorDetail',
-    component: () =>
-      import(/* webpackChunkName: "actordetail" */ '../views/actorDetail.vue')
+    component: () => import(/* webpackChunkName: "actordetail" */ '../views/actorDetail.vue')
   },
   {
     path: '/search', // 검색
@@ -71,32 +61,32 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "search" */ '../views/search.vue')
+    component: () => import(/* webpackChunkName: "search" */ '../views/search.vue')
   },
   {
     path: '/tvtoday', // 오늘 방영할 티비 프로그램 (선혜)
     name: 'TvToday',
-    component: () =>
-      import(/* webpackChunkName: "tvtoday" */ '../views/tvToday.vue')
+    component: () => import(/* webpackChunkName: "tvtoday" */ '../views/tvToday.vue')
   },
   {
     path: '/tvNow', // 티비 방영중 (선혜)
     name: 'TvNow',
-    component: () =>
-      import(/* webpackChunkName: "tvnow" */ '../views/tvNow.vue')
+    component: () => import(/* webpackChunkName: "tvnow" */ '../views/tvNow.vue')
   },
   {
     path: '/topRated', // 높은 평점 (선혜)
     name: 'TopRated',
-    component: () =>
-      import(/* webpackChunkName: "toprated" */ '../views/topRated.vue')
+    component: () => import(/* webpackChunkName: "toprated" */ '../views/topRated.vue')
   },
   {
     path: '/trending', // 지금 뜨는 컨텐츠 (선혜)
     name: 'Trending',
-    component: () =>
-      import(/* webpackChunkName: "toprated" */ '../views/trending.vue')
+    component: () => import(/* webpackChunkName: "toprated" */ '../views/trending.vue')
+  },
+  {
+    path: '/tvmovieSearch/:keyword', // 지금 뜨는 컨텐츠 (선혜)
+    name: 'tvmovie',
+    component: () => import(/* webpackChunkName: "toprated" */ '../views/tvmovieSearch.vue')
   }
 ];
 

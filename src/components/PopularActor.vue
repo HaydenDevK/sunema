@@ -1,66 +1,64 @@
 <template>
-    <section>
-        <h2>{{ title }}</h2>
-        <ul class="actor-list">
-          <li v-for="item in getActor()" :key="item.id">
-            <figure>
-                <router-link :to="`/actordetail/${item.id}`">
-                    <img :src="getImage(item.profile_path)" alt="" />
-                    <figcaption>
-                    <strong>{{ item.name }}</strong>
-                    <div class="film-box">
-                      <template v-for="(item2, index) in item.known_for">
-                        <span v-if="item2.name !== undefined" :key="index">
-                            {{ item2.name + ',' }}
-                        </span>
-                        <span v-if="item2.title !== undefined" :key="index">
-                            {{ item2.title + ',' }}
-                        </span>
-                      </template>
-                      <!-- <span v-if="item.known_for[1].name !== undefined">
+  <section>
+    <h2>{{ title }}</h2>
+    <ul class="actor-list">
+      <li v-for="item in getActor()" :key="item.id">
+        <figure>
+          <router-link :to="`/actordetail/${item.id}`">
+            <img :src="getImage(item.profile_path)" alt="" />
+            <figcaption>
+              <strong>{{ item.name }}</strong>
+              <div class="film-box">
+                <template v-for="(item2, index) in item.known_for">
+                  <span v-if="item2.name !== undefined" :key="index">
+                    {{ item2.name + ',' }}
+                  </span>
+                  <span v-if="item2.title !== undefined" :key="index">
+                    {{ item2.title + ',' }}
+                  </span>
+                </template>
+                <!-- <span v-if="item.known_for[1].name !== undefined">
                         {{ item.known_for[1].name + ',' }}
                       </span> -->
-                    </div>
-                    </figcaption>
-                </router-link>
-            </figure>
-          </li>
-        </ul>
-        <router-link to="/actor">전체보기</router-link>
-    </section>
+              </div>
+            </figcaption>
+          </router-link>
+        </figure>
+      </li>
+    </ul>
+    <router-link to="/actor">전체보기</router-link>
+  </section>
 </template>
 
 <script>
-    export default {
-        props: {
-            title: String,
-            actor: Array,
-            type: String
-        },
-        mounted() {
-            this.getInitActor();
-            console.log()
-        },
-        methods: {
-            getInitActor() {
-                //api사용하는 코드
-                this.$store.dispatch('actor/getPopularActor', this.$route.params.idx);
-            },
-            getImage(profile_path) {
-                // console.log(profile_path)
-                return `https://image.tmdb.org/t/p/w300${profile_path}`;
-            },
-            getActor() {
-              let actor = this.actor;
-              if (screen.width < 1024) {
-                actor = actor.slice(0, 3);
-              } else {
-                actor = actor.slice(0, 6);
-              }
-              return actor;
-            }
-        }
-    }
+export default {
+  props: {
+    title: String,
+    actor: Array,
+    type: String,
+  },
+  mounted() {
+    this.getInitActor();
+  },
+  methods: {
+    getInitActor() {
+      //api사용하는 코드
+      this.$store.dispatch('actor/getPopularActor', this.$route.params.idx);
+    },
+    getImage(profile_path) {
+      return `https://image.tmdb.org/t/p/w300${profile_path}`;
+    },
+    getActor() {
+      let actor = this.actor;
+      if (screen.width < 1024) {
+        actor = actor.slice(0, 3);
+      } else {
+        actor = actor.slice(0, 6);
+      }
+      return actor;
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -119,16 +117,16 @@
   border-radius: 5px;
 }
 #container .contents .popular-actor .actor-list li figure a {
-    display:flex;
-    width: 100%;
-    height:26.33vw;
+  display: flex;
+  width: 100%;
+  height: 26.33vw;
 }
 #container .contents .popular-actor .actor-list li figure img {
   width: 18.841vw;
 }
 #container .contents .popular-actor .actor-list li figure figcaption {
   width: calc(100% - 18.841vw);
-  height:100%;
+  height: 100%;
   background: #212634;
   color: #fff;
   padding: 3.38vw 2.05vw 4.35vw;
@@ -140,23 +138,39 @@
   letter-spacing: -0.02em;
 }
 #container .contents .popular-actor .actor-list li figure figcaption .film-box {
-  width:100%;
-  height:5.56vw;
+  width: 100%;
+  height: 5.56vw;
   overflow: hidden;
-  padding-top:8px;
-  text-overflow:ellipsis;
-  white-space:nowrap;
+  padding-top: 8px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
-#container .contents .popular-actor .actor-list li figure figcaption .film-box span {
+#container
+  .contents
+  .popular-actor
+  .actor-list
+  li
+  figure
+  figcaption
+  .film-box
+  span {
   font-size: 2.9vw;
   line-height: 3.62vw;
   letter-spacing: 0.25px;
 }
-#container .contents .popular-actor .actor-list li figure figcaption .film-box span:first-child {
-  margin-left:2px;
+#container
+  .contents
+  .popular-actor
+  .actor-list
+  li
+  figure
+  figcaption
+  .film-box
+  span:first-child {
+  margin-left: 2px;
 }
 @media (min-width: 1024px) {
-    #container .contents section {
+  #container .contents section {
     margin-top: 29px;
   }
   #container .contents section:first-child {
@@ -185,35 +199,58 @@
     margin-top: 0;
   }
   #container .contents .popular-actor .actor-list li figure {
-    height:10.64vw;
+    height: 10.64vw;
   }
   #container .contents .popular-actor .actor-list li figure a {
-    width:100%;
-    height:14.65vw;
+    width: 100%;
+    height: 14.65vw;
   }
   #container .contents .popular-actor .actor-list li figure img {
     width: 10.65vw;
   }
   #container .contents .popular-actor .actor-list li figure figcaption {
     width: calc(100% - 10.65vw);
-    height:100%;
+    height: 100%;
     padding: 1.91vw 2.87vw 2.26vw;
   }
   #container .contents .popular-actor .actor-list li figure figcaption strong {
     font-size: 2.05vw;
     line-height: 2.54vw;
   }
-  #container .contents .popular-actor .actor-list li figure figcaption .film-box {
-    padding-top:17.32px;
-    height:calc(100% - 2.54vw);
+  #container
+    .contents
+    .popular-actor
+    .actor-list
+    li
+    figure
+    figcaption
+    .film-box {
+    padding-top: 17.32px;
+    height: calc(100% - 2.54vw);
   }
-  #container .contents .popular-actor .actor-list li figure figcaption .film-box span {
+  #container
+    .contents
+    .popular-actor
+    .actor-list
+    li
+    figure
+    figcaption
+    .film-box
+    span {
     font-size: 1.76vw;
     line-height: 2.25vw;
     font-weight: 700;
   }
-  #container .contents .popular-actor .actor-list li figure figcaption .film-box span:first-child {
-    margin-left:2px;
+  #container
+    .contents
+    .popular-actor
+    .actor-list
+    li
+    figure
+    figcaption
+    .film-box
+    span:first-child {
+    margin-left: 2px;
   }
 }
 </style>

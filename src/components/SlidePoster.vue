@@ -1,71 +1,63 @@
 <template>
-    <section>
-        <div class="title-box">
-          <h2>{{ title }}</h2>
-          <div class="streaming" v-if="streaming === 'T'">
-            <p>스트리밍 ON</p>
-            <input type="checkbox" id="str" checked />
-            <label for="str"><p>선택</p></label>
-          </div>
-        </div>
-        <swiper class="swiper" :options="swiperOption">
-          <swiper-slide v-for="(item, index) in movie" :key="item.id">
-            <router-link :to="`/detail/${item.id}`">
-              <img :src="getImage(item.poster_path)" />
-              <p class="number" v-if="rank === 'T'">{{ index + 1 }}</p>
-            </router-link>
-          </swiper-slide>
-        </swiper>
-        <router-link :to="rink">전체보기</router-link>
-    </section>
+  <section>
+    <div class="title-box">
+      <h2>{{ title }}</h2>
+      <div class="streaming" v-if="streaming === 'T'">
+        <p>스트리밍 ON</p>
+        <input type="checkbox" id="str" checked />
+        <label for="str"><p>선택</p></label>
+      </div>
+    </div>
+    <swiper class="swiper" :options="swiperOption">
+      <swiper-slide v-for="(item, index) in movie" :key="item.id">
+        <router-link :to="`/detail/${item.id}?rink=${rink}`">
+          <img :src="getImage(item.poster_path)" />
+          <p class="number" v-if="rank === 'T'">{{ index + 1 }}</p>
+        </router-link>
+      </swiper-slide>
+    </swiper>
+    <router-link :to="rink">전체보기</router-link>
+  </section>
 </template>
 
 <script>
-    import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
-    import 'swiper/css/swiper.css';
+import {Swiper, SwiperSlide} from 'vue-awesome-swiper';
+import 'swiper/css/swiper.css';
 
-    export default {
-      props: {
-          title: String,
-          movie: Array,
-          streaming: String,
-          rank: String,
-          type: String,
-          rink: String
-      },
-      components: {
-          Swiper,
-          SwiperSlide,
-      },
-      data() { 
-          return { 
-            swiperOption: { 
-                slidesPerView: 2.33, 
-                spaceBetween: 16, 
-                freeMode: true,
-                breakpoints: {
-                  1024: {
-                    slidesPerView:4.55,
-                    spaceBetween: 24
-                  }
-                }
-            }
-          };
-      },
-      mounted() {
-         console.log(this.movie);
-          /* this.$store
-          .dispatch('main/getVideoList', this.movie.id)
-          .then(() => {
-            this.videoList = this.$store.state.main.videoList;
-          }); */
-      },
-      methods: {
-        getImage(poster_path) {
-          return `https://image.tmdb.org/t/p/w300${poster_path}`;
+export default {
+  props: {
+    title: String,
+    movie: Array,
+    streaming: String,
+    rank: String,
+    type: String,
+    rink: String
+  },
+  components: {
+    Swiper,
+    SwiperSlide
+  },
+  data() {
+    return {
+      swiperOption: {
+        slidesPerView: 2.33,
+        spaceBetween: 16,
+        freeMode: true,
+        breakpoints: {
+          1024: {
+            slidesPerView: 4.55,
+            spaceBetween: 24
+          }
         }
       }
     };
+  },
+  methods: {
+    getImage(poster_path) {
+      return `https://image.tmdb.org/t/p/w300${poster_path}`;
+    }
+  }
+};
 </script>
 
 <style scoped>
@@ -137,22 +129,10 @@
   transform: translateY(-50%);
   transition: 0.1s;
 }
-#container
-  .contents
-  section
-  .title-box
-  .streaming
-  input[type='checkbox']:checked
-  + label {
+#container .contents section .title-box .streaming input[type='checkbox']:checked + label {
   background: #43ff8e;
 }
-#container
-  .contents
-  section
-  .title-box
-  .streaming
-  input[type='checkbox']:checked
-  + label::after {
+#container .contents section .title-box .streaming input[type='checkbox']:checked + label::after {
   left: 3.86vw;
 }
 
@@ -221,13 +201,7 @@
     height: 3.1vw;
     border-radius: 3.1vw;
   }
-  #container
-    .contents
-    section
-    .title-box
-    .streaming
-    input[type='checkbox']:checked
-    + label::after {
+  #container .contents section .title-box .streaming input[type='checkbox']:checked + label::after {
     left: 2.2vw;
   }
   #container .contents section > .swiper-container {

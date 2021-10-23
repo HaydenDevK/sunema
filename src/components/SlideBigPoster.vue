@@ -1,100 +1,88 @@
 <template>
-    <section>
-        <div class="title-box">
-            <h2>{{ title }}</h2>
-            <ul class="tab-btn">
-                <li
-                    @click="changeTodayContentType('movie')"
-                    :class="{ active: todayContentType === 'movie' }"
-                >
-                    {{ tab1 }}
-                </li>
-                <li
-                    @click="changeTodayContentType('tv')"
-                    :class="{ active: todayContentType === 'tv' }"
-                >
-                    {{ tab2 }}
-                </li>
-            </ul>
-        </div>
-        <div class="tab-contents">
-            <!-- tab1 -->
-            <swiper 
-              :class="{ active: todayContentType === 'movie' }"
-              :options="swiperOption"
-            >
-              <swiper-slide v-for="item in movie" :key="item.id">
-                <router-link :to="`/detail/${item.id}`">
-                  <img :src="getImage(item.poster_path)" />
-                </router-link>
-              </swiper-slide>
-            </swiper>
-            <!-- // tab1 -->
-            <!-- tab2 -->
-            <swiper 
-              :class="{ active: todayContentType === 'tv' }"
-              :options="swiperOption"
-            >
-                <swiper-slide v-for="item in movie" :key="item.id">
-                  <router-link :to="`/detail/${item.id}`">
-                    <img :src="getImage(item.poster_path)" />
-                  </router-link>
-                </swiper-slide>
-            </swiper>
-            <!-- // tab2 -->
-        </div>
-        <router-link :to="rink">전체보기</router-link>
-    </section>
+  <section>
+    <div class="title-box">
+      <h2>{{ title }}</h2>
+      <ul class="tab-btn">
+        <li
+          @click="changeTodayContentType('movie')"
+          :class="{active: todayContentType === 'movie'}"
+        >
+          {{ tab1 }}
+        </li>
+        <li @click="changeTodayContentType('tv')" :class="{active: todayContentType === 'tv'}">
+          {{ tab2 }}
+        </li>
+      </ul>
+    </div>
+    <div class="tab-contents">
+      <!-- tab1 -->
+      <swiper :class="{active: todayContentType === 'movie'}" :options="swiperOption">
+        <swiper-slide v-for="item in movie" :key="item.id">
+          <router-link :to="`/detail/${item.id}`">
+            <img :src="getImage(item.poster_path)" />
+          </router-link>
+        </swiper-slide>
+      </swiper>
+      <!-- // tab1 -->
+      <!-- tab2 -->
+      <swiper :class="{active: todayContentType === 'tv'}" :options="swiperOption">
+        <swiper-slide v-for="item in movie" :key="item.id">
+          <router-link :to="`/detail/${item.id}?rink=tv`">
+            <img :src="getImage(item.poster_path)" />
+          </router-link>
+        </swiper-slide>
+      </swiper>
+      <!-- // tab2 -->
+    </div>
+    <router-link :to="rink">전체보기</router-link>
+  </section>
 </template>
 
 <script>
-    import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
-    import 'swiper/css/swiper.css';
+import {Swiper, SwiperSlide} from 'vue-awesome-swiper';
+import 'swiper/css/swiper.css';
 
-    export default {
-        props: {
-            title: String,
-            movie: Array,
-            type: String,
-            tab1: String,
-            tab2: String,
-            rink: String
-        },
-        components: {
-            Swiper,
-            SwiperSlide
-        },
-        data() { 
-            return { 
-                swiperOption: { 
-                    slidesPerView: 1.69, 
-                    spaceBetween: 16, 
-                    freeMode: true,
-                    breakpoints: {
-                      1024: {
-                        slidesPerView:4.55,
-                        spaceBetween: 24
-                      }
-                    }
-                },
-                todayContentType: 'movie',
-            };
-        },
-        mounted(){
-          console.log(['movie', this.movie]);
-        },
-        methods: {
-          getImage(poster_path) {
-            // console.log(poster_path);
-            return `https://image.tmdb.org/t/p/w300${poster_path}`;
-          },
-          changeTodayContentType(type) {
-            this.todayContentType = type;
-            this.$store.commit('main/SET_MEDIA_TYPE', type);
-            this.$store.dispatch('main/getTrendingContents');
+export default {
+  props: {
+    title: String,
+    movie: Array,
+    type: String,
+    tab1: String,
+    tab2: String,
+    rink: String
+  },
+  components: {
+    Swiper,
+    SwiperSlide
+  },
+  data() {
+    return {
+      swiperOption: {
+        slidesPerView: 1.69,
+        spaceBetween: 16,
+        freeMode: true,
+        breakpoints: {
+          1024: {
+            slidesPerView: 4.55,
+            spaceBetween: 24
           }
         }
+      },
+      todayContentType: 'movie'
+    };
+  },
+  methods: {
+    getImage(poster_path) {
+      // console.log(poster_path);
+      return `https://image.tmdb.org/t/p/w300${poster_path}`;
+    },
+    changeTodayContentType(type) {
+      this.todayContentType = type;
+      this.$store.commit('main/SET_MEDIA_TYPE', type);
+      this.$store.dispatch('main/getTrendingContents');
     }
+  }
+};
 </script>
 
 <style scoped>
@@ -208,7 +196,7 @@
 }
 
 @media (min-width: 1024px) {
-      #container .contents section {
+  #container .contents section {
     margin-top: 29px;
   }
   #container .contents section:first-child {
@@ -237,13 +225,7 @@
     height: 3.1vw;
     border-radius: 3.1vw;
   }
-  #container
-    .contents
-    section
-    .title-box
-    .streaming
-    input[type='checkbox']:checked
-    + label::after {
+  #container .contents section .title-box .streaming input[type='checkbox']:checked + label::after {
     left: 2.2vw;
   }
   #container .contents section > ul {
