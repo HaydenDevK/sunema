@@ -15,6 +15,12 @@ export default {
   props: {
     Media: Array
   },
+  mounted() {
+    console.log(this.$route.name);
+    if (this.$route.name === 'TvToday') {
+      this.$store.commit('keywordSearch/SET_MEDIA_TYPE', 'tv');
+    }
+  },
   methods: {
     getImage(poster_path) {
       return poster_path
