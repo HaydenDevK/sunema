@@ -99,16 +99,16 @@
             </ul>
           </div>
         </div> -->
-        <div class="tag-box">
-          <ul>
-            <li v-for="item in $store.state.detail.movieKeyword" :key="item.id">
-              <router-link :to="`/keywordsearch/${item.id}`"
-                >#<span>{{ item.name }}</span></router-link
-              >
-            </li>
-          </ul>
-        </div>
-        <!-- <ListKeyword View="detail"/> -->
+<!--        <div class="tag-box">-->
+<!--          <ul>-->
+<!--            <li v-for="item in $store.state.detail.movieKeyword" :key="item.id">-->
+<!--              <router-link :to="`/keywordsearch/${item.id}`"-->
+<!--                >#<span>{{ item.name }}</span></router-link-->
+<!--              >-->
+<!--            </li>-->
+<!--          </ul>-->
+<!--        </div>-->
+       <ListKeyword View="detail"/>
       </div>
     </section>
     <!-- e: info-area -->
@@ -310,8 +310,10 @@
 </template>
 
 <script>
+import ListKeyword from '../components/ListKeyword';
 export default {
   name: 'Detail',
+  components: { ListKeyword },
   computed: {
     loading() {
       return this.$store.state.detail.loading;
@@ -351,7 +353,7 @@ export default {
   },
   methods: {
     initMovieDetail() {
-      if (this.$route.query.rink === 'tvtoday' || this.$route.query.rink === 'tv')
+      if (this.$route.query.link === 'tvtoday' || this.$route.query.link === 'tv')
         this.$store.commit('detail/SET_MEDIA', 'tv');
       else this.$store.commit('detail/SET_MEDIA', 'movie');
       this.$store.dispatch('detail/getMovieRecommendation', this.$route.params.idx);

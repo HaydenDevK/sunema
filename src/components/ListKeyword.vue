@@ -89,10 +89,6 @@ export default {
 @import '../assets/css/sophie.css';
 
 /* mobile */
-.swiper {
-  padding-left: 2.4rem;
-}
-
 .swiper-slide {
   width: auto;
 }
@@ -125,10 +121,6 @@ export default {
 
 /* tablet */
 @media (min-width: 1024px) {
-  .swiper {
-    padding-left: 4.8rem;
-  }
-
   .swiper-slide button {
     font-size: 2.1rem;
     line-height: 2.6rem;

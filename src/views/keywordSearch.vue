@@ -86,6 +86,10 @@ export default {
 @import '../assets/css/sophie.css';
 
 /* mobile */
+.list-keyword {
+  padding-left: 2.4rem;
+}
+
 .list-scroll {
   padding-top: 2rem;
 }
@@ -110,6 +114,10 @@ export default {
 
 /* tablet */
 @media screen and (min-width: 1024px) {
+  .list-keyword {
+    padding-left: 4.8rem;
+  }
+
   .list-scroll {
     padding-top: 3.2rem;
   }

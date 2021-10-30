@@ -10,13 +10,13 @@
     </div>
     <swiper class="swiper" :options="swiperOption">
       <swiper-slide v-for="(item, index) in movie" :key="item.id">
-        <router-link :to="`/detail/${item.id}?rink=${rink}`">
+        <router-link :to="`/detail/${item.id}?link=${link}`">
           <img :src="getImage(item.poster_path)" />
           <p class="number" v-if="rank === 'T'">{{ index + 1 }}</p>
         </router-link>
       </swiper-slide>
     </swiper>
-    <router-link :to="rink">전체보기</router-link>
+    <router-link :to="link">전체보기</router-link>
   </section>
 </template>
 
@@ -31,7 +31,7 @@ export default {
     streaming: String,
     rank: String,
     type: String,
-    rink: String
+    link: String
   },
   components: {
     Swiper,

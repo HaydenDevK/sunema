@@ -14,6 +14,7 @@ export default {
     SET_MOVIE_NOW(state, result) {
       state.movieNow = result.results;
       state.pageTotal = result.total_pages;
+      console.log(state.movieNow);
     },
     SET_PAGE_NEXT(state) {
       if (state.pageTotal >= state.pageNow) {
@@ -22,6 +23,7 @@ export default {
     },
     SET_MOVIE_NOW_MORE(state, result) {
       state.movieNow = state.movieNow.concat(result.results);
+      // [Vue warn]: Duplicate keys detected: '859860'. This may cause an update error. api 자체 중복 문제
     }
   },
   actions: {
@@ -50,7 +52,7 @@ export default {
 
       // api 호출 성공 시
       if (result.status === 200) {
-        commit('SET_MOVIE_NOW_MORE', result.data);
+        // commit('SET_MOVIE_NOW_MORE', result.data);
       }
     }
   }

@@ -14,7 +14,7 @@ import 'swiper/css/swiper.css';
 
 export default {
   props: {
-    Media: [Object, Array],
+    Media: Array,
     Path: String,
     Type: String
   },

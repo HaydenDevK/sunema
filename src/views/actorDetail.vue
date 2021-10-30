@@ -83,7 +83,7 @@
 
       <!-- 참여 작품 -->
       <section
-        v-if="$store.state.actorDetail.actorCredits.cast > 0"
+        v-if="$store.state.actorDetail.actorCredits.cast.length > 0"
         id="filmography"
       >
         <div class="profile-subtitle">
@@ -232,7 +232,7 @@ export default {
         if (this.$store.state.actorDetail.actorCredits.cast.length >= 15) {
           this.actorCredits.cast = this.$store.state.actorDetail.actorCredits.cast.slice(
             0,
-            10
+            15
           );
           this.castMore = true;
         } else
@@ -241,7 +241,7 @@ export default {
         if (this.$store.state.actorDetail.actorCredits.crew.length >= 15) {
           this.actorCredits.crew = this.$store.state.actorDetail.actorCredits.crew.slice(
             0,
-            10
+            15
           );
           this.crewMore = true;
         } else

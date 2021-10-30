@@ -28,7 +28,7 @@
           type="pop"
           streaming="T"
           rank="T"
-          rink="popular"
+          link="popular"
           :movie="$store.state.main.popularMovie"
         />
         <SlidePoster
@@ -37,14 +37,14 @@
           type="now"
           streaming="F"
           rank="F"
-          rink="movienow"
+          link="movienow"
           :movie="$store.state.main.nowPlayingMovie"
         />
         <SlideVideo
           class="upcoming"
           title="개봉 예정"
           type="upcoming"
-          rink="upcoming"
+          link="upcoming"
           :movie="$store.state.main.upcomingMovie"
         />
         <SlideBigPoster
@@ -53,7 +53,7 @@
           type="trending"
           tab1="영화"
           tab2="TV"
-          rink="trending"
+          link="trending"
           :movie="$store.state.main.trendingContents"
         />
         <SlidePoster
@@ -62,7 +62,7 @@
           type="today"
           streaming="F"
           rank="F"
-          rink="tvtoday"
+          link="tvtoday"
           :movie="$store.state.main.todayTv"
         />
         <PopularActor

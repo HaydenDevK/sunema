@@ -27,14 +27,14 @@
       <!-- tab2 -->
       <swiper :class="{active: todayContentType === 'tv'}" :options="swiperOption">
         <swiper-slide v-for="item in movie" :key="item.id">
-          <router-link :to="`/detail/${item.id}?rink=tv`">
+          <router-link :to="`/detail/${item.id}?link=tv`">
             <img :src="getImage(item.poster_path)" />
           </router-link>
         </swiper-slide>
       </swiper>
       <!-- // tab2 -->
     </div>
-    <router-link :to="rink">전체보기</router-link>
+    <router-link :to="link">전체보기</router-link>
   </section>
 </template>
 
@@ -49,7 +49,7 @@ export default {
     type: String,
     tab1: String,
     tab2: String,
-    rink: String
+    link: String
   },
   components: {
     Swiper,

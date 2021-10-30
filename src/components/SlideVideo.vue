@@ -16,7 +16,7 @@
         </router-link>
       </swiper-slide>
     </swiper>
-    <router-link :to="rink">전체보기</router-link>
+    <router-link :to="link">전체보기</router-link>
   </section>
 </template>
 
@@ -29,7 +29,7 @@ export default {
     title: String,
     movie: Array,
     type: String,
-    rink: String
+    link: String
   },
   components: {
     Swiper,
