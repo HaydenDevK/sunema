@@ -3,7 +3,7 @@ import { request } from './axios';
 export default {
   namespaced: true,
   state: {
-    upcoming: [],
+    movieUpcoming: [],
     pageNow: 1,
     pageTotal: 1
   },
@@ -11,8 +11,8 @@ export default {
     INIT_PAGE_NOW(state) {
       state.pageNow = 1;
     },
-    SET_UPCOMING(state, result) {
-      state.upcoming = result.results;
+    SET_MOVIE_UPCOMING(state, result) {
+      state.movieUpcoming = result.results;
       state.pageTotal = result.total_pages;
     },
     SET_PAGE_NEXT(state) {
@@ -20,12 +20,12 @@ export default {
         state.pageNow++;
       }
     },
-    SET_UPCOMING_MORE(state, result) {
-      state.upcoming = state.upcoming.concat(result.results);
+    SET_MOVIE_UPCOMING_MORE(state, result) {
+      state.movieUpcoming = state.movieUpcoming.concat(result.results);
     }
   },
   actions: {
-    async getUpcoming({ state, commit }) {
+    async getMovieUpcoming({ state, commit }) {
       await commit('INIT_PAGE_NOW');
 
       const result = await request(`/movie/upcoming`, {
@@ -36,10 +36,10 @@ export default {
 
       // api 호출 성공 시
       if (result.status === 200) {
-        commit('SET_UPCOMING', result.data);
+        commit('SET_MOVIE_UPCOMING', result.data);
       }
     },
-    async getUpcomingMore({ state, commit }) {
+    async getMovieUpcomingMore({ state, commit }) {
       await commit('SET_PAGE_NEXT');
 
       const result = await request(`/movie/upcoming`, {
@@ -50,7 +50,7 @@ export default {
 
       // api 호출 성공 시
       if (result.status === 200) {
-        commit('SET_UPCOMING_MORE', result.data);
+        commit('SET_MOVIE_UPCOMING_MORE', result.data);
       }
     }
   }

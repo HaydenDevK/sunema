@@ -23,9 +23,9 @@ const routes = [
     component: () => import(/* webpackChunkName: "round" */ '../views/round.vue')
   },
   {
-    path: '/upcoming', // 개봉 예정 (선혜)
-    name: 'Upcoming',
-    component: () => import(/* webpackChunkName: "upcoming" */ '../views/upcoming.vue')
+    path: '/movieupcoming', // 개봉 예정 (선혜)
+    name: 'MovieUpcoming',
+    component: () => import(/* webpackChunkName: "movieupcoming" */ '../views/movieUpcoming.vue')
   },
   {
     path: '/movienow', // 현재 상영중 (선혜)

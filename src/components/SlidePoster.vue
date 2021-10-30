@@ -10,7 +10,7 @@
     </div>
     <swiper class="swiper" :options="swiperOption">
       <swiper-slide v-for="(item, index) in movie" :key="item.id">
-        <router-link :to="`/detail/${item.id}?link=${link}`">
+        <router-link :to="`/detail/${item.id}`">
           <img :src="getImage(item.poster_path)" />
           <p class="number" v-if="rank === 'T'">{{ index + 1 }}</p>
         </router-link>

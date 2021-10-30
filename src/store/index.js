@@ -13,7 +13,7 @@ import movieNow from './movieNow';
 import topRated from './topRated';
 import trending from './trending';
 import popular from './popular';
-import upcoming from './upcoming';
+import movieUpcoming from './movieUpcoming';
 import tvmoviesearch from './tvmoviesearch';
 
 Vue.use(Vuex);
@@ -33,7 +33,7 @@ export default new Vuex.Store({
     topRated,
     trending,
     popular,
-    upcoming,
+    movieUpcoming,
     tvmoviesearch
   }
 });

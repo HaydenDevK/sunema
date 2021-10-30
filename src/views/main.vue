@@ -1,10 +1,17 @@
 <template>
   <div id="wrap">
     <header>
-      <h1 class="logo">
-        <router-link to="">SUNEMA</router-link>
-      </h1>
-      <nav v-if="false">
+      <div class="wrapper-header-top">
+        <h1 class="logo">
+          <router-link to="">SUNEMA</router-link>
+        </h1>
+        <router-link to="/search">
+          <button>
+            <img src="../assets/images/round/icon-search.png" alt="" />
+          </button>
+        </router-link>
+      </div>
+      <nav v-if="true">
         <router-link to="">영화</router-link>
         <router-link to="">TV프로그램</router-link>
         <router-link to="">카테고리</router-link>
@@ -127,6 +134,7 @@ export default {
 </script>
 
 <style scoped>
+@import '../assets/css/sophie.css';
 @import url('../assets/css/reset.css');
 @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
 * {
@@ -147,9 +155,7 @@ header {
   left: 0;
   top: 0;
 }
-header .logo {
-  padding: 16px 0 0 31px;
-}
+
 #wrap header .logo a {
   font-size: 4.35vw;
   letter-spacing: -0.02em;
@@ -173,6 +179,18 @@ header .logo {
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+.wrapper-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 31px 0 31px;
+}
+.wrapper-header-top button {
+
+}
+.wrapper-header-top button img {
+  height: 22px;
+}
 /****************** 본문 ******************/
 #continaer {
   width: 100%;

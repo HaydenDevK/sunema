@@ -4,6 +4,11 @@
       <a class="btn-back" @click="$router.go(-1)">
         <img src="../assets/images/global/icon-back.png" alt="" />
       </a>
+      <p class="font-page-title">
+        {{ `"${keyword}"` }}
+        <span class="font-white-70" style="padding-left:8px;">검색 결과</span>
+      </p>
+
     </header>
 
     <!-- 버튼 -->
@@ -20,8 +25,8 @@
       </button>
     </section>
 
-    <div v-if="moieList.length > 0" class="wrapper-poster">
-      <a v-for="item in moieList" :key="item.id">
+    <div v-if="movieList.length > 0" class="wrapper-poster">
+      <a v-for="item in movieList" :key="item.id">
         <img :src="getImage(item.poster_path)" alt="" />
       </a>
     </div>
@@ -40,7 +45,7 @@ export default {
     };
   },
   computed: {
-    moieList() {
+    movieList() {
       return this.$store.state.tvmoviesearch.movieList;
     }
   },

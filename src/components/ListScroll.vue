@@ -5,6 +5,7 @@
       :key="item.id"
       :to="`/detail/${item.id}?link=${$store.state.keywordSearch.mediaType}`"
     >
+      <!-- a태그로 바꾸던지, 감싸던지 router-link에 직접 v-for 돌리지 말 것 -->
       <img :src="getImage(item.poster_path)" alt="" />
     </router-link>
   </div>

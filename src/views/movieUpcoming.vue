@@ -8,7 +8,7 @@
     </header>
 
     <!-- 작품 리스트 -->
-    <ListScroll :Media="$store.state.upcoming.upcoming" />
+    <ListScroll :Media="$store.state.movieUpcoming.movieUpcoming" />
   </div>
 </template>
 
@@ -26,11 +26,11 @@ export default {
   },
   methods: {
     getInitMedia() {
-      this.$store.dispatch('upcoming/getUpcoming');
+      this.$store.dispatch('movieUpcoming/getMovieUpcoming');
       // todo 스토어 정보가 바뀌면 템플릿에 바인딩도 다시 되는 이유 이해
     },
     scrollCallback() {
-      this.$store.dispatch('upcoming/getUpcomingMore');
+      this.$store.dispatch('movieUpcoming/getMovieUpcomingMore');
     }
   }
 };

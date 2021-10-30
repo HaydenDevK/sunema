@@ -19,7 +19,7 @@
         </router-link>
       </div>
       <div>
-        <router-link to="/upcoming" @click.native="changeRouter('upcoming')">
+        <router-link to="/movieupcoming" @click.native="changeRouter('movieupcoming')">
           <button>
             <img src="../assets/images/search/upcoming.png" alt="" />
             <p>개봉예정</p>
