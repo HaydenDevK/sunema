@@ -1,4 +1,4 @@
-import { request } from './axios';
+import { request } from './axios'
 
 export default {
   namespaced: true,
@@ -9,53 +9,54 @@ export default {
     pageTotal: 1
   },
   mutations: {
-    INIT_PAGE_NOW(state) {
-      state.pageNow = 1;
+    
+SET_PAGE_NOW (state, page) {
+      state.pageNow = page
     },
-    SET_MEDIA_TYPE(state, mediaType) {
-      state.mediaType = mediaType;
+    SET_MEDIA_TYPE (state, mediaType) {
+      state.mediaType = mediaType
     },
-    SET_TRENDING(state, result) {
-      state.trending = result.results;
-      state.pageTotal = result.total_pages;
+    SET_TRENDING (state, result) {
+      state.trending = result.results
+      state.pageTotal = result.total_pages
     },
-    SET_PAGE_NEXT(state) {
+    SET_PAGE_NEXT (state) {
       if (state.pageTotal >= state.pageNow) {
-        state.pageNow++;
+        state.pageNow++
       }
     },
-    SET_TRENDING_MORE(state, result) {
-      state.trending = state.trending.concat(result.results);
+    SET_TRENDING_MORE (state, result) {
+      state.trending = state.trending.concat(result.results)
     }
   },
   actions: {
-    async getTrending({ state, commit }) {
-      await commit('INIT_PAGE_NOW');
+    async getTrending ({ state, commit }) {
+      commit('SET_PAGE_NOW', 1)
 
       const result = await request(`/trending/${state.mediaType}/day`, {
         params: {
           page: state.pageNow
         }
-      });
+      })
 
       // api 호출 성공 시
       if (result.status === 200) {
-        commit('SET_TRENDING', result.data);
+        commit('SET_TRENDING', result.data)
       }
     },
-    async getTrendingMore({ state, commit }) {
-      await commit('SET_PAGE_NEXT');
+    async getTrendingMore ({ state, commit }) {
+      commit('SET_PAGE_NEXT')
 
       const result = await request(`/trending/${state.mediaType}/day`, {
         params: {
           page: state.pageNow
         }
-      });
+      })
 
       // api 호출 성공 시
       if (result.status === 200) {
-        commit('SET_TRENDING_MORE', result.data);
+        commit('SET_TRENDING_MORE', result.data)
       }
     }
   }
-};
+}

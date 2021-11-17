@@ -1,8 +1,8 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import Main from '../views/main.vue';
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Main from '../views/main.vue'
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
 const routes = [
   {
@@ -10,7 +10,7 @@ const routes = [
     name: 'Main',
     component: Main,
     // NoTopBottomLayout 적용
-    meta: {layout: 'NoTopBottomLayout'}
+    meta: { layout: 'NoTopBottomLayout' }
   },
   {
     path: '/detail/:idx',
@@ -79,21 +79,21 @@ const routes = [
     component: () => import(/* webpackChunkName: "toprated" */ '../views/topRated.vue')
   },
   {
-    path: '/trending', // 지금 뜨는 컨텐츠 (선혜)
+    path: '/trending', // 지금 뜨는 콘텐츠 (선혜)
     name: 'Trending',
     component: () => import(/* webpackChunkName: "toprated" */ '../views/trending.vue')
   },
   {
-    path: '/tvmovieSearch/:keyword', // 지금 뜨는 컨텐츠 (선혜)
+    path: '/tvmovieSearch/:keyword', //
     name: 'tvmovie',
     component: () => import(/* webpackChunkName: "toprated" */ '../views/tvmovieSearch.vue')
   }
-];
+]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
-});
+})
 
-export default router;
+export default router

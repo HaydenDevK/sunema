@@ -31,7 +31,7 @@ export default {
   methods: {
     getInitMedia() {
       this.$store.dispatch('tvNow/getTvNow');
-      // todo 스토어 정보가 바뀌면 템플릿에 바인딩도 다시 되는 이유 이해
+
     },
     scrollCallback() {
       this.$store.dispatch('tvNow/getTvNowMore');

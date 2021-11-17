@@ -46,8 +46,8 @@ export default {
       if (mediaType) {
         await this.$store.commit('popular/SET_MEDIA_TYPE', mediaType);
       }
-      this.$store.dispatch('popular/getPopular');
-      // todo 스토어 정보가 바뀌면 템플릿에 바인딩도 다시 되는 이유 이해
+      await this.$store.dispatch('popular/getPopular');
+
     },
     scrollCallback() {
       this.$store.dispatch('popular/getPopularMore');

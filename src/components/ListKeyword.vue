@@ -51,6 +51,7 @@ export default {
     this.mediaId = Number(this.$route.params.idx);
     await this.$store.commit('keywordSearch/SET_MEDIA_ID', this.mediaId);
     await this.$store.dispatch('keywordSearch/getMediaKeywords');
+    // todo await 필요한지?
 
     // todo 중첩문 함수형으로 축약
     if (this.View === 'keywordSearch') {
@@ -69,7 +70,7 @@ export default {
     },
     getInitMedia() {
       this.$store.dispatch('keywordSearch/getKeywordMedia');
-      // todo 스토어 정보가 바뀌면 템플릿에 바인딩도 다시 되는 이유 이해
+
     },
     handleFunc(keywordId) {
       if (this.View === 'keywordSearch') {

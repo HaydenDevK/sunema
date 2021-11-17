@@ -51,7 +51,7 @@
           class="upcoming"
           title="개봉 예정"
           type="upcoming"
-          link="upcoming"
+          link="movieupcoming"
           :movie="$store.state.main.upcomingMovie"
         />
         <SlideBigPoster
