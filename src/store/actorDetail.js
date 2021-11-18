@@ -45,7 +45,7 @@ export default {
       }
     },
     async getActorCredits ({ state, commit }) {
-      const result = await request(
+      const result = await request.get(
         `/person/${state.personId}/combined_credits`
       )
 
@@ -75,7 +75,7 @@ export default {
       }
     },
     async getActorImages ({ state, commit }) {
-      const result = await request(`/person/${state.personId}/images`)
+      const result = await request.get(`/person/${state.personId}/images`)
 
       // api 호출 성공 시
       if (result.status === 200) {

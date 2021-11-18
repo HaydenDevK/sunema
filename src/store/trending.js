@@ -33,7 +33,7 @@ SET_PAGE_NOW (state, page) {
     async getTrending ({ state, commit }) {
       commit('SET_PAGE_NOW', 1)
 
-      const result = await request(`/trending/${state.mediaType}/day`, {
+      const result = await request.get(`/trending/${state.mediaType}/day`, {
         params: {
           page: state.pageNow
         }
@@ -47,7 +47,7 @@ SET_PAGE_NOW (state, page) {
     async getTrendingMore ({ state, commit }) {
       commit('SET_PAGE_NEXT')
 
-      const result = await request(`/trending/${state.mediaType}/day`, {
+      const result = await request.get(`/trending/${state.mediaType}/day`, {
         params: {
           page: state.pageNow
         }

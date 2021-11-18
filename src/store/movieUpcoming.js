@@ -29,7 +29,7 @@ SET_PAGE_NOW (state, page) {
     async getMovieUpcoming ({ state, commit }) {
       commit('SET_PAGE_NOW', 1)
 
-      const result = await request('/movie/upcoming', {
+      const result = await request.get('/movie/upcoming', {
         params: {
           page: state.pageNow
         }
@@ -43,7 +43,7 @@ SET_PAGE_NOW (state, page) {
     async getMovieUpcomingMore ({ state, commit }) {
       commit('SET_PAGE_NEXT')
 
-      const result = await request('/movie/upcoming', {
+      const result = await request.get('/movie/upcoming', {
         params: {
           page: state.pageNow
         }

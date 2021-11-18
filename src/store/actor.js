@@ -13,7 +13,7 @@ export default {
   actions: {
     // 인기 배우 리스트 정보
     async getPopularActor ({ commit }) {
-      const result = await request('/person/popular')
+      const result = await request.get('/person/popular')
 
       // api 호출 성공
       if (result.status === 200) {

@@ -29,7 +29,7 @@ SET_PAGE_NOW (state, page) {
     async getTvToday ({ state, commit }) {
       commit('SET_PAGE_NOW', 1)
 
-      const result = await request('/tv/airing_today', {
+      const result = await request.get('/tv/airing_today', {
         params: {
           page: state.pageNow
         }
@@ -43,7 +43,7 @@ SET_PAGE_NOW (state, page) {
     async getTvTodayMore ({ state, commit }) {
       commit('SET_PAGE_NEXT')
 
-      const result = await request('/tv/airing_today', {
+      const result = await request.get('/tv/airing_today', {
         params: {
           page: state.pageNow
         }

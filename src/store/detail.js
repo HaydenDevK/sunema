@@ -40,13 +40,13 @@ export default {
   actions: {
     async getMovieDetail ({ state, commit }, movieId) {
       state.loading = false
-      const result = await request(`/${state.mediaType}/` + movieId)
+      const result = await request.get(`/${state.mediaType}/` + movieId)
       if (result.status === 200) {
         commit('SET_DETAIL_MOVIE', result.data)
       }
     },
     async getMovieRecommendation ({ commit, state }, movieId) {
-      const result = await request(`/${state.mediaType}/` + movieId + '/recommendations')
+      const result = await request.get(`/${state.mediaType}/` + movieId + '/recommendations')
       const newResult = result.data.results.filter(function (v, i) {
         return i < 6
       })
@@ -56,7 +56,7 @@ export default {
       }
     },
     async getMovieVideo ({ commit, state }, movieId) {
-      const result = await request(`/${state.mediaType}/` + movieId + '/videos')
+      const result = await request.get(`/${state.mediaType}/` + movieId + '/videos')
       if (result.status === 200) {
         // 1. v-for 는 배열만 가능
         // 2. result.data는 뭐다? 객체
@@ -81,7 +81,7 @@ export default {
     },
 
     async getMovieKeyword ({ commit, state }, movieId) {
-      const result = await request(`/${state.mediaType}/` + movieId + '/keywords')
+      const result = await request.get(`/${state.mediaType}/` + movieId + '/keywords')
       if (result.status === 200) {
         commit('SET_DETAIL_MOVIE_KEYWORD', result.data.keywords)
       }

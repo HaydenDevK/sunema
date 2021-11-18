@@ -33,7 +33,7 @@ SET_PAGE_NOW (state, page) {
     async getPopular ({ state, commit }) {
       commit('SET_PAGE_NOW', 1)
 
-      const result = await request(`/${state.mediaType}/popular`, {
+      const result = await request.get(`/${state.mediaType}/popular`, {
         params: {
           page: state.pageNow
         }
@@ -47,7 +47,7 @@ SET_PAGE_NOW (state, page) {
     async getPopularMore ({ state, commit }) {
       commit('SET_PAGE_NEXT')
 
-      const result = await request(`/${state.mediaType}/popular`, {
+      const result = await request.get(`/${state.mediaType}/popular`, {
         params: {
           page: state.pageNow
         }

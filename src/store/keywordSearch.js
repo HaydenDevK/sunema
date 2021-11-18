@@ -46,7 +46,7 @@ SET_PAGE_NOW (state, page) {
       commit('SET_KEYWORD_ID', state.keywordId)
       commit('SET_PAGE_NOW', 1)
 
-      const result = await request(`/discover/${state.mediaType}`, {
+      const result = await request.get(`/discover/${state.mediaType}`, {
         params: {
           page: state.pageNow,
           with_keywords: state.keywordId
@@ -60,7 +60,7 @@ SET_PAGE_NOW (state, page) {
     },
     async getKeywordMediaMore ({ state, commit }) {
       commit('SET_PAGE_NEXT')
-      const result = await request(`/discover/${state.mediaType}`, {
+      const result = await request.get(`/discover/${state.mediaType}`, {
         params: {
           page: state.pageNow,
           with_keywords: state.keywordId
@@ -75,7 +75,7 @@ SET_PAGE_NOW (state, page) {
     async getMediaKeywords ({ state, commit }) {
       try {
         let result = {}
-        result = await request(
+        result = await request.get(
           `/${state.mediaType}/${state.mediaId}/keywords`
         )
 

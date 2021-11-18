@@ -26,7 +26,7 @@ export default {
   actions: {
     // TV에피소드 정보
     async getMovieList ({ state, commit }) {
-      const result = await request(
+      const result = await request.get(
         `/tv/${state.tv_id}/season/${state.season_number}`
       )
 
@@ -38,7 +38,7 @@ export default {
     },
     // TV제목
     async getTvName ({ state, commit }) {
-      const result = await request(`/tv/${state.tv_id}`)
+      const result = await request.get(`/tv/${state.tv_id}`)
 
       // api 호출 성공
       if (result.status === 200) {

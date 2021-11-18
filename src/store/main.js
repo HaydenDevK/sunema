@@ -33,13 +33,13 @@ export default {
   },
   actions: {
     async getPopularMovie ({ commit }) {
-      const result = await request('movie/popular')
+      const result = await request.get('movie/popular')
       if (result.status === 200) {
         commit('SET_POPULAR_MOVIE', result.data.results)
       }
     },
     async getNowPlayingMovie ({ commit }) {
-      const result = await request('movie/now_playing')
+      const result = await request.get('movie/now_playing')
       if (result.status === 200) {
         commit('SET_NOWPLAYING_MOVIE', result.data.results)
       }
@@ -48,7 +48,7 @@ export default {
     async getUpcomingMovie ({ commit }) {
       // 개봉 영화 리스트를 요청할 때 예고편 정보까지 가져오면 좋겠지만, API에서 지원하지 않는걸로 보임
       // 그래서 일단 개봉 영화 정보 리스트를 불러오고 데이터 저장
-      const result = await request('movie/upcoming')
+      const result = await request.get('movie/upcoming')
       const movieData = result.data.results // 영화 정보
 
       // 예고편 정보는 영화 상세 정보 API에서만 제공하는 것으로 보이므로(현재로써)
@@ -56,7 +56,7 @@ export default {
       const movies = await Promise.all(
         movieData.map(async function (v) {
           // 상세 정보 요청
-          const video = await request('movie/' + v.id + '/videos')
+          const video = await request.get('movie/' + v.id + '/videos')
 
           // 상세 정보 요청 후 , 비디오 정보는 예고편의 개수에 따라서 1개 이상일 수 있는데,
           // 그냥 최초로 등록된 첫 번째 것만 가져오기로 하고
@@ -78,13 +78,13 @@ export default {
       }
     },
     async getTrendingContents ({ state, commit }) {
-      const result = await request(`/trending/${state.mediaType}/day`)
+      const result = await request.get(`/trending/${state.mediaType}/day`)
       if (result.status === 200) {
         commit('SET_TRENDING_CONTENTS', result.data.results)
       }
     },
     async getTodayTv ({ commit }) {
-      const result = await request('/tv/airing_today')
+      const result = await request.get('/tv/airing_today')
       if (result.status === 200) {
         commit('SET_TODAY_TV', result.data.results)
       }

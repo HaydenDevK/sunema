@@ -33,7 +33,7 @@ SET_PAGE_NOW (state, page) {
     async getTopRated ({ state, commit }) {
       commit('SET_PAGE_NOW', 1)
 
-      const result = await request(`${state.mediaType}/top_rated`, {
+      const result = await request.get(`${state.mediaType}/top_rated`, {
         params: {
           page: state.pageNow
         }
@@ -46,7 +46,7 @@ SET_PAGE_NOW (state, page) {
     async getTopRatedMore ({ state, commit }) {
       commit('SET_PAGE_NEXT')
 
-      const result = await request(`${state.mediaType}/top_rated`, {
+      const result = await request.get(`${state.mediaType}/top_rated`, {
         params: {
           page: state.pageNow
         }
