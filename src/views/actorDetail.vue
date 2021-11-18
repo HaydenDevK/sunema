@@ -23,14 +23,14 @@
             <span id="profile-name">
               {{ $store.state.actorDetail.actorDetail.name }}
             </span>
-            <span id="profile-job">{{
-              `${
-                $store.state.actorDetail.actorDetail.known_for_department ===
-                'Acting'
-                  ? '배우'
-                  : ''
-              }`
-            }}</span>
+            <span id="profile-job">
+              {{
+                `${$store.state.actorDetail.actorDetail.known_for_department === 'Acting'
+                    ? '배우'
+                    : ''
+                }`
+              }}
+            </span>
           </div>
 
           <div
@@ -70,10 +70,7 @@
 
             <span class="font-white-70">출생지</span>
             <span>
-              {{
-                $store.state.actorDetail.actorDetail.place_of_birth ||
-                  '정보 없음'
-              }}
+              {{ $store.state.actorDetail.actorDetail.place_of_birth || '정보 없음' }}
             </span>
           </div>
         </div>
@@ -122,7 +119,10 @@
           전체 작품 활동
         </div>
 
-        <div v-if="actorCredits.cast.length > 0" class="works-category-space">
+        <div
+          v-if="actorCredits.cast.length > 0"
+          class="works-category-space"
+        >
           <div class="works-category font-primary">
             연기
           </div>
@@ -131,10 +131,12 @@
             :key="item.id"
             class="wrapper-list"
           >
-            <span class="font-white-70">{{
-              item.release_date ? getYear(item.release_date) : ''
-            }}</span>
-            <span>{{ item.title }}</span>
+            <span class="font-white-70">
+              {{ item.release_date ? getYear(item.release_date) : '-' }}
+            </span>
+            <span>
+              {{ item.title || item.name }}
+            </span>
           </div>
 
           <div v-if="castMore" class="wrapper-more">
@@ -152,9 +154,11 @@
             class="wrapper-list"
           >
             <span class="font-white-70">
-              {{ item.release_date ? getYear(item.release_date) : '' }}
+              {{ item.release_date ? getYear(item.release_date) : '-' }}
             </span>
-            <span>{{ item.title }}…{{ item.job }}</span>
+            <span>
+              {{ item.title || item.name }} … {{ item.job }}
+            </span>
           </div>
 
           <div v-if="crewMore" class="wrapper-more">
@@ -176,7 +180,6 @@ export default {
   },
   data() {
     return {
-      personID: 0,
       actorCredits: {
         cast: [],
         crew: []
@@ -221,33 +224,26 @@ export default {
   },
   methods: {
     setPersonId() {
-      this.personID = Number(this.$route.params.personId);
-      this.$store.commit('actorDetail/SET_PERSON_ID', this.personID);
+      const personId = Number(this.$route.params.personId);
+      this.$store.commit('actorDetail/SET_PERSON_ID', personId);
     },
     getInitDetail() {
       this.$store.dispatch('actorDetail/getActorDetail');
     },
     getInitCredits() {
-      this.$store.dispatch('actorDetail/getActorCredits').then(() => {
-        if (this.$store.state.actorDetail.actorCredits.cast.length >= 15) {
-          this.actorCredits.cast = this.$store.state.actorDetail.actorCredits.cast.slice(
-            0,
-            15
-          );
-          this.castMore = true;
-        } else
-          this.actorCredits.cast = this.$store.state.actorDetail.actorCredits.cast;
+      this.$store.dispatch('actorDetail/getActorCredits')
+        .then(() => {
+          if (this.$store.state.actorDetail.actorCredits.cast.length >= 15) {
+            this.actorCredits.cast = this.$store.state.actorDetail.actorCredits.cast.slice(0, 15);
+            this.castMore = true;
+          } else this.actorCredits.cast = this.$store.state.actorDetail.actorCredits.cast;
 
-        if (this.$store.state.actorDetail.actorCredits.crew.length >= 15) {
-          this.actorCredits.crew = this.$store.state.actorDetail.actorCredits.crew.slice(
-            0,
-            15
-          );
-          this.crewMore = true;
-        } else
-          this.actorCredits.crew = this.$store.state.actorDetail.actorCredits.crew;
-      });
-      // todo 모든 데이터와 함수를 스테이트로 옮길지 판단해서 수정
+          if (this.$store.state.actorDetail.actorCredits.crew.length >= 15) {
+            this.actorCredits.crew = this.$store.state.actorDetail.actorCredits.crew.slice(0, 15);
+            this.crewMore = true;
+          } else this.actorCredits.crew = this.$store.state.actorDetail.actorCredits.crew;
+        });
+        // todo 모든 데이터와 함수를 스테이트로 옮길지 판단해서 수정
     },
     getInitImages() {
       this.$store.dispatch('actorDetail/getActorImages');
@@ -257,21 +253,12 @@ export default {
     },
     getCreditsMore(type) {
       this.setCreditsCounter(type);
+      const fiftyEach = this[`${type}Counter`] * 15
 
-      if (
-        this.$store.state.actorDetail.actorCredits[`${type}`].length >=
-        this[`${type}Counter`] * 15
-      ) {
-        this.actorCredits[
-          `${type}`
-        ] = this.$store.state.actorDetail.actorCredits[`${type}`].slice(
-          0,
-          this[`${type}Counter`] * 15
-        );
+      if (this.$store.state.actorDetail.actorCredits[`${type}`].length >= fiftyEach) {
+        this.actorCredits[`${type}`] = this.$store.state.actorDetail.actorCredits[`${type}`].slice(0, fiftyEach);
       } else {
-        this.actorCredits[
-          `${type}`
-        ] = this.$store.state.actorDetail.actorCredits[`${type}`];
+        this.actorCredits[`${type}`] = this.$store.state.actorDetail.actorCredits[`${type}`];
         this[`${type}More`] = false;
       }
     },
@@ -380,32 +367,32 @@ export default {
   color: white;
 }
 
-.wrapper-movie-slide {
-  display: grid;
-  grid-auto-columns: max-content;
-  grid-column-gap: 1.6rem;
-  grid-auto-flow: column;
-  overflow-x: auto;
-  white-space: nowrap;
-}
+/*.wrapper-movie-slide {*/
+/*  display: grid;*/
+/*  grid-auto-columns: max-content;*/
+/*  grid-column-gap: 1.6rem;*/
+/*  grid-auto-flow: column;*/
+/*  overflow-x: auto;*/
+/*  white-space: nowrap;*/
+/*}*/
 
-.wrapper-movie-slide a {
-  font-size: 0;
-  overflow: hidden;
-  border-radius: 0.5rem;
-}
+/*.wrapper-movie-slide a {*/
+/*  font-size: 0;*/
+/*  overflow: hidden;*/
+/*  border-radius: 0.5rem;*/
+/*}*/
 
-.wrapper-movie-slide a:first-child {
-  margin-left: 2.4rem;
-}
+/*.wrapper-movie-slide a:first-child {*/
+/*  margin-left: 2.4rem;*/
+/*}*/
 
-.wrapper-movie-slide a:last-child {
-  margin-right: 2.4rem;
-}
+/*.wrapper-movie-slide a:last-child {*/
+/*  margin-right: 2.4rem;*/
+/*}*/
 
-.wrapper-movie-slide img {
-  height: 22.2rem;
-}
+/*.wrapper-movie-slide img {*/
+/*  height: 22.2rem;*/
+/*}*/
 
 .bg-blurred {
   background-repeat: no-repeat;
@@ -481,20 +468,20 @@ export default {
     letter-spacing: 0.025rem;
   }
 
-  .wrapper-movie-slide {
-    grid-column-gap: 2.4rem;
-  }
+  /*.wrapper-movie-slide {*/
+  /*  grid-column-gap: 2.4rem;*/
+  /*}*/
 
-  .wrapper-movie-slide a:first-child {
-    margin-left: 4.8rem;
-  }
+  /*.wrapper-movie-slide a:first-child {*/
+  /*  margin-left: 4.8rem;*/
+  /*}*/
 
-  .wrapper-movie-slide a:last-child {
-    margin-right: 4.8rem;
-  }
+  /*.wrapper-movie-slide a:last-child {*/
+  /*  margin-right: 4.8rem;*/
+  /*}*/
 
-  .wrapper-movie-slide img {
-    height: 25.6rem;
-  }
+  /*.wrapper-movie-slide img {*/
+  /*  height: 25.6rem;*/
+  /*}*/
 }
 </style>
