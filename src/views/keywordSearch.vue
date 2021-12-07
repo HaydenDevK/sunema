@@ -7,21 +7,24 @@
     </header>
 
     <!-- 버튼 -->
-    <section v-if="$store.state.keywordSearch.mediaKeywords.length > 0" class="wrapper-btn-type">
-      <button
-        class="btn-type"
-        @click="$store.dispatch('keywordSearch/getKeywordMediaElse', 'movie')"
-      >
-        <p :class="{active: $store.state.keywordSearch.mediaType === 'movie'}">
-          영화
-        </p>
-      </button>
-      <button class="btn-type" @click="$store.dispatch('keywordSearch/getKeywordMediaElse', 'tv')">
-        <p :class="{active: $store.state.keywordSearch.mediaType === 'tv'}">
-          티비 프로그램
-        </p>
-      </button>
-    </section>
+<!--    <section v-if="$store.state.keywordSearch.mediaKeywords.length > 0" class="wrapper-btn-type">-->
+<!--      <button-->
+<!--        class="btn-type"-->
+<!--        @click="$store.dispatch('keywordSearch/getKeywordMediaElse', 'movie')"-->
+<!--      >-->
+<!--        <p :class="{active: $store.state.keywordSearch.mediaType === 'movie'}">-->
+<!--          영화-->
+<!--        </p>-->
+<!--      </button>-->
+<!--      <button class="btn-type" @click="$store.dispatch('keywordSearch/getKeywordMediaElse', 'tv')">-->
+<!--        <p :class="{active: $store.state.keywordSearch.mediaType === 'tv'}">-->
+<!--          티비 프로그램-->
+<!--        </p>-->
+<!--      </button>-->
+<!--    </section>-->
+    <TabMediaType
+      MediaKeywords="store.state.keywordSearch.mediaKeywords"
+    />
 
     <!-- 키워드 리스트 -->
     <ListKeyword View="keywordSearch" class="list-keyword" />
@@ -64,10 +67,11 @@
 <script>
 import ListScroll from '../components/ListScroll.vue';
 import ListKeyword from '../components/ListKeyword.vue';
+import TabMediaType from '../components/TabMediaType.vue';
 
 export default {
   name: 'KeywordSearch',
-  components: {ListScroll, ListKeyword},
+  components: {ListScroll, ListKeyword, TabMediaType},
   async mounted() {
     //  스크롤 하단 이동 체크하기
     //  하단 이동하면 콜백 함수 실행

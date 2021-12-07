@@ -25,7 +25,7 @@ export default {
   tvToday,
   tvNow,
   movieNow,
-  topRated,경
+  topRated,
   trending,
   popular,
   movieUpcoming,

@@ -23,7 +23,8 @@ SET_PAGE_NOW (state, page) {
       state.mediaType = mediaType
     },
     SET_MEDIA_KEYWORDS (state, data) {
-      data ? state.mediaKeywords = data : state.mediaKeywords = []
+      // data ? state.mediaKeywords = data : state.mediaKeywords = []
+      state.mediaKeywords = data || []
     },
     SET_KEYWORD_ID (state, keywordId) {
       state.keywordId = keywordId

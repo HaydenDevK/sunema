@@ -5,6 +5,7 @@ import store from './store'
 import reset from './assets/css/reset.css'
 import moment from 'moment'
 import globalMethods from './plugins/globalFunc'
+import IconBase from './components/svg/IconBase.vue'
 
 // 2021-09-11 12:25  -> YYYY/MM/DD hh:mm
 Vue.filter('formatDateYear', function (value) {
@@ -27,6 +28,7 @@ Vue.filter('formatDateV2', function (value) {
 
 Vue.config.productionTip = false
 Vue.use(globalMethods)
+Vue.component('icon-base', IconBase);
 
 new Vue({
   router,

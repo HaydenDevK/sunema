@@ -1,123 +1,95 @@
 <template>
   <div>
-    <!-- 하단 메뉴 -->
-    <section class="menu">
-      <div>
-        <router-link to="/">
-          <button>
-            <img src="../assets/images/search/home.png" alt="" />
-            <p>홈</p>
-          </button>
-        </router-link>
-      </div>
-      <div>
-        <router-link to="/movienow" @click.native="changeRouter('movienow')">
-          <button>
-            <img src="../assets/images/search/released.png" alt="" />
-            <p>상영중</p>
-          </button>
-        </router-link>
-      </div>
-      <div>
-        <router-link to="/movieupcoming" @click.native="changeRouter('movieupcoming')">
-          <button>
-            <img src="../assets/images/search/upcoming.png" alt="" />
-            <p>개봉예정</p>
-          </button>
-        </router-link>
-      </div>
-      <div>
-        <router-link to="/search" @click.native="changeRouter('search')">
-          <button>
-            <!-- tab 변수가 search 면 mint_...파일 불러오기 -->
-            <img v-if="tab === 'search'" src="../assets/images/round/icon-search-on.png" alt="" />
-            <p v-if="tab === 'search'" class="mint">검색</p>
-            <!-- tab 변수가 다른거면 흰색 이미지 불러오기 -->
-            <img v-else src="../assets/images/round/icon-search.png" alt="" />
-            <p>검색</p>
-          </button>
-        </router-link>
-      </div>
-      <div>
-        <router-link to="/popular" @click.native="changeRouter('popular')">
-          <button>
-            <img src="../assets/images/search/popular.png" alt="" />
-            <p>인기콘텐츠</p>
-          </button>
-        </router-link>
-      </div>
-    </section>
+    <!-- 독 바 -->
+    <footer class="doc-bar">
+      <router-link to="/" class="doc-bar-item">
+        <icon-base iconColor="white" icon-name="home">
+          <IconPopular/>
+        </icon-base>
+        <p :class="[tab === 'home' ? 'font-primary': 'font-white']">홈</p>
+      </router-link>
+      <router-link to="/movienow" class="doc-bar-item">
+        <icon-base
+          :iconColor="tab === 'movienow' ? '#42ff8f' : 'white'" icon-name="movienow">
+          <IconPopular/>
+        </icon-base>
+        <p :class="[tab === 'movienow' ? 'font-primary': 'font-white']">상영중</p>
+      </router-link>
+      <router-link to="/movieupcoming" class="doc-bar-item">
+        <icon-base
+          :iconColor="tab === 'movieupcoming' ? '#42ff8f' : 'white'" icon-name="movieupcoming">
+          <IconPopular/>
+        </icon-base>
+        <p :class="[tab === 'movieupcoming' ? 'font-primary': 'font-white']">개봉예정</p>
+      </router-link>
+      <router-link to="/search" class="doc-bar-item">
+        <icon-base
+          :iconColor="tab === 'search' ? '#42ff8f' : 'white'" icon-name="search">
+          <IconPopular/>
+        </icon-base>
+        <p :class="[tab === 'search' ? 'font-primary': 'font-white']">검색</p>
+      </router-link>
+      <router-link to="/popular" class="doc-bar-item">
+        <icon-base
+          :iconColor="tab === 'popular' ? '#42ff8f' : 'white'" icon-name="popular">
+          <IconPopular/>
+        </icon-base>
+        <p :class="[tab === 'popular' ? 'font-primary': 'font-white']">인기콘텐츠</p>
+      </router-link>
+    </footer>
   </div>
 </template>
 
 <script>
+import IconPopular from "./svg/IconPopular.vue"
+
 export default {
-  data() {
-    return {
-      tab: ''
-    };
+  components: {
+    IconPopular
   },
-  methods: {
-    changeRouter(type) {
-      this.tab = type;
+  computed: {
+    tab () {
+      return this.$route.name.toLowerCase('en-US');
     }
-  }
+  },
 };
 </script>
 
 <style scoped>
-.menu {
-  display: flex;
-  background-color: #13131b;
-  padding: 0px;
+@import '../assets/css/sophie.css';
+
+/* doc-bar */
+.doc-bar {
   position: fixed;
   bottom: 0;
-  height: 54px;
+  height: 5.4rem;
   width: 100%;
-  position: fixed;
-  left: 0;
-  z-index: 1;
-  bottom: 0;
+  background-color: #13131b;
+  display: flex;
 }
-.menu div {
-  width: 25%;
-  list-style: none;
+
+.doc-bar-item {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0.6rem 0;
 }
-.menu div p {
+
+.doc-bar-item p {
+  font-weight: bold;
+  font-size: 1.1rem;
+  line-height: 1.4rem;
+  letter-spacing: -0.02em;
   text-align: center;
 }
-.menu button {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 11px;
-  color: #ffffff;
-}
-.menu p {
-  display: block;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-}
-.mint {
-  color: #42ff8f;
-}
-button,
-input,
-button:focus {
-  border: none;
-  cursor: pointer;
-  outline: none;
-  background-color: unset;
-  color: #ffffff;
-}
-.menu button img {
-  margin: 0 auto;
-  margin-top: 10px;
-  margin-bottom: -5px;
-  width: 16px;
-  height: 18px;
+
+/* tab */
+@media screen and (min-width: 1024px) {
+  .doc-bar {
+    padding: 0 22rem;
+    height: 6rem;
+  }
 }
 </style>
