@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import BottomMenu from '@/components/BottomMenu.vue';
+import BottomMenu from '../components/BottomMenu.vue';
 export default {
   components: {
     BottomMenu,

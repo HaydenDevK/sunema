@@ -49,7 +49,9 @@ export default {
   },
   computed: {
     tab () {
-      return this.$route.name.toLowerCase('en-US');
+      return (this.$route.name)
+        ?  this.$route.name.toLowerCase('en-US')
+        : '';
     }
   },
 };

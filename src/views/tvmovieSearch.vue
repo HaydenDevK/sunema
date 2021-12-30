@@ -26,9 +26,16 @@
     </section>
 
     <div v-if="movieList.length > 0" class="wrapper-poster">
-      <a v-for="item in movieList" :key="item.id">
-        <img :src="getImage(item.poster_path)" alt="" />
-      </a>
+      <div
+        v-for="item in movieList"
+        :key="item.id"
+      >
+        <router-link
+          :to="`/detail/${item.id}?link=${$store.state.keywordSearch.mediaType}`"
+        >
+          <img :src="getImage(item.poster_path)" alt="" />
+        </router-link>
+      </div>
     </div>
     <div v-else class="no-media-keywords">
       해당하는 작품이 없거나, 해당 키워드에 맞는 작품이 없습니다.

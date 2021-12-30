@@ -1,5 +1,5 @@
 <template>
-  <div id="search" class="bg-navy">
+  <div id="page-search" class="bg-navy">
     <!-- Header -->
     <header>
       <div class="window">
@@ -16,7 +16,8 @@
         />
       </div>
       <div class="cancel">
-        <button>취소</button>
+        <button v-if="inputText === ''">취소</button>
+        <button v-if="inputText !== ''">검색</button>
       </div>
     </header>
     <!-- 검색 순위 -->
@@ -37,7 +38,9 @@
 export default {
   name: 'Search',
   data() {
-    return {inputText: ''};
+    return {
+      inputText: ''
+    }
   },
   computed: {
     searchKeyword() {
