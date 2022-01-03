@@ -3,7 +3,6 @@
     <!-- Header -->
     <header>
       <div class="window">
-        <img src="../assets/images/search/magnifier.png" alt="" />
         <input
           id="name"
           @keyup.enter="find(inputText)"
@@ -24,10 +23,10 @@
     <section class="ranking">
       <p>최다 검색</p>
       <div class="rank-padding">
-        <div class="rank" v-for="(item, index) in searchKeyword" :key="item.text">
-          <router-link to="">
+        <div class="rank" v-for="(item, index) in searchedKeyword" :key="item.text">
+          <a @click="find(item.text)">
             <span class="num-mint">{{ index + 1 }}</span> {{ item.text }}
-          </router-link>
+          </a>
         </div>
       </div>
     </section>
@@ -43,7 +42,7 @@ export default {
     }
   },
   computed: {
-    searchKeyword() {
+    searchedKeyword() {
       return this.$store.state.keyword.searchKeyword.slice(0, 10);
     }
   },
@@ -100,10 +99,10 @@ button:focus {
 header {
   height: 80px;
   width: 100vw;
-  padding: 23px 16px 17px;
+  padding: 23px 0 17px 0;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
 }
 header .window {
   font-size: 16px;
@@ -111,12 +110,25 @@ header .window {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 0px 16px;
   width: 100%;
   height: 40px;
   border-radius: 5px;
   background-color: #2e323e;
+  position: relative;
+  margin-left: 16px;
 }
+header .window::before {
+  content: '';
+  position: absolute;
+  top: 13px;
+  left: 16px;
+  background: url("../assets/images/search/magnifier.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 13px;
+  height: 14px;
+}
+
 header input::placeholder {
   color: #ffffff;
 }
@@ -146,72 +158,76 @@ header input {
   font-weight: normal;
 }
 header .cancel {
-  line-height: 40px;
-  flex-basis: 39px;
+  padding: 0 16px;
+  width: 72px;
+  height: 100%;
 }
 header .cancel button {
-  width: 39px;
-  display: inline-block;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
-  line-height: 23px;
-  text-align: right;
-}
-.ranking {
-  color: #ffffff;
-  font-size: 18px;
-  line-height: 20px;
-  letter-spacing: -0.02em;
+  width: 100%;
+  height: 100%;
   font-style: normal;
   font-weight: normal;
-  display: inline-block;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: scroll;
-  width: 100vw;
-  height: calc(100vh - 139px);
+  font-size: 16px;
+}
+.ranking {
+color: #ffffff;
+font-size: 18px;
+line-height: 20px;
+letter-spacing: -0.02em;
+font-style: normal;
+font-weight: normal;
+display: inline-block;
+text-overflow: ellipsis;
+white-space: nowrap;
+overflow: scroll;
+width: 100vw;
+height: calc(100vh - 139px);
 }
 .ranking p {
-  margin-left: 13px;
-  margin-top: 17px;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 18px;
-  line-height: 23px;
-  text-align: center;
-  letter-spacing: -0.02em;
-  width: 92px;
+margin-left: 13px;
+margin-top: 17px;
+font-style: normal;
+font-weight: bold;
+font-size: 18px;
+line-height: 23px;
+text-align: center;
+letter-spacing: -0.02em;
+width: 92px;
 }
+
 p {
-  display: block;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
+display: block;
+margin-block-start: 1em;
+margin-block-end: 1em;
+margin-inline-start: 0px;
+margin-inline-end: 0px;
 }
 .rank-padding {
-  width: 100%;
-  height: 395.11px;
-  padding: 0 26px;
-  margin-top: 12.89px;
+width: 100%;
+height: 395.11px;
+padding: 0 26px;
+margin-top: 12.89px;
 }
 .ranking div a {
-  display: inline-block;
-  height: 40px;
-  width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-size: 18px;
+display: block;
+height: 40px;
+line-height: 40px;
+width: 100%;
+overflow: hidden;
+text-overflow: ellipsis;
+font-size: 18px;
 }
 .num-mint {
-  display: inline-block;
-  color: #42ff8f;
-  padding-left: 10px;
-  width: 40px;
+display: inline-block;
+color: #42ff8f;
+padding-left: 10px;
+width: 40px;
 }
 
 .font-mint {
-  color: #42ff8f;
+color: #42ff8f;
 }
 </style>
