@@ -5,7 +5,7 @@
       <div class="window">
         <input
           id="name"
-          @keyup.enter="find(inputText)"
+          @keyup.enter="find"
           v-model="inputText"
           type="text"
           placeholder="영화, TV프로그램, 배우 검색"
@@ -14,10 +14,9 @@
           style="width: 186px;"
         />
       </div>
-      <div class="cancel">
-        <button v-if="inputText === ''">취소</button>
-        <button v-if="inputText !== ''">검색</button>
-      </div>
+
+      <button class="cancel" v-if="inputText !== ''" @click="inputText = ''">취소</button>
+
     </header>
     <!-- 검색 순위 -->
     <section class="ranking">
@@ -43,17 +42,18 @@ export default {
   },
   computed: {
     searchedKeyword() {
+      // 10위까지만 가져오기
       return this.$store.state.keyword.searchKeyword.slice(0, 10);
     }
   },
   methods: {
-    find(txt) {
-      if (txt.length < 2) {
+    find() {
+      if (this.inputText.length < 2) {
         alert('검색 키워드는 최소 2글자 이상이어야 합니다.');
         return;
       }
-      this.$store.dispatch('keyword/find', txt);
-      this.$router.push('/tvmovieSearch/' + txt);
+      this.$store.dispatch('keyword/find', this.inputText);
+      this.$router.push('/tvmovieSearch/' + this.inputText);
     },
     sort(a, b) {
       // 검색어 순위 정렬
@@ -115,7 +115,7 @@ header .window {
   border-radius: 5px;
   background-color: #2e323e;
   position: relative;
-  margin-left: 16px;
+  margin: 0 16px;
 }
 header .window::before {
   content: '';
@@ -158,9 +158,9 @@ header input {
   font-weight: normal;
 }
 header .cancel {
-  padding: 0 16px;
-  width: 72px;
+  width: 52px;
   height: 100%;
+  margin-right: 16px;
 }
 header .cancel button {
   font-style: normal;

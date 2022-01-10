@@ -7,24 +7,7 @@
     </header>
 
     <!-- 버튼 -->
-<!--    <section v-if="$store.state.keywordSearch.mediaKeywords.length > 0" class="wrapper-btn-type">-->
-<!--      <button-->
-<!--        class="btn-type"-->
-<!--        @click="$store.dispatch('keywordSearch/getKeywordMediaElse', 'movie')"-->
-<!--      >-->
-<!--        <p :class="{active: $store.state.keywordSearch.mediaType === 'movie'}">-->
-<!--          영화-->
-<!--        </p>-->
-<!--      </button>-->
-<!--      <button class="btn-type" @click="$store.dispatch('keywordSearch/getKeywordMediaElse', 'tv')">-->
-<!--        <p :class="{active: $store.state.keywordSearch.mediaType === 'tv'}">-->
-<!--          티비 프로그램-->
-<!--        </p>-->
-<!--      </button>-->
-<!--    </section>-->
-    <TabMediaType
-      MediaKeywords="store.state.keywordSearch.mediaKeywords"
-    />
+    <TabMediaType />
 
     <!-- 키워드 리스트 -->
     <ListKeyword View="keywordSearch" class="list-keyword" />
@@ -75,7 +58,7 @@ export default {
   async mounted() {
     //  스크롤 하단 이동 체크하기
     //  하단 이동하면 콜백 함수 실행
-    this.$store.commit('keywordSearch/SET_MEDIA_TYPE', 'movie');
+    // this.$store.commit('keywordSearch/SET_MEDIA_TYPE', 'movie');
     this.$isScrollBottomCheck(this.scrollCallback);
   },
   methods: {

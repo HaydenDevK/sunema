@@ -4,12 +4,11 @@ export default {
     searchKeyword: []
   },
   mutations: {
-    PUSH_KEYWORD (state, txt) {
-      state.searchKeyword.push({ text: txt, counter: 1 })
-      txt = null
+    PUSH_KEYWORD (state, inputText) {
+      state.searchKeyword.push({ text: `${inputText}`, counter: 1 })
     },
-    PLUS_COUNTER (state, idx) {
-      state.searchKeyword[idx].counter++
+    ADD_COUNTER (state, index) {
+      state.searchKeyword[index].counter++
     },
     SORT_KEYWORD (state) {
       state.searchKeyword.sort((a, b) => {
@@ -24,21 +23,15 @@ export default {
     }
   },
   actions: {
-    find ({ state, commit }, txt) {
-      // 검색 키워드가 이미 state에 있는지?
-      let result = 0
-      let idx = 0
-      for (let i = 0; i < state.searchKeyword.length; i++) {
-        if (txt === state.searchKeyword[i].text) {
-          result = 1
-          idx = i
-        }
-      }
-      if (result == 0) {
-        commit('PUSH_KEYWORD', txt)
-      } else {
-        commit('PLUS_COUNTER', idx)
-      }
+    find ({ state, commit }, inputText) {
+      const index = state.searchKeyword.findIndex(
+        (ele) => ele.text === inputText
+      )
+
+      index === -1
+        ? commit('PUSH_KEYWORD', inputText) // 없으면 PUSH_KEYWORD
+        : commit('ADD_COUNTER', index) // 있으면 ADD_COUNTER
+
       commit('SORT_KEYWORD')
     }
   }
