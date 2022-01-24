@@ -68,7 +68,7 @@ export default {
   width: 100%;
   background-color: #13131b;
   display: flex;
-ㅐ  z-index: 999;
+  z-index: 999;
 }
 
 .doc-bar-item {
