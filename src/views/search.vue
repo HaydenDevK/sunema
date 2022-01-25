@@ -5,7 +5,7 @@
       <div class="window">
         <input
           id="name"
-          @keyup.enter="find"
+          @keyup.enter="find(inputText)"
           v-model="inputText"
           type="text"
           placeholder="영화, TV프로그램, 배우 검색"
@@ -47,13 +47,13 @@ export default {
     }
   },
   methods: {
-    find() {
-      if (this.inputText.length < 2) {
+    find(text) {
+      if (text.length < 2) {
         alert('검색 키워드는 최소 2글자 이상이어야 합니다.');
         return;
       }
-      this.$store.dispatch('keyword/find', this.inputText);
-      this.$router.push('/tvmovieSearch/' + this.inputText);
+      this.$store.dispatch('keyword/find', text);
+      this.$router.push('/tvmovieSearch/' + text);
     },
     sort(a, b) {
       // 검색어 순위 정렬

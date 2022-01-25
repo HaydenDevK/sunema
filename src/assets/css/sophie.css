@@ -135,10 +135,13 @@ button {
   /* 375까지 3개 */
 }
 
-.wrapper-poster a {
-  font-size: 0;
+.wrapper-poster > div {
   border-radius: 0.5rem;
   overflow: hidden;
+}
+
+.wrapper-poster a {
+  font-size: 0;
   height: 100%;
 }
 
