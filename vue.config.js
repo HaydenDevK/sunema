@@ -2,9 +2,9 @@ module.exports = {
   // options...
   devServer: {
     disableHostCheck: true
-  },
-  publicPath: '/dist',
-  outputDir: './dist'
+  }
+  // publicPath: '/dist',
+  // outputDir: './dist'
   //   outputDir: "dist",  // publicPath: './',
-  // publicPath: './'
+  // publicPath:s './'
 }
