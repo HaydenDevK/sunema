@@ -12,8 +12,7 @@ export default {
     mediaKeywords: []
   },
   mutations: {
-
-SET_PAGE_NOW (state, page) {
+    SET_PAGE_NOW (state, page) {
       state.pageNow = page
     },
     SET_MEDIA_ID (state, id) {

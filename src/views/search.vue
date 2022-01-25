@@ -11,11 +11,12 @@
           placeholder="영화, TV프로그램, 배우 검색"
           onfocus="this.placeholder=''"
           onblur="this.placeholder='영화, TV프로그램, 배우 검색'"
-          style="width: 186px;"
+          style="width: 100%;"
         />
+        <button class="cancel" v-if="inputText !== ''" @click="inputText = ''">취소</button>
       </div>
 
-      <button class="cancel" v-if="inputText !== ''" @click="inputText = ''">취소</button>
+      <button class="search" v-if="inputText !== ''" @click="find(inputText)">검색</button>
 
     </header>
     <!-- 검색 순위 -->
@@ -80,6 +81,7 @@ export default {
 * {
   font-family: 'Spoqa Han Sans Neo', 'sans-serif';
   letter-spacing: 0.25px;
+  vertical-align: top;
 }
 
 .bg-navy {
@@ -102,7 +104,7 @@ header {
   padding: 23px 0 17px 0;
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
 }
 header .window {
   font-size: 16px;
@@ -142,12 +144,7 @@ header img {
   margin: 0px 10px;
 }
 header input {
-  margin-left: 10px;
-  font-style: normal;
-  font-weight: normal;
   font-size: 16px;
-  line-height: 23px;
-  margin-top: 8.5px;
   text-align: center;
   color: #ffffff;
   flex: none;
@@ -156,13 +153,17 @@ header input {
   margin: 0px 10px;
   font-style: normal;
   font-weight: normal;
+  width: 100%;
+  height: 100%;
 }
-header .cancel {
+
+header .search {
   width: 52px;
   height: 100%;
   margin-right: 16px;
 }
-header .cancel button {
+
+header .search button {
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -172,6 +173,14 @@ header .cancel button {
   font-weight: normal;
   font-size: 16px;
 }
+
+header .cancel {
+  position: absolute;
+  top: 0;
+  right: 16px;
+  height: 100%;
+}
+
 .ranking {
 color: #ffffff;
 font-size: 18px;

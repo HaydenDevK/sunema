@@ -113,199 +113,199 @@
     </section>
     <!-- e: info-area -->
 
-    <!-- s: man-area -->
-    <section class="man-area">
-      <dl>
-        <dt>
-          <div class="section-tit">
-            출연
-          </div>
-        </dt>
-        <dd class="box-x-wrap">
-          <ul class="box-x man-list">
-            <li class="box-x-item">
-              <router-link to="#">
-                <div class="man-img">
-                  <img src="@/assets/images/detail/thum_man_01.png" alt="출연인물 이미지" />
-                </div>
-                <p class="name">
-                  mapokim
-                </p>
-              </router-link>
-            </li>
-            <li class="box-x-item">
-              <router-link to="#">
-                <div class="man-img">
-                  <img src="@/assets/images/detail/thum_man_01.png" alt="출연인물 이미지" />
-                </div>
-                <p class="name">
-                  mapokim
-                </p>
-              </router-link>
-            </li>
-            <li class="box-x-item">
-              <router-link to="#">
-                <div class="man-img">
-                  <img src="@/assets/images/detail/thum_man_01.png" alt="출연인물 이미지" />
-                </div>
-                <p class="name">
-                  mapokim
-                </p>
-              </router-link>
-            </li>
-            <li class="box-x-item">
-              <router-link to="#">
-                <div class="man-img">
-                  <img src="@/assets/images/detail/thum_man_01.png" alt="출연인물 이미지" />
-                </div>
-                <p class="name">
-                  mapokim
-                </p>
-              </router-link>
-            </li>
-          </ul>
-        </dd>
-      </dl>
-    </section>
-    <!-- e: man-area -->
+<!--    &lt;!&ndash; s: man-area &ndash;&gt;-->
+<!--    <section class="man-area">-->
+<!--      <dl>-->
+<!--        <dt>-->
+<!--          <div class="section-tit">-->
+<!--            출연-->
+<!--          </div>-->
+<!--        </dt>-->
+<!--        <dd class="box-x-wrap">-->
+<!--          <ul class="box-x man-list">-->
+<!--            <li class="box-x-item">-->
+<!--              <router-link to="#">-->
+<!--                <div class="man-img">-->
+<!--                  <img src="@/assets/images/detail/thum_man_01.png" alt="출연인물 이미지" />-->
+<!--                </div>-->
+<!--                <p class="name">-->
+<!--                  mapokim-->
+<!--                </p>-->
+<!--              </router-link>-->
+<!--            </li>-->
+<!--            <li class="box-x-item">-->
+<!--              <router-link to="#">-->
+<!--                <div class="man-img">-->
+<!--                  <img src="@/assets/images/detail/thum_man_01.png" alt="출연인물 이미지" />-->
+<!--                </div>-->
+<!--                <p class="name">-->
+<!--                  mapokim-->
+<!--                </p>-->
+<!--              </router-link>-->
+<!--            </li>-->
+<!--            <li class="box-x-item">-->
+<!--              <router-link to="#">-->
+<!--                <div class="man-img">-->
+<!--                  <img src="@/assets/images/detail/thum_man_01.png" alt="출연인물 이미지" />-->
+<!--                </div>-->
+<!--                <p class="name">-->
+<!--                  mapokim-->
+<!--                </p>-->
+<!--              </router-link>-->
+<!--            </li>-->
+<!--            <li class="box-x-item">-->
+<!--              <router-link to="#">-->
+<!--                <div class="man-img">-->
+<!--                  <img src="@/assets/images/detail/thum_man_01.png" alt="출연인물 이미지" />-->
+<!--                </div>-->
+<!--                <p class="name">-->
+<!--                  mapokim-->
+<!--                </p>-->
+<!--              </router-link>-->
+<!--            </li>-->
+<!--          </ul>-->
+<!--        </dd>-->
+<!--      </dl>-->
+<!--    </section>-->
+<!--    &lt;!&ndash; e: man-area &ndash;&gt;-->
 
-    <!-- s: video-area -->
-    <section class="video-area">
-      <dl>
-        <dt>
-          <div class="section-tit">
-            동영상
-          </div>
-        </dt>
-        <dd class="box-x-wrap">
-          <ul class="video-list box-x">
-            <!-- 여기서 뿌리고 끝  -->
-            <li class="box-x-item" v-for="item in movieVideo" :key="item.id">
-              <router-link to="#">
-                <div class="video-box">
-                  <iframe
-                    :src="getMovieVideo(item.key)"
-                    width="100%"
-                    height="auto"
-                    frameborder="0"
-                  ></iframe>
-                </div>
-                <!-- <div class="icon_play"></div> -->
-              </router-link>
-            </li>
-          </ul>
-          <div v-if="movieVideo.length === 0">
-            <p class="no-space">동영상이 없습니다.</p>
-          </div>
-        </dd>
-      </dl>
-    </section>
-    <!-- e: video-area -->
+<!--    &lt;!&ndash; s: video-area &ndash;&gt;-->
+<!--    <section class="video-area">-->
+<!--      <dl>-->
+<!--        <dt>-->
+<!--          <div class="section-tit">-->
+<!--            동영상-->
+<!--          </div>-->
+<!--        </dt>-->
+<!--        <dd class="box-x-wrap">-->
+<!--          <ul class="video-list box-x">-->
+<!--            &lt;!&ndash; 여기서 뿌리고 끝  &ndash;&gt;-->
+<!--            <li class="box-x-item" v-for="item in movieVideo" :key="item.id">-->
+<!--              <router-link to="#">-->
+<!--                <div class="video-box">-->
+<!--                  <iframe-->
+<!--                    :src="getMovieVideo(item.key)"-->
+<!--                    width="100%"-->
+<!--                    height="auto"-->
+<!--                    frameborder="0"-->
+<!--                  ></iframe>-->
+<!--                </div>-->
+<!--                &lt;!&ndash; <div class="icon_play"></div> &ndash;&gt;-->
+<!--              </router-link>-->
+<!--            </li>-->
+<!--          </ul>-->
+<!--          <div v-if="movieVideo.length === 0">-->
+<!--            <p class="no-space">동영상이 없습니다.</p>-->
+<!--          </div>-->
+<!--        </dd>-->
+<!--      </dl>-->
+<!--    </section>-->
+<!--    &lt;!&ndash; e: video-area &ndash;&gt;-->
 
-    <!-- s: still-cut-area -->
-    <section class="still-cut-area">
-      <dl>
-        <dt>
-          <div class="section-tit">
-            스틸컷
-          </div>
-        </dt>
-        <dd class="box-x-wrap">
-          <ul class="box-x">
-            <!-- <li class="box-x-item" v-for="item in $store.state.detail.movieImg" :key="item.id"> -->
-            <li class="box-x-item" v-for="item in movieImg" :key="item.id">
-              <router-link to="#">
-                <div class="img-box">
-                  <img :src="getImgBackDrop(item.file_path)" alt="스틸컷 이미지" />
-                </div>
-              </router-link>
-            </li>
-          </ul>
-        </dd>
-      </dl>
-    </section>
-    <!-- e: still-cut-area -->
+<!--    &lt;!&ndash; s: still-cut-area &ndash;&gt;-->
+<!--    <section class="still-cut-area">-->
+<!--      <dl>-->
+<!--        <dt>-->
+<!--          <div class="section-tit">-->
+<!--            스틸컷-->
+<!--          </div>-->
+<!--        </dt>-->
+<!--        <dd class="box-x-wrap">-->
+<!--          <ul class="box-x">-->
+<!--            &lt;!&ndash; <li class="box-x-item" v-for="item in $store.state.detail.movieImg" :key="item.id"> &ndash;&gt;-->
+<!--            <li class="box-x-item" v-for="item in movieImg" :key="item.id">-->
+<!--              <router-link to="#">-->
+<!--                <div class="img-box">-->
+<!--                  <img :src="getImgBackDrop(item.file_path)" alt="스틸컷 이미지" />-->
+<!--                </div>-->
+<!--              </router-link>-->
+<!--            </li>-->
+<!--          </ul>-->
+<!--        </dd>-->
+<!--      </dl>-->
+<!--    </section>-->
+<!--    &lt;!&ndash; e: still-cut-area &ndash;&gt;-->
 
-    <!-- s: poster-area -->
-    <!-- slider -->
-    <section class="poster-area">
-      <dl>
-        <dt>
-          <div class="section-tit">
-            포스터
-          </div>
-        </dt>
-        <dd class="box-x-wrap">
-          <ul class="box-x">
-            <li class="box-x-item" v-for="item in moviePoster" :key="item.id">
-              <router-link to="#">
-                <div class="img-box">
-                  <img :src="getPoster(item.file_path)" alt="포스터 이미지" />
-                </div>
-              </router-link>
-            </li>
-          </ul>
-        </dd>
-      </dl>
-    </section>
-    <!-- // slider -->
-    <!-- e: poster-area -->
-    <!-- s: sns-area -->
-    <section class="sns-area inner-box" v-if="false">
-      <dl>
-        <dt>
-          <div class="section-tit">
-            바로가기
-          </div>
-        </dt>
-        <dd class="sns-box">
-          <ul>
-            <li class="facebook">
-              <router-link to="#"><span class="blind">facebook</span></router-link>
-            </li>
-            <li class="twitter">
-              <router-link to="#"><span class="blind">twitter</span></router-link>
-            </li>
-            <li class="instagram">
-              <router-link to="#"><span class="blind">instagram</span></router-link>
-            </li>
-            <li class="justwatch">
-              <router-link to="#"><span class="blind">justwatch</span></router-link>
-            </li>
-            <li class="homepage">
-              <router-link to="#"><span class="blind">homepage</span></router-link>
-            </li>
-          </ul>
-        </dd>
-      </dl>
-    </section>
-    <!-- e: sns-area -->
+<!--    &lt;!&ndash; s: poster-area &ndash;&gt;-->
+<!--    &lt;!&ndash; slider &ndash;&gt;-->
+<!--    <section class="poster-area">-->
+<!--      <dl>-->
+<!--        <dt>-->
+<!--          <div class="section-tit">-->
+<!--            포스터-->
+<!--          </div>-->
+<!--        </dt>-->
+<!--        <dd class="box-x-wrap">-->
+<!--          <ul class="box-x">-->
+<!--            <li class="box-x-item" v-for="item in moviePoster" :key="item.id">-->
+<!--              <router-link to="#">-->
+<!--                <div class="img-box">-->
+<!--                  <img :src="getPoster(item.file_path)" alt="포스터 이미지" />-->
+<!--                </div>-->
+<!--              </router-link>-->
+<!--            </li>-->
+<!--          </ul>-->
+<!--        </dd>-->
+<!--      </dl>-->
+<!--    </section>-->
+<!--    &lt;!&ndash; // slider &ndash;&gt;-->
+<!--    &lt;!&ndash; e: poster-area &ndash;&gt;-->
+<!--    &lt;!&ndash; s: sns-area &ndash;&gt;-->
+<!--    <section class="sns-area inner-box" v-if="false">-->
+<!--      <dl>-->
+<!--        <dt>-->
+<!--          <div class="section-tit">-->
+<!--            바로가기-->
+<!--          </div>-->
+<!--        </dt>-->
+<!--        <dd class="sns-box">-->
+<!--          <ul>-->
+<!--            <li class="facebook">-->
+<!--              <router-link to="#"><span class="blind">facebook</span></router-link>-->
+<!--            </li>-->
+<!--            <li class="twitter">-->
+<!--              <router-link to="#"><span class="blind">twitter</span></router-link>-->
+<!--            </li>-->
+<!--            <li class="instagram">-->
+<!--              <router-link to="#"><span class="blind">instagram</span></router-link>-->
+<!--            </li>-->
+<!--            <li class="justwatch">-->
+<!--              <router-link to="#"><span class="blind">justwatch</span></router-link>-->
+<!--            </li>-->
+<!--            <li class="homepage">-->
+<!--              <router-link to="#"><span class="blind">homepage</span></router-link>-->
+<!--            </li>-->
+<!--          </ul>-->
+<!--        </dd>-->
+<!--      </dl>-->
+<!--    </section>-->
+<!--    &lt;!&ndash; e: sns-area &ndash;&gt;-->
 
-    <!-- s: recomandation-area -->
-    <section class="recomandation-area inner-box">
-      <dl>
-        <dt>
-          <div class="section-tit clear">
-            추천<router-link to="#" class="btn-more">더보기</router-link>
-          </div>
-        </dt>
-        <dd>
-          <ul class="clear">
-            <li v-for="item in movieDetailRecommendation" :key="item.id">
-              <router-link to="#">
-                <div class="img-box">
-                  <img :src="getImage(item.poster_path)" alt="추천영화 이미지" />
-                </div>
-              </router-link>
-            </li>
-          </ul>
-          <div v-if="movieDetailRecommendation.length === 0">
-            <p class="no-space">추천영화가 없습니다.</p>
-          </div>
-        </dd>
-      </dl>
-    </section>
-    <!-- e: recomandation-area -->
+<!--    &lt;!&ndash; s: recomandation-area &ndash;&gt;-->
+<!--    <section class="recomandation-area inner-box">-->
+<!--      <dl>-->
+<!--        <dt>-->
+<!--          <div class="section-tit clear">-->
+<!--            추천<router-link to="#" class="btn-more">더보기</router-link>-->
+<!--          </div>-->
+<!--        </dt>-->
+<!--        <dd>-->
+<!--          <ul class="clear">-->
+<!--            <li v-for="item in movieDetailRecommendation" :key="item.id">-->
+<!--              <router-link to="#">-->
+<!--                <div class="img-box">-->
+<!--                  <img :src="getImage(item.poster_path)" alt="추천영화 이미지" />-->
+<!--                </div>-->
+<!--              </router-link>-->
+<!--            </li>-->
+<!--          </ul>-->
+<!--          <div v-if="movieDetailRecommendation.length === 0">-->
+<!--            <p class="no-space">추천영화가 없습니다.</p>-->
+<!--          </div>-->
+<!--        </dd>-->
+<!--      </dl>-->
+<!--    </section>-->
+<!--    &lt;!&ndash; e: recomandation-area &ndash;&gt;-->
   </div>
 </template>
 
@@ -364,10 +364,10 @@ export default {
       this.$store.dispatch('detail/getMovieKeyword', this.$route.params.idx);
     },
     getImage(poster_path) {
-      return `https://image.tmdb.org/t/p/w300${poster_path}`;
+      return poster_path ? `https://image.tmdb.org/t/p/w300${poster_path}` : require('../assets/images/global/no-image.png');
     },
     getBackDrop(backdrop_path) {
-      return `https://image.tmdb.org/t/p/w300${backdrop_path}`;
+      return backdrop_path ? `https://image.tmdb.org/t/p/w300${backdrop_path}` : require('../assets/images/global/no-image.png');
     },
     getMovieVideo(key) {
       return 'https://www.youtube.com/embed/' + key;
@@ -383,6 +383,7 @@ export default {
 </script>
 
 <style scoped>
+@import '../assets/css/sophie.css';
 @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
 
 /* 모바일 해상도 360 - 767px 기준 */
@@ -441,12 +442,6 @@ h6 {
   color: white;
   font-size: 16px;
   width: 100%;
-}
-
-/* html */
-html {
-  font-size: 16px;
-  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
 }
 
 /* From Style */
@@ -577,12 +572,6 @@ label {
 }
 /* .blur img{-webkit-filter:blur(6px);-moz-filter:blur(6px);filter:blur(6px);} */
 
-html,
-body {
-  min-height: 100%;
-  letter-spacing: 0.25px;
-}
-
 a {
   color: inherit;
 }
@@ -604,7 +593,6 @@ section.inner-box {
 .detail-container .top-area .poster-box {
   margin-top: -80px;
   height: 439px;
-  padding-bottom: 21px;
   position: relative;
 }
 .detail-container .top-area .poster-box .bg-box {
@@ -634,13 +622,13 @@ section.inner-box {
   margin-top: 0.625rem;
 }
 .detail-container .info-area .movie-tit {
-  padding: 1rem 0;
-  font-size: 1.313rem;
+  font-size: 2.1rem;
+  line-height: 2.6rem;
   font-weight: 700;
+  margin-bottom: 1rem;
 }
 .detail-container .info-area .info_basic span {
-  line-height: 1.563rem;
-  font-size: 0.75rem;
+  font-size: 1.4rem;
 }
 .detail-container .info-area .info_basic span.grade {
   display: inline-block;
@@ -687,11 +675,13 @@ section.inner-box {
 }
 
 .detail-container .info-area .info_other {
-  margin-top: 0.625rem;
+  margin: 1rem 0;
 }
+
 .detail-container .info-area .info_other .date {
-  font-size: 0.75rem;
+  font-size: 1.4rem;
 }
+
 .detail-container .info-area .info_other .star-box {
   display: inline-block;
   margin-left: 0.75rem;
@@ -710,14 +700,15 @@ section.inner-box {
 }
 
 .detail-container .info-area .movie-tit-lang {
-  margin-top: 1.125rem;
-  font-size: 1.125rem;
+  font-size: 1.6rem;
+  line-height: 2.3rem;
+  margin-bottom: 1rem;
+  font-weight: 400;
 }
 
 .detail-container .info-area .info-txt {
-  margin-top: 0.75rem;
-  font-size: 1rem;
-  line-height: 1.4;
+  font-size: 1.4rem;
+  line-height: 2.3rem;
 }
 
 .detail-container .info-area .info-series {

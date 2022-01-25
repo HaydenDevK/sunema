@@ -33,7 +33,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "movienow" */ '../views/movieNow.vue')
   },
   {
-    path: '/popular', // 인기 콘텐츠
+    path: '/popular', // 인기 콘텐츠 (선혜)
     name: 'Popular',
     component: () => import(/* webpackChunkName: "popular" */ '../views/popular.vue')
   },
@@ -51,7 +51,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "actordetail" */ '../views/actor.vue')
   },
   {
-    path: '/actordetail/:personId', // 인기배우 상세
+    path: '/actordetail/:personId', // 인기배우 상세 (선혜)
     name: 'ActorDetail',
     component: () => import(/* webpackChunkName: "actordetail" */ '../views/actorDetail.vue')
   },
@@ -81,7 +81,7 @@ const routes = [
   {
     path: '/trending', // 지금 뜨는 콘텐츠 (선혜)
     name: 'Trending',
-    component: () => import(/* webpackChunkName: "toprated" */ '../views/trending.vue')
+    component: () => import(/* webpackChunkName: "trending" */ '../views/trending.vue')
   },
   {
     path: '/tvmovieSearch/:keyword', //
